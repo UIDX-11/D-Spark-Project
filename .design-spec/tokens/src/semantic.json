@@ -1,0 +1,17 @@
+{
+  "name": "d-spark-tokens-semantic",
+  "version": "0.1.0",
+  "mode": "light",
+  "tokens": {
+    "bg": {
+      "page": "{color.neutral.0}",
+      "surface": "{color.neutral.0}"
+    },
+    "text": {
+      "primary": "{color.neutral.900}"
+    },
+    "border": {
+      "default": "rgba(17,24,39,0.12)"
+    }
+  }
+}

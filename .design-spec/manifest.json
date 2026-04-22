@@ -1,0 +1,43 @@
+{
+  "name": "d-spark-design-spec",
+  "version": "0.1.0",
+  "language": "en",
+  "scope": {
+    "covers": [
+      "foundations",
+      "components",
+      "layouts",
+      "content",
+      "accessibility",
+      "i18n"
+    ],
+    "platforms": [
+      "web-react",
+      "web-vue",
+      "flutter"
+    ]
+  },
+  "taxonomy": {
+    "levels": [
+      "atomic",
+      "molecular",
+      "page"
+    ],
+    "naming_rule": "type/kind/shape/size/state"
+  },
+  "entrypoints": {
+    "human_index": "./index.md",
+    "design_overview": "./docs/design.md",
+    "component_index": "./docs/components/README.md",
+    "intent_index": "./docs/components/intent-index.md",
+    "generator_contract": "./generator/schema-ui-contract.md",
+    "tokens": {
+      "source": "./tokens/src",
+      "dist": "./tokens/dist"
+    },
+    "adapters": {
+      "web": "./adapters/web",
+      "flutter": "./adapters/flutter"
+    }
+  }
+}

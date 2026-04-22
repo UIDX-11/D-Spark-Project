@@ -1,0 +1,14 @@
+{
+  "name": "d-spark-tokens-component",
+  "version": "0.1.0",
+  "mode": "light",
+  "tokens": {
+    "button": {
+      "primary": {
+        "bg": "{text.primary}",
+        "text": "{bg.page}",
+        "radius": "{radius.md}"
+      }
+    }
+  }
+}

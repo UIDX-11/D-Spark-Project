@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "d-spark-tokens-core",
+  "version": "0.1.0",
+  "mode": "light",
+  "tokens": {
+    "color": {
+      "neutral": {
+        "0": "#FFFFFF",
+        "900": "#111827"
+      }
+    },
+    "space": {
+      "0": "0",
+      "2": "8",
+      "3": "12",
+      "4": "16"
+    },
+    "radius": {
+      "sm": "4",
+      "md": "8"
+    },
+    "font": {
+      "size": {
+        "sm": "12",
+        "md": "14",
+        "lg": "16"
+      }
+    }
+  }
+}
