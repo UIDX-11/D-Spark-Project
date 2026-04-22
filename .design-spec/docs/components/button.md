@@ -75,6 +75,36 @@ Sizes are defined by height tokens and paired typography/icon sizes.
 | 选中            | Selected         | Toggle/selection contexts   | Selected must be distinguishable from hover/focus; not color-only. |
 | 禁用            | Disabled         | Action is unavailable       | Don’t use disabled to “explain validation”; show inline errors. |
 
+## Button group (Figma-based)
+
+Button groups are used when multiple actions are presented together (toolbars, form footers, dialogs).
+
+### Group layout rules
+
+| Rule | Recommendation | Rationale |
+|---|---|---|
+| Group spacing | **12px gap** between buttons (tokenized) | Matches the button-group container gap observed in Figma export; keeps groups readable and avoids “toggle-like” confusion. |
+| Internal alignment | Align button baselines/heights within a group; do not mix sizes in the same group | Prevents jitter and improves scanability. |
+| Grouping | Keep related actions adjacent; separate unrelated action clusters with a larger gap (use `Space`) | Reduces cognitive load in dense B-end toolbars. |
+| Overflow | When actions exceed available width, collapse **least-used** actions first into an overflow menu | Preserves the primary path and avoids layout breakage. |
+
+### Ordering rules (primary/secondary/destructive)
+
+| Context | Recommended order | Notes |
+|---|---|---|
+| Common B-end pages (LTR) | Primary → Secondary → Filled/Tertiary/Text → Destructive (if present) | Keep a single primary per region; destructive should not compete for attention. |
+| Wizard / step actions | Back/Previous → Next/Continue (Primary) | Order should match navigation direction. |
+| Dialog footer | Primary (confirm) + Secondary (cancel) grouped consistently | Keep cancel consistent across dialogs; avoid swapping positions between screens. |
+
+### Anti-patterns (button groups)
+
+| Anti-pattern | Why it’s bad | Preferred alternative |
+|---|---|---|
+| Multiple Primary buttons in one group | Competing emphasis, unclear recommendation | Choose 1 primary; demote others to secondary/tertiary. |
+| Zero spacing (buttons touching) | Reads as toggle/segmented control; increases misclick risk | Use 12px gap (token). |
+| Mixed sizes in one group | Visual noise; inconsistent hit targets | Use a single size per group. |
+| Destructive placed as primary without confirmation | Increases accidental destructive actions | Use destructive styling + confirm for irreversible actions. |
+
 
 ## Layout patterns
 
