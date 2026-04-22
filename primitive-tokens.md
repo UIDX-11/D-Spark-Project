@@ -27,7 +27,7 @@ The file `Mode 1.tokens.json` is organized like:
 Where:
 
 - `**$type`** is `color`
-- `**$value.hex**` is the canonical value for most consumption
+- `**$value.hex`** is the canonical value for most consumption
 - `**$extensions.com.figma.variableId**` links back to the Figma Variable
 
 ### Palette list as CSS variables (example)
@@ -56,6 +56,54 @@ Below is a **CSS Variables** representation of the Neutral ramp (Light mode) tak
   --color-neutral-160: #4E4E4E;
   --color-neutral-170: #222222;
   --color-neutral-180: #1B1B1B;
+
+  /* 橘色 orange / Light */
+  --color-orange-10: #FFE6BA;
+  --color-orange-20: #FFCD99;
+  --color-orange-30: #FF9A33;
+  --color-orange-40: #FF8100;
+  --color-orange-50: #D26200;
+
+  /* 绿色Green / Light */
+  --color-green-10: #E6F7EF;
+  --color-green-20: #D6F4E3;
+  --color-green-30: #7DDDA5;
+  --color-green-40: #2ABB70;
+  --color-green-50: #09AA5C;
+  --color-green-60: #069353;
+
+  /* 黄色Yellow / Light */
+  --color-yellow-10: #FFF7E8;
+  --color-yellow-20: #FFF5DB;
+  --color-yellow-30: #FFE493;
+  --color-yellow-40: #FFC23E;
+  --color-yellow-50: #FFAD14;
+  --color-yellow-60: #D2860C;
+
+  /* 红色Red / Light */
+  --color-red-10: #FEEDED;
+  --color-red-20: #FDE4E1;
+  --color-red-30: #F9AFA5;
+  --color-red-40: #F46C65;
+  --color-red-50: #F14846;
+  --color-red-70: #C82C2E;
+
+  /* 蓝色Blue / Light */
+  --color-blue-10: #ECF2FC;
+  --color-blue-20: #E0ECFB;
+  --color-blue-30: #A0C6F4;
+  --color-blue-40: #5E93E9;
+  --color-blue-50: #3F78E4;
+  --color-blue-60: #2757BE;
+
+  /* 深蓝色 Deep Blue / Light */
+  --color-deep-blue-10: #A3BBDF;
+  --color-deep-blue-20: #6985BF;
+  --color-deep-blue-30: #506DAF;
+  --color-deep-blue-40: #344E96;
+
+  /* 遮罩Mask / Light */
+  --color-mask-default: rgba(0, 0, 0, 0.3);
 }
 ```
 
@@ -64,7 +112,6 @@ Other palettes in `Mode 1.tokens.json` can be expressed in the same format:
 - **橘色 orange**: `--color-orange-10 … --color-orange-50`
 - **绿色 Green / 黄色 Yellow / 红色 Red / 蓝色 Blue / 深蓝色 Deep Blue**
 - **遮罩 Mask**: include alpha (e.g. `--color-mask-*: rgba(...)`), and keep a single stable key per mode.
-
 
 ### Step naming guidance (normalization)
 
