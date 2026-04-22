@@ -18,8 +18,19 @@ Molecular
 
 ## Anatomy (Figma-based)
 
+High-level structure (recommended for most form fields):
+
+```
+Label (optional)
+┌─────────────────────────────────────┐
+│ [icon] Placeholder/Value   [action] │
+└─────────────────────────────────────┘
+Helper text or error message
+```
+
 | Part | Description | Notes |
 |---|---|---|
+| Label (optional) | Visible label describing the field | Must remain visible; placeholder is not a substitute. Prefer `Form` label association. |
 | Container | Outer wrapper providing background/border/radius | Token-driven surface + border; avoid hardcoded colors. |
 | Input area | Text entry region | Must support placeholder + value; respects padding per size. |
 | Placeholder | Hint text when empty | Never replace labels; contrast must remain readable. |
@@ -28,8 +39,8 @@ Molecular
 | Prefix slot (`addBefore`) | Leading label/icon/selector (e.g., `http://`) | Use only when it improves comprehension (units/protocols). |
 | Suffix slot (`addAfter`) | Trailing icon/label/selector (search, clear, unit, dropdown) | Icon-only requires accessible name; keep hit target size. |
 | Clear action | Clears current value | Only visible when there is value; must be keyboard reachable. |
-| Assistive text | Prompt/helper text under field | Tokenized typography; used for constraints and guidance. |
-| Error message | Validation message under field | Must be specific and actionable; associated with the field for a11y. |
+| Helper text | Prompt/helper text under field | Tokenized typography; used for constraints and guidance. |
+| Error message | Validation message under field | Must be specific and actionable; associated with the field for a11y. Takes precedence over helper text. |
 | Divider | Thin separator between segments (range/IP) | Visual + structural; do not rely on color alone for meaning. |
 | Counter (Textarea) | Character count (e.g., `0/50`) | Optional; announce changes politely; avoid noisy updates. |
 | Resizer (Textarea) | Resize handle | Web-only; must not overlap text; keep accessible resizing if possible. |
