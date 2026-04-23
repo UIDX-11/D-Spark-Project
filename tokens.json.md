@@ -4,25 +4,20 @@
 
 ## 设计目标
 
-*   协助用户采取你所期望的行动。
-    
-*   帮助用户避免犯错。
-    
+- 协助用户采取你所期望的行动。
+- 帮助用户避免犯错。
 
 ## 如何使用
 
-*   按钮的样式应该易于理解和识别，使用户能够直观或下意识地点击。
-    
-*   确保按钮清晰传达其目的，使用户能够从按钮上预测它的作用和行为结果。
-    
-*   按钮要易于用户选择，按钮周围必须有足够的空间，以便于用户可以在视觉上将按钮与周围的组织和内容区分开来。
-    
+- 按钮的样式应该易于理解和识别，使用户能够直观或下意识地点击。
+- 确保按钮清晰传达其目的，使用户能够从按钮上预测它的作用和行为结果。
+- 按钮要易于用户选择，按钮周围必须有足够的空间，以便于用户可以在视觉上将按钮与周围的组织和内容区分开来。
 
 ## 按钮分类
 
 按钮分为 主要按钮、次要按钮、虚线按钮、线形按钮、文本按钮和图标按钮。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/126f5a10-a353-4b4d-8102-d30064954f91.png)
+image
 
 ## 基本用法
 
@@ -30,78 +25,67 @@
 
 主要按钮，在视觉上最突出，帮助用户快速识别他们最可能想要的操作，同时也是当前页面引导用户关注并去操作的组件，优先使用主要按钮来强制引导用户进行“完成”、“推荐”等操作。
 
-*   避免在视图中使用太多主要按钮，太多的主要按钮会增加用户的认知负荷，推荐只有一至两个主要按钮，给用户明确的操作指引。
-    
-*   可独立使用，也可与其他按钮搭配使用（除图标按钮），搭配使用时注意按钮大小的一致性。
-    
-*   可搭配图标使用，图标通常在文字左边或上方。
-    
+- 避免在视图中使用太多主要按钮，太多的主要按钮会增加用户的认知负荷，推荐只有一至两个主要按钮，给用户明确的操作指引。
+- 可独立使用，也可与其他按钮搭配使用（除图标按钮），搭配使用时注意按钮大小的一致性。
+- 可搭配图标使用，图标通常在文字左边或上方。
 
 注意：当设计的语言方向是从右向左的时候，将图标放在文字右边可以使按钮更符合用户的阅读习惯。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/bbd4a8aa-f702-4fb6-ae56-3522ade45527.png)
+image
 
 ### 次要按钮
 
 次要按钮，在视觉强度上弱于主要按钮，用于非主要动作，通常用于次级引导，与主要按钮搭配组合使用。
 
-*   可独立使用，也可以与其他按钮搭配使用（除图标按钮），搭配使用时注意按钮大小的一致性。
-    
-*   可搭配图标使用，图标通常在文字左边或上方。
-    
+- 可独立使用，也可以与其他按钮搭配使用（除图标按钮），搭配使用时注意按钮大小的一致性。
+- 可搭配图标使用，图标通常在文字左边或上方。
 
 注意：当设计的语言方向是从右向左的时候，将图标放在文字右边可以使按钮更符合用户的阅读习惯。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/1aeb3437-8546-4f58-901f-9c6715cc4dcb.png)
+image
 
 ### 虚线按钮
 
 用于引导用户在一个区域中添加内容，常用于表单中的添加配置项。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/4c10c9fe-19d0-43d5-9a44-6ee5102b7dd8.png)
+image
 
 ### 线形按钮
 
 也称为幽灵按钮。它通常被放置在复杂或深色的背景中，以避免按钮使背景的整体美感受到破坏。这种按钮常用于有色背景上，例如banner 图等。在这种情况下，可以根据需要自定义样式。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/e092d5c3-aeff-4878-9660-061bcf371e6f.png)
+image
 
 ### 文本按钮
 
 直接使用文字作按键，是视觉吸引力最弱的一个按钮，采用更轻量的按钮样式，可用于需大面积展示按钮场景，例如表格组件中的操作列。
 
-*   搭配图标使用时，图标通常在文字左边或上方。
-    
+- 搭配图标使用时，图标通常在文字左边或上方。
 
 注意：当设计的语言方向是从右向左的时候，将图标放在文字右边可以使按钮更符合用户的阅读习惯。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/b757bc85-8ed4-484b-b06d-c077d45698b8.png)
+image
 
 ### 图标按钮
 
 图标提供视觉线索，避免逐字阅读按钮文案，更高效地使用界面，增强识别性，以便直观使用界面。
 
-*   添加图标到按钮时，图标需要传达信息，而不仅仅是装饰。
-    
-*   使用只有图标的按钮时，需要添加 Tooltip 来解释按钮的含义。
-    
-*   按钮文字与按钮图标的颜色色相在所有情况下都应该保持一致。
-    
+- 添加图标到按钮时，图标需要传达信息，而不仅仅是装饰。
+- 使用只有图标的按钮时，需要添加 Tooltip 来解释按钮的含义。
+- 按钮文字与按钮图标的颜色色相在所有情况下都应该保持一致。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/ba8ded63-a22e-4afc-b6b0-28f1a9f284d7.png)
+image
 
 ## 按钮强调
 
 常规按钮类型呈现出不同的**强调程度**，使用者可以据此变化出合适的按钮类型：
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/269700b3-33ce-4538-9169-0fd31b144e97.png)
+image
 
-*   在视图中显示多个按钮，高强调按钮可以伴随非高强调按钮，需要注意强调按钮的数量。
-    
-*   使用多个按钮组合时，确保一个按钮的可用状态看起来不像另一个按钮的禁用状态。
-    
+- 在视图中显示多个按钮，高强调按钮可以伴随非高强调按钮，需要注意强调按钮的数量。
+- 使用多个按钮组合时，确保一个按钮的可用状态看起来不像另一个按钮的禁用状态。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/9d3d480b-efc9-4e25-82fe-68af4a099497.png)
+image
 
 ## 按钮位置
 
@@ -109,7 +93,7 @@
 
 按钮区是用于放置按钮的区域，一个按钮区内可以有多个按钮。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/c2847046-5fe0-4a66-96aa-29b7ff477ea2.png)
+image
 
 ### 跟随内容的按钮区
 
@@ -117,41 +101,36 @@
 
 在空状态的上下文中时，按钮区居中对齐。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/193e4953-3228-4efa-8aea-b669b5b1edb4.png)
+image
 
 ### 容器中的按钮区
 
 在容器组件（如对话框、弹出框或卡片）中的按钮区，靠右放置。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/fca09696-1c10-46fd-b5d0-9ad6e36dc8f5.png)
+image
 
 ### 如何确定按钮区的放置位置？
 
 #### 页面/卡片/一组信息都能够呈现一个主题，主题的描述可以抽象为三个区域：
 
-*   Header：主题的标题和摘要信息内容区的导航等。
-    
-*   Body：具体内容。
-    
-*   Footer：主题的补充信息和工具栏等。
-    
+- Header：主题的标题和摘要信息内容区的导航等。
+- Body：具体内容。
+- Footer：主题的补充信息和工具栏等。
 
 将按钮区放置在不同的区域，有不同的含义：见下图。
 
 也存在一些特殊情况，将“完成”主题类的动作放在 Header 区。例如，编辑器中为了最大化编辑空间，将“完成”类动作放到了右上角。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/249bae53-46e7-4c20-bee9-b4d71ee91999.png)
+image
 
 #### 什么时候需要在 Footer 中放置按钮区？
 
 为避免页脚工具栏滥用，不推荐使用页脚工具栏，仅建议以下两种场景使用：
 
-*   对象详情页，「推进」对象的进展，例如审批流「通过」「驳回」。
-    
-*   异常复杂的表单页，表单的内容复杂到需要切分为多张卡片。
-    
+- 对象详情页，「推进」对象的进展，例如审批流「通过」「驳回」。
+- 异常复杂的表单页，表单的内容复杂到需要切分为多张卡片。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/8d0ad0e5-14f5-4f8e-9ca7-f26f9a60e3b3.png)
+image
 
 ## 按钮顺序
 
@@ -161,11 +140,11 @@
 
 按钮放置顺序类似于电脑和用户的对话，**优先询问用户可能需要执行的操作，或你希望用户执行的操作，最后向用户提供存在风险的操作**。相比较于次要操作，用户更关心主要操作，因此将主要操作放在前面更符合用户的预期，更符合菲兹定律。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/7915e26a-7a95-4c83-a002-2f11ed37d6e5.png)
+image
 
 注意：推荐操作是阅读的起点，折叠内容始终在最右侧。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/ff534312-2d67-4a9e-be27-cd3a8d6d0ec7.png)
+image
 
 注意：当设计的语言方向是从右向左的时候，将主要操作放到右侧更符合用户的阅读习惯。
 
@@ -173,114 +152,87 @@
 
 按钮的顺序应该映射到用户的阅读和浏览顺序，从左到右，右边是前进，左边是回退。根据现有的一致性布局，“上一步”通常放在左侧，“下一步”则在右侧。例如，具有返回意义的按钮应该放在左侧，以显示其方向是回到之前的位置。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/28fe5e36-7457-4167-9ca4-23f42a89589f.png)
+image
 
 ### 按钮组合
 
 在一些特定的场景下，需要将相同主题类型的按钮组合进行使用。
 
-*   当文案无法调整为相同字数，则可使用较大按钮的宽度，以保证按钮大小一致。
-    
-*   在多个按钮同时使用时，相近功能的按钮在页面位置上更近。
-    
-*   多个按钮形成一组时，将按钮排列在一起即可。
-    
+- 当文案无法调整为相同字数，则可使用较大按钮的宽度，以保证按钮大小一致。
+- 在多个按钮同时使用时，相近功能的按钮在页面位置上更近。
+- 多个按钮形成一组时，将按钮排列在一起即可。
 
 按钮成一组时，需要注意彼此间距，避免连在一起在外观上与Toggle Button切换按钮混淆。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/c5738097-477b-4769-9fb2-8a3c89735216.png)
+image
 
 ### 按钮分组类型
 
 当需要布置的按钮数量过多，可以把相关的动作组成一组，并采用相似的视觉设计。当某一个按钮是首要动作时仍可使用主按钮强调。
 
-*   按主次折叠部分按钮
-    
+- 按主次折叠部分按钮
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/29ae83b4-6452-46c7-8185-4ce699ca860d.png)
+image
 
-*   平铺每个按钮：优先推荐通过间距来区隔分组，也可以使用分割线来区隔视觉相似的按钮组。间距可以满足区分时，无需使用短竖线分割。
-    
+- 平铺每个按钮：优先推荐通过间距来区隔分组，也可以使用分割线来区隔视觉相似的按钮组。间距可以满足区分时，无需使用短竖线分割。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/3d89383c-7621-4220-b8d8-f1d815a61c5e.png)
+image
 
 ### 很多按钮组，如何确定顺序
 
 工具栏中的操作类型很多，我们会倾向于将变化较少的内容位置固化。以表格工具栏举例，排列逻辑如下：
 
-*   业务逻辑：「推进」进程的操作。例如：编辑、新建、发布、保存、取消、撤回等；
-    
-*   视图控制：控制内容展示的形式。例如：全屏、表格密度、放大缩小、布局控制等；
-    
-*   其他：刷新、分享、设置等；
-    
-*   溢出：被折叠的操作，若进行响应式设计，从右往左折叠至溢出操作。
-    
+- 业务逻辑：「推进」进程的操作。例如：编辑、新建、发布、保存、取消、撤回等；
+- 视图控制：控制内容展示的形式。例如：全屏、表格密度、放大缩小、布局控制等；
+- 其他：刷新、分享、设置等；
+- 溢出：被折叠的操作，若进行响应式设计，从右往左折叠至溢出操作。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/4e330b41-ec5f-4cdf-bfea-65c194d99dcb.png)
+image
 
 ## Do & Don't
 
-*   **仅对最关键的操作使用图标：**并非组中的所有按钮都需要图标，但带图标的按钮应始终比不带图标的按钮具有更高的优先级。如果组中最关键的操作没有图标，则不要在其余较低级别的操作中使用图标。
-    
+- **仅对最关键的操作使用图标：**并非组中的所有按钮都需要图标，但带图标的按钮应始终比不带图标的按钮具有更高的优先级。如果组中最关键的操作没有图标，则不要在其余较低级别的操作中使用图标。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/cf46d93c-291a-42d5-8538-0323c9c8982f.png)
+image
 
-*   **按钮文本应始终使用首字母大小**：不要使用大写来强调特定的按钮。
-    
+- **按钮文本应始终使用首字母大小**：不要使用大写来强调特定的按钮。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/e69c33cf-957c-4a44-b591-499af1476834.png)
+image
 
-*   **删除操作建议不要使用关闭按钮**：关闭按钮仅用于解除或关闭其父组件，而不用于执行破坏性操作（如删除文件），请改用操作按钮。
-    
+- **删除操作建议不要使用关闭按钮**：关闭按钮仅用于解除或关闭其父组件，而不用于执行破坏性操作（如删除文件），请改用操作按钮。
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/74627f47-70c6-4ce2-ad24-b46ffadcea0c.png)
+image
 
 ## 文案
 
 按钮的文案帮助用户立即了解按钮的功能，需清楚传达用户按下按钮时系统将执行的操作：
 
-*   使用标题样式的大写，必须使用动词以帮助传达按钮的操作。（下拉按钮除外）
-    
-*   与语境紧密关联，用语简练，简洁地描述按钮的功能。
-    
-*   按钮中有图标情况，优先使用现有或者与系统统一的符号。
-    
-*   不要使用标点符号，如句号或感叹号。
-    
+- 使用标题样式的大写，必须使用动词以帮助传达按钮的操作。（下拉按钮除外）
+- 与语境紧密关联，用语简练，简洁地描述按钮的功能。
+- 按钮中有图标情况，优先使用现有或者与系统统一的符号。
+- 不要使用标点符号，如句号或感叹号。
 
 按钮中文案长度：
 
-*   尽量减少按钮上的文字长度，以保持按钮的整体可读性。可以通过缩写、简化或重新组织文字来实现。
-    
-*   如果文字过长，在按钮的宽度足够情况下，可以将文字进行换行显示，以避免按钮变得过长。但要确保换行的位置和方式不会破坏按钮的整体视觉效果。
-    
-*   如果按钮的宽度仍然不足以容纳全部文字，可以在文字末尾使用省略号（...）来表示截断的部分。同时，鼠标悬停时使用提示工具（Tooltip ）来显示完整的文字内容以提供更多信息。
-    
+- 尽量减少按钮上的文字长度，以保持按钮的整体可读性。可以通过缩写、简化或重新组织文字来实现。
+- 如果文字过长，在按钮的宽度足够情况下，可以将文字进行换行显示，以避免按钮变得过长。但要确保换行的位置和方式不会破坏按钮的整体视觉效果。
+- 如果按钮的宽度仍然不足以容纳全部文字，可以在文字末尾使用省略号（...）来表示截断的部分。同时，鼠标悬停时使用提示工具（Tooltip ）来显示完整的文字内容以提供更多信息。
 
 组件中默认使用 “确定 / 取消”文案 ，但你仍然可以通过以下方式优化按钮文案：
 
-*   描述任务结果。如：发布、登录、注册。
-    
-*   主要操作也为否定含义时，强调后果。如：你确定要删除它吗？删除 / 取消
-    
+- 描述任务结果。如：发布、登录、注册。
+- 主要操作也为否定含义时，强调后果。如：你确定要删除它吗？删除 / 取消
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/oJGq75kz4kLm2lAK/img/a51e03ce-c1de-4946-bc54-f8acefa508b5.png)
+image
 
 ---
 
 # 参考文献
 
-*   [arco.design](https://arco.design/)
-    
-*   [ant.Design](https://ant.design/index-cn)
-    
-*   [Human Interface Guideline](https://developer.apple.com/)
-    
-*   [Spectrum](https://spectrum.adobe.com/page/principles/?ref=88sheji.cn)
-    
-*   [HarmonyOs Developer](https://developer.harmonyos.com/cn/docs/design/des-guides/overview-0000001053563071?ref=88sheji.cn)
-    
-*   [Element](https://element-plus.org/)
-    
-*   [Clarity Design](https://design.teambition.com/)
+- [arco.design](https://arco.design/)
+- [ant.Design](https://ant.design/index-cn)
+- [Human Interface Guideline](https://developer.apple.com/)
+- [Spectrum](https://spectrum.adobe.com/page/principles/?ref=88sheji.cn)
+- [HarmonyOs Developer](https://developer.harmonyos.com/cn/docs/design/des-guides/overview-0000001053563071?ref=88sheji.cn)
+- [Element](https://element-plus.org/)
+- [Clarity Design](https://design.teambition.com/)

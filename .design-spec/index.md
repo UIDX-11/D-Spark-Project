@@ -21,4 +21,3 @@ This directory is the **single entrypoint** for D-Spark UI generation rules.
 - `docs/design.md`
 - `generator/schema-ui-contract.md`
 - `docs/components/intent-index.md`
-

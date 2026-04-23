@@ -25,7 +25,7 @@ Molecular
   - Avoid punctuation in labels.
   - If label is long, prefer rewording; if unavoidable, allow wrapping or use tooltip.
 
-## Variants (Figma-based)
+## Variants
 
 ### Variant axes
 
@@ -36,74 +36,92 @@ From Figma component properties:
 - **Leading icon**: optional
 - **Type**: Regular (text) / Icon-only
 
-### Variants table
+### Variants
 
 
-| Style (Figma)                  | Common name (EN)  | Intended use                                           | Notes / anti-misuse                                                                             |
-| ------------------------------ | ----------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| 主要按钮                           | Primary           | The default recommended action in a region             | Keep to **1 primary** per region; avoid “primary spam”.                                         |
-| 次要按钮                           | Secondary         | Alternative actions alongside primary                  | Use when action is valid but not the recommended path.                                          |
-| 三级按钮-tertiary (filled surface) | Filled / Tertiary | Low-emphasis actions, often in toolbars/cards          | Prefer grouping via `Space`; avoid visually overloading dense UIs.                              |
-| 文本按钮                           | Text              | Low emphasis, inline actions (e.g., table row actions) | Must still have clear hover/focus affordance.                                                   |
-| 线框按钮                           | Outline (solid)   | Secondary/tertiary emphasis without fill               | Use tokens for border/hover; do not use outline to encode “disabled”.                           |
-| 虚框按钮                           | Outline / Dashed  | “Add item / add section” patterns                      | Use only when the intent is “add”; don’t use as a generic secondary.                            |
-| 图标按钮                           | Icon button       | Compact actions in toolbars, tables, dense surfaces    | Must provide tooltip + accessible name (`aria-label`). Ensure hit target meets min size.        |
-| 危险 (Kind)                      | Destructive       | Delete/disable/irreversible actions                    | Prefer confirm dialogs for irreversible actions. Combine with Primary/Secondary/Text as needed. |
+|          |             |                   |                 |            |                   |                                                     |                                                                                                 |
+| -------- | ----------- | ----------------- | --------------- | ---------- | ----------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Name** | **Variant** | **Background**    | **Font**        | **Border** | **Use Case**      | **Intended use**                                    | **Notes / anti-misuse**                                                                         |
+| 默认       | Default     | --color-primary   | white           | none       | Primary actions   | The default recommended action in a region          | Keep to **1 primary** per region; avoid “primary spam”.                                         |
+| 次要       | Secondary   | --color-secondary | --color-primary | none       | Secondary actions | Alternative actions alongside primary               | Use when action is valid but not the recommended path.                                          |
+| 辅助       | Tertiary    | --color-teritiary | --color-primary | border     | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       | Prefer grouping via `Space`; avoid visually overloading dense UIs.                              |
+| 幽灵       | Outline     | transparent       | --color-primary | none       | Subtle actions    | “Add item / add section” patterns                   | Use only when the intent is “add”; don’t use as a generic secondary.                            |
+| 链接       | Link        | transparent       | --color-link    | none       |                   | Compact actions in toolbars, tables, dense surfaces | Must provide tooltip + accessible name (`aria-label`). Ensure hit target meets min size.        |
+| 警示/告警    | Destructive | --color-error     | white           | none       | Dangerous action  | Delete/disable/irreversible actions                 | Prefer confirm dialogs for irreversible actions. Combine with Primary/Secondary/Text as needed. |
 
 
-## Sizes (Figma-based)
+## Sizes
 
 Sizes are defined by height tokens and paired typography/icon sizes.
 
 
-| Size (Figma) | Height | Typography    | Icon size | Default padding (X / Y) | Corner radius |
-| ------------ | ------ | ------------- | --------- | ----------------------- | ------------- |
-| XL 大（36）     | 36     | 14 / Semibold | 16        | 16 / 8                  | 6             |
-| L 中（32）      | 32     | 14 / Semibold | 16        | 16 / 6                  | 6             |
-| M 小 （28）     | 28     | 12 / Semibold | 12        | 12 / 6                  | 4             |
-| S 迷你（24）     | 24     | 12 / Medium   | 12        | 8–12 / 4                | 4             |
+|          |            |               |               |                 |               |                   |
+| -------- | ---------- | ------------- | ------------- | --------------- | ------------- | ----------------- |
+| **Size** | **Height** | **Padding X** | **Padding Y** | **Font Size**   | **Icon Size** | **Corner radius** |
+| XL       | 36px       | 16px          | 8px           | 14px / Semibold | 16px          | 6px               |
+| L        | 32px       | 16px          | 6px           | 14px / Semibold | 16px          | 6px               |
+| S        | 28px       | 12px          | 6px           | 12px / Semibold | 12px          | 4px               |
+| M        | 24px       | 12px          | 4px           | 12px / Medium   | 12px          | 4px               |
 
 
-## States (Figma-based)
+## States
 
 
-| State (Figma) | Common name (EN) | When to use                 | Minimum requirements                                            |
-| ------------- | ---------------- | --------------------------- | --------------------------------------------------------------- |
-| 默认            | Default          | Resting state               | Clear hierarchy; token-based colors.                            |
-| 悬停            | Hover            | Pointer hover on web        | Must not be the only affordance; keep contrast.                 |
-| 激活            | Active / Pressed | Pointer down / active state | Provide pressed feedback without layout shift.                  |
-| 选中            | Selected         | Toggle/selection contexts   | Selected must be distinguishable from hover/focus; not color-only. |
-| 禁用            | Disabled         | Action is unavailable       | Don’t use disabled to “explain validation”; show inline errors. |
+|                  |                |          |             |             |                                                |                                                                    |
+| ---------------- | -------------- | -------- | ----------- | ----------- | ---------------------------------------------- | ------------------------------------------------------------------ |
+| **State**        | **Background** | **Text** | **Opacity** | **Cursor**  | **When to use**                                | **Minimum requirements**                                           |
+| Default          | token          | token    | 1           | pointer     | Resting state                                  | Clear hierarchy; token-based colors.                               |
+| Hover            | darker         | token    | 1           | pointer     | Resting state                                  | Clear hierarchy; token-based colors.                               |
+| Active / Pressed | darkest        | token    | 1           | pointer     | Provide pressed feedback without layout shift. | Provide pressed feedback without layout shift.                     |
+| Focus            | token          | token    | 1           | pointer     | Toggle/selection contexts                      | Selected must be distinguishable from hover/focus; not color-only. |
+| Disabled         | muted          | muted-fg | 0.5         | not-allowed | Action is unavailable                          | Don’t use disabled to “explain validation”; show inline errors.    |
+| Loading          | token          | token    | 0.7         | wait        |                                                |                                                                    |
 
-## Button group (Figma-based)
+
+### **Anatomy**
+
+```
+┌─────────────────────────────────────┐
+│  [icon]  Label Text  [icon]         │
+└─────────────────────────────────────┘
+     ↑                      ↑
+  leading icon         trailing icon
+```
+
+## Button group
 
 Button groups are used when multiple actions are presented together (toolbars, form footers, dialogs).
 
 ### Group layout rules
 
-| Rule | Recommendation | Rationale |
-|---|---|---|
-| Group spacing | **12px gap** between buttons (tokenized) | Matches the button-group container gap observed in Figma export; keeps groups readable and avoids “toggle-like” confusion. |
-| Internal alignment | Align button baselines/heights within a group; do not mix sizes in the same group | Prevents jitter and improves scanability. |
-| Grouping | Keep related actions adjacent; separate unrelated action clusters with a larger gap (use `Space`) | Reduces cognitive load in dense B-end toolbars. |
-| Overflow | When actions exceed available width, collapse **least-used** actions first into an overflow menu | Preserves the primary path and avoids layout breakage. |
+
+| Rule               | Recommendation                                                                                    | Rationale                                                                                                                  |
+| ------------------ | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Group spacing      | **12px gap** between buttons (tokenized)                                                          | Matches the button-group container gap observed in Figma export; keeps groups readable and avoids “toggle-like” confusion. |
+| Internal alignment | Align button baselines/heights within a group; do not mix sizes in the same group                 | Prevents jitter and improves scanability.                                                                                  |
+| Grouping           | Keep related actions adjacent; separate unrelated action clusters with a larger gap (use `Space`) | Reduces cognitive load in dense B-end toolbars.                                                                            |
+| Overflow           | When actions exceed available width, collapse **least-used** actions first into an overflow menu  | Preserves the primary path and avoids layout breakage.                                                                     |
+
 
 ### Ordering rules (primary/secondary/destructive)
 
-| Context | Recommended order | Notes |
-|---|---|---|
-| Common B-end pages (LTR) | Primary → Secondary → Filled/Tertiary/Text → Destructive (if present) | Keep a single primary per region; destructive should not compete for attention. |
-| Wizard / step actions | Back/Previous → Next/Continue (Primary) | Order should match navigation direction. |
-| Dialog footer | Primary (confirm) + Secondary (cancel) grouped consistently | Keep cancel consistent across dialogs; avoid swapping positions between screens. |
+
+| Context                  | Recommended order                                                     | Notes                                                                            |
+| ------------------------ | --------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Common B-end pages (LTR) | Primary → Secondary → Filled/Tertiary/Text → Destructive (if present) | Keep a single primary per region; destructive should not compete for attention.  |
+| Wizard / step actions    | Back/Previous → Next/Continue (Primary)                               | Order should match navigation direction.                                         |
+| Dialog footer            | Primary (confirm) + Secondary (cancel) grouped consistently           | Keep cancel consistent across dialogs; avoid swapping positions between screens. |
+
 
 ### Anti-patterns (button groups)
 
-| Anti-pattern | Why it’s bad | Preferred alternative |
-|---|---|---|
-| Multiple Primary buttons in one group | Competing emphasis, unclear recommendation | Choose 1 primary; demote others to secondary/tertiary. |
-| Zero spacing (buttons touching) | Reads as toggle/segmented control; increases misclick risk | Use 12px gap (token). |
-| Mixed sizes in one group | Visual noise; inconsistent hit targets | Use a single size per group. |
-| Destructive placed as primary without confirmation | Increases accidental destructive actions | Use destructive styling + confirm for irreversible actions. |
+
+| Anti-pattern                                       | Why it’s bad                                               | Preferred alternative                                       |
+| -------------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------- |
+| Multiple Primary buttons in one group              | Competing emphasis, unclear recommendation                 | Choose 1 primary; demote others to secondary/tertiary.      |
+| Zero spacing (buttons touching)                    | Reads as toggle/segmented control; increases misclick risk | Use 12px gap (token).                                       |
+| Mixed sizes in one group                           | Visual noise; inconsistent hit targets                     | Use a single size per group.                                |
+| Destructive placed as primary without confirmation | Increases accidental destructive actions                   | Use destructive styling + confirm for irreversible actions. |
 
 
 ## Layout patterns

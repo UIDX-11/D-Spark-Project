@@ -44,13 +44,14 @@ module.exports = {
 
 ## Disallowed patterns
 
-| Pattern | Why |
-|---|---|
-| `text-[#fff]`, `bg-[#000]` | Hardcoded color bypasses token system |
-| `p-[13px]`, `rounded-[7px]` | Non-token sizing breaks consistency |
+
+| Pattern                                 | Why                                                    |
+| --------------------------------------- | ------------------------------------------------------ |
+| `text-[#fff]`, `bg-[#000]`              | Hardcoded color bypasses token system                  |
+| `p-[13px]`, `rounded-[7px]`             | Non-token sizing breaks consistency                    |
 | Copying Figma export Tailwind literally | Figma exports are references, not production contracts |
+
 
 ## Controlled components
 
 Even with Tailwind enabled, schema-driven UI should compose **controlled components** and should not inject arbitrary Tailwind class strings into schema.
-

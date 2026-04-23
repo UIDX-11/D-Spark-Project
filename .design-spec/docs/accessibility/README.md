@@ -9,4 +9,3 @@ Accessibility requirements are part of the design system, not an optional add-on
 - Accessible naming (labels, aria-label, descriptions)
 - Contrast targets and color usage rules
 - Reduced motion support
-

@@ -11,11 +11,13 @@ This document describes how design tokens are structured and consumed in D-Spark
 
 ## Layers
 
-| Layer | What it is | Examples | Rules |
-|---|---|---|---|
-| Primitive (core) | Raw values, never reference UI meaning | `color.neutral.0`, `space.4`, `radius.md` | Stable, cross-platform. Avoid naming by usage (no “buttonBg”). |
-| Semantic | Meaningful roles used across the UI | `bg.page`, `text.primary`, `border.default` | Prefer semantic tokens in UI. Semantic may reference primitive. |
-| Component | Component-scoped roles | `button.primary.bg`, `input.border.focus` | Component tokens reference semantic (preferred) or primitive (fallback). |
+
+| Layer            | What it is                             | Examples                                    | Rules                                                                    |
+| ---------------- | -------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------ |
+| Primitive (core) | Raw values, never reference UI meaning | `color.neutral.0`, `space.4`, `radius.md`   | Stable, cross-platform. Avoid naming by usage (no “buttonBg”).           |
+| Semantic         | Meaningful roles used across the UI    | `bg.page`, `text.primary`, `border.default` | Prefer semantic tokens in UI. Semantic may reference primitive.          |
+| Component        | Component-scoped roles                 | `button.primary.bg`, `input.border.focus`   | Component tokens reference semantic (preferred) or primitive (fallback). |
+
 
 ## Referencing rules
 
@@ -26,4 +28,3 @@ This document describes how design tokens are structured and consumed in D-Spark
 ## Platform outputs
 
 Token outputs (CSS/TS/Dart) are produced under `.design-spec/tokens/dist/` (to be extended).
-
