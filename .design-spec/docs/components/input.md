@@ -88,17 +88,17 @@ From the provided nodes, Input includes:
 ## States
 
 
-|            |                      |                  |                   |                     |          |                            |
-| ---------- | -------------------- | ---------------- | ----------------- | ------------------- | -------- | -------------------------- |
-| **Name**   | **State**            | **Background**   | **Font**          | **Border**          | **Ring** | **When to use**            |
-| 默认         | Default              | color-neutral-20 | color-neutral-120 | none                | none     | Resting state              |
-| 悬停         | Hover                | color-neutral-60 |                   | none                | none     | Pointer hover on web       |
-| 聚焦 / 激活输入框 | Focus                | color-neutral-20 |                   | color-neutral-170   | none     | Active text entry          |
-| 输入中        | Typing               | color-neutral-20 | color-neutral-170 | none                | none     | During input               |
-| 输入完成       | Completed            | color-neutral-20 | color-neutral-170 | none                | none     | Value confirmed/valid      |
-| 报错 / 输入报错  | Error                | color-neutral-20 | color-neutral-170 | color-red-50        | red/20%  | Validation failed          |
-| 禁用         | Disabled             | color-neutral-10 | color-neutral-120 | none                | none     | Not editable               |
-| 禁用-输入完成    | Disabled (segmented) | color-neutral-10 | color-neutral-120 | none                | none     | IP input disabled variants |
+|            |                      |                  |                   |                   |          |                            |
+| ---------- | -------------------- | ---------------- | ----------------- | ----------------- | -------- | -------------------------- |
+| **Name**   | **State**            | **Background**   | **Font**          | **Border**        | **Ring** | **When to use**            |
+| 默认         | Default              | `var(--color-neutral-20)` | `var(--color-neutral-120)` | none | none | Resting state |
+| 悬停         | Hover                | `var(--color-neutral-60)` | `var(--color-neutral-120)` | none | none | Pointer hover on web |
+| 聚焦 / 激活输入框 | Focus                | `var(--color-neutral-20)` | `var(--color-neutral-170)` | `var(--color-neutral-170)` | `var(--color-ring)` | Active text entry |
+| 输入中        | Typing               | `var(--color-neutral-20)` | `var(--color-neutral-170)` | none | none | During input |
+| 输入完成       | Completed            | `var(--color-neutral-20)` | `var(--color-neutral-170)` | none | none | Value confirmed/valid |
+| 报错 / 输入报错  | Error                | `var(--color-neutral-20)` | `var(--color-neutral-170)` | `var(--color-red-50)` | `var(--color-red-50)` | Validation failed |
+| 禁用         | Disabled             | `var(--color-neutral-10)` | `var(--color-neutral-120)` | none | none | Not editable |
+| 禁用-输入完成    | Disabled (segmented) | `var(--color-neutral-10)` | `var(--color-neutral-120)` | none | none | IP input disabled variants |
 
 
 ## Layout patterns

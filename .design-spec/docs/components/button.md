@@ -42,12 +42,13 @@ From Figma component properties:
 |          |             |                 |               |                   |                   |                                                     |
 | -------- | ----------- | --------------- | ------------- | ----------------- | ----------------- | --------------------------------------------------- |
 | **Name** | **Variant** | **Background**  | **Font**      | **Border**        | **Use Case**      | **Intended use**                                    |
-| 默认按钮     | Default     | color-primary   | white         | none              | Primary actions   | The default recommended action in a region          |
-| 次要按钮     | Secondary   | color-secondary | color-primary | color-neutral-120 | Secondary actions | Alternative actions alongside primary               |
-| 辅助按钮     | Tertiary    | color-teritiary | color-primary | none              | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       |
-| 幽灵按钮     | Outline     | transparent     | color-primary | none              | Subtle actions    | “Add item / add section” patterns                   |
-| 链接       | Link        | transparent     | color-link    | none              |                   | Compact actions in toolbars, tables, dense surfaces |
-| 警示/告警按钮  | Destructive | color-error     | white         | none              | Dangerous action  | Delete/disable/irreversible actions                 |
+| 默认按钮     | Default     | `var(--component-fill-button-primary-default)` | `var(--component-and-text-and-icon-unbound-always-white)` | none | Primary actions | The default recommended action in a region |
+| 次要按钮     | Secondary   | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` | Secondary actions | Alternative actions alongside primary |
+| 辅助按钮     | Tertiary    | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)` | none | Tertiary actions | Low-emphasis actions, often in toolbars/cards |
+| 幽灵按钮     | Outline     | transparent | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-dashed-default)` | Subtle actions | “Add item / add section” patterns |
+| 链接       | Link        | transparent | `var(--component-and-text-and-icon-unbound-link)` | none | Inline actions | Compact actions in toolbars, tables, dense surfaces |
+| 警示/告警按钮  | Destructive | `var(--component-fill-button-main)` | `var(--component-and-text-and-icon-unbound-always-white)` | none | Dangerous action | Delete/disable/irreversible actions |
+
 
 ## Sizes
 

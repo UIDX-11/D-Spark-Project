@@ -6,7 +6,7 @@ Raw design values - foundation of the design system.
 
 ---
 
-### Neural
+### Neutral
 
 ```css
 :root {

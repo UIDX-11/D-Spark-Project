@@ -14,11 +14,13 @@ Semantic tokens represent **UI meaning**, not raw values.
 
 ## Typical semantic groups
 
-| Group | Examples | Used by |
-|---|---|---|
-| Background | `bg.page`, `bg.surface` | Layout, cards, inputs |
-| Text | `text.primary` | All components |
-| Border | `border.default` | Inputs, dividers, tables |
+
+| Group      | Examples                | Used by                  |
+| ---------- | ----------------------- | ------------------------ |
+| Background | `bg.page`, `bg.surface` | Layout, cards, inputs    |
+| Text       | `text.primary`          | All components           |
+| Border     | `border.default`        | Inputs, dividers, tables |
+
 
 ## Semantic color palettes (CSS variables example)
 
@@ -117,6 +119,24 @@ Below is a **Global light** semantic color list rendered as CSS variables from t
 }
 ```
 
+## Semantic roles (recommended for implementation)
+
+The palette above is designed for mapping. For actual UI implementation, define stable “role” tokens that reference the palette (and remain consistent across themes).
+
+```css
+:root {
+  /* Surfaces */
+  --color-card: var(--semantic-neutral-10);
+  --color-card-foreground: var(--semantic-neutral-130);
+
+  /* Borders */
+  --color-border: var(--semantic-neutral-70);
+
+  /* Focus ring */
+  --color-ring: var(--semantic-link-20);
+}
+```
+
 ## Rules
 
 - Semantic tokens may reference primitives.
@@ -199,8 +219,8 @@ Below is a **Global light** semantic color list rendered as CSS variables from t
 
 /* Bad - uses primitive tokens directly */
 .card {
-  background: var(--color-gray-50);
-  color: var(--color-gray-900);
+  background: var(--color-neutral-20);
+  color: var(--color-neutral-170);
 }
 ```
 
