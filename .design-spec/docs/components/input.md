@@ -85,24 +85,20 @@ From the provided nodes, Input includes:
 | M        | 24px       | 8px         | 4px           | 12px / Medium | 4px               | Tight spaces; avoid for critical form fields when possible.   |
 
 
-
-
 ## States
 
 
-|            |                      |                    |                     |                     |          |                            |
-| ---------- | -------------------- | ------------------ | ------------------- | ------------------- | -------- | -------------------------- |
-| **Name**   | **State**            | **Background**     | **Font**            | **Border**          | **Ring** | **When to use**            |
-| 默认         | Default              | --color-neutral-20 | --color-neutral-120 | none                | none     | Resting state              |
-| 悬停         | Hover                | --color-neutral-60 |                     | none                | none     | Pointer hover on web       |
-| 聚焦 / 激活输入框 | Focus                | --color-neutral-20 |                     | --color-neutral-170 | none     | Active text entry          |
-| 输入中        | Typing               | --color-neutral-20 | --color-neutral-170 | none                | none     | During input               |
-| 输入完成       | Completed            | --color-neutral-20 | --color-neutral-170 | none                | none     | Value confirmed/valid      |
-| 报错 / 输入报错  | Error                | --color-neutral-20 | --color-neutral-170 | --color-red-50      | red/20%  | Validation failed          |
-| 禁用         | Disabled             | --color-neutral-10 | --color-neutral-120 | none                | none     | Not editable               |
-| 禁用-输入完成    | Disabled (segmented) | --color-neutral-10 | --color-neutral-120 | none                | none     | IP input disabled variants |
-
-
+|            |                      |                  |                   |                     |          |                            |
+| ---------- | -------------------- | ---------------- | ----------------- | ------------------- | -------- | -------------------------- |
+| **Name**   | **State**            | **Background**   | **Font**          | **Border**          | **Ring** | **When to use**            |
+| 默认         | Default              | color-neutral-20 | color-neutral-120 | none                | none     | Resting state              |
+| 悬停         | Hover                | color-neutral-60 |                   | none                | none     | Pointer hover on web       |
+| 聚焦 / 激活输入框 | Focus                | color-neutral-20 |                   | color-neutral-170   | none     | Active text entry          |
+| 输入中        | Typing               | color-neutral-20 | color-neutral-170 | none                | none     | During input               |
+| 输入完成       | Completed            | color-neutral-20 | color-neutral-170 | none                | none     | Value confirmed/valid      |
+| 报错 / 输入报错  | Error                | color-neutral-20 | color-neutral-170 | color-red-50        | red/20%  | Validation failed          |
+| 禁用         | Disabled             | color-neutral-10 | color-neutral-120 | none                | none     | Not editable               |
+| 禁用-输入完成    | Disabled (segmented) | color-neutral-10 | color-neutral-120 | none                | none     | IP input disabled variants |
 
 
 ## Layout patterns

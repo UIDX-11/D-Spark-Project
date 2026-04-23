@@ -38,4 +38,3 @@ Molecular
 - Examples:
   - `card/section/rounded/md/default`
   - `card/clickable/rounded/md/focus`
-
