@@ -23,6 +23,49 @@ Component tokens define **component-scoped roles** that map design intent to con
   - `.design-spec/tokens/src/component.json` (normalized source of truth)
   - or generated outputs under `.design-spec/tokens/dist/` (future)
 
+## Naming ↔ JSON path mapping (required)
+
+Component tokens have **one canonical JSON path** and **one canonical CSS variable name**.
+
+### JSON path convention
+
+- **Root**: `.design-spec/tokens/src/component.json` → `tokens`
+- **Path format**: `tokens.<component>.<variantGroup>.<property>`
+- Example:
+  - `tokens.button.primary.bgDefault`
+
+### CSS variable convention
+
+- **Prefix**: `--component-`
+- **Convert path segments**:
+  - Remove the leading `tokens.`
+  - Convert camelCase to kebab-case (`bgDefault` → `bg-default`)
+  - Join with `-`
+- Example:
+  - `tokens.button.primary.bgDefault` → `--component-button-primary-bg-default`
+
+This mapping is what allows:
+- Component specs (`button.md`, `input.md`) to reference stable, readable `var(--component-...)`
+- The token source of truth to remain structured in JSON
+
+## Minimal build step (generate `.design-spec/tokens/dist/tokens.css`)
+
+To make `var(--component-...)` real in code, generate a CSS file from:
+
+- **Primitive**: `.design-spec/tokens/src/core.json`
+- **Semantic**: `.design-spec/tokens/src/semantic.json` (may reference core)
+- **Component**: `.design-spec/tokens/src/component.json` (must reference semantic only)
+
+Run:
+
+```bash
+python3 ".design-spec/tokens/generate_tokens_css.py"
+```
+
+Output:
+
+- `.design-spec/tokens/dist/tokens.css`
+
 ## Rules
 
 - Component tokens should reference semantic tokens first.
