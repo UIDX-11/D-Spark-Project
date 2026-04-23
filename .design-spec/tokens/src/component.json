@@ -5,10 +5,62 @@
   "tokens": {
     "button": {
       "primary": {
-        "bg": "{text.primary}",
-        "text": "{bg.page}",
+        "bgDefault": "{action.primary.bg}",
+        "bgHover": "{action.primary.bgHover}",
+        "bgActive": "{action.primary.bgActive}",
+        "bgDisabled": "{action.primary.bgDisabled}",
+        "textDefault": "{action.primary.text}",
+        "textHover": "{action.primary.text}",
+        "textActive": "{action.primary.text}",
+        "textDisabled": "{text.inverse}",
         "radius": "{radius.md}"
+      },
+      "neutral": {
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.page}",
+        "bgActive": "{bg.page}",
+        "bgDisabled": "{bg.page}",
+        "textDefault": "{text.primary}",
+        "textHover": "{text.primary}",
+        "textActive": "{text.primary}",
+        "textDisabled": "{text.disabled}",
+        "borderDefault": "{border.default}",
+        "borderHover": "{border.default}",
+        "borderActive": "{border.default}",
+        "borderDisabled": "{border.default}"
+      },
+      "outline": {
+        "borderDefault": "{border.strong}"
+      },
+      "link": {
+        "textDefault": "{text.link}"
+      },
+      "danger": {
+        "bgDefault": "{status.danger}",
+        "textDefault": "{text.inverse}"
       }
+    },
+    "input": {
+      "bgDefault": "{bg.surface}",
+      "bgHover": "{bg.surface}",
+      "bgFocus": "{bg.surface}",
+      "bgTyping": "{bg.surface}",
+      "bgCompleted": "{bg.surface}",
+      "bgError": "{bg.surface}",
+      "bgDisabled": "{bg.page}",
+
+      "textDefault": "{text.secondary}",
+      "textFocus": "{text.primary}",
+      "textDisabled": "{text.disabled}",
+
+      "borderDefault": "{border.default}",
+      "borderHover": "{border.default}",
+      "borderFocus": "{border.strong}",
+      "borderError": "{status.danger}",
+      "borderDisabled": "{border.default}",
+
+      "ringFocus": "{focus.ring}",
+      "ringError": "{status.danger}"
     }
   }
 }

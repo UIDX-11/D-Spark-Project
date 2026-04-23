@@ -55,7 +55,7 @@ From the provided nodes, Input includes:
 
 - **Style**: Standard input / Range input / Search box / Textarea / Password / IP input
 - **Affixes**: none / prefix+suffix labels / suffix unit / suffix selector / suffix count text
-- **Filled**: empty vs filled value (Figma: `填充文本`)
+- **Filled**: empty vs filled value
 
 ### Variants
 
@@ -91,14 +91,14 @@ From the provided nodes, Input includes:
 |            |                      |                  |                   |                   |          |                            |
 | ---------- | -------------------- | ---------------- | ----------------- | ----------------- | -------- | -------------------------- |
 | **Name**   | **State**            | **Background**   | **Font**          | **Border**        | **Ring** | **When to use**            |
-| 默认         | Default              | `var(--color-neutral-20)` | `var(--color-neutral-120)` | none | none | Resting state |
-| 悬停         | Hover                | `var(--color-neutral-60)` | `var(--color-neutral-120)` | none | none | Pointer hover on web |
-| 聚焦 / 激活输入框 | Focus                | `var(--color-neutral-20)` | `var(--color-neutral-170)` | `var(--color-neutral-170)` | `var(--color-ring)` | Active text entry |
-| 输入中        | Typing               | `var(--color-neutral-20)` | `var(--color-neutral-170)` | none | none | During input |
-| 输入完成       | Completed            | `var(--color-neutral-20)` | `var(--color-neutral-170)` | none | none | Value confirmed/valid |
-| 报错 / 输入报错  | Error                | `var(--color-neutral-20)` | `var(--color-neutral-170)` | `var(--color-red-50)` | `var(--color-red-50)` | Validation failed |
-| 禁用         | Disabled             | `var(--color-neutral-10)` | `var(--color-neutral-120)` | none | none | Not editable |
-| 禁用-输入完成    | Disabled (segmented) | `var(--color-neutral-10)` | `var(--color-neutral-120)` | none | none | IP input disabled variants |
+| 默认         | Default              | `var(--component-input-bg-default)` | `var(--component-input-text-default)` | `var(--component-input-border-default)` | none | Resting state |
+| 悬停         | Hover                | `var(--component-input-bg-hover)` | `var(--component-input-text-default)` | `var(--component-input-border-hover)` | none | Pointer hover on web |
+| 聚焦 / 激活输入框 | Focus                | `var(--component-input-bg-focus)` | `var(--component-input-text-focus)` | `var(--component-input-border-focus)` | `var(--component-input-ring-focus)` | Active text entry |
+| 输入中        | Typing               | `var(--component-input-bg-typing)` | `var(--component-input-text-focus)` | `var(--component-input-border-focus)` | none | During input |
+| 输入完成       | Completed            | `var(--component-input-bg-completed)` | `var(--component-input-text-focus)` | `var(--component-input-border-default)` | none | Value confirmed/valid |
+| 报错 / 输入报错  | Error                | `var(--component-input-bg-error)` | `var(--component-input-text-focus)` | `var(--component-input-border-error)` | `var(--component-input-ring-error)` | Validation failed |
+| 禁用         | Disabled             | `var(--component-input-bg-disabled)` | `var(--component-input-text-disabled)` | `var(--component-input-border-disabled)` | none | Not editable |
+| 禁用-输入完成    | Disabled (segmented) | `var(--component-input-bg-disabled)` | `var(--component-input-text-disabled)` | `var(--component-input-border-disabled)` | none | IP input disabled variants |
 
 
 ## Layout patterns

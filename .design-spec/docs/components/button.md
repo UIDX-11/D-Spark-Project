@@ -29,7 +29,7 @@ Molecular
 
 ### Variant axes
 
-From Figma component properties:
+From component spec properties:
 
 - **Style**: Primary / Secondary / Text / Filled (Surface) / Outline (Dashed)
 - **Kind**: Standard / Danger
@@ -42,12 +42,12 @@ From Figma component properties:
 |          |             |                                                 |                                                           |                                                    |                   |                                                     |
 | -------- | ----------- | ----------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------- | ----------------- | --------------------------------------------------- |
 | **Name** | **Variant** | **Background**                                  | **Font**                                                  | **Border**                                         | **Use Case**      | **Intended use**                                    |
-| 默认按钮     | Default     | `var(--component-fill-button-primary-default)`  | `var(--component-and-text-and-icon-unbound-always-white)` | none                                               | Primary actions   | The default recommended action in a region          |
-| 次要按钮     | Secondary   | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)`      | `var(--component-border-button-secondary-default)` | Secondary actions | Alternative actions alongside primary               |
-| 辅助按钮     | Tertiary    | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)`      | none                                               | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       |
-| 幽灵按钮     | Outline     | transparent                                     | `var(--component-and-text-and-icon-unbound-primary)`      | `var(--component-border-button-dashed-default)`    | Subtle actions    | “Add item / add section” patterns                   |
-| 链接       | Link        | transparent                                     | `var(--component-and-text-and-icon-unbound-link)`         | none                                               | Inline actions    | Compact actions in toolbars, tables, dense surfaces |
-| 警示/告警按钮  | Destructive | `var(--component-fill-button-main)`             | `var(--component-and-text-and-icon-unbound-always-white)` | none                                               | Dangerous action  | Delete/disable/irreversible actions                 |
+| 默认按钮     | Default     | `var(--component-button-primary-bg-default)`  | `var(--component-button-primary-text-default)` | none                                           | Primary actions   | The default recommended action in a region          |
+| 次要按钮     | Secondary   | `var(--component-button-neutral-bg-default)`  | `var(--component-button-neutral-text-default)` | `var(--component-button-neutral-border-default)` | Secondary actions | Alternative actions alongside primary               |
+| 辅助按钮     | Tertiary    | `var(--component-button-neutral-bg-default)`  | `var(--component-button-neutral-text-default)` | none                                           | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       |
+| 幽灵按钮     | Outline     | transparent                                   | `var(--component-button-neutral-text-default)` | `var(--component-button-outline-border-default)` | Subtle actions    | “Add item / add section” patterns                   |
+| 链接       | Link        | transparent                                   | `var(--component-button-link-text-default)`    | none                                           | Inline actions    | Compact actions in toolbars, tables, dense surfaces |
+| 警示/告警按钮  | Destructive | `var(--component-button-danger-bg-default)`   | `var(--component-button-danger-text-default)`  | none                                           | Dangerous action  | Delete/disable/irreversible actions                 |
 
 
 ## Sizes
@@ -63,42 +63,47 @@ Sizes are defined by height tokens and paired typography/icon sizes.
 | S        | 28px       | 12px          | 6px           | 12px / Semibold | 12px          | 4px               |
 | M        | 24px       | 12px          | 4px           | 12px / Medium   | 12px          | 4px               |
 
+
 ## States
 
 ## Component token bindings (required)
 
-This spec uses **component color tokens** exported from Figma (Global light). Until they are normalized into `.design-spec/tokens/src/component.json`, treat the following token names as the canonical interface for implementation and AI generation.
+All values below must come from component tokens (`.design-spec/tokens/src/component.json`) which in turn must reference semantic tokens only.
 
-### Primary (Default style) — states
+### Primary (Style: Primary) — states
 
-| State | Background | Text |
-|---|---|---|
-| Default | `var(--component-fill-button-primary-default)` | `var(--component-and-text-and-icon-unbound-always-white)` |
-| Hover | `var(--component-fill-button-primary-hover)` | `var(--component-and-text-and-icon-unbound-always-white)` |
-| Active / Pressed | `var(--component-fill-button-primary-active)` | `var(--component-and-text-and-icon-unbound-always-white)` |
-| Disabled | `var(--component-fill-button-primary-disabled)` | `var(--component-and-text-and-icon-unbound-disabled)` |
 
-### Neutral surfaces (Secondary/Tertiary/Text/Outline) — common states
+| State            | Background                                  | Text                                     |
+| ---------------- | ------------------------------------------- | ---------------------------------------- |
+| Default          | `var(--component-button-primary-bg-default)`  | `var(--component-button-primary-text-default)`  |
+| Hover            | `var(--component-button-primary-bg-hover)`    | `var(--component-button-primary-text-hover)`    |
+| Active / Pressed | `var(--component-button-primary-bg-active)`   | `var(--component-button-primary-text-active)`   |
+| Disabled         | `var(--component-button-primary-bg-disabled)` | `var(--component-button-primary-text-disabled)` |
 
-| State | Background | Text | Border |
-|---|---|---|---|
-| Default | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` |
-| Hover | `var(--component-fill-button-tertiary-hover)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` |
-| Active / Pressed | `var(--component-fill-button-tertiary-active)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` |
-| Disabled | `var(--component-fill-button-tertiary-disabled)` | `var(--component-and-text-and-icon-unbound-disabled)` | `var(--component-border-button-secondary-disabled)` |
+
+### Neutral surfaces (Style: Secondary / Tertiary) — states
+
+
+| State            | Background                                   | Text                                     | Border                                      |
+| ---------------- | -------------------------------------------- | ---------------------------------------- | ------------------------------------------- |
+| Default          | `var(--component-button-neutral-bg-default)`  | `var(--component-button-neutral-text-default)`  | `var(--component-button-neutral-border-default)`  |
+| Hover            | `var(--component-button-neutral-bg-hover)`    | `var(--component-button-neutral-text-hover)`    | `var(--component-button-neutral-border-hover)`    |
+| Active / Pressed | `var(--component-button-neutral-bg-active)`   | `var(--component-button-neutral-text-active)`   | `var(--component-button-neutral-border-active)`   |
+| Disabled         | `var(--component-button-neutral-bg-disabled)` | `var(--component-button-neutral-text-disabled)` | `var(--component-button-neutral-border-disabled)` |
+
 
 ## States
 
 
-|                  |                |          |             |             |                                                |                                                                    |
-| ---------------- | -------------- | -------- | ----------- | ----------- | ---------------------------------------------- | ------------------------------------------------------------------ |
-| **State**        | **Background** | **Text** | **Opacity** | **Cursor**  | **When to use**                                | **Minimum requirements**                                           |
-| Default          | See bindings   | See bindings | 1        | pointer     | Resting state                                  | Clear hierarchy; token-based colors.                               |
-| Hover            | See bindings   | See bindings | 1        | pointer     | Pointer hover on web                           | Must not be the only affordance; keep contrast.                    |
-| Active / Pressed | See bindings   | See bindings | 1        | pointer     | Pointer down / pressed feedback                | No layout shift; avoid motion that feels like “disabled”.          |
-| Focus            | See bindings   | See bindings | 1        | pointer     | Keyboard focus                                 | Visible focus ring; never rely on color-only to indicate focus.    |
-| Disabled         | See bindings   | See bindings | 1        | not-allowed | Action is unavailable                          | Don’t use disabled to “explain validation”; show inline errors.    |
-| Loading          | See bindings   | See bindings | 1        | wait        | Async in progress                              | Keep width stable; announce loading; prevent double-submit.        |
+|                  |                |              |             |             |                                 |                                                                 |
+| ---------------- | -------------- | ------------ | ----------- | ----------- | ------------------------------- | --------------------------------------------------------------- |
+| **State**        | **Background** | **Text**     | **Opacity** | **Cursor**  | **When to use**                 | **Minimum requirements**                                        |
+| Default          | See bindings   | See bindings | 1           | pointer     | Resting state                   | Clear hierarchy; token-based colors.                            |
+| Hover            | See bindings   | See bindings | 1           | pointer     | Pointer hover on web            | Must not be the only affordance; keep contrast.                 |
+| Active / Pressed | See bindings   | See bindings | 1           | pointer     | Pointer down / pressed feedback | No layout shift; avoid motion that feels like “disabled”.       |
+| Focus            | See bindings   | See bindings | 1           | pointer     | Keyboard focus                  | Visible focus ring; never rely on color-only to indicate focus. |
+| Disabled         | See bindings   | See bindings | 1           | not-allowed | Action is unavailable           | Don’t use disabled to “explain validation”; show inline errors. |
+| Loading          | See bindings   | See bindings | 1           | wait        | Async in progress               | Keep width stable; announce loading; prevent double-submit.     |
 
 
 ### **Anatomy**
@@ -120,7 +125,7 @@ Button groups are used when multiple actions are presented together (toolbars, f
 
 | Rule               | Recommendation                                                                                    | Rationale                                                                                                                  |
 | ------------------ | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Group spacing      | **12px gap** between buttons (tokenized)                                                          | Matches the button-group container gap observed in Figma export; keeps groups readable and avoids “toggle-like” confusion. |
+| Group spacing      | **12px gap** between buttons (tokenized)                                                          | Keeps groups readable and avoids “toggle-like” confusion.                                                                   |
 | Internal alignment | Align button baselines/heights within a group; do not mix sizes in the same group                 | Prevents jitter and improves scanability.                                                                                  |
 | Grouping           | Keep related actions adjacent; separate unrelated action clusters with a larger gap (use `Space`) | Reduces cognitive load in dense B-end toolbars.                                                                            |
 | Overflow           | When actions exceed available width, collapse **least-used** actions first into an overflow menu  | Preserves the primary path and avoids layout breakage.                                                                     |

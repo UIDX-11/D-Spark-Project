@@ -4,14 +4,42 @@
   "mode": "light",
   "tokens": {
     "bg": {
-      "page": "{color.neutral.0}",
-      "surface": "{color.neutral.0}"
+      "page": "{color.neutral.20}",
+      "surface": "{color.neutral.0}",
+      "card": "{color.neutral.0}"
     },
     "text": {
-      "primary": "{color.neutral.900}"
+      "primary": "{color.neutral.170}",
+      "secondary": "{color.neutral.140}",
+      "disabled": "{color.neutral.110}",
+      "inverse": "{color.neutral.0}",
+      "link": "{color.deepBlue.30}"
     },
     "border": {
-      "default": "rgba(17,24,39,0.12)"
+      "default": "{color.neutral.80}",
+      "strong": "{color.neutral.120}"
+    },
+    "action": {
+      "primary": {
+        "bg": "{color.neutral.170}",
+        "bgHover": "{color.neutral.160}",
+        "bgActive": "{color.neutral.180}",
+        "bgDisabled": "{color.neutral.110}",
+        "text": "{color.neutral.0}",
+        "textDisabled": "{color.neutral.0}"
+      }
+    },
+    "focus": {
+      "ring": "{color.deepBlue.20}"
+    },
+    "radius": {
+      "sm": "{radius.sm}",
+      "md": "{radius.md}"
+    },
+    "status": {
+      "success": "{color.green.50}",
+      "warning": "{color.yellow.50}",
+      "danger": "{color.red.50}"
     }
   }
 }

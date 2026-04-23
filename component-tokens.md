@@ -5,9 +5,7 @@ Component tokens define **component-scoped roles** that map design intent to con
 ## Where they live
 
 - **Design-spec source of truth (normalized)**: `.design-spec/tokens/src/component.json`
-- **Imported sources (Figma exports)**:
-  - `~/Downloads/3.组件颜色 Component color /光储Global light.tokens.json` (component color)
-  - (optional) component-specific exports as needed
+- **Upstream dependency**: semantic tokens at `.design-spec/tokens/src/semantic.json`
 
 ## What belongs here
 
