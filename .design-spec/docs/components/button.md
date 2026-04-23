@@ -39,15 +39,15 @@ From Figma component properties:
 ### Variants
 
 
-|          |             |                 |               |                   |                   |                                                     |
-| -------- | ----------- | --------------- | ------------- | ----------------- | ----------------- | --------------------------------------------------- |
-| **Name** | **Variant** | **Background**  | **Font**      | **Border**        | **Use Case**      | **Intended use**                                    |
-| 默认按钮     | Default     | `var(--component-fill-button-primary-default)` | `var(--component-and-text-and-icon-unbound-always-white)` | none | Primary actions | The default recommended action in a region |
-| 次要按钮     | Secondary   | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` | Secondary actions | Alternative actions alongside primary |
-| 辅助按钮     | Tertiary    | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)` | none | Tertiary actions | Low-emphasis actions, often in toolbars/cards |
-| 幽灵按钮     | Outline     | transparent | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-dashed-default)` | Subtle actions | “Add item / add section” patterns |
-| 链接       | Link        | transparent | `var(--component-and-text-and-icon-unbound-link)` | none | Inline actions | Compact actions in toolbars, tables, dense surfaces |
-| 警示/告警按钮  | Destructive | `var(--component-fill-button-main)` | `var(--component-and-text-and-icon-unbound-always-white)` | none | Dangerous action | Delete/disable/irreversible actions |
+|          |             |                                                 |                                                           |                                                    |                   |                                                     |
+| -------- | ----------- | ----------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------- | ----------------- | --------------------------------------------------- |
+| **Name** | **Variant** | **Background**                                  | **Font**                                                  | **Border**                                         | **Use Case**      | **Intended use**                                    |
+| 默认按钮     | Default     | `var(--component-fill-button-primary-default)`  | `var(--component-and-text-and-icon-unbound-always-white)` | none                                               | Primary actions   | The default recommended action in a region          |
+| 次要按钮     | Secondary   | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)`      | `var(--component-border-button-secondary-default)` | Secondary actions | Alternative actions alongside primary               |
+| 辅助按钮     | Tertiary    | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)`      | none                                               | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       |
+| 幽灵按钮     | Outline     | transparent                                     | `var(--component-and-text-and-icon-unbound-primary)`      | `var(--component-border-button-dashed-default)`    | Subtle actions    | “Add item / add section” patterns                   |
+| 链接       | Link        | transparent                                     | `var(--component-and-text-and-icon-unbound-link)`         | none                                               | Inline actions    | Compact actions in toolbars, tables, dense surfaces |
+| 警示/告警按钮  | Destructive | `var(--component-fill-button-main)`             | `var(--component-and-text-and-icon-unbound-always-white)` | none                                               | Dangerous action  | Delete/disable/irreversible actions                 |
 
 
 ## Sizes
@@ -63,6 +63,29 @@ Sizes are defined by height tokens and paired typography/icon sizes.
 | S        | 28px       | 12px          | 6px           | 12px / Semibold | 12px          | 4px               |
 | M        | 24px       | 12px          | 4px           | 12px / Medium   | 12px          | 4px               |
 
+## States
+
+## Component token bindings (required)
+
+This spec uses **component color tokens** exported from Figma (Global light). Until they are normalized into `.design-spec/tokens/src/component.json`, treat the following token names as the canonical interface for implementation and AI generation.
+
+### Primary (Default style) — states
+
+| State | Background | Text |
+|---|---|---|
+| Default | `var(--component-fill-button-primary-default)` | `var(--component-and-text-and-icon-unbound-always-white)` |
+| Hover | `var(--component-fill-button-primary-hover)` | `var(--component-and-text-and-icon-unbound-always-white)` |
+| Active / Pressed | `var(--component-fill-button-primary-active)` | `var(--component-and-text-and-icon-unbound-always-white)` |
+| Disabled | `var(--component-fill-button-primary-disabled)` | `var(--component-and-text-and-icon-unbound-disabled)` |
+
+### Neutral surfaces (Secondary/Tertiary/Text/Outline) — common states
+
+| State | Background | Text | Border |
+|---|---|---|---|
+| Default | `var(--component-fill-button-tertiary-default)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` |
+| Hover | `var(--component-fill-button-tertiary-hover)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` |
+| Active / Pressed | `var(--component-fill-button-tertiary-active)` | `var(--component-and-text-and-icon-unbound-primary)` | `var(--component-border-button-secondary-default)` |
+| Disabled | `var(--component-fill-button-tertiary-disabled)` | `var(--component-and-text-and-icon-unbound-disabled)` | `var(--component-border-button-secondary-disabled)` |
 
 ## States
 
@@ -70,12 +93,12 @@ Sizes are defined by height tokens and paired typography/icon sizes.
 |                  |                |          |             |             |                                                |                                                                    |
 | ---------------- | -------------- | -------- | ----------- | ----------- | ---------------------------------------------- | ------------------------------------------------------------------ |
 | **State**        | **Background** | **Text** | **Opacity** | **Cursor**  | **When to use**                                | **Minimum requirements**                                           |
-| Default          | token          | token    | 1           | pointer     | Resting state                                  | Clear hierarchy; token-based colors.                               |
-| Hover            | darker         | token    | 1           | pointer     | Resting state                                  | Clear hierarchy; token-based colors.                               |
-| Active / Pressed | darkest        | token    | 1           | pointer     | Provide pressed feedback without layout shift. | Provide pressed feedback without layout shift.                     |
-| Focus            | token          | token    | 1           | pointer     | Toggle/selection contexts                      | Selected must be distinguishable from hover/focus; not color-only. |
-| Disabled         | muted          | muted-fg | 0.5         | not-allowed | Action is unavailable                          | Don’t use disabled to “explain validation”; show inline errors.    |
-| Loading          | token          | token    | 0.7         | wait        |                                                |                                                                    |
+| Default          | See bindings   | See bindings | 1        | pointer     | Resting state                                  | Clear hierarchy; token-based colors.                               |
+| Hover            | See bindings   | See bindings | 1        | pointer     | Pointer hover on web                           | Must not be the only affordance; keep contrast.                    |
+| Active / Pressed | See bindings   | See bindings | 1        | pointer     | Pointer down / pressed feedback                | No layout shift; avoid motion that feels like “disabled”.          |
+| Focus            | See bindings   | See bindings | 1        | pointer     | Keyboard focus                                 | Visible focus ring; never rely on color-only to indicate focus.    |
+| Disabled         | See bindings   | See bindings | 1        | not-allowed | Action is unavailable                          | Don’t use disabled to “explain validation”; show inline errors.    |
+| Loading          | See bindings   | See bindings | 1        | wait        | Async in progress                              | Keep width stable; announce loading; prevent double-submit.        |
 
 
 ### **Anatomy**
