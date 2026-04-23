@@ -39,16 +39,15 @@ From Figma component properties:
 ### Variants
 
 
-|          |             |                   |                 |            |                   |                                                     |                                                                                                 |
-| -------- | ----------- | ----------------- | --------------- | ---------- | ----------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Name** | **Variant** | **Background**    | **Font**        | **Border** | **Use Case**      | **Intended use**                                    | **Notes / anti-misuse**                                                                         |
-| 默认       | Default     | --color-primary   | white           | none       | Primary actions   | The default recommended action in a region          | Keep to **1 primary** per region; avoid “primary spam”.                                         |
-| 次要       | Secondary   | --color-secondary | --color-primary | none       | Secondary actions | Alternative actions alongside primary               | Use when action is valid but not the recommended path.                                          |
-| 辅助       | Tertiary    | --color-teritiary | --color-primary | border     | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       | Prefer grouping via `Space`; avoid visually overloading dense UIs.                              |
-| 幽灵       | Outline     | transparent       | --color-primary | none       | Subtle actions    | “Add item / add section” patterns                   | Use only when the intent is “add”; don’t use as a generic secondary.                            |
-| 链接       | Link        | transparent       | --color-link    | none       |                   | Compact actions in toolbars, tables, dense surfaces | Must provide tooltip + accessible name (`aria-label`). Ensure hit target meets min size.        |
-| 警示/告警    | Destructive | --color-error     | white           | none       | Dangerous action  | Delete/disable/irreversible actions                 | Prefer confirm dialogs for irreversible actions. Combine with Primary/Secondary/Text as needed. |
-
+|          |             |                 |               |                   |                   |                                                     |
+| -------- | ----------- | --------------- | ------------- | ----------------- | ----------------- | --------------------------------------------------- |
+| **Name** | **Variant** | **Background**  | **Font**      | **Border**        | **Use Case**      | **Intended use**                                    |
+| 默认按钮     | Default     | color-primary   | white         | none              | Primary actions   | The default recommended action in a region          |
+| 次要按钮     | Secondary   | color-secondary | color-primary | color-neutral-120 | Secondary actions | Alternative actions alongside primary               |
+| 辅助按钮     | Tertiary    | color-teritiary | color-primary | none              | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       |
+| 幽灵按钮     | Outline     | transparent     | color-primary | none              | Subtle actions    | “Add item / add section” patterns                   |
+| 链接       | Link        | transparent     | color-link    | none              |                   | Compact actions in toolbars, tables, dense surfaces |
+| 警示/告警按钮  | Destructive | color-error     | white         | none              | Dangerous action  | Delete/disable/irreversible actions                 |
 
 ## Sizes
 
