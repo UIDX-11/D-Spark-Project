@@ -573,6 +573,26 @@
         "icon": "{text.secondary}",
         "iconDisabled": "{text.muted}"
       }
+    },
+    "pinCode": {
+      "cell": {
+        "bgDefault": "{bg.page}",
+        "bgActive": "{bg.page}",
+        "bgFilled": "{bg.page}",
+        "bgError": "{bg.page}",
+        "bgDisabled": "{bg.muted}",
+        "borderDefault": "{border.subtle}",
+        "borderActive": "{text.primary}",
+        "borderFilled": "{text.primary}",
+        "borderError": "{status.danger}",
+        "borderDisabled": "{border.subtle}",
+        "textDefault": "{text.primary}",
+        "textFilled": "{text.primary}",
+        "textDisabled": "{text.muted}",
+        "caret": "{text.primary}"
+      },
+      "helpText": "{text.secondary}",
+      "errorText": "{status.danger}"
     }
   }
 }
