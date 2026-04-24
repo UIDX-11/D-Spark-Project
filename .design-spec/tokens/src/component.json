@@ -543,6 +543,36 @@
         "divider": "{border.subtle}",
         "p": 8
       }
+    },
+    "inputNumber": {
+      "bgDefault": "{bg.page}",
+      "bgHover": "{bg.page}",
+      "bgFocus": "{bg.page}",
+      "bgDisabled": "{bg.page}",
+
+      "borderDefault": "{border.default}",
+      "borderHover": "{border.default}",
+      "borderFocus": "{border.strong}",
+      "borderDisabled": "{border.default}",
+      "borderError": "{status.danger}",
+
+      "textValue": "{text.primary}",
+      "textPlaceholder": "{text.muted}",
+      "textDisabled": "{text.disabled}",
+      "helperText": "{text.secondary}",
+      "errorText": "{status.danger}",
+      "suffixText": "{text.primary}",
+      "suffixTextDisabled": "{text.secondary}",
+
+      "ringFocus": "{focus.ring}",
+      "ringError": "{status.danger}",
+
+      "step": {
+        "btnBg": "{bg.page}",
+        "divider": "{border.subtle}",
+        "icon": "{text.secondary}",
+        "iconDisabled": "{text.muted}"
+      }
     }
   }
 }
