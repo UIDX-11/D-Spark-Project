@@ -754,6 +754,43 @@
       "p": 24,
       "w": 440,
       "wWithTip": 464
+    },
+    "notification": {
+      "tone": {
+        "info": {
+          "bg": "{bg.statusInfo}",
+          "icon": "{status.info}"
+        },
+        "success": {
+          "bg": "{bg.statusSuccess}",
+          "icon": "{status.success}"
+        },
+        "warning": {
+          "bg": "{bg.statusWarning}",
+          "icon": "{status.warning}"
+        },
+        "error": {
+          "bg": "{bg.statusDanger}",
+          "icon": "{status.danger}"
+        },
+        "default": {
+          "bg": "{bg.surface}"
+        }
+      },
+      "panel": {
+        "bg": "{bg.surface}",
+        "radius": 8,
+        "shadow": "0px 4px 10px 0px rgba(0,0,0,0.1)"
+      },
+      "titleText": "{text.primary}",
+      "bodyText": "{text.primary}",
+      "closeIcon": "{text.secondary}",
+      "p": 16,
+      "w": 304,
+      "actions": {
+        "gap": 12,
+        "mt": 16
+      }
     }
   }
 }
