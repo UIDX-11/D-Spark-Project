@@ -48,10 +48,11 @@ routes:
       - .design-spec/tokens/dist/tokens.css
   overlays:
     conditional:
-      # Overlay selection rule:
-      # - If multiple overlays match within the same `group`, load ONLY the highest `priority`.
+      # Overlay selection rule (group policy):
+      # - For groups in `exclusive_groups`: if multiple match, load ONLY the highest `priority`.
+      # - For groups NOT in `exclusive_groups`: multiple overlays/modules may be loaded together.
       # - priority: P0 (highest) > P1 > P2 > P3 (lowest)
-      # - Always safe to load multiple overlays if they are in different groups.
+      exclusive_groups: [web-stack, platform]
 
       - id: overlay-saas-b2b
         group: overlay
@@ -59,7 +60,7 @@ routes:
         when_includes_any: [saas, SaaS, b端, B端, to b, tob, 企业, admin, 控制台]
         read:
           - design-system/overlays/saas-b2b.md
-      # Capability modules (at most ONE per request unless explicitly asked)
+      # Capability modules (multi-select allowed)
       - id: module-iam-rbac
         group: capability
         priority: P0
