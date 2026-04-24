@@ -44,6 +44,12 @@ routes:
       - when_includes_any: [case, 案例, best practice, 最佳实践]
         read:
           - .design-spec/docs/content/README.md
+      - when_includes_any: [react, element, element-plus]
+        read:
+          - .design-spec/adapters/web/README.md
+      - when_includes_any: [vue, arco, arco-design]
+        read:
+          - .design-spec/adapters/web/README.md
 hard_rules:
   - always: Use component tokens for component specs (var(--component-*))
   - always: Component tokens reference semantic only; semantic references core only
