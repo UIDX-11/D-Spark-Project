@@ -57,6 +57,24 @@ routes:
       - when_includes_any: [table, 表格, 列, 排序, 筛选, 批量, pagination, 分页, 导出, import, 导入]
         read:
           - design-system/overlays/data-heavy-table.md
+      - when_includes_any: [iam, rbac, 权限, permission, role, roles, 用户, user, group, 组织, tenant, 多租户, workspace]
+        read:
+          - design-system/product-lines/iam-rbac.md
+      - when_includes_any: [billing, 计费, 订阅, subscription, plan, pricing, invoice, 发票, payment, 支付, checkout]
+        read:
+          - design-system/product-lines/billing.md
+      - when_includes_any: [monitoring, 监控, metrics, dashboard, 日志, logs, alert, 告警, incident, 事件]
+        read:
+          - design-system/product-lines/monitoring.md
+      - when_includes_any: [audit, 审计, compliance, 合规, 操作日志, 操作记录]
+        read:
+          - design-system/product-lines/audit-logs.md
+      - when_includes_any: [onboarding, 新手, 引导, guide, wizard, setup, 首次使用, empty state, 空状态]
+        read:
+          - design-system/product-lines/onboarding.md
+      - when_includes_any: [import, 导入, export, 导出, bulk, 批量, batch, 数据管理, mapping, 映射, schema]
+        read:
+          - design-system/product-lines/data-management.md
       - when_includes_any: [mobile, 移动端, app, flutter]
         read:
           - .design-spec/adapters/flutter/README.md
