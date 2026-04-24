@@ -157,6 +157,73 @@ Molecular
 | Default | `var(--component-tabs-scrollable-item-bg-default)` | `var(--component-tabs-scrollable-item-border)` | `var(--component-tabs-scrollable-item-text-default)` |
 | Selected | `var(--component-tabs-scrollable-item-bg-selected)` | `var(--component-tabs-scrollable-item-border)` | `var(--component-tabs-scrollable-item-text-selected)` |
 
+## Executable interaction rules
+
+### Overflow rule (scroll vs menu)
+
+- **When overflow happens**: tabs row width exceeds container.
+- **Default strategy**: keep the row **horizontally scrollable** and show **direction buttons** (left/right).
+- **Menu strategy (optional)**: if product requires fast jump, provide an **overflow menu** (“More”) that lists all tabs.
+- **Priority**:
+  - **Scrollable** is default (keeps spatial memory).
+  - **Menu** is an additive shortcut; never remove the currently selected tab from the visible rail.
+- **Direction buttons behavior**:
+  - **Enabled** only when there is content to scroll in that direction.
+  - **Click**: scroll by \(~1–2\) tab widths (consistent step).
+  - **Press & hold** (optional): continuous scroll.
+  - **Keyboard**: must be reachable by Tab; Enter/Space activates.
+
+### Closable tabs (×)
+
+- **Use for**: user-created or user-manageable views (e.g., “Saved search”, “Draft”, “Temp tab”).
+- **Never closable**:
+  - The **first** / “Home” / default tab if it anchors the page.
+  - Any tab that would leave the view without a valid selected target.
+- **Hit target**:
+  - Close icon must have a **minimum hit area 24×24** (even if icon is 12×12).
+  - Close icon must not steal the click from the tab label (separate target).
+- **Hover affordance**:
+  - Close icon can appear on hover/focus; once visible, it must remain visible while the pointer is over it.
+  - Disabled tabs: close icon is also disabled.
+- **Close action result**:
+  - If the **active tab** is closed: select the **nearest enabled tab**:
+    1. Prefer the tab to the **left**.
+    2. Else the tab to the **right**.
+    3. Else no-op (should be prevented by “Never closable”).
+  - If a **non-active tab** is closed: keep current selection.
+- **Undo (recommended)**: provide “Undo” toast for destructive close when content may be lost.
+- **A11y**:
+  - Close button must have `aria-label="Close <tab name>"`.
+  - Close must be operable with keyboard (Tab to close, Enter/Space to activate).
+
+### Add tab (+)
+
+- **Use for**: create new view / add a new entity under the same tab set.
+- **Placement**:
+  - Append to the **right end** of the rail.
+  - In overflow: keep “+” visible when possible; otherwise place “+” near overflow menu.
+- **Behavior**:
+  - Click “+” creates a new tab and **immediately selects** it.
+  - Newly created tab label must enter a **rename** state if naming is required (inline edit or modal).
+  - Respect max tabs limit (if any). When reached, “+” becomes disabled with explanation.
+
+### Keyboard & ARIA (required)
+
+- **Roles**:
+  - Tab list: `role="tablist"`
+  - Tabs: `role="tab"` with `aria-selected`
+  - Panels: `role="tabpanel"` with `aria-labelledby`
+- **Roving tabindex**:
+  - Only one tab has `tabindex="0"`; others `-1`.
+- **Key bindings**:
+  - ArrowLeft / ArrowRight: move focus between tabs (skip disabled).
+  - Home / End: focus first / last enabled tab.
+  - Enter / Space: activate focused tab.
+  - Delete / Backspace (optional): close focused tab if closable.
+- **Focus vs selected**:
+  - Focus ring must be visible even when selected.
+  - Activation must not require mouse; keyboard-only must work.
+
 ## Component token bindings (required)
 
 > 规则：本文件只引用 `var(--component-tabs-...)`，组件 token 必须从 `component.json` 生成。
