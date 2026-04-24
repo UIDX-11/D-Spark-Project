@@ -470,6 +470,40 @@
       "check": {
         "size": 16
       }
+    },
+    "datepicker": {
+      "trigger": {
+        "bgDefault": "{bg.page}",
+        "bgFocus": "{bg.page}",
+        "bgError": "{bg.page}",
+        "bgDisabled": "{bg.page}",
+        "borderDefault": "{border.default}",
+        "borderFocus": "{border.strong}",
+        "borderError": "{status.danger}",
+        "borderDisabled": "{border.default}",
+        "textDefault": "{text.secondary}",
+        "textFocus": "{text.primary}",
+        "textDisabled": "{text.disabled}",
+        "iconDefault": "{text.secondary}",
+        "iconDisabled": "{text.disabled}",
+        "ringFocus": "{focus.ring}",
+        "ringError": "{status.danger}"
+      },
+      "panel": {
+        "bg": "{bg.surface}",
+        "border": "{border.subtle}",
+        "radius": "{radius.sm}",
+        "shadow": "0px 4px 10px 0px rgba(0,0,0,0.1)"
+      },
+      "day": {
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.page}",
+        "bgSelected": "{action.primary.bg}",
+        "bgInRange": "{bg.page}",
+        "textDefault": "{text.primary}",
+        "textSelected": "{text.inverse}",
+        "textDisabled": "{text.muted}"
+      }
     }
   }
 }
