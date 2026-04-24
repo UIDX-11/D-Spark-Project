@@ -504,6 +504,45 @@
         "textSelected": "{text.inverse}",
         "textDisabled": "{text.muted}"
       }
+    },
+    "timepicker": {
+      "trigger": {
+        "bgDefault": "{bg.page}",
+        "bgHover": "{bg.page}",
+        "bgActive": "{bg.page}",
+        "bgDisabled": "{bg.page}",
+        "borderDefault": "{border.default}",
+        "borderHover": "{border.default}",
+        "borderActive": "{border.strong}",
+        "borderError": "{status.danger}",
+        "borderDisabled": "{border.default}",
+        "textPlaceholder": "{text.muted}",
+        "textValue": "{text.primary}",
+        "textDisabled": "{text.disabled}",
+        "iconDefault": "{text.secondary}",
+        "iconDisabled": "{text.disabled}",
+        "ringActive": "{focus.ring}",
+        "ringError": "{status.danger}"
+      },
+      "panel": {
+        "bg": "{bg.surface}",
+        "border": "{border.subtle}",
+        "radius": 8,
+        "shadow": "0px 4px 10px 0px rgba(0,0,0,0.1)",
+        "p": 8
+      },
+      "item": {
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.page}",
+        "bgSelected": "{bg.page}",
+        "textDefault": "{text.primary}",
+        "textDisabled": "{text.disabled}",
+        "radius": "{radius.sm}"
+      },
+      "footer": {
+        "divider": "{border.subtle}",
+        "p": 8
+      }
     }
   }
 }
