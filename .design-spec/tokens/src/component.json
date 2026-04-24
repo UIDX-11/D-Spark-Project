@@ -176,6 +176,37 @@
           "selected": "{bg.page}"
         }
       }
+    },
+    "badge": {
+      "count": {
+        "bg": {
+          "default": "{status.danger}",
+          "disabled": "{bg.muted}"
+        },
+        "text": {
+          "default": "{text.inverse}",
+          "disabled": "{text.secondary}"
+        },
+        "height": 16,
+        "radius": 999,
+        "px": 6,
+        "pxSingle": 4,
+        "minWidthSingle": 16
+      },
+      "dot": {
+        "size": 6
+      },
+      "status": {
+        "gap": 8,
+        "dot": {
+          "default": "{text.secondary}",
+          "processing": "{focus.ring}",
+          "success": "{status.success}",
+          "warning": "{status.warning}",
+          "error": "{status.danger}"
+        },
+        "label": "{text.primary}"
+      }
     }
   }
 }

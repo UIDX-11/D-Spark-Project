@@ -6,7 +6,8 @@
     "bg": {
       "page": "{color.neutral.20}",
       "surface": "{color.neutral.0}",
-      "card": "{color.neutral.0}"
+      "card": "{color.neutral.0}",
+      "muted": "{color.neutral.60}"
     },
     "text": {
       "primary": "{color.neutral.170}",

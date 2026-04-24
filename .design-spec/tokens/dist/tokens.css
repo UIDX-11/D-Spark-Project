@@ -35,6 +35,7 @@
   --semantic-action-primary-text: #FFFFFF;
   --semantic-action-primary-text-disabled: #FFFFFF;
   --semantic-bg-card: #FFFFFF;
+  --semantic-bg-muted: #E8E8E8;
   --semantic-bg-page: #F7F7F7;
   --semantic-bg-surface: #FFFFFF;
   --semantic-border-default: #CCCCCC;
@@ -52,6 +53,23 @@
   --semantic-text-secondary: #666666;
 
   /* Component (resolved) */
+  --component-badge-count-bg-default: #F14846;
+  --component-badge-count-bg-disabled: #E8E8E8;
+  --component-badge-count-height: 16;
+  --component-badge-count-min-width-single: 16;
+  --component-badge-count-px: 6;
+  --component-badge-count-px-single: 4;
+  --component-badge-count-radius: 999;
+  --component-badge-count-text-default: #FFFFFF;
+  --component-badge-count-text-disabled: #666666;
+  --component-badge-dot-size: 6;
+  --component-badge-status-dot-default: #666666;
+  --component-badge-status-dot-error: #F14846;
+  --component-badge-status-dot-processing: #6985BF;
+  --component-badge-status-dot-success: #09AA5C;
+  --component-badge-status-dot-warning: #FFAD14;
+  --component-badge-status-gap: 8;
+  --component-badge-status-label: #222222;
   --component-button-danger-bg-default: #F14846;
   --component-button-danger-text-default: #FFFFFF;
   --component-button-link-text-default: #506DAF;
