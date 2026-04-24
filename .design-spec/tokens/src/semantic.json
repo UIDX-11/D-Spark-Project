@@ -27,7 +27,8 @@
     },
     "border": {
       "default": "{color.neutral.80}",
-      "strong": "{color.neutral.120}"
+      "strong": "{color.neutral.120}",
+      "subtle": "{color.neutral.60}"
     },
     "action": {
       "primary": {
