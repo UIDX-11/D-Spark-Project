@@ -242,6 +242,96 @@
           "knob": 12
         }
       }
+    },
+    "tag": {
+      "status": {
+        "tone": {
+          "offline": {
+            "bg": "{bg.statusOffline}",
+            "text": "{text.secondary}",
+            "border": "{text.secondary}"
+          },
+          "danger": {
+            "bg": "{bg.statusDanger}",
+            "text": "{status.danger}",
+            "border": "{status.danger}"
+          },
+          "success": {
+            "bg": "{bg.statusSuccess}",
+            "text": "{status.success}",
+            "border": "{status.success}"
+          },
+          "warning": {
+            "bg": "{bg.statusWarning}",
+            "text": "{status.warning}",
+            "border": "{status.warning}"
+          },
+          "info": {
+            "bg": "{bg.statusInfo}",
+            "text": "{status.info}",
+            "border": "{status.info}"
+          }
+        },
+        "radiusMd": "{radius.sm}",
+        "radiusLg": "{radius.md}",
+        "minWidth": 44,
+        "pxSm": 6,
+        "pxMd": 8,
+        "pySm": 2,
+        "pyMd": 4,
+        "pyLg": 6,
+        "hSm": 20,
+        "hMd": 24,
+        "hLg": 32,
+        "textSizeSm": 12,
+        "textSizeMd": 14
+      },
+      "selector": {
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.muted}",
+        "bgSelected": "{bg.surface}",
+        "bgDisabled": "{bg.surface}",
+        "borderSelected": "{text.primary}",
+        "textDefault": "{text.primary}",
+        "textDisabled": "{text.muted}",
+        "radius": "{radius.sm}",
+        "px": 12,
+        "py": 2
+      },
+      "group": {
+        "bgDefault": "{bg.page}",
+        "bgHover": "{bg.muted}",
+        "bgDisabled": "{bg.page}",
+        "textDefault": "{text.primary}",
+        "textDisabled": "{text.muted}",
+        "iconDefault": "{text.primary}",
+        "iconDisabled": "{text.muted}",
+        "closeBgHover": "{bg.switchOff}",
+        "radius": "{radius.md}",
+        "gap": 8,
+        "px": 8,
+        "py": 6,
+        "h": 32
+      },
+      "addButton": {
+        "bg": "{bg.page}",
+        "text": "{text.primary}",
+        "icon": "{text.primary}",
+        "radiusLg": "{radius.md}",
+        "radiusMd": "{radius.sm}",
+        "radiusSm": "{radius.sm}",
+        "radiusXs": 2,
+        "gap": 4,
+        "px": 8,
+        "pyLg": 5,
+        "pyMd": 4,
+        "pySm": 2,
+        "hLg": 32,
+        "iconSizeLg": 16,
+        "iconSizeSm": 12,
+        "textSizeLg": 14,
+        "textSizeSm": 12
+      }
     }
   }
 }

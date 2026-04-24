@@ -38,3 +38,187 @@ Molecular
   - `tag/status/rounded/sm/default`
   - `tag/filter/rounded/sm/dismissible`
 
+## Anatomy
+
+### Status tag
+
+```
+┌──────────────┐
+│ [icon] Label │  (optional icon)
+└──────────────┘
+```
+
+- **Container**: bg / border (optional) / radius
+- **Content**: label (Semibold)
+- **Leading icon (optional)**: used for warning/info (when defined)
+
+### Selector tag
+
+```
+┌──────────┐
+│  Label   │  (pill button-like tag)
+└──────────┘
+```
+
+- Used as filter/selection chips
+
+### Tag group (dismissible)
+
+```
+┌────────────────┐
+│ Label     [x]  │
+└────────────────┘
+```
+
+- Close icon must be focusable + labeled (a11y)
+
+### Add tag button
+
+```
+┌──────────────┐
+│ [+] Add Tag  │
+└──────────────┘
+```
+
+## Variants
+
+| **Kind** | **When to use** | **Notes** |
+| --- | --- | --- |
+| `status` | 状态/属性展示 | tone: offline/danger/success/warning/info; style: bg / outline / border / text |
+| `selector` | 筛选/选择标签 | state: default/hover/selected/disabled |
+| `group` | 多个可移除标签 | close 可 hover；disabled 置灰 |
+| `add-button` | 添加标签入口 | 可仅图标/仅文字/图标+文字（按场景） |
+
+## Sizes
+
+### Status tag
+
+| **Size** | **Height** | **Radius** | **Padding X** | **Padding Y** | **Text size** | **Min width** |
+| --- | ---:| ---:| ---:| ---:| ---:| ---:|
+| `lg` (大) | `var(--component-tag-status-h-lg)` | `var(--component-tag-status-radius-lg)` | `var(--component-tag-status-px-md)` | `var(--component-tag-status-py-lg)` | `var(--component-tag-status-text-size-md)` | `var(--component-tag-status-min-width)` |
+| `md` (中) | `var(--component-tag-status-h-md)` | `var(--component-tag-status-radius-md)` | `var(--component-tag-status-px-md)` | `var(--component-tag-status-py-md)` | `var(--component-tag-status-text-size-md)` | `var(--component-tag-status-min-width)` |
+| `sm` (小) | `var(--component-tag-status-h-sm)` | `var(--component-tag-status-radius-md)` | `var(--component-tag-status-px-md)` | `var(--component-tag-status-py-sm)` | `var(--component-tag-status-text-size-md)` | `var(--component-tag-status-min-width)` |
+| `xs` (迷你) | `var(--component-tag-status-h-sm)` | `var(--component-tag-status-radius-md)` | `var(--component-tag-status-px-sm)` | `var(--component-tag-status-py-sm)` | `var(--component-tag-status-text-size-sm)` | `var(--component-tag-status-min-width)` |
+
+## States
+
+### Status tag — tones (required)
+
+> 规则：组件规范只引用 component tokens（`var(--component-tag-...)`）。
+
+| **Tone** | **Background** | **Text** | **Border** |
+| --- | --- | --- | --- |
+| Offline | `var(--component-tag-status-tone-offline-bg)` | `var(--component-tag-status-tone-offline-text)` | `var(--component-tag-status-tone-offline-border)` |
+| Danger | `var(--component-tag-status-tone-danger-bg)` | `var(--component-tag-status-tone-danger-text)` | `var(--component-tag-status-tone-danger-border)` |
+| Success | `var(--component-tag-status-tone-success-bg)` | `var(--component-tag-status-tone-success-text)` | `var(--component-tag-status-tone-success-border)` |
+| Warning | `var(--component-tag-status-tone-warning-bg)` | `var(--component-tag-status-tone-warning-text)` | `var(--component-tag-status-tone-warning-border)` |
+| Info | `var(--component-tag-status-tone-info-bg)` | `var(--component-tag-status-tone-info-text)` | `var(--component-tag-status-tone-info-border)` |
+
+### Selector tag — states
+
+| **State** | **Background** | **Border** | **Text** |
+| --- | --- | --- | --- |
+| Default | `var(--component-tag-selector-bg-default)` | none | `var(--component-tag-selector-text-default)` |
+| Hover | `var(--component-tag-selector-bg-hover)` | none | `var(--component-tag-selector-text-default)` |
+| Selected | `var(--component-tag-selector-bg-selected)` | `var(--component-tag-selector-border-selected)` | `var(--component-tag-selector-text-default)` |
+| Disabled | `var(--component-tag-selector-bg-disabled)` | none | `var(--component-tag-selector-text-disabled)` |
+
+### Tag group — states
+
+| **State** | **Background** | **Text** | **Close icon** | **Close hover bg** |
+| --- | --- | --- | --- | --- |
+| Default | `var(--component-tag-group-bg-default)` | `var(--component-tag-group-text-default)` | `var(--component-tag-group-icon-default)` | none |
+| Hover | `var(--component-tag-group-bg-hover)` | `var(--component-tag-group-text-default)` | `var(--component-tag-group-icon-default)` | none |
+| Disabled | `var(--component-tag-group-bg-disabled)` | `var(--component-tag-group-text-disabled)` | `var(--component-tag-group-icon-disabled)` | none |
+| Close hover | (keep bg) | (keep text) | (keep icon) | `var(--component-tag-group-close-bg-hover)` |
+
+## Component token bindings (required)
+
+### Status tag
+
+| **Token path** | **CSS var** |
+| --- | --- |
+| `tokens.tag.status.tone.offline.bg` | `--component-tag-status-tone-offline-bg` |
+| `tokens.tag.status.tone.offline.text` | `--component-tag-status-tone-offline-text` |
+| `tokens.tag.status.tone.offline.border` | `--component-tag-status-tone-offline-border` |
+| `tokens.tag.status.tone.danger.bg` | `--component-tag-status-tone-danger-bg` |
+| `tokens.tag.status.tone.danger.text` | `--component-tag-status-tone-danger-text` |
+| `tokens.tag.status.tone.danger.border` | `--component-tag-status-tone-danger-border` |
+| `tokens.tag.status.tone.success.bg` | `--component-tag-status-tone-success-bg` |
+| `tokens.tag.status.tone.success.text` | `--component-tag-status-tone-success-text` |
+| `tokens.tag.status.tone.success.border` | `--component-tag-status-tone-success-border` |
+| `tokens.tag.status.tone.warning.bg` | `--component-tag-status-tone-warning-bg` |
+| `tokens.tag.status.tone.warning.text` | `--component-tag-status-tone-warning-text` |
+| `tokens.tag.status.tone.warning.border` | `--component-tag-status-tone-warning-border` |
+| `tokens.tag.status.tone.info.bg` | `--component-tag-status-tone-info-bg` |
+| `tokens.tag.status.tone.info.text` | `--component-tag-status-tone-info-text` |
+| `tokens.tag.status.tone.info.border` | `--component-tag-status-tone-info-border` |
+| `tokens.tag.status.radiusMd` | `--component-tag-status-radius-md` |
+| `tokens.tag.status.radiusLg` | `--component-tag-status-radius-lg` |
+| `tokens.tag.status.minWidth` | `--component-tag-status-min-width` |
+| `tokens.tag.status.pxSm` | `--component-tag-status-px-sm` |
+| `tokens.tag.status.pxMd` | `--component-tag-status-px-md` |
+| `tokens.tag.status.pySm` | `--component-tag-status-py-sm` |
+| `tokens.tag.status.pyMd` | `--component-tag-status-py-md` |
+| `tokens.tag.status.pyLg` | `--component-tag-status-py-lg` |
+| `tokens.tag.status.hSm` | `--component-tag-status-h-sm` |
+| `tokens.tag.status.hMd` | `--component-tag-status-h-md` |
+| `tokens.tag.status.hLg` | `--component-tag-status-h-lg` |
+| `tokens.tag.status.textSizeSm` | `--component-tag-status-text-size-sm` |
+| `tokens.tag.status.textSizeMd` | `--component-tag-status-text-size-md` |
+
+### Selector tag
+
+| **Token path** | **CSS var** |
+| --- | --- |
+| `tokens.tag.selector.bgDefault` | `--component-tag-selector-bg-default` |
+| `tokens.tag.selector.bgHover` | `--component-tag-selector-bg-hover` |
+| `tokens.tag.selector.bgSelected` | `--component-tag-selector-bg-selected` |
+| `tokens.tag.selector.bgDisabled` | `--component-tag-selector-bg-disabled` |
+| `tokens.tag.selector.borderSelected` | `--component-tag-selector-border-selected` |
+| `tokens.tag.selector.textDefault` | `--component-tag-selector-text-default` |
+| `tokens.tag.selector.textDisabled` | `--component-tag-selector-text-disabled` |
+| `tokens.tag.selector.radius` | `--component-tag-selector-radius` |
+| `tokens.tag.selector.px` | `--component-tag-selector-px` |
+| `tokens.tag.selector.py` | `--component-tag-selector-py` |
+
+### Tag group
+
+| **Token path** | **CSS var** |
+| --- | --- |
+| `tokens.tag.group.bgDefault` | `--component-tag-group-bg-default` |
+| `tokens.tag.group.bgHover` | `--component-tag-group-bg-hover` |
+| `tokens.tag.group.bgDisabled` | `--component-tag-group-bg-disabled` |
+| `tokens.tag.group.textDefault` | `--component-tag-group-text-default` |
+| `tokens.tag.group.textDisabled` | `--component-tag-group-text-disabled` |
+| `tokens.tag.group.iconDefault` | `--component-tag-group-icon-default` |
+| `tokens.tag.group.iconDisabled` | `--component-tag-group-icon-disabled` |
+| `tokens.tag.group.closeBgHover` | `--component-tag-group-close-bg-hover` |
+| `tokens.tag.group.radius` | `--component-tag-group-radius` |
+| `tokens.tag.group.gap` | `--component-tag-group-gap` |
+| `tokens.tag.group.px` | `--component-tag-group-px` |
+| `tokens.tag.group.py` | `--component-tag-group-py` |
+| `tokens.tag.group.h` | `--component-tag-group-h` |
+
+### Add tag button
+
+| **Token path** | **CSS var** |
+| --- | --- |
+| `tokens.tag.addButton.bg` | `--component-tag-add-button-bg` |
+| `tokens.tag.addButton.text` | `--component-tag-add-button-text` |
+| `tokens.tag.addButton.icon` | `--component-tag-add-button-icon` |
+| `tokens.tag.addButton.radiusLg` | `--component-tag-add-button-radius-lg` |
+| `tokens.tag.addButton.radiusMd` | `--component-tag-add-button-radius-md` |
+| `tokens.tag.addButton.radiusSm` | `--component-tag-add-button-radius-sm` |
+| `tokens.tag.addButton.radiusXs` | `--component-tag-add-button-radius-xs` |
+| `tokens.tag.addButton.gap` | `--component-tag-add-button-gap` |
+| `tokens.tag.addButton.px` | `--component-tag-add-button-px` |
+| `tokens.tag.addButton.pyLg` | `--component-tag-add-button-py-lg` |
+| `tokens.tag.addButton.pyMd` | `--component-tag-add-button-py-md` |
+| `tokens.tag.addButton.pySm` | `--component-tag-add-button-py-sm` |
+| `tokens.tag.addButton.hLg` | `--component-tag-add-button-h-lg` |
+| `tokens.tag.addButton.iconSizeLg` | `--component-tag-add-button-icon-size-lg` |
+| `tokens.tag.addButton.iconSizeSm` | `--component-tag-add-button-icon-size-sm` |
+| `tokens.tag.addButton.textSizeLg` | `--component-tag-add-button-text-size-lg` |
+| `tokens.tag.addButton.textSizeSm` | `--component-tag-add-button-text-size-sm` |
+
