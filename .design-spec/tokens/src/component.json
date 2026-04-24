@@ -739,6 +739,21 @@
       "px": 16,
       "py": 8,
       "gap": 8
+    },
+    "modal": {
+      "mask": "rgba(0,0,0,0.4)",
+      "panel": {
+        "bg": "{bg.surface}",
+        "radius": 16,
+        "shadow": "0px 4px 10px 0px rgba(0,0,0,0.1)"
+      },
+      "titleText": "{text.primary}",
+      "bodyText": "{text.primary}",
+      "closeIcon": "{text.secondary}",
+      "divider": "{border.subtle}",
+      "p": 24,
+      "w": 440,
+      "wWithTip": 464
     }
   }
 }

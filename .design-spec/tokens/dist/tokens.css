@@ -255,6 +255,17 @@
   --component-message-tone-success-icon: #09AA5C;
   --component-message-tone-warning-bg: #FFF7E8;
   --component-message-tone-warning-icon: #FFAD14;
+  --component-modal-body-text: #222222;
+  --component-modal-close-icon: #666666;
+  --component-modal-divider: #E8E8E8;
+  --component-modal-mask: rgba(0,0,0,0.4);
+  --component-modal-p: 24;
+  --component-modal-panel-bg: #FFFFFF;
+  --component-modal-panel-radius: 16;
+  --component-modal-panel-shadow: 0px 4px 10px 0px rgba(0,0,0,0.1);
+  --component-modal-title-text: #222222;
+  --component-modal-w: 440;
+  --component-modal-w-with-tip: 464;
   --component-pin-code-cell-bg-active: #F7F7F7;
   --component-pin-code-cell-bg-default: #F7F7F7;
   --component-pin-code-cell-bg-disabled: #E8E8E8;
