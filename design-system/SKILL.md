@@ -41,18 +41,28 @@ routes:
 
   common:
     always_read:
+      - design-system/glossary.md
       - .design-spec/docs/design.md
       - .design-spec/docs/components/intent-index.md
       - .design-spec/docs/components/README.md
       - .design-spec/tokens/dist/tokens.css
   overlays:
     conditional:
+      - when_includes_any: [saas, SaaS, b端, B端, to b, tob, 企业, admin, 控制台]
+        read:
+          - design-system/overlays/saas-b2b.md
+      - when_includes_any: [权限, permission, rbac, role, roles, tenant, 多租户, workspace, 组织]
+        read:
+          - design-system/overlays/permissions-and-tenancy.md
+      - when_includes_any: [table, 表格, 列, 排序, 筛选, 批量, pagination, 分页, 导出, import, 导入]
+        read:
+          - design-system/overlays/data-heavy-table.md
       - when_includes_any: [mobile, 移动端, app, flutter]
         read:
           - .design-spec/adapters/flutter/README.md
       - when_includes_any: [case, 案例, best practice, 最佳实践]
         read:
-          - .design-spec/docs/content/README.md
+          - design-system/case-studies/README.md
       - when_includes_any: [react, element, element-plus]
         read:
           - .design-spec/adapters/web/README.md
