@@ -593,6 +593,33 @@
       },
       "helpText": "{text.secondary}",
       "errorText": "{status.danger}"
+    },
+    "slider": {
+      "track": {
+        "bg": "{border.subtle}",
+        "bgActive": "{text.primary}",
+        "radius": 10,
+        "h": 4
+      },
+      "thumb": {
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.surface}",
+        "bgActive": "{bg.surface}",
+        "bgDisabled": "{bg.surface}",
+        "borderDefault": "{text.primary}",
+        "borderHover": "{text.primary}",
+        "borderActive": "{text.primary}",
+        "borderDisabled": "{border.default}",
+        "ringActive": "{focus.ring}",
+        "size": 16
+      },
+      "tick": {
+        "active": "{text.primary}",
+        "inactive": "{border.subtle}"
+      },
+      "mark": {
+        "text": "{text.secondary}"
+      }
     }
   }
 }
