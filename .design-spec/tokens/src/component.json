@@ -61,6 +61,33 @@
 
       "ringFocus": "{focus.ring}",
       "ringError": "{status.danger}"
+    },
+    "checkbox": {
+      "boxSize": 16,
+      "boxRadius": 3,
+      "gap": 8,
+
+      "labelTextDefault": "{text.primary}",
+      "labelTextDisabled": "{text.disabled}",
+
+      "uncheckedBgDefault": "{bg.surface}",
+      "uncheckedBorderDefault": "{border.strong}",
+      "uncheckedBgHover": "{bg.surface}",
+      "uncheckedBorderHover": "{text.primary}",
+      "uncheckedBgDisabled": "{bg.surface}",
+      "uncheckedBorderDisabled": "{border.default}",
+
+      "checkedBgDefault": "{action.primary.bg}",
+      "checkedMarkDefault": "{text.inverse}",
+      "checkedBgDisabled": "{action.primary.bgDisabled}",
+      "checkedMarkDisabled": "{text.inverse}",
+
+      "indeterminateBgDefault": "{bg.surface}",
+      "indeterminateBorderDefault": "{border.strong}",
+      "indeterminateDashDefault": "{text.primary}",
+      "indeterminateBgDisabled": "{bg.surface}",
+      "indeterminateBorderDisabled": "{border.default}",
+      "indeterminateDashDisabled": "{text.disabled}"
     }
   }
 }
