@@ -683,6 +683,36 @@
         "bgUploading": "{bg.muted}",
         "bgError": "{bg.statusDanger}"
       }
+    },
+    "alert": {
+      "tone": {
+        "info": {
+          "bg": "{bg.statusInfo}",
+          "icon": "{status.info}"
+        },
+        "success": {
+          "bg": "{bg.statusSuccess}",
+          "icon": "{status.success}"
+        },
+        "warning": {
+          "bg": "{bg.statusWarning}",
+          "icon": "{status.warning}"
+        },
+        "error": {
+          "bg": "{bg.statusDanger}",
+          "icon": "{status.danger}"
+        }
+      },
+      "text": "{text.primary}",
+      "titleText": "{text.primary}",
+      "closeIcon": "{text.secondary}",
+      "actionText": "{text.primary}",
+      "actionBorder": "{border.default}",
+      "radiusLg": 8,
+      "radiusMd": 6,
+      "px": 16,
+      "pyLg": 8,
+      "pyMd": 6
     }
   }
 }

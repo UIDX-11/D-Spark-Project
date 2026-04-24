@@ -72,6 +72,24 @@
   --semantic-text-secondary: #666666;
 
   /* Component (resolved) */
+  --component-alert-action-border: #CCCCCC;
+  --component-alert-action-text: #222222;
+  --component-alert-close-icon: #666666;
+  --component-alert-px: 16;
+  --component-alert-py-lg: 8;
+  --component-alert-py-md: 6;
+  --component-alert-radius-lg: 8;
+  --component-alert-radius-md: 6;
+  --component-alert-text: #222222;
+  --component-alert-title-text: #222222;
+  --component-alert-tone-error-bg: #FEEDED;
+  --component-alert-tone-error-icon: #F14846;
+  --component-alert-tone-info-bg: #ECF2FC;
+  --component-alert-tone-info-icon: #3F78E4;
+  --component-alert-tone-success-bg: #E6F7EF;
+  --component-alert-tone-success-icon: #09AA5C;
+  --component-alert-tone-warning-bg: #FFF7E8;
+  --component-alert-tone-warning-icon: #FFAD14;
   --component-badge-count-bg-default: #F14846;
   --component-badge-count-bg-disabled: #E8E8E8;
   --component-badge-count-height: 16;
