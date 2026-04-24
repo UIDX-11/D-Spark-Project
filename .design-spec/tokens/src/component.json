@@ -131,6 +131,51 @@
       "pyMd": 2,
       "pxSm": 8,
       "hSm": 20
+    },
+    "select": {
+      "trigger": {
+        "bg": {
+          "default": "{bg.page}",
+          "hover": "{bg.page}",
+          "focus": "{bg.page}",
+          "disabled": "{bg.page}",
+          "error": "{bg.page}"
+        },
+        "border": {
+          "default": "{border.default}",
+          "hover": "{text.primary}",
+          "focus": "{text.primary}",
+          "disabled": "{border.default}",
+          "error": "{status.danger}"
+        },
+        "text": {
+          "default": "{text.secondary}",
+          "focus": "{text.primary}",
+          "disabled": "{text.disabled}"
+        },
+        "placeholder": "{text.secondary}",
+        "icon": {
+          "default": "{text.secondary}",
+          "disabled": "{text.disabled}"
+        },
+        "ring": {
+          "focus": "{focus.ring}",
+          "error": "{status.danger}"
+        }
+      },
+      "dropdown": {
+        "bg": "{bg.surface}",
+        "shadow": "0px 4px 10px 0px rgba(0,0,0,0.1)",
+        "radius": "{radius.md}"
+      },
+      "item": {
+        "text": "{text.primary}",
+        "bg": {
+          "default": "{bg.surface}",
+          "hover": "{bg.page}",
+          "selected": "{bg.page}"
+        }
+      }
     }
   }
 }
