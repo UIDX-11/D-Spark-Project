@@ -791,6 +791,40 @@
         "gap": 12,
         "mt": 16
       }
+    },
+    "progress": {
+      "line": {
+        "track": "{border.subtle}",
+        "fillActive": "{status.success}",
+        "fillSuccess": "{status.success}",
+        "fillError": "{status.danger}",
+        "hSm": 4,
+        "hLg": 8,
+        "radius": 16
+      },
+      "label": {
+        "text": "{text.secondary}"
+      },
+      "circle": {
+        "track": "{border.subtle}",
+        "strokeActive": "{status.success}",
+        "strokeSuccess": "{status.success}",
+        "strokeError": "{status.danger}",
+        "text": "{text.disabled}",
+        "sizeSm": 48,
+        "sizeMd": 64,
+        "sizeLg": 80
+      },
+      "mini": {
+        "size": 16
+      },
+      "step": {
+        "bg": "{bg.page}",
+        "fill": "{action.primary.bg}",
+        "textOnFill": "{action.primary.text}",
+        "radius": 6,
+        "h": 36
+      }
     }
   }
 }
