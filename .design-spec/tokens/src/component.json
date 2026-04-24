@@ -88,6 +88,49 @@
       "indeterminateBgDisabled": "{bg.surface}",
       "indeterminateBorderDisabled": "{border.default}",
       "indeterminateDashDisabled": "{text.disabled}"
+    },
+    "radio": {
+      "dotSize": 8,
+      "outerSize": 16,
+      "gap": 8,
+
+      "labelTextDefault": "{text.primary}",
+      "labelTextDisabled": "{text.disabled}",
+      "helperTextDefault": "{text.secondary}",
+      "helperTextDisabled": "{text.disabled}",
+
+      "uncheckedBgDefault": "{bg.surface}",
+      "uncheckedBorderDefault": "{border.strong}",
+      "uncheckedBgHover": "{bg.surface}",
+      "uncheckedBorderHover": "{text.primary}",
+      "uncheckedBgDisabled": "{bg.surface}",
+      "uncheckedBorderDisabled": "{border.default}",
+
+      "checkedOuterDefault": "{action.primary.bg}",
+      "checkedDotDefault": "{text.inverse}",
+      "checkedOuterDisabled": "{action.primary.bgDisabled}",
+      "checkedDotDisabled": "{text.inverse}"
+    },
+    "radioButton": {
+      "gap": 8,
+
+      "bgDefault": "{bg.surface}",
+      "textDefault": "{text.secondary}",
+      "bgSelected": "{action.primary.bg}",
+      "textSelected": "{text.inverse}",
+      "bgDisabled": "{bg.surface}",
+      "textDisabled": "{text.disabled}",
+
+      "radiusLg": "{radius.md}",
+      "radiusMd": "{radius.md}",
+      "radiusSm": "{radius.sm}",
+
+      "pxLg": 8,
+      "pyLg": 4,
+      "pxMd": 8,
+      "pyMd": 2,
+      "pxSm": 8,
+      "hSm": 20
     }
   }
 }
