@@ -536,4 +536,24 @@
   --component-tree-select-trigger-text-disabled: #A7A7A7;
   --component-tree-select-trigger-text-placeholder: #666666;
   --component-tree-select-trigger-text-value: #222222;
+  --component-upload-card-bg-error: #FEEDED;
+  --component-upload-card-bg-uploading: #E8E8E8;
+  --component-upload-card-mask: rgba(0,0,0,0.6);
+  --component-upload-item-bg: #F7F7F7;
+  --component-upload-item-filename: #222222;
+  --component-upload-item-filename-error: #F14846;
+  --component-upload-trigger-bg-default: #F7F7F7;
+  --component-upload-trigger-bg-disabled: #F7F7F7;
+  --component-upload-trigger-bg-drag-hover: #E8E8E8;
+  --component-upload-trigger-bg-hover: #E8E8E8;
+  --component-upload-trigger-border-default: #E8E8E8;
+  --component-upload-trigger-border-disabled: #E8E8E8;
+  --component-upload-trigger-border-drag-hover: #CCCCCC;
+  --component-upload-trigger-border-hover: #E8E8E8;
+  --component-upload-trigger-desc: #666666;
+  --component-upload-trigger-desc-disabled: #CCCCCC;
+  --component-upload-trigger-icon-default: #222222;
+  --component-upload-trigger-icon-disabled: #CCCCCC;
+  --component-upload-trigger-title: #222222;
+  --component-upload-trigger-title-disabled: #CCCCCC;
 }

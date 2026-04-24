@@ -655,6 +655,34 @@
       "switcher": {
         "icon": "{text.secondary}"
       }
+    },
+    "upload": {
+      "trigger": {
+        "bgDefault": "{bg.page}",
+        "bgHover": "{bg.muted}",
+        "bgDisabled": "{bg.page}",
+        "bgDragHover": "{bg.muted}",
+        "borderDefault": "{border.subtle}",
+        "borderHover": "{border.subtle}",
+        "borderDisabled": "{border.subtle}",
+        "borderDragHover": "{border.default}",
+        "iconDefault": "{text.primary}",
+        "iconDisabled": "{text.muted}",
+        "title": "{text.primary}",
+        "titleDisabled": "{text.muted}",
+        "desc": "{text.secondary}",
+        "descDisabled": "{text.muted}"
+      },
+      "item": {
+        "bg": "{bg.page}",
+        "filename": "{text.primary}",
+        "filenameError": "{status.danger}"
+      },
+      "card": {
+        "mask": "rgba(0,0,0,0.6)",
+        "bgUploading": "{bg.muted}",
+        "bgError": "{bg.statusDanger}"
+      }
     }
   }
 }
