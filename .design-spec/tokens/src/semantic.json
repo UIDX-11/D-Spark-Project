@@ -7,7 +7,10 @@
       "page": "{color.neutral.20}",
       "surface": "{color.neutral.0}",
       "card": "{color.neutral.0}",
-      "muted": "{color.neutral.60}"
+      "muted": "{color.neutral.60}",
+      "switchOff": "{color.neutral.90}",
+      "switchOnDisabled": "{color.blue.30}",
+      "switchKnobDisabled": "{color.blue.10}"
     },
     "text": {
       "primary": "{color.neutral.170}",
@@ -40,7 +43,8 @@
     "status": {
       "success": "{color.green.50}",
       "warning": "{color.yellow.50}",
-      "danger": "{color.red.50}"
+      "danger": "{color.red.50}",
+      "info": "{color.blue.50}"
     }
   }
 }

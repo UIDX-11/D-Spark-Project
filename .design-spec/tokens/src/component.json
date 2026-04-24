@@ -207,6 +207,41 @@
         },
         "label": "{text.primary}"
       }
+    },
+    "switch": {
+      "track": {
+        "on": {
+          "default": "{status.info}",
+          "disabled": "{bg.switchOnDisabled}"
+        },
+        "off": {
+          "default": "{bg.switchOff}",
+          "disabled": "{bg.muted}"
+        }
+      },
+      "knob": {
+        "bg": {
+          "default": "{bg.surface}",
+          "disabled": "{bg.switchKnobDisabled}"
+        },
+        "shadow": "0px 1px 3px 0px rgba(0,0,0,0.1)"
+      },
+      "icon": {
+        "on": "{text.inverse}",
+        "off": "{text.inverse}"
+      },
+      "size": {
+        "lg": {
+          "height": 24,
+          "width": 40,
+          "knob": 16
+        },
+        "md": {
+          "height": 16,
+          "width": 28,
+          "knob": 12
+        }
+      }
     }
   }
 }

@@ -1,5 +1,8 @@
 :root {
   /* Primitive (core) */
+  --core-color-blue-10: #ECF2FC;
+  --core-color-blue-30: #A0C6F4;
+  --core-color-blue-50: #3F78E4;
   --core-color-deep-blue-20: #6985BF;
   --core-color-deep-blue-30: #506DAF;
   --core-color-green-50: #09AA5C;
@@ -14,6 +17,7 @@
   --core-color-neutral-20: #F7F7F7;
   --core-color-neutral-60: #E8E8E8;
   --core-color-neutral-80: #CCCCCC;
+  --core-color-neutral-90: #BFBFBF;
   --core-color-neutral-900: #111827;
   --core-color-red-50: #F14846;
   --core-color-yellow-50: #FFAD14;
@@ -38,12 +42,16 @@
   --semantic-bg-muted: #E8E8E8;
   --semantic-bg-page: #F7F7F7;
   --semantic-bg-surface: #FFFFFF;
+  --semantic-bg-switch-knob-disabled: #ECF2FC;
+  --semantic-bg-switch-off: #BFBFBF;
+  --semantic-bg-switch-on-disabled: #A0C6F4;
   --semantic-border-default: #CCCCCC;
   --semantic-border-strong: #999999;
   --semantic-focus-ring: #6985BF;
   --semantic-radius-md: 6;
   --semantic-radius-sm: 4;
   --semantic-status-danger: #F14846;
+  --semantic-status-info: #3F78E4;
   --semantic-status-success: #09AA5C;
   --semantic-status-warning: #FFAD14;
   --semantic-text-disabled: #A7A7A7;
@@ -191,4 +199,19 @@
   --component-select-trigger-text-default: #666666;
   --component-select-trigger-text-disabled: #A7A7A7;
   --component-select-trigger-text-focus: #222222;
+  --component-switch-icon-off: #FFFFFF;
+  --component-switch-icon-on: #FFFFFF;
+  --component-switch-knob-bg-default: #FFFFFF;
+  --component-switch-knob-bg-disabled: #ECF2FC;
+  --component-switch-knob-shadow: 0px 1px 3px 0px rgba(0,0,0,0.1);
+  --component-switch-size-lg-height: 24;
+  --component-switch-size-lg-knob: 16;
+  --component-switch-size-lg-width: 40;
+  --component-switch-size-md-height: 16;
+  --component-switch-size-md-knob: 12;
+  --component-switch-size-md-width: 28;
+  --component-switch-track-off-default: #BFBFBF;
+  --component-switch-track-off-disabled: #E8E8E8;
+  --component-switch-track-on-default: #3F78E4;
+  --component-switch-track-on-disabled: #A0C6F4;
 }
