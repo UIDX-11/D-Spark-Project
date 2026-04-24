@@ -713,6 +713,32 @@
       "px": 16,
       "pyLg": 8,
       "pyMd": 6
+    },
+    "message": {
+      "tone": {
+        "info": {
+          "bg": "{bg.statusInfo}",
+          "icon": "{status.info}"
+        },
+        "success": {
+          "bg": "{bg.statusSuccess}",
+          "icon": "{status.success}"
+        },
+        "warning": {
+          "bg": "{bg.statusWarning}",
+          "icon": "{status.warning}"
+        },
+        "error": {
+          "bg": "{bg.statusDanger}",
+          "icon": "{status.danger}"
+        }
+      },
+      "text": "{text.primary}",
+      "closeIcon": "{text.secondary}",
+      "radius": 8,
+      "px": 16,
+      "py": 8,
+      "gap": 8
     }
   }
 }
