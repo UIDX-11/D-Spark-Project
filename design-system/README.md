@@ -17,9 +17,19 @@ All authoritative, AI-retrievable specifications live in:
 - **AI / tooling entry**: `.design-spec/manifest.json`
 - **Global rules**: `.design-spec/docs/design.md`
 - **Component library**: `.design-spec/docs/components/README.md`
+- **Page skeletons (layouts)**: `.design-spec/docs/layouts/README.md`
 - **Intent index**: `.design-spec/docs/components/intent-index.md`
 - **Generator contract**: `.design-spec/generator/schema-ui-contract.md`
 - **Tokens (CSS dist)**: `.design-spec/tokens/dist/tokens.css`
+
+## Routing (3-layer router)
+
+- **Router**: `design-system/SKILL.md`
+- **Glossary**: `design-system/glossary.md`
+- **Overlays**: `design-system/overlays/`
+- **Capability modules (product-lines)**: `design-system/product-lines/`
+- **Case studies**: `design-system/case-studies/`
+- **Assets links**: `design-system/assets/`
 
 ## Recommended workflow
 

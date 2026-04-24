@@ -14,6 +14,7 @@ This directory is the **single entrypoint** for D-Spark UI generation rules.
 - Use the component library in `docs/components/`.
 - Use `docs/components/intent-index.md` to go from **intent → recommended patterns/components**.
 - For generators/validators, enforce `generator/schema-ui-contract.md`.
+- For a human-visible entry on GitHub, start at `../design-system/README.md`.
 
 ## Files that tools should read first
 

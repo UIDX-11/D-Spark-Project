@@ -37,9 +37,12 @@ Example (illustrative):
 - Tree
 - Cascader
 - Checkbox
+- Radio
 - Form
 - Input
 - Select
+- Switch
+- Badge
 
 See also `intent-index.md` for intent-based retrieval.
 
