@@ -18,6 +18,11 @@ triggers:
   - 表单
   - 列表页
   - 详情页
+  - 主从
+  - 主从页
+  - master detail
+  - tree detail
+  - 树详情
 routes:
   skeleton:
     choose_one:
@@ -30,6 +35,10 @@ routes:
       - id: page-form
         read:
           - .design-spec/docs/layouts/page-form.md
+      - id: page-master-detail
+        read:
+          - .design-spec/docs/layouts/page-master-detail.md
+
   common:
     always_read:
       - .design-spec/docs/design.md
