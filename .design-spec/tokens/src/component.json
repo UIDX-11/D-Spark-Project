@@ -852,6 +852,33 @@
       "divider": "{border.subtle}",
       "backIcon": "{text.primary}",
       "backIconSize": 20
+    },
+    "pagination": {
+      "item": {
+        "bgDefault": "{bg.muted}",
+        "bgHover": "{bg.page}",
+        "bgCurrent": "{bg.muted}",
+        "text": "{text.secondary}",
+        "textCurrent": "{text.primary}",
+        "radiusMd": 6,
+        "radiusSm": 4,
+        "sizeLg": 36,
+        "sizeMd": 32,
+        "sizeSm": 28,
+        "sizeXs": 24
+      },
+      "arrow": {
+        "icon": "{text.secondary}",
+        "iconDisabled": "{text.muted}"
+      },
+      "label": {
+        "text": "{text.secondary}"
+      },
+      "disabled": {
+        "text": "{text.muted}",
+        "bg": "{bg.page}"
+      },
+      "gap": 8
     }
   }
 }
