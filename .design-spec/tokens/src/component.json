@@ -943,6 +943,37 @@
         "hM": 32,
         "hL": 36
       }
+    },
+    "menu": {
+      "container": {
+        "bg": "{bg.surface}",
+        "wExpanded": 220,
+        "wCollapsed": 48
+      },
+      "item": {
+        "h1": 38,
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.page}",
+        "bgSelected": "{bg.page}",
+        "text": "{text.secondary}",
+        "textHover": "{text.primary}",
+        "textSelected": "{text.primary}",
+        "textDisabled": "{text.muted}",
+        "px": 12,
+        "gap": 12
+      },
+      "icon": "{text.secondary}",
+      "iconDisabled": "{text.muted}",
+      "chevron": "{text.secondary}",
+      "groupTitle": "{text.disabled}",
+      "pop": {
+        "bg": "{bg.surface}",
+        "radius": 8,
+        "shadow": "0px 4px 10px 0px rgba(0,0,0,0.1)",
+        "minW": 182,
+        "itemPx": 12,
+        "itemPy": 9
+      }
     }
   }
 }
