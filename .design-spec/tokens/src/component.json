@@ -974,6 +974,17 @@
         "itemPx": 12,
         "itemPy": 9
       }
+    },
+    "form": {
+      "rowGap": 16,
+      "colGap": 16,
+      "labelGap": 8,
+      "labelW": 120,
+      "labelText": "{text.primary}",
+      "labelTextDisabled": "{text.muted}",
+      "requiredMark": "{status.danger}",
+      "helpText": "{text.secondary}",
+      "errorText": "{status.danger}"
     }
   }
 }

@@ -237,6 +237,15 @@
   --component-dropdown-trigger-radius: 8;
   --component-dropdown-trigger-text: #222222;
   --component-dropdown-trigger-text-disabled: #A7A7A7;
+  --component-form-col-gap: 16;
+  --component-form-error-text: #F14846;
+  --component-form-help-text: #666666;
+  --component-form-label-gap: 8;
+  --component-form-label-text: #222222;
+  --component-form-label-text-disabled: #CCCCCC;
+  --component-form-label-w: 120;
+  --component-form-required-mark: #F14846;
+  --component-form-row-gap: 16;
   --component-input-bg-completed: #FFFFFF;
   --component-input-bg-default: #FFFFFF;
   --component-input-bg-disabled: #F7F7F7;
