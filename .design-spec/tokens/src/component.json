@@ -908,6 +908,41 @@
         "length": 28
       },
       "gap": 12
+    },
+    "dropdown": {
+      "panel": {
+        "bg": "{bg.surface}",
+        "radius": 8,
+        "shadow": "0px 4px 10px 0px rgba(0,0,0,0.1)"
+      },
+      "item": {
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.page}",
+        "text": "{text.primary}",
+        "textDisabled": "{text.muted}",
+        "textDanger": "{status.danger}",
+        "radiusMd": 6,
+        "radiusSm": 4,
+        "hMd": 32,
+        "hSm": 28,
+        "gapMd": 12,
+        "gapSm": 8
+      },
+      "divider": "{border.subtle}",
+      "icon": "{text.primary}",
+      "iconDisabled": "{text.muted}",
+      "checkIcon": "{text.primary}",
+      "submenuIcon": "{text.secondary}",
+      "trigger": {
+        "bgHover": "{bg.page}",
+        "bgActive": "{bg.muted}",
+        "text": "{text.primary}",
+        "textDisabled": "{text.disabled}",
+        "radius": 8,
+        "px": 8,
+        "hM": 32,
+        "hL": 36
+      }
     }
   }
 }
