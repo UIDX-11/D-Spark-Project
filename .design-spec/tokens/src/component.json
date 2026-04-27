@@ -879,6 +879,35 @@
         "bg": "{bg.page}"
       },
       "gap": 8
+    },
+    "steps": {
+      "icon": {
+        "sizeLg": 28,
+        "sizeMd": 24,
+        "bgCurrent": "{action.primary.bg}",
+        "bgError": "{status.danger}",
+        "borderPending": "{text.secondary}",
+        "borderDisabled": "{text.muted}",
+        "textOnCurrent": "{action.primary.text}",
+        "textPending": "{text.secondary}",
+        "textDisabled": "{text.muted}"
+      },
+      "title": {
+        "text": "{text.primary}",
+        "textCurrent": "{text.primary}",
+        "textPending": "{text.secondary}",
+        "textError": "{status.danger}",
+        "textDisabled": "{text.muted}"
+      },
+      "desc": {
+        "text": "{text.disabled}"
+      },
+      "connector": {
+        "track": "{border.subtle}",
+        "trackCompleted": "{text.primary}",
+        "length": 28
+      },
+      "gap": 12
     }
   }
 }
