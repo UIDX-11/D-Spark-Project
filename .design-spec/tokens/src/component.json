@@ -975,6 +975,30 @@
         "itemPy": 9
       }
     },
+    "table": {
+      "bg": "{bg.surface}",
+      "border": "{border.default}",
+      "header": {
+        "bg": "{bg.page}",
+        "text": "{text.primary}"
+      },
+      "row": {
+        "bgDefault": "{bg.surface}",
+        "bgHover": "{bg.page}",
+        "bgSelected": "{bg.page}",
+        "text": "{text.primary}",
+        "textMuted": "{text.secondary}",
+        "hCompact": 36,
+        "hDefault": 44,
+        "hComfortable": 52
+      },
+      "cell": {
+        "px": 16,
+        "pyCompact": 8,
+        "pyDefault": 14,
+        "pyComfortable": 18
+      }
+    },
     "form": {
       "rowGap": 16,
       "colGap": 16,
