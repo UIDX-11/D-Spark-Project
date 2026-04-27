@@ -841,6 +841,17 @@
       "gap": 4,
       "px": 4,
       "itemMaxW": 300
+    },
+    "pageHeader": {
+      "bg": "{bg.surface}",
+      "px": 16,
+      "py": 12,
+      "gap": 12,
+      "titleText": "{text.primary}",
+      "descText": "{text.disabled}",
+      "divider": "{border.subtle}",
+      "backIcon": "{text.primary}",
+      "backIconSize": 20
     }
   }
 }
