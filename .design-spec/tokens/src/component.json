@@ -825,6 +825,22 @@
         "radius": 6,
         "h": 36
       }
+    },
+    "breadcrumb": {
+      "link": {
+        "text": "{text.secondary}",
+        "textHover": "{text.primary}"
+      },
+      "current": {
+        "text": "{text.primary}"
+      },
+      "separator": {
+        "color": "{text.secondary}",
+        "size": 16
+      },
+      "gap": 4,
+      "px": 4,
+      "itemMaxW": 300
     }
   }
 }

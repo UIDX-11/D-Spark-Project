@@ -107,6 +107,14 @@
   --component-badge-status-dot-warning: #FFAD14;
   --component-badge-status-gap: 8;
   --component-badge-status-label: #222222;
+  --component-breadcrumb-current-text: #222222;
+  --component-breadcrumb-gap: 4;
+  --component-breadcrumb-item-max-w: 300;
+  --component-breadcrumb-link-text: #666666;
+  --component-breadcrumb-link-text-hover: #222222;
+  --component-breadcrumb-px: 4;
+  --component-breadcrumb-separator-color: #666666;
+  --component-breadcrumb-separator-size: 16;
   --component-button-danger-bg-default: #F14846;
   --component-button-danger-text-default: #FFFFFF;
   --component-button-link-text-default: #506DAF;
