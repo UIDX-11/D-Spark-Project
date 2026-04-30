@@ -595,7 +595,7 @@
   --component-tabs-direction-button-bg-default: #FFFFFF;
   --component-tabs-direction-button-bg-hover: #F7F7F7;
   --component-tabs-direction-button-icon-default: #666666;
-  --component-tabs-direction-button-icon-disabled: #A7A7A7;
+  --component-tabs-direction-button-icon-disabled: #CCCCCC;
   --component-tabs-direction-button-icon-size: 12;
   --component-tabs-direction-button-p: 4;
   --component-tabs-direction-button-radius: 23;
@@ -614,7 +614,7 @@
   --component-tabs-pill-py: 8;
   --component-tabs-pill-radius: 999;
   --component-tabs-pill-text-default: #666666;
-  --component-tabs-pill-text-disabled: #A7A7A7;
+  --component-tabs-pill-text-disabled: #CCCCCC;
   --component-tabs-pill-text-hover: #666666;
   --component-tabs-pill-text-selected: #222222;
   --component-tabs-scrollable-close-icon-size: 12;
@@ -636,7 +636,13 @@
   --component-tabs-segmented-divider: #E8E8E8;
   --component-tabs-segmented-h: 36;
   --component-tabs-segmented-item-bg: #FFFFFF;
+  --component-tabs-segmented-item-bg-disabled: #FFFFFF;
+  --component-tabs-segmented-item-bg-hover: #F7F7F7;
+  --component-tabs-segmented-item-bg-selected: #FFFFFF;
   --component-tabs-segmented-px: 8;
+  --component-tabs-segmented-text-default: #666666;
+  --component-tabs-segmented-text-disabled: #CCCCCC;
+  --component-tabs-segmented-text-selected: #222222;
   --component-tabs-underline-gap: 8;
   --component-tabs-underline-h-md: 32;
   --component-tabs-underline-icon-size: 14;
@@ -648,7 +654,7 @@
   --component-tabs-underline-py-lg: 12;
   --component-tabs-underline-py-md: 6;
   --component-tabs-underline-text-default: #666666;
-  --component-tabs-underline-text-disabled: #A7A7A7;
+  --component-tabs-underline-text-disabled: #CCCCCC;
   --component-tabs-underline-text-hover: #222222;
   --component-tabs-underline-text-selected: #222222;
   --component-tabs-vertical-icon-size: 14;
@@ -659,7 +665,7 @@
   --component-tabs-vertical-outer-px: 16;
   --component-tabs-vertical-radius: 2;
   --component-tabs-vertical-text-default: #666666;
-  --component-tabs-vertical-text-disabled: #A7A7A7;
+  --component-tabs-vertical-text-disabled: #CCCCCC;
   --component-tabs-vertical-text-selected: #222222;
   --component-tabs-vertical-width: 120;
   --component-tabs-vertical-wrapper-bg-default: #FFFFFF;
