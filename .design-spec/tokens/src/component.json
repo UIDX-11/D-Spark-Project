@@ -41,23 +41,23 @@
       }
     },
     "input": {
-      "bgDefault": "{bg.surface}",
-      "bgHover": "{bg.surface}",
-      "bgFocus": "{bg.surface}",
-      "bgTyping": "{bg.surface}",
-      "bgCompleted": "{bg.surface}",
-      "bgError": "{bg.surface}",
-      "bgDisabled": "{bg.page}",
+      "bgDefault": "{bg.formDefault}",
+      "bgHover": "{bg.formHover}",
+      "bgFocus": "{bg.formDefault}",
+      "bgTyping": "{bg.formDefault}",
+      "bgCompleted": "{bg.formDefault}",
+      "bgError": "{bg.formDefault}",
+      "bgDisabled": "{bg.formDisabled}",
 
-      "textDefault": "{text.secondary}",
-      "textFocus": "{text.primary}",
-      "textDisabled": "{text.disabled}",
+      "textDefault": "{text.placeholder}",
+      "textFocus": "{text.placeholder}",
+      "textDisabled": "{text.muted}",
 
-      "borderDefault": "{border.default}",
-      "borderHover": "{border.default}",
-      "borderFocus": "{border.strong}",
+      "borderDefault": "{bg.formDefault}",
+      "borderHover": "{bg.formHover}",
+      "borderFocus": "{text.primary}",
       "borderError": "{status.danger}",
-      "borderDisabled": "{border.default}",
+      "borderDisabled": "{bg.formDisabled}",
 
       "ringFocus": "{focus.ring}",
       "ringError": "{status.danger}"
@@ -135,28 +135,28 @@
     "select": {
       "trigger": {
         "bg": {
-          "default": "{bg.page}",
-          "hover": "{bg.page}",
-          "focus": "{bg.page}",
-          "disabled": "{bg.page}",
-          "error": "{bg.page}"
+          "default": "{bg.formDefault}",
+          "hover": "{bg.formHover}",
+          "focus": "{bg.formDefault}",
+          "disabled": "{bg.formDisabled}",
+          "error": "{bg.formDefault}"
         },
         "border": {
-          "default": "{border.default}",
-          "hover": "{text.primary}",
+          "default": "{bg.formDefault}",
+          "hover": "{bg.formHover}",
           "focus": "{text.primary}",
-          "disabled": "{border.default}",
+          "disabled": "{bg.formDisabled}",
           "error": "{status.danger}"
         },
         "text": {
-          "default": "{text.secondary}",
-          "focus": "{text.primary}",
-          "disabled": "{text.disabled}"
+          "default": "{text.placeholder}",
+          "focus": "{text.placeholder}",
+          "disabled": "{text.muted}"
         },
-        "placeholder": "{text.secondary}",
+        "placeholder": "{text.placeholder}",
         "icon": {
-          "default": "{text.secondary}",
-          "disabled": "{text.disabled}"
+          "default": "{text.placeholder}",
+          "disabled": "{text.muted}"
         },
         "ring": {
           "focus": "{focus.ring}",

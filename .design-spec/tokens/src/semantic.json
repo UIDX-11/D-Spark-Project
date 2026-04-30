@@ -10,6 +10,9 @@
       "muted": "{color.neutral.60}",
       "tableHeader": "{color.neutral.10}",
       "tableHover": "{color.neutral.10}",
+      "formDefault": "{color.neutral.20}",
+      "formHover": "{color.neutral.60}",
+      "formDisabled": "{color.neutral.10}",
       "switchOff": "{color.neutral.90}",
       "switchOnDisabled": "{color.blue.30}",
       "switchKnobDisabled": "{color.blue.10}",
@@ -24,6 +27,7 @@
       "secondary": "{color.neutral.140}",
       "disabled": "{color.neutral.110}",
       "muted": "{color.neutral.80}",
+      "placeholder": "{color.neutral.120}",
       "inverse": "{color.neutral.0}",
       "link": "{color.deepBlue.30}"
     },
