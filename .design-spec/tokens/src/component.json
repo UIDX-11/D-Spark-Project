@@ -791,7 +791,7 @@
       },
       "titleText": "{text.primary}",
       "bodyText": "{text.primary}",
-      "closeIcon": "{text.secondary}",
+      "closeIcon": "{text.placeholder}",
       "p": 16,
       "w": 304,
       "actions": {
