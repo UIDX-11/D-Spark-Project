@@ -111,11 +111,11 @@
   --component-badge-count-px-single: 4;
   --component-badge-count-radius: 999;
   --component-badge-count-text-default: #FFFFFF;
-  --component-badge-count-text-disabled: #666666;
+  --component-badge-count-text-disabled: #999999;
   --component-badge-dot-size: 6;
   --component-badge-status-dot-default: #666666;
   --component-badge-status-dot-error: #F14846;
-  --component-badge-status-dot-processing: #6985BF;
+  --component-badge-status-dot-processing: #3F78E4;
   --component-badge-status-dot-success: #09AA5C;
   --component-badge-status-dot-warning: #FFAD14;
   --component-badge-status-gap: 8;

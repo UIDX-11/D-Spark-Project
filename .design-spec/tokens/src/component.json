@@ -185,7 +185,7 @@
         },
         "text": {
           "default": "{text.inverse}",
-          "disabled": "{text.secondary}"
+          "disabled": "{text.placeholder}"
         },
         "height": 16,
         "radius": 999,
@@ -200,7 +200,7 @@
         "gap": 8,
         "dot": {
           "default": "{text.secondary}",
-          "processing": "{focus.ring}",
+          "processing": "{status.info}",
           "success": "{status.success}",
           "warning": "{status.warning}",
           "error": "{status.danger}"
