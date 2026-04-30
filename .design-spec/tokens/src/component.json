@@ -1002,14 +1002,22 @@
         "pyComfortable": 18
       },
       "pinned": {
+        "divider": "{border.subtle}",
         "shadowLeft": "inset -12px 0px 10px -12px rgba(0,0,0,0.12)",
-        "shadowRight": "inset 12px 0px 10px -12px rgba(0,0,0,0.12)"
+        "shadowRight": "inset 12px 0px 10px -12px rgba(0,0,0,0.12)",
+        "shadowTier1": "inset -8px 0px 8px -8px rgba(0,0,0,0.10)",
+        "shadowTier2": "inset -12px 0px 10px -12px rgba(0,0,0,0.16)"
       },
       "column": {
         "resizeHandleW": 8,
         "resizeHandleColor": "{border.subtle}",
         "dragIndicatorW": 2,
         "dragIndicatorColor": "{focus.ring}"
+      },
+      "focus": {
+        "rowRing": "{focus.ring}",
+        "cellOutlineW": 2,
+        "cellOutlineColor": "{focus.ring}"
       },
       "tree": {
         "indent": 16,
@@ -1025,7 +1033,8 @@
         "bg": "{bg.surface}"
       },
       "virtual": {
-        "overscan": 6
+        "overscan": 6,
+        "rowHeightMode": "fixed"
       }
     },
     "form": {

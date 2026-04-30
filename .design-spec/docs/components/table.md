@@ -92,6 +92,53 @@ Table container
 
 ## Executable interaction rules
 
+## Hard rules (MUST / MUST NOT)
+
+- **MUST** use tokens for all Table visuals (bg/border/shadow/padding/indicator). No ad-hoc hex/px in product UI.
+- **MUST** keep header/body column widths identical under all states (hover/selected/loading/virtualized).
+- **MUST NOT** rely on hover-only affordances for critical actions (sort/filter/row actions must be visible or focus-visible).
+- **MUST** provide stable row identity (`rowKey`) so selection/expand/tree state survives sort/paginate (when data represents same entities).
+- **MUST** avoid layout shift:
+  - sort icons / resize handles / action icons must not change column width when appearing
+  - expanded content must not change header/body alignment
+
+### Keyboard navigation model (choose ONE, document per product)
+
+> This is a **hard contract**. Mixing models across tables in one product is forbidden.
+
+| **Model** | **What is focusable by default** | **When to use** |
+| --- | --- | --- |
+| `row-focus` | each row is a single tab stop; interactive controls inside row are entered via explicit action | most CRUD tables |
+| `cell-focus` | each cell can receive focus and arrow-key navigation moves focus cell-to-cell | data-heavy / spreadsheet-like |
+
+#### `row-focus` model rules (required if chosen)
+
+- Tab order:
+  - `Tab` moves focus: toolbar → header controls → row 1 → row 2 → … → pagination
+  - inside a focused row, `Enter` toggles “row action mode” (or opens primary action) (product decision)
+- Arrow keys:
+  - `Up/Down`: move focused row
+  - `Home/End`: jump to first/last row in current page
+- Selection:
+  - `Space` toggles row checkbox when selection enabled
+- Expand / tree:
+  - `Right`: expand (if expandable/collapsed)
+  - `Left`: collapse (if expanded)
+- **MUST** expose a visible focus ring for the focused row (tokenized)
+
+#### `cell-focus` model rules (required if chosen)
+
+- Tab order:
+  - `Tab` enters the grid at the first focusable cell; leaves grid after the last focusable cell
+  - `Tab` does **not** traverse every cell by default when the grid is large; use roving tabindex (one active cell)
+- Arrow keys:
+  - `Up/Down/Left/Right` moves active cell
+  - `PageUp/PageDown` moves by viewport (virtualization must support this)
+- Editing:
+  - `Enter` enters edit mode for editable cell
+  - `Esc` exits edit mode (revert changes if not committed)
+- **MUST** render a cell focus outline without shifting layout (tokenized outline)
+
 ### Column sizing
 
 - Columns must support:
@@ -198,6 +245,10 @@ Table container
   - sticky header works with virtualization
   - pinned columns remain aligned with virtualized rows
   - overscan rows are rendered above/below viewport (tokenized `overscan`)
+- **MUST** define row height strategy:
+  - fixed row heights (preferred) OR measured dynamic heights (more expensive, document limits)
+- **MUST** define scroll-to-index behavior:
+  - `scrollToIndex(i)` aligns to row top (default) and supports `center` alignment optionally
 - Accessibility:
   - announce total row count
   - do not break “find in page” expectations for critical workflows (document limitation)
@@ -228,6 +279,19 @@ Table container
   - checkbox labels include row identifier (`aria-label="Select row: <name>"`)
 - Inline controls:
   - maintain predictable tab order within a row
+
+## Verification checklist (self-check)
+
+- [ ] **Tokens-only styling**: no new non-token colors/spacing/shadows introduced.
+- [ ] **Pinned alignment**: pinned header/body widths match scrollable region; no 1px drift.
+- [ ] **Pinned shadow**: boundary shadow appears only when overflow exists in that direction.
+- [ ] **Resize**: min/max clamped; indicator line shown; commit on pointer up.
+- [ ] **Reorder**: insertion indicator shown; pinned-group constraint enforced; widths preserved.
+- [ ] **Tree**: indentation uses token; toggle alignment consistent with selection checkbox.
+- [ ] **Expand**: expanded content spans full width; uses tokenized bg/padding; state stable by rowKey.
+- [ ] **Merge**: borders correct; hover/selection applies to merged region; keyboard skips phantom cells.
+- [ ] **Virtual**: overscan token applied; sticky header works; keyboard model still valid.
+- [ ] **A11y**: `aria-sort` set; selection labels include row identifier; focus visible (row or cell).
 
 ## Component token bindings (required)
 
@@ -266,4 +330,11 @@ Table container
 | `tokens.table.expand.py` | `--component-table-expand-py` |
 | `tokens.table.merge.bg` | `--component-table-merge-bg` |
 | `tokens.table.virtual.overscan` | `--component-table-virtual-overscan` |
+| `tokens.table.pinned.divider` | `--component-table-pinned-divider` |
+| `tokens.table.pinned.shadowTier1` | `--component-table-pinned-shadow-tier-1` |
+| `tokens.table.pinned.shadowTier2` | `--component-table-pinned-shadow-tier-2` |
+| `tokens.table.focus.rowRing` | `--component-table-focus-row-ring` |
+| `tokens.table.focus.cellOutlineW` | `--component-table-focus-cell-outline-w` |
+| `tokens.table.focus.cellOutlineColor` | `--component-table-focus-cell-outline-color` |
+| `tokens.table.virtual.rowHeightMode` | `--component-table-virtual-row-height-mode` |
 

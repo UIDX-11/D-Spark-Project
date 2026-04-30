@@ -538,14 +538,20 @@
   --component-table-expand-bg: #F7F7F7;
   --component-table-expand-px: 16;
   --component-table-expand-py: 12;
+  --component-table-focus-cell-outline-color: #6985BF;
+  --component-table-focus-cell-outline-w: 2;
+  --component-table-focus-row-ring: #6985BF;
   --component-table-header-bg: #F7F7F7;
   --component-table-header-h-comfortable: 52;
   --component-table-header-h-compact: 36;
   --component-table-header-h-default: 44;
   --component-table-header-text: #222222;
   --component-table-merge-bg: #FFFFFF;
+  --component-table-pinned-divider: #E8E8E8;
   --component-table-pinned-shadow-left: inset -12px 0px 10px -12px rgba(0,0,0,0.12);
   --component-table-pinned-shadow-right: inset 12px 0px 10px -12px rgba(0,0,0,0.12);
+  --component-table-pinned-shadow-tier1: inset -8px 0px 8px -8px rgba(0,0,0,0.10);
+  --component-table-pinned-shadow-tier2: inset -12px 0px 10px -12px rgba(0,0,0,0.16);
   --component-table-row-bg-default: #FFFFFF;
   --component-table-row-bg-hover: #F7F7F7;
   --component-table-row-bg-selected: #F7F7F7;
@@ -558,6 +564,7 @@
   --component-table-tree-toggle-color: #666666;
   --component-table-tree-toggle-size: 16;
   --component-table-virtual-overscan: 6;
+  --component-table-virtual-row-height-mode: fixed;
   --component-tabs-border-border-default: #999999;
   --component-tabs-border-border-selected: #222222;
   --component-tabs-border-min-width: 72;
