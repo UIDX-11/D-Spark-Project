@@ -756,7 +756,7 @@
       },
       "titleText": "{text.primary}",
       "bodyText": "{text.primary}",
-      "closeIcon": "{text.secondary}",
+      "closeIcon": "{text.placeholder}",
       "divider": "{border.subtle}",
       "p": 24,
       "w": 440,
