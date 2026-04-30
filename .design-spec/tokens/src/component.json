@@ -587,18 +587,18 @@
         "bgActive": "{bg.page}",
         "bgFilled": "{bg.page}",
         "bgError": "{bg.page}",
-        "bgDisabled": "{bg.muted}",
-        "borderDefault": "{border.subtle}",
+        "bgDisabled": "{bg.formDisabled}",
+        "borderDefault": "{bg.page}",
         "borderActive": "{text.primary}",
         "borderFilled": "{text.primary}",
         "borderError": "{status.danger}",
-        "borderDisabled": "{border.subtle}",
+        "borderDisabled": "{bg.formDisabled}",
         "textDefault": "{text.primary}",
         "textFilled": "{text.primary}",
         "textDisabled": "{text.muted}",
         "caret": "{text.primary}"
       },
-      "helpText": "{text.secondary}",
+      "helpText": "{text.placeholder}",
       "errorText": "{status.danger}"
     },
     "slider": {

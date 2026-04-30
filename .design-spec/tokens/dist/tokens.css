@@ -393,12 +393,12 @@
   --component-pagination-label-text: #666666;
   --component-pin-code-cell-bg-active: #F7F7F7;
   --component-pin-code-cell-bg-default: #F7F7F7;
-  --component-pin-code-cell-bg-disabled: #E8E8E8;
+  --component-pin-code-cell-bg-disabled: #FAFAFA;
   --component-pin-code-cell-bg-error: #F7F7F7;
   --component-pin-code-cell-bg-filled: #F7F7F7;
   --component-pin-code-cell-border-active: #222222;
-  --component-pin-code-cell-border-default: #E8E8E8;
-  --component-pin-code-cell-border-disabled: #E8E8E8;
+  --component-pin-code-cell-border-default: #F7F7F7;
+  --component-pin-code-cell-border-disabled: #FAFAFA;
   --component-pin-code-cell-border-error: #F14846;
   --component-pin-code-cell-border-filled: #222222;
   --component-pin-code-cell-caret: #222222;
@@ -406,7 +406,7 @@
   --component-pin-code-cell-text-disabled: #CCCCCC;
   --component-pin-code-cell-text-filled: #222222;
   --component-pin-code-error-text: #F14846;
-  --component-pin-code-help-text: #666666;
+  --component-pin-code-help-text: #999999;
   --component-progress-circle-size-lg: 80;
   --component-progress-circle-size-md: 64;
   --component-progress-circle-size-sm: 48;
