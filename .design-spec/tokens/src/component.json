@@ -980,7 +980,10 @@
       "border": "{border.default}",
       "header": {
         "bg": "{bg.page}",
-        "text": "{text.primary}"
+        "text": "{text.primary}",
+        "hCompact": 36,
+        "hDefault": 44,
+        "hComfortable": 52
       },
       "row": {
         "bgDefault": "{bg.surface}",
@@ -997,6 +1000,32 @@
         "pyCompact": 8,
         "pyDefault": 14,
         "pyComfortable": 18
+      },
+      "pinned": {
+        "shadowLeft": "inset -12px 0px 10px -12px rgba(0,0,0,0.12)",
+        "shadowRight": "inset 12px 0px 10px -12px rgba(0,0,0,0.12)"
+      },
+      "column": {
+        "resizeHandleW": 8,
+        "resizeHandleColor": "{border.subtle}",
+        "dragIndicatorW": 2,
+        "dragIndicatorColor": "{focus.ring}"
+      },
+      "tree": {
+        "indent": 16,
+        "toggleSize": 16,
+        "toggleColor": "{text.secondary}"
+      },
+      "expand": {
+        "bg": "{bg.page}",
+        "px": 16,
+        "py": 12
+      },
+      "merge": {
+        "bg": "{bg.surface}"
+      },
+      "virtual": {
+        "overscan": 6
       }
     },
     "form": {

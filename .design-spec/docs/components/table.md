@@ -99,12 +99,44 @@ Table container
   - min/max width with truncation + tooltip
 - Text columns left-aligned; numeric columns right-aligned.
 
+### Column resize (required when enabled)
+
+- Resize handle is on the right edge of the header cell.
+- Dragging updates column width:
+  - must clamp to `minWidth` and `maxWidth` per column
+  - must not cause layout jank (use transform/raf when possible)
+- Show a resize indicator line while dragging; commit width on pointer up.
+- Keyboard support (recommended):
+  - focused header + `Alt+Left/Right` adjusts width in steps (e.g. 8px)
+
+### Column reorder / drag (required when enabled)
+
+- Drag is initiated from a dedicated drag handle or by long-press on header label (product decision); avoid accidental drags during sorting.
+- While dragging:
+  - show a ghost preview
+  - show insertion indicator line between columns
+  - auto-scroll horizontally when near edges
+- Drop rules:
+  - respect pinned (fixed) columns: pinned group cannot be dropped into non-pinned region and vice versa
+  - preserve column widths after reorder
+
 ### Sorting
 
 - Sort toggle is on header cell:
   - cycle: none → asc → desc
   - show sort indicator when active (not hover-only)
 - Sorting does not reset pagination selection (unless data source changes).
+
+### Fixed columns / pinned columns (required when enabled)
+
+- Pinned columns:
+  - `left` pinned group (e.g. checkbox, identifier)
+  - `right` pinned group (e.g. actions)
+- Horizontal scroll must keep pinned columns stationary.
+- Visual separation:
+  - show shadow on the boundary between pinned and scrollable region
+  - shadow appears only when there is overflow scroll in that direction
+- Header + body alignment is strict: pinned column widths must match body cells.
 
 ### Selection (required for `with-selection`)
 
@@ -126,6 +158,49 @@ Table container
 - Validation:
   - invalid field shows inline error message and sets `aria-invalid`
   - table does not shift columns when error appears (use reserved helper area or overlay tooltip)
+
+### Tree table (required when enabled)
+
+- Tree uses a dedicated expand/collapse toggle in the first “tree column”.
+- Indentation:
+  - each depth adds `indent` spacing (tokenized)
+  - toggles align consistently regardless of row selection checkbox
+- Loading children:
+  - expanding a node may show a loading indicator in place (do not block entire table)
+- Selection + tree:
+  - selecting a parent may optionally select children (product decision) but must be explicit and documented
+
+### Expandable row (required when enabled)
+
+- Expand toggle location:
+  - either a dedicated expand column OR within first column (tree-style)
+- Expanded content:
+  - spans full row width across all columns (including pinned)
+  - must not break column alignment
+  - uses a distinct background and padding (tokenized)
+- Expansion state must be preserved across sorting and pagination when row identity is stable.
+
+### Cell merge (rowspan/colspan) (required when enabled)
+
+- Merge is data-driven (computed by grouping rules); never manual drag merge in B-end tables.
+- Visual rules:
+  - merged region preserves outer borders; inner borders removed
+  - text alignment remains consistent with column type
+- Interaction rules:
+  - selection and hover apply to the whole merged region
+  - keyboard navigation skips internal “phantom” cells
+
+### Virtual scrolling (required when enabled)
+
+- Use virtualization when:
+  - rows > 200 (rule-of-thumb) OR row rendering is expensive
+- Requirements:
+  - sticky header works with virtualization
+  - pinned columns remain aligned with virtualized rows
+  - overscan rows are rendered above/below viewport (tokenized `overscan`)
+- Accessibility:
+  - announce total row count
+  - do not break “find in page” expectations for critical workflows (document limitation)
 
 ### Scrolling & sticky header
 
@@ -162,6 +237,9 @@ Table container
 | `tokens.table.border` | `--component-table-border` |
 | `tokens.table.header.bg` | `--component-table-header-bg` |
 | `tokens.table.header.text` | `--component-table-header-text` |
+| `tokens.table.header.hCompact` | `--component-table-header-h-compact` |
+| `tokens.table.header.hDefault` | `--component-table-header-h-default` |
+| `tokens.table.header.hComfortable` | `--component-table-header-h-comfortable` |
 | `tokens.table.row.bgDefault` | `--component-table-row-bg-default` |
 | `tokens.table.row.bgHover` | `--component-table-row-bg-hover` |
 | `tokens.table.row.bgSelected` | `--component-table-row-bg-selected` |
@@ -174,4 +252,18 @@ Table container
 | `tokens.table.cell.pyCompact` | `--component-table-cell-py-compact` |
 | `tokens.table.cell.pyDefault` | `--component-table-cell-py-default` |
 | `tokens.table.cell.pyComfortable` | `--component-table-cell-py-comfortable` |
+| `tokens.table.pinned.shadowLeft` | `--component-table-pinned-shadow-left` |
+| `tokens.table.pinned.shadowRight` | `--component-table-pinned-shadow-right` |
+| `tokens.table.column.resizeHandleW` | `--component-table-column-resize-handle-w` |
+| `tokens.table.column.resizeHandleColor` | `--component-table-column-resize-handle-color` |
+| `tokens.table.column.dragIndicatorW` | `--component-table-column-drag-indicator-w` |
+| `tokens.table.column.dragIndicatorColor` | `--component-table-column-drag-indicator-color` |
+| `tokens.table.tree.indent` | `--component-table-tree-indent` |
+| `tokens.table.tree.toggleSize` | `--component-table-tree-toggle-size` |
+| `tokens.table.tree.toggleColor` | `--component-table-tree-toggle-color` |
+| `tokens.table.expand.bg` | `--component-table-expand-bg` |
+| `tokens.table.expand.px` | `--component-table-expand-px` |
+| `tokens.table.expand.py` | `--component-table-expand-py` |
+| `tokens.table.merge.bg` | `--component-table-merge-bg` |
+| `tokens.table.virtual.overscan` | `--component-table-virtual-overscan` |
 
