@@ -625,7 +625,7 @@
         "inactive": "{border.subtle}"
       },
       "mark": {
-        "text": "{text.secondary}"
+        "text": "{text.placeholder}"
       }
     },
     "treeSelect": {
