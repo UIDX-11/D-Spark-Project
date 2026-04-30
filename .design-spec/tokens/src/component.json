@@ -947,7 +947,7 @@
         "bgHover": "{bg.page}",
         "bgActive": "{bg.muted}",
         "text": "{text.primary}",
-        "textDisabled": "{text.disabled}",
+        "textDisabled": "{text.muted}",
         "textDisabledL": "{text.disabled}",
         "textDisabledM": "{text.muted}",
         "radius": 8,
