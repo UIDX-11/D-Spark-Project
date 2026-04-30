@@ -18,6 +18,7 @@
   --core-color-neutral-20: #F7F7F7;
   --core-color-neutral-30: #F0F0F0;
   --core-color-neutral-60: #E8E8E8;
+  --core-color-neutral-70: #E7E7E7;
   --core-color-neutral-80: #CCCCCC;
   --core-color-neutral-90: #BFBFBF;
   --core-color-neutral-900: #111827;
@@ -57,6 +58,7 @@
   --semantic-bg-table-header: #FAFAFA;
   --semantic-bg-table-hover: #FAFAFA;
   --semantic-border-default: #CCCCCC;
+  --semantic-border-disabled: #E7E7E7;
   --semantic-border-strong: #999999;
   --semantic-border-subtle: #E8E8E8;
   --semantic-focus-ring: #6985BF;
@@ -143,7 +145,7 @@
   --component-button-primary-radius: 6;
   --component-button-primary-text-active: #FFFFFF;
   --component-button-primary-text-default: #FFFFFF;
-  --component-button-primary-text-disabled: #FFFFFF;
+  --component-button-primary-text-disabled: #CCCCCC;
   --component-button-primary-text-hover: #FFFFFF;
   --component-cascader-check-size: 16;
   --component-cascader-column-bg: #FFFFFF;
@@ -178,16 +180,16 @@
   --component-checkbox-indeterminate-bg-default: #FFFFFF;
   --component-checkbox-indeterminate-bg-disabled: #FFFFFF;
   --component-checkbox-indeterminate-border-default: #999999;
-  --component-checkbox-indeterminate-border-disabled: #CCCCCC;
+  --component-checkbox-indeterminate-border-disabled: #E7E7E7;
   --component-checkbox-indeterminate-dash-default: #222222;
-  --component-checkbox-indeterminate-dash-disabled: #A7A7A7;
+  --component-checkbox-indeterminate-dash-disabled: #CCCCCC;
   --component-checkbox-label-text-default: #222222;
-  --component-checkbox-label-text-disabled: #A7A7A7;
+  --component-checkbox-label-text-disabled: #CCCCCC;
   --component-checkbox-unchecked-bg-default: #FFFFFF;
   --component-checkbox-unchecked-bg-disabled: #FFFFFF;
   --component-checkbox-unchecked-bg-hover: #FFFFFF;
   --component-checkbox-unchecked-border-default: #999999;
-  --component-checkbox-unchecked-border-disabled: #CCCCCC;
+  --component-checkbox-unchecked-border-disabled: #E7E7E7;
   --component-checkbox-unchecked-border-hover: #222222;
   --component-datepicker-day-bg-default: #FFFFFF;
   --component-datepicker-day-bg-hover: #F7F7F7;

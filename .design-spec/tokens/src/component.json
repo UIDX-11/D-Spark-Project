@@ -12,7 +12,7 @@
         "textDefault": "{action.primary.text}",
         "textHover": "{action.primary.text}",
         "textActive": "{action.primary.text}",
-        "textDisabled": "{text.inverse}",
+        "textDisabled": "{text.muted}",
         "radius": "{radius.md}"
       },
       "neutral": {
@@ -68,14 +68,14 @@
       "gap": 8,
 
       "labelTextDefault": "{text.primary}",
-      "labelTextDisabled": "{text.disabled}",
+      "labelTextDisabled": "{text.muted}",
 
       "uncheckedBgDefault": "{bg.surface}",
       "uncheckedBorderDefault": "{border.strong}",
       "uncheckedBgHover": "{bg.surface}",
       "uncheckedBorderHover": "{text.primary}",
       "uncheckedBgDisabled": "{bg.surface}",
-      "uncheckedBorderDisabled": "{border.default}",
+      "uncheckedBorderDisabled": "{border.disabled}",
 
       "checkedBgDefault": "{action.primary.bg}",
       "checkedMarkDefault": "{text.inverse}",
@@ -86,8 +86,8 @@
       "indeterminateBorderDefault": "{border.strong}",
       "indeterminateDashDefault": "{text.primary}",
       "indeterminateBgDisabled": "{bg.surface}",
-      "indeterminateBorderDisabled": "{border.default}",
-      "indeterminateDashDisabled": "{text.disabled}"
+      "indeterminateBorderDisabled": "{border.disabled}",
+      "indeterminateDashDisabled": "{text.muted}"
     },
     "radio": {
       "dotSize": 8,
