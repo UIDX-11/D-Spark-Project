@@ -817,7 +817,7 @@
         "strokeActive": "{status.success}",
         "strokeSuccess": "{status.success}",
         "strokeError": "{status.danger}",
-        "text": "{text.disabled}",
+        "text": "{text.placeholder}",
         "sizeSm": 48,
         "sizeMd": 64,
         "sizeLg": 80
@@ -826,7 +826,7 @@
         "size": 16
       },
       "step": {
-        "bg": "{bg.page}",
+        "bg": "{bg.formDisabled}",
         "fill": "{action.primary.bg}",
         "textOnFill": "{action.primary.text}",
         "radius": 6,

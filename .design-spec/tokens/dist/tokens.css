@@ -413,7 +413,7 @@
   --component-progress-circle-stroke-active: #09AA5C;
   --component-progress-circle-stroke-error: #F14846;
   --component-progress-circle-stroke-success: #09AA5C;
-  --component-progress-circle-text: #A7A7A7;
+  --component-progress-circle-text: #999999;
   --component-progress-circle-track: #E8E8E8;
   --component-progress-label-text: #666666;
   --component-progress-line-fill-active: #09AA5C;
@@ -424,7 +424,7 @@
   --component-progress-line-radius: 16;
   --component-progress-line-track: #E8E8E8;
   --component-progress-mini-size: 16;
-  --component-progress-step-bg: #F7F7F7;
+  --component-progress-step-bg: #FAFAFA;
   --component-progress-step-fill: #222222;
   --component-progress-step-h: 36;
   --component-progress-step-radius: 6;
