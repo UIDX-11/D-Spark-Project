@@ -527,7 +527,7 @@
   --component-switch-icon-on: #FFFFFF;
   --component-switch-knob-bg-default: #FFFFFF;
   --component-switch-knob-bg-disabled: #ECF2FC;
-  --component-switch-knob-shadow: 0px 1px 3px 0px rgba(0,0,0,0.1);
+  --component-switch-knob-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
   --component-switch-size-lg-height: 24;
   --component-switch-size-lg-knob: 16;
   --component-switch-size-lg-width: 40;

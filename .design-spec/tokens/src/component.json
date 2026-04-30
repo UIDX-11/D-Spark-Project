@@ -224,7 +224,7 @@
           "default": "{bg.surface}",
           "disabled": "{bg.switchKnobDisabled}"
         },
-        "shadow": "0px 1px 3px 0px rgba(0,0,0,0.1)"
+        "shadow": "0px 2px 5px 0px rgba(0,0,0,0.1)"
       },
       "icon": {
         "on": "{text.inverse}",
