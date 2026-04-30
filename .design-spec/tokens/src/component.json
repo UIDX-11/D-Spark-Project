@@ -741,7 +741,7 @@
         }
       },
       "text": "{text.primary}",
-      "closeIcon": "{text.secondary}",
+      "closeIcon": "{text.placeholder}",
       "radius": 8,
       "px": 16,
       "py": 8,
