@@ -85,9 +85,9 @@
   --semantic-text-secondary: #666666;
 
   /* Component (resolved) */
-  --component-alert-action-border: #CCCCCC;
+  --component-alert-action-border: #999999;
   --component-alert-action-text: #222222;
-  --component-alert-close-icon: #666666;
+  --component-alert-close-icon: #999999;
   --component-alert-px: 16;
   --component-alert-py-lg: 8;
   --component-alert-py-md: 6;
