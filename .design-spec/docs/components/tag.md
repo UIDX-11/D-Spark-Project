@@ -98,7 +98,7 @@ Molecular
 | `lg` (大) | `var(--component-tag-status-h-lg)` | `var(--component-tag-status-radius-lg)` | `var(--component-tag-status-px-md)` | `var(--component-tag-status-py-lg)` | `var(--component-tag-status-text-size-md)` | `var(--component-tag-status-min-width)` |
 | `md` (中) | `var(--component-tag-status-h-md)` | `var(--component-tag-status-radius-md)` | `var(--component-tag-status-px-md)` | `var(--component-tag-status-py-md)` | `var(--component-tag-status-text-size-md)` | `var(--component-tag-status-min-width)` |
 | `sm` (小) | `var(--component-tag-status-h-sm)` | `var(--component-tag-status-radius-md)` | `var(--component-tag-status-px-md)` | `var(--component-tag-status-py-sm)` | `var(--component-tag-status-text-size-md)` | `var(--component-tag-status-min-width)` |
-| `xs` (迷你) | `var(--component-tag-status-h-sm)` | `var(--component-tag-status-radius-md)` | `var(--component-tag-status-px-sm)` | `var(--component-tag-status-py-sm)` | `var(--component-tag-status-text-size-sm)` | `var(--component-tag-status-min-width)` |
+| `xs` (迷你) | `var(--component-tag-status-h-xs)` | `var(--component-tag-status-radius-md)` | `var(--component-tag-status-px-sm)` | `var(--component-tag-status-py-sm)` | `var(--component-tag-status-text-size-sm)` | `var(--component-tag-status-min-width)` |
 
 ## States
 
@@ -161,6 +161,7 @@ Molecular
 | `tokens.tag.status.pySm` | `--component-tag-status-py-sm` |
 | `tokens.tag.status.pyMd` | `--component-tag-status-py-md` |
 | `tokens.tag.status.pyLg` | `--component-tag-status-py-lg` |
+| `tokens.tag.status.hXs` | `--component-tag-status-h-xs` |
 | `tokens.tag.status.hSm` | `--component-tag-status-h-sm` |
 | `tokens.tag.status.hMd` | `--component-tag-status-h-md` |
 | `tokens.tag.status.hLg` | `--component-tag-status-h-lg` |

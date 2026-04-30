@@ -95,9 +95,9 @@
       "gap": 8,
 
       "labelTextDefault": "{text.primary}",
-      "labelTextDisabled": "{text.disabled}",
+      "labelTextDisabled": "{text.muted}",
       "helperTextDefault": "{text.secondary}",
-      "helperTextDisabled": "{text.disabled}",
+      "helperTextDisabled": "{text.muted}",
 
       "uncheckedBgDefault": "{bg.surface}",
       "uncheckedBorderDefault": "{border.strong}",
@@ -280,8 +280,9 @@
         "pySm": 2,
         "pyMd": 4,
         "pyLg": 6,
-        "hSm": 20,
-        "hMd": 24,
+        "hXs": 20,
+        "hSm": 24,
+        "hMd": 28,
         "hLg": 32,
         "textSizeSm": 12,
         "textSizeMd": 14

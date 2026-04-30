@@ -434,9 +434,9 @@
   --component-radio-dot-size: 8;
   --component-radio-gap: 8;
   --component-radio-helper-text-default: #666666;
-  --component-radio-helper-text-disabled: #A7A7A7;
+  --component-radio-helper-text-disabled: #CCCCCC;
   --component-radio-label-text-default: #222222;
-  --component-radio-label-text-disabled: #A7A7A7;
+  --component-radio-label-text-disabled: #CCCCCC;
   --component-radio-outer-size: 16;
   --component-radio-unchecked-bg-default: #FFFFFF;
   --component-radio-unchecked-bg-disabled: #FFFFFF;
@@ -705,8 +705,9 @@
   --component-tag-selector-text-default: #222222;
   --component-tag-selector-text-disabled: #CCCCCC;
   --component-tag-status-h-lg: 32;
-  --component-tag-status-h-md: 24;
-  --component-tag-status-h-sm: 20;
+  --component-tag-status-h-md: 28;
+  --component-tag-status-h-sm: 24;
+  --component-tag-status-h-xs: 20;
   --component-tag-status-min-width: 44;
   --component-tag-status-px-md: 8;
   --component-tag-status-px-sm: 6;
