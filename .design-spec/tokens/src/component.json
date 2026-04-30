@@ -1050,7 +1050,7 @@
       }
     },
     "form": {
-      "rowGap": 16,
+      "rowGap": 20,
       "colGap": 16,
       "labelGap": 8,
       "labelW": 120,
