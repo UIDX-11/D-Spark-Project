@@ -1,4 +1,4 @@
-# D-Spark-Project
+# D.Spark-Project
 
 ## Design system docs
 
