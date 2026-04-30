@@ -158,6 +158,8 @@ Trigger (optional)
 | `tokens.dropdown.trigger.bgActive` | `--component-dropdown-trigger-bg-active` |
 | `tokens.dropdown.trigger.text` | `--component-dropdown-trigger-text` |
 | `tokens.dropdown.trigger.textDisabled` | `--component-dropdown-trigger-text-disabled` |
+| `tokens.dropdown.trigger.textDisabledL` | `--component-dropdown-trigger-text-disabled-l` |
+| `tokens.dropdown.trigger.textDisabledM` | `--component-dropdown-trigger-text-disabled-m` |
 | `tokens.dropdown.trigger.radius` | `--component-dropdown-trigger-radius` |
 | `tokens.dropdown.trigger.px` | `--component-dropdown-trigger-px` |
 | `tokens.dropdown.trigger.hM` | `--component-dropdown-trigger-h-m` |
