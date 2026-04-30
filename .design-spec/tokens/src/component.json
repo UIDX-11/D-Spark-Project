@@ -893,7 +893,9 @@
         "sizeLg": 28,
         "sizeMd": 24,
         "bgCurrent": "{action.primary.bg}",
+        "bgCompleted": "{bg.surface}",
         "bgError": "{status.danger}",
+        "borderCompleted": "{text.primary}",
         "borderPending": "{text.secondary}",
         "borderDisabled": "{text.muted}",
         "textOnCurrent": "{action.primary.text}",
@@ -908,7 +910,7 @@
         "textDisabled": "{text.muted}"
       },
       "desc": {
-        "text": "{text.disabled}"
+        "text": "{text.placeholder}"
       },
       "connector": {
         "track": "{border.subtle}",

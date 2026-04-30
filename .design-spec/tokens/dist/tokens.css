@@ -508,10 +508,12 @@
   --component-steps-connector-length: 28;
   --component-steps-connector-track: #E8E8E8;
   --component-steps-connector-track-completed: #222222;
-  --component-steps-desc-text: #A7A7A7;
+  --component-steps-desc-text: #999999;
   --component-steps-gap: 12;
+  --component-steps-icon-bg-completed: #FFFFFF;
   --component-steps-icon-bg-current: #222222;
   --component-steps-icon-bg-error: #F14846;
+  --component-steps-icon-border-completed: #222222;
   --component-steps-icon-border-disabled: #CCCCCC;
   --component-steps-icon-border-pending: #666666;
   --component-steps-icon-size-lg: 28;
