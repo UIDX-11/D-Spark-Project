@@ -977,7 +977,7 @@
       "icon": "{text.secondary}",
       "iconDisabled": "{text.muted}",
       "chevron": "{text.secondary}",
-      "groupTitle": "{text.disabled}",
+      "groupTitle": "{text.placeholder}",
       "pop": {
         "bg": "{bg.surface}",
         "radius": 8,
