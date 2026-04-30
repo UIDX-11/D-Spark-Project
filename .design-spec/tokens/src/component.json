@@ -855,7 +855,7 @@
       "py": 12,
       "gap": 12,
       "titleText": "{text.primary}",
-      "descText": "{text.disabled}",
+      "descText": "{text.placeholder}",
       "divider": "{border.subtle}",
       "backIcon": "{text.primary}",
       "backIconSize": 20
