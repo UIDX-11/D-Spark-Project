@@ -862,9 +862,10 @@
     },
     "pagination": {
       "item": {
-        "bgDefault": "{bg.muted}",
+        "bgDefault": "transparent",
         "bgHover": "{bg.page}",
-        "bgCurrent": "{bg.muted}",
+        "bgCurrent": "{bg.page}",
+        "bgCurrentDisabled": "{bg.formDisabled}",
         "text": "{text.secondary}",
         "textCurrent": "{text.primary}",
         "radiusMd": 6,
@@ -883,7 +884,7 @@
       },
       "disabled": {
         "text": "{text.muted}",
-        "bg": "{bg.page}"
+        "bg": "transparent"
       },
       "gap": 8
     },

@@ -138,6 +138,7 @@ Total (optional) | PageSize selector (optional) | [Prev] [1] [2] [3] ... [N] [Ne
 | `tokens.pagination.item.bgDefault` | `--component-pagination-item-bg-default` |
 | `tokens.pagination.item.bgHover` | `--component-pagination-item-bg-hover` |
 | `tokens.pagination.item.bgCurrent` | `--component-pagination-item-bg-current` |
+| `tokens.pagination.item.bgCurrentDisabled` | `--component-pagination-item-bg-current-disabled` |
 | `tokens.pagination.item.text` | `--component-pagination-item-text` |
 | `tokens.pagination.item.textCurrent` | `--component-pagination-item-text-current` |
 | `tokens.pagination.item.radiusMd` | `--component-pagination-item-radius-md` |
