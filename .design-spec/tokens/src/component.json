@@ -977,9 +977,9 @@
     },
     "table": {
       "bg": "{bg.surface}",
-      "border": "{border.default}",
+      "border": "{border.subtle}",
       "header": {
-        "bg": "{bg.page}",
+        "bg": "{bg.tableHeader}",
         "text": "{text.primary}",
         "hCompact": 36,
         "hDefault": 44,
@@ -987,8 +987,8 @@
       },
       "row": {
         "bgDefault": "{bg.surface}",
-        "bgHover": "{bg.page}",
-        "bgSelected": "{bg.page}",
+        "bgHover": "{bg.tableHover}",
+        "bgSelected": "{bg.tableHover}",
         "text": "{text.primary}",
         "textMuted": "{text.secondary}",
         "hCompact": 36,
@@ -998,8 +998,13 @@
       "cell": {
         "px": 16,
         "pyCompact": 8,
-        "pyDefault": 14,
-        "pyComfortable": 18
+        "pyDefault": 12,
+        "pyComfortable": 16
+      },
+      "typography": {
+        "headerFontSize": "{font.size.md}",
+        "cellFontSize": "{font.size.md}",
+        "noFontSize": "{font.size.sm}"
       },
       "pinned": {
         "divider": "{border.subtle}",
@@ -1025,7 +1030,7 @@
         "toggleColor": "{text.secondary}"
       },
       "expand": {
-        "bg": "{bg.page}",
+        "bg": "{bg.tableHover}",
         "px": 16,
         "py": 12
       },

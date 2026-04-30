@@ -8,6 +8,8 @@
       "surface": "{color.neutral.0}",
       "card": "{color.neutral.0}",
       "muted": "{color.neutral.60}",
+      "tableHeader": "{color.neutral.10}",
+      "tableHover": "{color.neutral.10}",
       "switchOff": "{color.neutral.90}",
       "switchOnDisabled": "{color.blue.30}",
       "switchKnobDisabled": "{color.blue.10}",
@@ -42,6 +44,13 @@
     },
     "focus": {
       "ring": "{color.deepBlue.20}"
+    },
+    "font": {
+      "size": {
+        "sm": "{font.size.sm}",
+        "md": "{font.size.md}",
+        "lg": "{font.size.lg}"
+      }
     },
     "radius": {
       "sm": "{radius.sm}",

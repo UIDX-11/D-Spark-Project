@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D-Spark Table (Tokens Demo)</title>
+    <link rel="stylesheet" href="../../.design-spec/tokens/dist/tokens.css" />
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+        background: var(--semantic-bg-page);
+        color: var(--semantic-text-primary);
+      }
+
+      .page {
+        padding: 24px;
+        display: grid;
+        gap: calc(var(--core-space-4) * 1px);
+      }
+
+      .card {
+        background: var(--semantic-bg-surface);
+        border: 1px solid var(--component-table-border);
+        border-radius: calc(var(--core-radius-md) * 1px);
+        overflow: hidden;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--core-space-3) * 1px);
+        padding: calc(var(--core-space-3) * 1px) calc(var(--core-space-4) * 1px);
+        border-bottom: 1px solid var(--component-table-border);
+        background: var(--semantic-bg-surface);
+      }
+
+      .chip {
+        font-size: calc(var(--core-font-size-sm) * 1px);
+        line-height: calc(var(--core-space-4) * 1px);
+        padding: calc(var(--core-space-2) * 0.5px) calc(var(--core-space-2) * 1px);
+        border-radius: 999px;
+        background: var(--semantic-bg-page);
+        color: var(--semantic-text-secondary);
+        border: 1px solid var(--semantic-border-subtle);
+        white-space: nowrap;
+      }
+
+      .hint {
+        font-size: calc(var(--core-font-size-sm) * 1px);
+        color: var(--semantic-text-secondary);
+      }
+
+      .table-wrap {
+        position: relative;
+        overflow: auto;
+        max-height: 420px;
+        background: var(--component-table-bg);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 980px; /* create horizontal scroll to demo pinned columns */
+      }
+
+      thead th {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        height: calc(var(--component-table-header-h-default) * 1px);
+        background: var(--component-table-header-bg);
+        color: var(--component-table-header-text);
+        text-align: left;
+        font-weight: 600;
+        font-size: calc(var(--core-font-size-sm) * 1px);
+        padding: 0 calc(var(--component-table-cell-px) * 1px);
+        border-bottom: 1px solid var(--component-table-border);
+        white-space: nowrap;
+      }
+
+      tbody td {
+        height: calc(var(--component-table-row-h-default) * 1px);
+        padding: 0 calc(var(--component-table-cell-px) * 1px);
+        border-bottom: 1px solid var(--component-table-border);
+        color: var(--component-table-row-text);
+        font-size: calc(var(--core-font-size-sm) * 1px);
+        white-space: nowrap;
+        background: var(--component-table-row-bg-default);
+      }
+
+      tbody tr:hover td {
+        background: var(--component-table-row-bg-hover);
+      }
+
+      tbody tr[data-selected="true"] td {
+        background: var(--component-table-row-bg-selected);
+      }
+
+      .muted {
+        color: var(--component-table-row-text-muted);
+      }
+
+      /* pinned columns */
+      .pinned-left,
+      .pinned-right {
+        position: sticky;
+        z-index: 4;
+        background: inherit;
+      }
+
+      .pinned-left {
+        left: 0;
+      }
+
+      .pinned-right {
+        right: 0;
+      }
+
+      /* pinned boundary divider + shadow tiers */
+      .shadow-left {
+        box-shadow: var(--component-table-pinned-shadow-tier1);
+      }
+      .shadow-right {
+        box-shadow: var(--component-table-pinned-shadow-right);
+      }
+      .divider-right {
+        border-right: 1px solid var(--component-table-pinned-divider);
+      }
+      .divider-left {
+        border-left: 1px solid var(--component-table-pinned-divider);
+      }
+
+      /* focus demo (row-focus model) */
+      tbody tr:focus-visible td {
+        outline: calc(var(--component-table-focus-cell-outline-w) * 1px) solid var(--component-table-focus-row-ring);
+        outline-offset: calc(var(--component-table-focus-cell-outline-w) * -1px);
+      }
+
+      tbody tr {
+        outline: none;
+      }
+
+      /* tree + expand visuals */
+      .tree-cell {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--core-space-2) * 1px);
+      }
+
+      .tree-indent {
+        width: calc(var(--component-table-tree-indent) * var(--depth, 0));
+        flex: 0 0 auto;
+      }
+
+      .toggle {
+        width: calc(var(--component-table-tree-toggle-size) * 1px);
+        height: calc(var(--component-table-tree-toggle-size) * 1px);
+        border: 1px solid var(--semantic-border-default);
+        border-radius: calc(var(--core-radius-sm) * 1px);
+        display: inline-grid;
+        place-items: center;
+        color: var(--component-table-tree-toggle-color);
+        background: var(--semantic-bg-surface);
+        font-size: calc(var(--core-font-size-sm) * 1px);
+        line-height: 1;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .expanded-row td {
+        background: var(--component-table-expand-bg);
+        padding: calc(var(--component-table-expand-py) * 1px) calc(var(--component-table-expand-px) * 1px);
+        color: var(--semantic-text-secondary);
+      }
+
+      .action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(var(--component-table-row-h-default) * 0.64px);
+        height: calc(var(--component-table-row-h-default) * 0.64px);
+        border-radius: calc(var(--core-radius-md) * 1px);
+        border: 1px solid var(--semantic-border-default);
+        background: var(--semantic-bg-surface);
+        color: var(--semantic-text-secondary);
+      }
+
+      .checkbox {
+        width: calc(var(--core-font-size-md) * 1px);
+        height: calc(var(--core-font-size-md) * 1px);
+        border: 1px solid var(--semantic-border-strong);
+        border-radius: calc(var(--core-radius-sm) * 0.75px);
+        display: inline-block;
+        background: var(--semantic-bg-surface);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="toolbar card">
+        <div class="chip">Table demo (tokens-only)</div>
+        <div class="chip">Pinned left/right</div>
+        <div class="chip">Tree + Expand</div>
+        <div class="chip">Row focus</div>
+        <div class="hint">提示：横向滚动以观察 pinned 边界阴影与 divider。</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap" role="region" aria-label="Table demo region">
+          <table aria-label="Example table">
+            <thead>
+              <tr>
+                <th class="pinned-left divider-right shadow-left" style="width: 56px">
+                  <span class="muted">#</span>
+                </th>
+                <th style="min-width: 220px">Name</th>
+                <th style="min-width: 160px">Type</th>
+                <th style="min-width: 160px">Owner</th>
+                <th style="min-width: 180px">Status</th>
+                <th style="min-width: 260px">Notes</th>
+                <th class="pinned-right divider-left shadow-right" style="width: 72px; text-align: center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr tabindex="0" data-selected="true">
+                <td class="pinned-left divider-right shadow-left">
+                  <span class="checkbox" aria-hidden="true"></span>
+                </td>
+                <td>
+                  <div class="tree-cell">
+                    <span class="tree-indent" style="--depth: 0"></span>
+                    <span class="toggle" data-toggle aria-label="Collapse row">−</span>
+                    <span>Project A</span>
+                  </div>
+                </td>
+                <td class="muted">Design</td>
+                <td class="muted">Wang</td>
+                <td>In progress</td>
+                <td class="muted">Selected row demo</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center">
+                  <span class="action" aria-label="Edit">✎</span>
+                </td>
+              </tr>
+              <tr class="expanded-row" data-expanded="true">
+                <td class="pinned-left divider-right shadow-left"></td>
+                <td colspan="5">
+                  Expanded content (spans full width). Uses <code>--component-table-expand-*</code> tokens.
+                </td>
+                <td class="pinned-right divider-left shadow-right"></td>
+              </tr>
+
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>
+                  <div class="tree-cell">
+                    <span class="tree-indent" style="--depth: 1"></span>
+                    <span class="toggle" aria-label="Expand row">+</span>
+                    <span>Child A-1</span>
+                  </div>
+                </td>
+                <td class="muted">Compute</td>
+                <td class="muted">Li</td>
+                <td>Ready</td>
+                <td class="muted">Tree indentation uses token</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>
+                  <div class="tree-cell">
+                    <span class="tree-indent" style="--depth: 0"></span>
+                    <span class="toggle" aria-label="Expand row">+</span>
+                    <span>Project B</span>
+                  </div>
+                </td>
+                <td class="muted">Ops</td>
+                <td class="muted">Chen</td>
+                <td>Blocked</td>
+                <td class="muted">Hover background demo</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+
+              <!-- extra rows to show vertical scroll -->
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>Item C</td>
+                <td class="muted">Storage</td>
+                <td class="muted">Zhao</td>
+                <td>Done</td>
+                <td class="muted">Scrollable region demo</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>Item D</td>
+                <td class="muted">Network</td>
+                <td class="muted">Sun</td>
+                <td>Ready</td>
+                <td class="muted">Virtualization not implemented in static HTML</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>Item E</td>
+                <td class="muted">Security</td>
+                <td class="muted">Hu</td>
+                <td>In progress</td>
+                <td class="muted">More rows…</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>Item F</td>
+                <td class="muted">Design</td>
+                <td class="muted">Wang</td>
+                <td>Ready</td>
+                <td class="muted">More rows…</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>Item G</td>
+                <td class="muted">Ops</td>
+                <td class="muted">Li</td>
+                <td>Blocked</td>
+                <td class="muted">More rows…</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left"><span class="checkbox" aria-hidden="true"></span></td>
+                <td>Item H</td>
+                <td class="muted">Compute</td>
+                <td class="muted">Chen</td>
+                <td>Done</td>
+                <td class="muted">More rows…</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center"><span class="action" aria-label="Edit">✎</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Minimal demo: toggle button label (+/-) without changing DOM structure
+      document.addEventListener("click", (e) => {
+        const t = e.target;
+        if (!(t instanceof HTMLElement)) return;
+        if (!t.matches("[data-toggle]")) return;
+        t.textContent = t.textContent.trim() === "−" ? "+" : "−";
+      });
+    </script>
+  </body>
+</html>

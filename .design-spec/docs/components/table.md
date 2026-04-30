@@ -331,8 +331,8 @@ Table container
 | `tokens.table.merge.bg` | `--component-table-merge-bg` |
 | `tokens.table.virtual.overscan` | `--component-table-virtual-overscan` |
 | `tokens.table.pinned.divider` | `--component-table-pinned-divider` |
-| `tokens.table.pinned.shadowTier1` | `--component-table-pinned-shadow-tier-1` |
-| `tokens.table.pinned.shadowTier2` | `--component-table-pinned-shadow-tier-2` |
+| `tokens.table.pinned.shadowTier1` | `--component-table-pinned-shadow-tier1` |
+| `tokens.table.pinned.shadowTier2` | `--component-table-pinned-shadow-tier2` |
 | `tokens.table.focus.rowRing` | `--component-table-focus-row-ring` |
 | `tokens.table.focus.cellOutlineW` | `--component-table-focus-cell-outline-w` |
 | `tokens.table.focus.cellOutlineColor` | `--component-table-focus-cell-outline-color` |
