@@ -672,7 +672,7 @@
         "borderDefault": "{border.subtle}",
         "borderHover": "{border.subtle}",
         "borderDisabled": "{border.subtle}",
-        "borderDragHover": "{border.default}",
+        "borderDragHover": "{border.hover}",
         "iconDefault": "{text.primary}",
         "iconDisabled": "{text.muted}",
         "title": "{text.primary}",
@@ -681,13 +681,13 @@
         "descDisabled": "{text.muted}"
       },
       "item": {
-        "bg": "{bg.page}",
+        "bg": "{bg.formDisabled}",
         "filename": "{text.primary}",
         "filenameError": "{status.danger}"
       },
       "card": {
         "mask": "rgba(0,0,0,0.6)",
-        "bgUploading": "{bg.muted}",
+        "bgUploading": "{bg.uploading}",
         "bgError": "{bg.statusDanger}"
       }
     },
