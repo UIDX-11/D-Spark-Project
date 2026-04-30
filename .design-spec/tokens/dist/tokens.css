@@ -163,7 +163,7 @@
   --component-cascader-item-gap: 4;
   --component-cascader-item-gap-with-checkbox: 8;
   --component-cascader-item-icon-default: #666666;
-  --component-cascader-item-icon-disabled: #A7A7A7;
+  --component-cascader-item-icon-disabled: #CCCCCC;
   --component-cascader-item-min-width: 212;
   --component-cascader-item-px: 8;
   --component-cascader-item-py-lg: 6;
@@ -171,7 +171,7 @@
   --component-cascader-item-radius-lg: 6;
   --component-cascader-item-radius-sm: 4;
   --component-cascader-item-text-default: #222222;
-  --component-cascader-item-text-disabled: #A7A7A7;
+  --component-cascader-item-text-disabled: #CCCCCC;
   --component-cascader-popup-bg: #FFFFFF;
   --component-cascader-popup-p: 4;
   --component-cascader-popup-radius: 4;
