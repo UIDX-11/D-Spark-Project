@@ -15,6 +15,7 @@ Every variant/state must follow:
 `type/kind/shape/size/state`
 
 This is used for:
+
 - component variants
 - state-driven styles
 - className/slot naming
@@ -39,4 +40,3 @@ This is used for:
 ## Examples
 
 See `schema-examples/` for positive and negative examples.
-

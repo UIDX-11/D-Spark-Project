@@ -66,47 +66,57 @@ Molecular
 
 ## Variants
 
-| **Kind** | **加减模式** | **填充** | **Notes** |
-| --- | --- | --- | --- |
-| `plain` | false | true/false | input with optional suffix unit |
-| `stepper` | true | true | minus/value/plus buttons |
+
+| **Kind**  | **加减模式** | **填充**     | **Notes**                       |
+| --------- | -------- | ---------- | ------------------------------- |
+| `plain`   | false    | true/false | input with optional suffix unit |
+| `stepper` | true     | true       | minus/value/plus buttons        |
+
 
 ## Sizes
 
-| **Size** | **Height** | **Radius** | **Padding X** | **Text** |
-| --- | ---:| ---:| ---:| --- |
-| `XL` | 36 | 8 | 12 | 14 / line 20 |
-| `L` | 32 | 6 | 12 | 14 / line 20 |
-| `M` | 28 | 6 | 12 | 14 / line 20 |
-| `S` | 24 | 6 | 12 | 14 / line 20 |
+
+| **Size** | **Height** | **Radius** | **Padding X** | **Text**     |
+| -------- | ---------- | ---------- | ------------- | ------------ |
+| `XL`     | 36         | 8          | 12            | 14 / line 20 |
+| `L`      | 32         | 6          | 12            | 14 / line 20 |
+| `M`      | 28         | 6          | 12            | 14 / line 20 |
+| `S`      | 24         | 6          | 12            | 14 / line 20 |
+
 
 ## States
 
 ### Trigger (input-like) — states
 
-| **State** | **BG** | **Border** | **Text** | **Ring** |
-| --- | --- | --- | --- | --- |
-| Default | `var(--component-input-number-bg-default)` | `var(--component-input-number-border-default)` | `var(--component-input-number-text-value)` | none |
-| Hover | `var(--component-input-number-bg-hover)` | `var(--component-input-number-border-hover)` | `var(--component-input-number-text-value)` | none |
-| Focus | `var(--component-input-number-bg-focus)` | `var(--component-input-number-border-focus)` | `var(--component-input-number-text-value)` | `var(--component-input-number-ring-focus)` |
-| Disabled | `var(--component-input-number-bg-disabled)` | `var(--component-input-number-border-disabled)` | `var(--component-input-number-text-disabled)` | none |
-| Error | `var(--component-input-number-bg-default)` | `var(--component-input-number-border-error)` | `var(--component-input-number-text-value)` | `var(--component-input-number-ring-error)` |
+
+| **State** | **BG**                                      | **Border**                                      | **Text**                                      | **Ring**                                   |
+| --------- | ------------------------------------------- | ----------------------------------------------- | --------------------------------------------- | ------------------------------------------ |
+| Default   | `var(--component-input-number-bg-default)`  | `var(--component-input-number-border-default)`  | `var(--component-input-number-text-value)`    | none                                       |
+| Hover     | `var(--component-input-number-bg-hover)`    | `var(--component-input-number-border-hover)`    | `var(--component-input-number-text-value)`    | none                                       |
+| Focus     | `var(--component-input-number-bg-focus)`    | `var(--component-input-number-border-focus)`    | `var(--component-input-number-text-value)`    | `var(--component-input-number-ring-focus)` |
+| Disabled  | `var(--component-input-number-bg-disabled)` | `var(--component-input-number-border-disabled)` | `var(--component-input-number-text-disabled)` | none                                       |
+| Error     | `var(--component-input-number-bg-default)`  | `var(--component-input-number-border-error)`    | `var(--component-input-number-text-value)`    | `var(--component-input-number-ring-error)` |
+
 
 ### Placeholder / helper / suffix (unit)
 
-| **Part** | **Token** |
-| --- | --- |
-| Placeholder text | `var(--component-input-number-text-placeholder)` |
-| Helper text | `var(--component-input-number-helper-text)` |
-| Error text | `var(--component-input-number-error-text)` |
-| Suffix (unit) text | `var(--component-input-number-suffix-text)` |
-| Suffix disabled | `var(--component-input-number-suffix-text-disabled)` |
+
+| **Part**           | **Token**                                            |
+| ------------------ | ---------------------------------------------------- |
+| Placeholder text   | `var(--component-input-number-text-placeholder)`     |
+| Helper text        | `var(--component-input-number-helper-text)`          |
+| Error text         | `var(--component-input-number-error-text)`           |
+| Suffix (unit) text | `var(--component-input-number-suffix-text)`          |
+| Suffix disabled    | `var(--component-input-number-suffix-text-disabled)` |
+
 
 ### Stepper buttons (加减模式)
 
-| **Part** | **BG** | **Border/Divider** | **Icon** | **Icon disabled** |
-| --- | --- | --- | --- | --- |
+
+| **Part**            | **BG**                                      | **Border/Divider**                           | **Icon**                                  | **Icon disabled**                                  |
+| ------------------- | ------------------------------------------- | -------------------------------------------- | ----------------------------------------- | -------------------------------------------------- |
 | Minus / Plus button | `var(--component-input-number-step-btn-bg)` | `var(--component-input-number-step-divider)` | `var(--component-input-number-step-icon)` | `var(--component-input-number-step-icon-disabled)` |
+
 
 ## Executable interaction rules
 
@@ -145,27 +155,30 @@ Molecular
 
 ## Component token bindings (required)
 
-| **Token path** | **CSS var** |
-| --- | --- |
-| `tokens.inputNumber.bgDefault` | `--component-input-number-bg-default` |
-| `tokens.inputNumber.bgHover` | `--component-input-number-bg-hover` |
-| `tokens.inputNumber.bgFocus` | `--component-input-number-bg-focus` |
-| `tokens.inputNumber.bgDisabled` | `--component-input-number-bg-disabled` |
-| `tokens.inputNumber.borderDefault` | `--component-input-number-border-default` |
-| `tokens.inputNumber.borderHover` | `--component-input-number-border-hover` |
-| `tokens.inputNumber.borderFocus` | `--component-input-number-border-focus` |
-| `tokens.inputNumber.borderDisabled` | `--component-input-number-border-disabled` |
-| `tokens.inputNumber.borderError` | `--component-input-number-border-error` |
-| `tokens.inputNumber.textValue` | `--component-input-number-text-value` |
-| `tokens.inputNumber.textPlaceholder` | `--component-input-number-text-placeholder` |
-| `tokens.inputNumber.textDisabled` | `--component-input-number-text-disabled` |
-| `tokens.inputNumber.helperText` | `--component-input-number-helper-text` |
-| `tokens.inputNumber.errorText` | `--component-input-number-error-text` |
-| `tokens.inputNumber.suffixText` | `--component-input-number-suffix-text` |
+
+| **Token path**                          | **CSS var**                                     |
+| --------------------------------------- | ----------------------------------------------- |
+| `tokens.inputNumber.bgDefault`          | `--component-input-number-bg-default`           |
+| `tokens.inputNumber.bgHover`            | `--component-input-number-bg-hover`             |
+| `tokens.inputNumber.bgFocus`            | `--component-input-number-bg-focus`             |
+| `tokens.inputNumber.bgDisabled`         | `--component-input-number-bg-disabled`          |
+| `tokens.inputNumber.borderDefault`      | `--component-input-number-border-default`       |
+| `tokens.inputNumber.borderHover`        | `--component-input-number-border-hover`         |
+| `tokens.inputNumber.borderFocus`        | `--component-input-number-border-focus`         |
+| `tokens.inputNumber.borderDisabled`     | `--component-input-number-border-disabled`      |
+| `tokens.inputNumber.borderError`        | `--component-input-number-border-error`         |
+| `tokens.inputNumber.textValue`          | `--component-input-number-text-value`           |
+| `tokens.inputNumber.textPlaceholder`    | `--component-input-number-text-placeholder`     |
+| `tokens.inputNumber.textDisabled`       | `--component-input-number-text-disabled`        |
+| `tokens.inputNumber.helperText`         | `--component-input-number-helper-text`          |
+| `tokens.inputNumber.errorText`          | `--component-input-number-error-text`           |
+| `tokens.inputNumber.suffixText`         | `--component-input-number-suffix-text`          |
 | `tokens.inputNumber.suffixTextDisabled` | `--component-input-number-suffix-text-disabled` |
-| `tokens.inputNumber.ringFocus` | `--component-input-number-ring-focus` |
-| `tokens.inputNumber.ringError` | `--component-input-number-ring-error` |
-| `tokens.inputNumber.step.btnBg` | `--component-input-number-step-btn-bg` |
-| `tokens.inputNumber.step.divider` | `--component-input-number-step-divider` |
-| `tokens.inputNumber.step.icon` | `--component-input-number-step-icon` |
-| `tokens.inputNumber.step.iconDisabled` | `--component-input-number-step-icon-disabled` |
+| `tokens.inputNumber.ringFocus`          | `--component-input-number-ring-focus`           |
+| `tokens.inputNumber.ringError`          | `--component-input-number-ring-error`           |
+| `tokens.inputNumber.step.btnBg`         | `--component-input-number-step-btn-bg`          |
+| `tokens.inputNumber.step.divider`       | `--component-input-number-step-divider`         |
+| `tokens.inputNumber.step.icon`          | `--component-input-number-step-icon`            |
+| `tokens.inputNumber.step.iconDisabled`  | `--component-input-number-step-icon-disabled`   |
+
+
