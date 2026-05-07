@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Component demos — D.Spark Design System Demo</title>
+    <link rel="stylesheet" href="../tokens/dist/tokens.css" />
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: var(--semantic-bg-page, #f7f7f7);
+        color: var(--semantic-text-primary, #222);
+      }
+      a {
+        color: var(--semantic-text-link, #506daf);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .card {
+        background: var(--semantic-bg-surface, #fff);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 12px;
+        box-shadow: 0px 1px 2px rgba(0,0,0,0.06);
+      }
+      .card-h {
+        padding: 16px 16px 0 16px;
+      }
+      .card-b {
+        padding: 16px;
+      }
+      .muted {
+        color: var(--semantic-text-secondary, #666);
+        font-size: 12px;
+      }
+      pre {
+        margin: 0;
+        padding: 12px;
+        overflow: auto;
+        background: var(--semantic-bg-page, #f7f7f7);
+        border-radius: 10px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: var(--semantic-bg-surface, #fff);
+      }
+      .swatch {
+        width: 14px;
+        height: 14px;
+        border-radius: 4px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-text-primary, #222);
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1 style="margin:0; font-size:20px; line-height:1.2;">Component demos</h1>
+          <div class="muted" style="margin-top:6px;">Live token studio per component · <code>../tokens/dist/tokens.css</code></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-b">
+          <ul style="margin:0; padding-left: 18px;">
+            <li style="margin:6px 0;"><a href="components/alert.html">Alert</a> <span class="muted">(<code>alert</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/badge.html">Badge</a> <span class="muted">(<code>badge</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/breadcrumb.html">Breadcrumb</a> <span class="muted">(<code>breadcrumb</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/button.html">Button</a> <span class="muted">(<code>button</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/card.html">Card</a> <span class="muted">(<code>card</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/cascader.html">Cascader</a> <span class="muted">(<code>cascader</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/checkbox.html">Checkbox</a> <span class="muted">(<code>checkbox</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/data-display-number.html">Data Display (Number)</a> <span class="muted">(<code>data-display-number</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/datepicker.html">DatePicker</a> <span class="muted">(<code>datepicker</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/dropdown.html">Dropdown</a> <span class="muted">(<code>dropdown</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/form.html">Form</a> <span class="muted">(<code>form</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/input.html">Input</a> <span class="muted">(<code>input</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/input-adornment.html">Input-Adornment</a> <span class="muted">(<code>input-adornment</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/input-ip.html">Input-IP</a> <span class="muted">(<code>input-ip</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/input-number.html">InputNumber</a> <span class="muted">(<code>input-number</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/input-range.html">Input-Range</a> <span class="muted">(<code>input-range</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/layout.html">Layout</a> <span class="muted">(<code>layout</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/list.html">List</a> <span class="muted">(<code>list</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/menu.html">Menu (Left Navigation)</a> <span class="muted">(<code>menu</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/message.html">Message</a> <span class="muted">(<code>message</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/modal.html">Modal</a> <span class="muted">(<code>modal</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/notification.html">Notification</a> <span class="muted">(<code>notification</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/pageheader.html">PageHeader</a> <span class="muted">(<code>pageheader</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/pagination.html">Pagination</a> <span class="muted">(<code>pagination</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/pincode.html">PinCode</a> <span class="muted">(<code>pincode</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/progress.html">Progress</a> <span class="muted">(<code>progress</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/radio.html">Radio</a> <span class="muted">(<code>radio</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/select.html">Select</a> <span class="muted">(<code>select</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/slider.html">Slider</a> <span class="muted">(<code>slider</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/space.html">Space</a> <span class="muted">(<code>space</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/steps.html">Steps</a> <span class="muted">(<code>steps</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/switch.html">Switch</a> <span class="muted">(<code>switch</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/table.html">Table</a> <span class="muted">(<code>table</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/tabs.html">Tabs</a> <span class="muted">(<code>tabs</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/tag.html">Tag</a> <span class="muted">(<code>tag</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/timepicker.html">TimePicker</a> <span class="muted">(<code>timepicker</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/tree.html">Tree</a> <span class="muted">(<code>tree</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/treeselect.html">TreeSelect</a> <span class="muted">(<code>treeselect</code>)</span></li>
+<li style="margin:6px 0;"><a href="components/upload.html">Upload</a> <span class="muted">(<code>upload</code>)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>

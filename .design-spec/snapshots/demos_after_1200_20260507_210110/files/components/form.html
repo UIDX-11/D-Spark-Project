@@ -1,0 +1,1559 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Form — D.Spark Design System Demo</title>
+    <link rel="stylesheet" href="../../tokens/dist/tokens.css" />
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: var(--semantic-bg-page, #f7f7f7);
+        color: var(--semantic-text-primary, #222);
+      }
+      a {
+        color: var(--semantic-text-link, #506daf);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .card {
+        background: var(--semantic-bg-surface, #fff);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 12px;
+        box-shadow: 0px 1px 2px rgba(0,0,0,0.06);
+      }
+      .card-h {
+        padding: 16px 16px 0 16px;
+      }
+      .card-b {
+        padding: 16px;
+      }
+      .muted {
+        color: var(--semantic-text-secondary, #666);
+        font-size: 12px;
+      }
+      pre {
+        margin: 0;
+        padding: 12px;
+        overflow: auto;
+        background: var(--semantic-bg-page, #f7f7f7);
+        border-radius: 10px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: var(--semantic-bg-surface, #fff);
+      }
+      .swatch {
+        width: 14px;
+        height: 14px;
+        border-radius: 4px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-text-primary, #222);
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1 style="margin:0; font-size:20px; line-height:1.2;">Form</h1>
+          <div class="muted" style="margin-top:6px;">Slug <code>form</code> · tokens <code>--component-form-*</code></div>
+        </div>
+        <div class="pill">
+          <span class="swatch"></span>
+          <a href="../index.html">Back to index</a>
+        </div>
+      </div>
+      <style>
+/* Inlined from .design-spec/generator/studio_runtime.css (+ studio_runtime.js below). Regenerate from repo root:
+   python3 .design-spec/generator/generate_component_html_demos.py */
+/* Inlined into each component demo HTML — tokens only, no hardcoded palette. */
+
+.studio {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 920px) {
+  .studio {
+    grid-template-columns: 1fr minmax(260px, 300px);
+  }
+}
+
+.studio-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.studio-aside {
+  padding: 14px 16px;
+}
+
+.studio-aside h3 {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pg-field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.pg-field > span {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--semantic-text-secondary, #666);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pg-field select {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  background: var(--semantic-bg-surface, #fff);
+  color: var(--semantic-text-primary, #222);
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.sec-head {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.sec-sub {
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  color: var(--semantic-text-secondary, #666);
+}
+
+.live-canvas {
+  border-radius: 12px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  background: var(--semantic-bg-page, #f7f7f7);
+  padding: 28px 20px;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#liveRoot {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 840px) {
+  .matrix-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.matrix-card {
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  border-radius: 10px;
+  padding: 12px 10px;
+  background: var(--semantic-bg-surface, #fff);
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.matrix-card .matrix-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--semantic-text-secondary, #666);
+}
+
+/* ---- Ripple ---- */
+.ds-ripple-host {
+  position: relative;
+  overflow: hidden;
+}
+
+.ds-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  animation: ds-ripple-anim 0.55s ease-out forwards;
+}
+
+@keyframes ds-ripple-anim {
+  to {
+    transform: scale(18);
+    opacity: 0;
+  }
+}
+
+/* ---- Button ---- */
+.ds-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ds-btn {
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: calc(var(--component-button-primary-radius, 6) * 1px);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.ds-play[data-size="sm"] .ds-btn {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.ds-play[data-size="md"] .ds-btn {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ds-play[data-size="lg"] .ds-btn {
+  height: 56px;
+  padding: 0 20px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.ds-play[data-variant="primary"] .ds-btn {
+  background: var(--component-button-primary-bg-default, #222);
+  color: var(--component-button-primary-text-default, #fff);
+}
+
+.ds-play[data-variant="primary"] .ds-btn:hover {
+  background: var(--component-button-primary-bg-hover, #4e4e4e);
+}
+
+.ds-play[data-variant="primary"] .ds-btn:active {
+  background: var(--component-button-primary-bg-active, #1b1b1b);
+}
+
+.ds-play[data-variant="primary"] .ds-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-play[data-variant="neutral"] .ds-btn {
+  background: var(--component-button-neutral-bg-default, #fff);
+  color: var(--component-button-neutral-text-default, #222);
+  border-color: var(--component-button-neutral-border-default, #ccc);
+}
+
+.ds-play[data-variant="neutral"] .ds-btn:hover {
+  background: var(--component-button-neutral-bg-hover, #f7f7f7);
+}
+
+.ds-play[data-variant="neutral"] .ds-btn:active {
+  background: var(--component-button-neutral-bg-active, #f7f7f7);
+}
+
+.ds-play[data-variant="neutral"] .ds-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-play[data-variant="danger"] .ds-btn {
+  background: var(--component-button-danger-bg-default, #f14846);
+  color: var(--component-button-danger-text-default, #fff);
+}
+
+.ds-play[data-variant="danger"] .ds-btn:hover {
+  filter: brightness(0.95);
+}
+
+.ds-play[data-variant="danger"] .ds-btn:active {
+  filter: brightness(0.88);
+}
+
+.ds-play[data-variant="danger"] .ds-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-play[data-variant="ghost"] .ds-btn {
+  background: transparent;
+  color: var(--semantic-text-primary, #222);
+  border-color: var(--component-button-outline-border-default, #999);
+}
+
+.ds-play[data-variant="ghost"] .ds-btn:hover {
+  background: var(--semantic-bg-page, #f7f7f7);
+}
+
+.ds-play[data-variant="ghost"] .ds-btn:active {
+  background: var(--semantic-bg-page, #f7f7f7);
+  filter: brightness(0.97);
+}
+
+.ds-play[data-variant="ghost"] .ds-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+/* Matrix static buttons */
+.mat-btn {
+  pointer-events: none;
+  border: 1px solid transparent;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: calc(var(--component-button-primary-radius, 6) * 1px);
+}
+
+.mat-btn.mat-sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.mat-btn.mat-md {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.mat-btn.mat-lg {
+  height: 56px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.mat-pri-def {
+  background: var(--component-button-primary-bg-default);
+  color: var(--component-button-primary-text-default);
+}
+
+.mat-pri-hov {
+  background: var(--component-button-primary-bg-hover);
+  color: var(--component-button-primary-text-hover);
+}
+
+.mat-pri-act {
+  background: var(--component-button-primary-bg-active);
+  color: var(--component-button-primary-text-active);
+}
+
+.mat-pri-foc {
+  background: var(--component-button-primary-bg-default);
+  color: var(--component-button-primary-text-default);
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.mat-pri-dis {
+  background: var(--component-button-primary-bg-disabled);
+  color: var(--component-button-primary-text-disabled);
+  cursor: not-allowed;
+}
+
+.mat-neu-def {
+  background: var(--component-button-neutral-bg-default);
+  color: var(--component-button-neutral-text-default);
+  border-color: var(--component-button-neutral-border-default);
+}
+
+.mat-neu-hov {
+  background: var(--component-button-neutral-bg-hover);
+  color: var(--component-button-neutral-text-hover);
+  border-color: var(--component-button-neutral-border-hover);
+}
+
+.mat-neu-act {
+  background: var(--component-button-neutral-bg-active);
+  color: var(--component-button-neutral-text-active);
+  border-color: var(--component-button-neutral-border-active);
+}
+
+.mat-neu-foc {
+  background: var(--component-button-neutral-bg-default);
+  color: var(--component-button-neutral-text-default);
+  border-color: var(--component-button-neutral-border-default);
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.mat-neu-dis {
+  background: var(--component-button-neutral-bg-disabled);
+  color: var(--component-button-neutral-text-disabled);
+  border-color: var(--component-button-neutral-border-disabled);
+}
+
+.mat-dan-def {
+  background: var(--component-button-danger-bg-default);
+  color: var(--component-button-danger-text-default);
+}
+
+.mat-dan-hov {
+  background: var(--component-button-danger-bg-default);
+  color: var(--component-button-danger-text-default);
+  filter: brightness(0.95);
+}
+
+.mat-dan-act {
+  background: var(--component-button-danger-bg-default);
+  color: var(--component-button-danger-text-default);
+  filter: brightness(0.88);
+}
+
+.mat-dan-foc {
+  background: var(--component-button-danger-bg-default);
+  color: var(--component-button-danger-text-default);
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.mat-dan-dis {
+  background: var(--component-button-primary-bg-disabled);
+  color: var(--component-button-primary-text-disabled);
+  opacity: 0.85;
+}
+
+.mat-gho-def {
+  background: transparent;
+  color: var(--semantic-text-primary, #222);
+  border-color: var(--component-button-outline-border-default, #999);
+}
+
+.mat-gho-hov {
+  background: var(--semantic-bg-page, #f7f7f7);
+  color: var(--semantic-text-primary, #222);
+  border-color: var(--component-button-outline-border-default, #999);
+}
+
+.mat-gho-act {
+  background: var(--semantic-bg-page, #f7f7f7);
+  color: var(--semantic-text-primary, #222);
+  border-color: var(--component-button-outline-border-default, #999);
+  filter: brightness(0.97);
+}
+
+.mat-gho-foc {
+  background: transparent;
+  color: var(--semantic-text-primary, #222);
+  border-color: var(--component-button-outline-border-default, #999);
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.mat-gho-dis {
+  background: transparent;
+  color: var(--semantic-text-secondary, #666);
+  border-color: var(--semantic-border-subtle, #e8e8e8);
+  opacity: 0.6;
+}
+
+/* ---- Input ---- */
+.ds-input {
+  width: min(100%, 320px);
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--component-input-border-default, #f7f7f7);
+  background: var(--component-input-bg-default, #f7f7f7);
+  color: var(--semantic-text-primary, #222);
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ds-input::placeholder {
+  color: var(--component-input-text-default, #999);
+}
+
+.ds-input:hover {
+  background: var(--component-input-bg-hover, #e8e8e8);
+  border-color: var(--component-input-border-hover, #e8e8e8);
+}
+
+.ds-input:focus {
+  outline: none;
+  background: var(--component-input-bg-focus, #f7f7f7);
+  border-color: var(--component-input-border-focus, #222);
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-input:disabled {
+  background: var(--component-input-bg-disabled, #fafafa);
+  border-color: var(--component-input-border-disabled, #fafafa);
+  color: var(--component-input-text-disabled, #ccc);
+}
+
+/* input-number uses same layout; tokens differ via modifier class */
+.ds-input.in-num:hover {
+  background: var(--component-input-number-bg-hover, #e8e8e8);
+  border-color: var(--component-input-number-border-hover, #e8e8e8);
+}
+
+.ds-input.in-num:focus {
+  background: var(--component-input-number-bg-focus, #f7f7f7);
+  border-color: var(--component-input-number-border-focus, #222);
+  box-shadow: 0 0 0 2px var(--component-input-number-ring-focus, #6985bf);
+}
+
+.ds-input.in-num:disabled {
+  background: var(--component-input-number-bg-disabled, #fafafa);
+  border-color: var(--component-input-number-border-disabled, #fafafa);
+  color: var(--component-input-number-text-disabled, #ccc);
+}
+
+.mat-inp-def {
+  border-color: var(--component-input-border-default);
+  background: var(--component-input-bg-default);
+}
+
+.mat-inp-hov {
+  border-color: var(--component-input-border-hover);
+  background: var(--component-input-bg-hover);
+}
+
+.mat-inp-act {
+  border-color: var(--component-input-border-focus);
+  background: var(--component-input-bg-focus);
+}
+
+.mat-inp-foc {
+  border-color: var(--component-input-border-focus);
+  background: var(--component-input-bg-focus);
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus);
+}
+
+.mat-inp-dis {
+  border-color: var(--component-input-border-disabled);
+  background: var(--component-input-bg-disabled);
+  color: var(--component-input-text-disabled);
+}
+
+/* ---- Switch ---- */
+.ds-switch {
+  position: relative;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.ds-switch-track {
+  display: block;
+  border-radius: 999px;
+  background: var(--component-switch-track-off-default, #bfbfbf);
+  transition: background 0.2s ease;
+}
+
+.ds-switch[aria-checked="true"] .ds-switch-track {
+  background: var(--component-switch-track-on-default, #3f78e4);
+}
+
+.ds-switch[disabled] .ds-switch-track {
+  background: var(--component-switch-track-off-disabled, #e8e8e8);
+}
+
+.ds-switch[disabled][aria-checked="true"] .ds-switch-track {
+  background: var(--component-switch-track-on-disabled, #a0c6f4);
+}
+
+.ds-switch-knob {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 2px;
+  border-radius: 999px;
+  background: var(--component-switch-knob-bg-default, #fff);
+  box-shadow: var(--component-switch-knob-shadow, 0 2px 5px rgba(0, 0, 0, 0.1));
+  transition: left 0.2s ease, background 0.2s ease;
+}
+
+.ds-switch[aria-checked="true"] .ds-switch-knob {
+  left: calc(100% - var(--knob-px) - 2px);
+}
+
+.ds-switch[disabled] .ds-switch-knob {
+  background: var(--component-switch-knob-bg-disabled, #ecf2fc);
+}
+
+.ds-switch[data-size="md"] {
+  width: calc(var(--component-switch-size-md-width, 28) * 1px);
+  height: calc(var(--component-switch-size-md-height, 16) * 1px);
+  --knob-px: calc(var(--component-switch-size-md-knob, 12) * 1px);
+}
+
+.ds-switch[data-size="md"] .ds-switch-knob {
+  width: var(--knob-px);
+  height: var(--knob-px);
+}
+
+.ds-switch[data-size="lg"] {
+  width: calc(var(--component-switch-size-lg-width, 40) * 1px);
+  height: calc(var(--component-switch-size-lg-height, 24) * 1px);
+  --knob-px: calc(var(--component-switch-size-lg-knob, 16) * 1px);
+}
+
+.ds-switch[data-size="lg"] .ds-switch-knob {
+  width: var(--knob-px);
+  height: var(--knob-px);
+}
+
+.mat-sw-off {
+  background: var(--component-switch-track-off-default);
+}
+
+.mat-sw-hov {
+  background: var(--component-switch-track-off-default);
+  filter: brightness(0.96);
+}
+
+.mat-sw-act {
+  background: var(--component-switch-track-on-default);
+}
+
+.mat-sw-foc .mini-track {
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.mat-sw-dis {
+  background: var(--component-switch-track-off-disabled);
+}
+
+.mini-sw {
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  position: relative;
+}
+
+.mini-knob {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  top: 4px;
+  left: 4px;
+  background: var(--component-switch-knob-bg-default);
+  box-shadow: var(--component-switch-knob-shadow);
+}
+
+.mini-sw.on .mini-track {
+  background: var(--component-switch-track-on-default);
+}
+
+.mini-sw.on .mini-knob {
+  left: 24px;
+}
+
+.mini-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--component-switch-track-off-default);
+}
+
+/* ---- Modal ---- */
+.ds-open-modal {
+  border: 0;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: calc(var(--component-button-primary-radius, 6) * 1px);
+  background: var(--component-button-primary-bg-default, #222);
+  color: var(--component-button-primary-text-default, #fff);
+}
+
+.ds-open-modal:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-modal-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.ds-modal-layer[hidden] {
+  display: none !important;
+}
+
+.ds-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--component-modal-mask, rgba(0, 0, 0, 0.4));
+}
+
+.ds-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(calc(var(--component-modal-w, 440) * 1px), calc(100vw - 48px));
+  max-height: min(80vh, 560px);
+  overflow: auto;
+  background: var(--component-modal-panel-bg, #fff);
+  border-radius: calc(var(--component-modal-panel-radius, 16) * 1px);
+  box-shadow: var(--component-modal-panel-shadow, 0 4px 10px rgba(0, 0, 0, 0.1));
+}
+
+.ds-modal-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--component-modal-p, 24) * 1px);
+  padding-bottom: 14px;
+}
+
+.ds-modal-title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--component-modal-title-text, #222);
+}
+
+.ds-modal-x {
+  border: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--component-modal-close-icon, #999);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.ds-modal-x:hover {
+  background: var(--semantic-bg-page, #f7f7f7);
+}
+
+.ds-modal-div {
+  height: 1px;
+  background: var(--component-modal-divider, #e8e8e8);
+}
+
+.ds-modal-body {
+  padding: calc(var(--component-modal-p, 24) * 1px);
+  color: var(--component-modal-body-text, #222);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ds-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.ds-mini-btn {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  background: var(--semantic-bg-surface, #fff);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.ds-mini-btn.primary {
+  background: var(--component-button-primary-bg-default, #222);
+  color: var(--component-button-primary-text-default, #fff);
+  border-color: var(--component-button-primary-bg-default, #222);
+}
+
+/* ---- Checkbox ---- */
+.ds-cb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--component-checkbox-label-text-default, #222);
+  user-select: none;
+}
+
+.ds-cb input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ds-cb-box {
+  width: calc(var(--component-checkbox-box-size, 16) * 1px);
+  height: calc(var(--component-checkbox-box-size, 16) * 1px);
+  border-radius: calc(var(--component-checkbox-box-radius, 3) * 1px);
+  border: 1px solid var(--component-checkbox-unchecked-border-default, #999);
+  background: var(--component-checkbox-unchecked-bg-default, #fff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ds-cb:hover .ds-cb-box {
+  border-color: var(--component-checkbox-unchecked-border-hover, #222);
+}
+
+.ds-cb input:focus-visible + .ds-cb-box {
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-cb input:checked + .ds-cb-box {
+  background: var(--component-checkbox-checked-bg-default, #222);
+  border-color: var(--component-checkbox-checked-bg-default, #222);
+}
+
+.ds-cb input:checked + .ds-cb-box::after {
+  content: "";
+  width: 8px;
+  height: 4px;
+  border: 2px solid var(--component-checkbox-checked-mark-default, #fff);
+  border-top: 0;
+  border-right: 0;
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+.ds-cb input:disabled + .ds-cb-box {
+  border-color: var(--component-checkbox-unchecked-border-disabled, #ccc);
+  background: var(--component-checkbox-unchecked-bg-disabled, #fff);
+}
+
+.ds-cb input:disabled ~ .ds-cb-label {
+  color: var(--component-checkbox-label-text-disabled, #ccc);
+}
+
+/* ---- Radio ---- */
+.ds-rg {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.ds-rb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--component-radio-label-text-default, #222);
+}
+
+.ds-rb input {
+  accent-color: var(--component-radio-checked-outer-default, #222);
+  width: calc(var(--component-radio-outer-size, 16) * 1px);
+  height: calc(var(--component-radio-outer-size, 16) * 1px);
+}
+
+/* ---- Select ---- */
+.ds-sel {
+  position: relative;
+  width: min(100%, 280px);
+}
+
+.ds-sel-trg {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--component-select-trigger-border-default, #f7f7f7);
+  background: var(--component-select-trigger-bg-default, #f7f7f7);
+  color: var(--semantic-text-primary, #222);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.ds-sel-trg:hover {
+  background: var(--component-select-trigger-bg-hover, #e8e8e8);
+  border-color: var(--component-select-trigger-border-hover, #e8e8e8);
+}
+
+.ds-sel-trg:focus {
+  outline: none;
+  border-color: var(--component-select-trigger-border-focus, #222);
+  box-shadow: 0 0 0 2px var(--component-select-trigger-ring-focus, #6985bf);
+}
+
+.ds-sel-trg .chev {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--component-select-trigger-icon-default, #999);
+  border-bottom: 2px solid var(--component-select-trigger-icon-default, #999);
+  transform: rotate(45deg);
+  margin-bottom: 4px;
+}
+
+.ds-sel-list {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  padding: 4px;
+  border-radius: calc(var(--component-select-dropdown-radius, 6) * 1px);
+  background: var(--component-select-dropdown-bg, #fff);
+  box-shadow: var(--component-select-dropdown-shadow, 0 4px 10px rgba(0, 0, 0, 0.1));
+}
+
+.ds-sel-list[hidden] {
+  display: none !important;
+}
+
+.ds-sel-item {
+  height: 32px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--component-select-item-text, #222);
+  background: var(--component-select-item-bg-default, #fff);
+  cursor: pointer;
+}
+
+.ds-sel-item:hover,
+.ds-sel-item.is-hover {
+  background: var(--component-select-item-bg-hover, #f7f7f7);
+}
+
+.ds-sel-item.is-active {
+  background: var(--component-select-item-bg-selected, #f7f7f7);
+}
+
+.ds-sel-item.is-foc {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-sel-item.is-dis {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ---- Generic token chip ---- */
+.ds-gen-chip {
+  min-width: 160px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.ds-gen-chip:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+}
+
+.ds-gen-chip:active {
+  transform: scale(0.98);
+}
+
+      </style>
+
+      <div class="studio">
+        <div class="studio-main card">
+          <div class="card-b">
+            
+            <section>
+              <h2 class="sec-head">Live</h2>
+              <p class="sec-sub">Visuals follow <code>tokens.css</code> (see <code>docs/design.md</code> — tokens first). Pseudo-states + small JS for ripple, switch, modal, select.</p>
+              <div class="live-canvas">
+                <div id="liveRoot"></div>
+              </div>
+            </section>
+            <section style="margin-top:8px;">
+              <h2 class="sec-head">Status matrix</h2>
+              <p class="sec-sub">Five rows (label left · preview right): Default · Hover · Active · Focus · Disabled</p>
+              <div id="matrixRoot" class="matrix-grid"></div>
+            </section>
+          </div>
+        </div>
+
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <label class="pg-field">
+            <span>Size</span>
+            <select id="pgSize" aria-label="Preview size">
+              <option value="sm">Small</option>
+              <option value="md" selected>Medium</option>
+              <option value="lg">Large</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Variant</span>
+            <select id="pgVariant" aria-label="Preview variant">
+              <option value="primary" selected>Primary</option>
+              <option value="neutral">Neutral</option>
+              <option value="danger">Danger</option>
+              <option value="ghost">Ghost</option>
+            </select>
+          </label>
+        </aside>
+      </div>
+    </div>
+    <script type="application/json" id="ds-component-tokens">{"--component-form-col-gap": "16", "--component-form-error-text": "#F14846", "--component-form-help-text": "#666666", "--component-form-label-gap": "8", "--component-form-label-text": "#222222", "--component-form-label-text-disabled": "#CCCCCC", "--component-form-label-w": "120", "--component-form-required-mark": "#F14846", "--component-form-row-gap": "20"}</script>
+    <script>
+(function () {
+  "use strict";
+  const SLUG = "form";
+  const PREFIX = "form";
+  const root = document.documentElement;
+  const liveRoot = document.getElementById("liveRoot");
+  const matrixRoot = document.getElementById("matrixRoot");
+  const pgSize = document.getElementById("pgSize");
+  const pgVariant = document.getElementById("pgVariant");
+
+  function bindRipple(el) {
+    if (!el || el.dataset.rippleBound) return;
+    el.dataset.rippleBound = "1";
+    el.addEventListener("click", function (e) {
+      if (el.disabled) return;
+      const span = document.createElement("span");
+      span.className = "ds-ripple";
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const d = Math.max(rect.width, rect.height) * 0.35;
+      span.style.left = x - d / 2 + "px";
+      span.style.top = y - d / 2 + "px";
+      span.style.width = d + "px";
+      span.style.height = d + "px";
+      el.appendChild(span);
+      setTimeout(function () {
+        span.remove();
+      }, 600);
+    });
+  }
+
+  function readVars(pref) {
+    const pre = "--component-" + pref + "-";
+    const names = [];
+    for (const sheet of Array.from(document.styleSheets)) {
+      let rules;
+      try {
+        rules = sheet.cssRules;
+      } catch (e) {
+        continue;
+      }
+      if (!rules) continue;
+      for (const rule of Array.from(rules)) {
+        if (!rule || rule.type !== CSSRule.STYLE_RULE) continue;
+        if (rule.selectorText !== ":root") continue;
+        const style = rule.style;
+        for (let i = 0; i < style.length; i++) {
+          const p = style[i];
+          if (p && p.startsWith(pre)) names.push(p);
+        }
+      }
+    }
+    return names.sort();
+  }
+
+  function pickExact(names, tail) {
+    const k = "-" + tail.toLowerCase();
+    for (let i = 0; i < names.length; i++) {
+      if (names[i].toLowerCase().endsWith(k)) return names[i];
+    }
+    return null;
+  }
+
+  function matrixShell(labels, innerHtmlFn) {
+    var html = "";
+    for (var i = 0; i < labels.length; i++) {
+      html +=
+        '<div class="matrix-card"><div class="matrix-label">' +
+        labels[i] +
+        "</div>" +
+        innerHtmlFn(labels[i], i) +
+        "</div>";
+    }
+    matrixRoot.innerHTML = html;
+  }
+
+  const L5 = ["Default", "Hover", "Active", "Focus", "Disabled"];
+
+  function mountButton() {
+    liveRoot.innerHTML =
+      '<div class="ds-play" data-size="md" data-variant="primary">' +
+      '<button type="button" class="ds-btn ds-ripple-host">Submit</button></div>';
+    var wrap = liveRoot.querySelector(".ds-play");
+    var btn = liveRoot.querySelector(".ds-btn");
+    bindRipple(btn);
+
+    function paintMatrix() {
+      var v = pgVariant.value;
+      var s = pgSize.value;
+      var sz = s === "sm" ? "mat-sm" : s === "lg" ? "mat-lg" : "mat-md";
+      var rows = {
+        primary: ["mat-pri-def", "mat-pri-hov", "mat-pri-act", "mat-pri-foc", "mat-pri-dis"],
+        neutral: ["mat-neu-def", "mat-neu-hov", "mat-neu-act", "mat-neu-foc", "mat-neu-dis"],
+        danger: ["mat-dan-def", "mat-dan-hov", "mat-dan-act", "mat-dan-foc", "mat-dan-dis"],
+        ghost: ["mat-gho-def", "mat-gho-hov", "mat-gho-act", "mat-gho-foc", "mat-gho-dis"],
+      };
+      var cls = rows[v] || rows.primary;
+      matrixShell(L5, function (_lbl, i) {
+        var dis = i === 4 ? " disabled" : "";
+        return '<button type="button" class="mat-btn ' + sz + " " + cls[i] + '"' + dis + ">State</button>";
+      });
+    }
+
+    window.__dsRefresh = function () {
+      wrap.setAttribute("data-size", pgSize.value);
+      wrap.setAttribute("data-variant", pgVariant.value);
+      paintMatrix();
+    };
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+    pgVariant.addEventListener("change", window.__dsRefresh);
+  }
+
+  function mountInput() {
+    liveRoot.innerHTML =
+      '<input class="ds-input" type="text" placeholder="Placeholder text" aria-label="Demo input" />';
+    var inp = liveRoot.querySelector(".ds-input");
+    window.__dsRefresh = function () {
+      var s = pgSize.value;
+      inp.classList.remove("in-num");
+      if (s === "sm") {
+        inp.style.height = "32px";
+        inp.style.fontSize = "13px";
+      } else if (s === "lg") {
+        inp.style.height = "48px";
+        inp.style.fontSize = "16px";
+      } else {
+        inp.style.height = "40px";
+        inp.style.fontSize = "14px";
+      }
+      matrixShell(L5, function (_l, i) {
+        var cls = ["mat-inp-def", "mat-inp-hov", "mat-inp-act", "mat-inp-foc", "mat-inp-dis"][i];
+        var ro = i === 4 ? " disabled" : ' readonly value="Sample"';
+        return '<input class="ds-input ' + cls + '" type="text"' + ro + " />";
+      });
+    };
+    pgVariant.disabled = true;
+    pgSize.disabled = false;
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+  }
+
+  function mountInputNumber() {
+    liveRoot.innerHTML =
+      '<input class="ds-input in-num" type="number" placeholder="0" aria-label="Demo number" />';
+    var inp = liveRoot.querySelector(".ds-input");
+    window.__dsRefresh = function () {
+      var s = pgSize.value;
+      if (s === "sm") {
+        inp.style.height = "32px";
+        inp.style.fontSize = "13px";
+      } else if (s === "lg") {
+        inp.style.height = "48px";
+        inp.style.fontSize = "16px";
+      } else {
+        inp.style.height = "40px";
+        inp.style.fontSize = "14px";
+      }
+      matrixShell(L5, function (_l, i) {
+        var cls = ["mat-num-def", "mat-num-hov", "mat-num-act", "mat-num-foc", "mat-num-dis"][i];
+        var ro = i === 4 ? " disabled" : ' readonly value="42"';
+        return '<input class="ds-input in-num ' + cls + '" type="number"' + ro + " />";
+      });
+    };
+    pgVariant.disabled = true;
+    pgSize.disabled = false;
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+  }
+
+  function mountSwitch() {
+    liveRoot.innerHTML =
+      '<button type="button" class="ds-switch" role="switch" aria-checked="false" data-size="md" id="dsSw">' +
+      '<span class="ds-switch-track"></span><span class="ds-switch-knob"></span></button>';
+    var sw = document.getElementById("dsSw");
+    sw.addEventListener("click", function () {
+      if (sw.disabled) return;
+      var on = sw.getAttribute("aria-checked") === "true";
+      sw.setAttribute("aria-checked", on ? "false" : "true");
+    });
+    window.__dsRefresh = function () {
+      var s = pgSize.value === "sm" ? "md" : pgSize.value;
+      sw.setAttribute("data-size", s === "lg" ? "lg" : "md");
+    };
+    var o = pgSize.querySelector('option[value="sm"]');
+    if (o) o.hidden = true;
+    if (pgSize.value === "sm") pgSize.value = "md";
+    pgVariant.disabled = true;
+    pgSize.disabled = false;
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+
+    matrixShell(L5, function (_l, i) {
+      var on = i === 2 || i === 3;
+      var dis = i === 4;
+      var foc = i === 3;
+      var hov = i === 1;
+      var extra = on ? " on" : "";
+      var cls = "mini-sw" + extra + (foc ? " mat-sw-foc" : "") + (hov ? " mat-sw-hov" : "") + (dis ? " mat-sw-dis" : "");
+      if (i === 0) cls = "mini-sw";
+      if (i === 1) cls = "mini-sw mat-sw-hov";
+      if (i === 2) cls = "mini-sw on mat-sw-act";
+      if (i === 3) cls = "mini-sw on mat-sw-foc";
+      if (i === 4) cls = "mini-sw mat-sw-dis";
+      return (
+        '<div class="' +
+        cls +
+        '" aria-hidden="true"><span class="mini-track"></span><span class="mini-knob"></span></div>'
+      );
+    });
+  }
+
+  function mountModal() {
+    liveRoot.innerHTML =
+      '<button type="button" class="ds-open-modal ds-ripple-host" id="dsmOpen">Open modal</button>' +
+      '<div class="ds-modal-layer" id="dsmLayer" hidden>' +
+      '<div class="ds-modal-backdrop" id="dsmBd" tabindex="-1"></div>' +
+      '<div class="ds-modal-panel" role="dialog" aria-modal="true" aria-labelledby="dsmT">' +
+      '<header class="ds-modal-h"><h2 class="ds-modal-title" id="dsmT">Dialog</h2>' +
+      '<button type="button" class="ds-modal-x" id="dsmX" aria-label="Close">×</button></header>' +
+      '<div class="ds-modal-div"></div>' +
+      '<div class="ds-modal-body">Click backdrop, ×, Cancel, OK, or press Escape to close.</div>' +
+      '<div class="ds-modal-actions">' +
+      '<button type="button" class="ds-mini-btn" id="dsmCancel">Cancel</button>' +
+      '<button type="button" class="ds-mini-btn primary" id="dsmOk">OK</button></div></div></div>';
+
+    var layer = document.getElementById("dsmLayer");
+    var bd = document.getElementById("dsmBd");
+    var openB = document.getElementById("dsmOpen");
+    function close() {
+      layer.hidden = true;
+    }
+    function openM() {
+      layer.hidden = false;
+      document.getElementById("dsmX").focus();
+    }
+    openB.addEventListener("click", openM);
+    bd.addEventListener("click", close);
+    document.getElementById("dsmX").addEventListener("click", close);
+    document.getElementById("dsmCancel").addEventListener("click", close);
+    document.getElementById("dsmOk").addEventListener("click", close);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !layer.hidden) close();
+    });
+    bindRipple(openB);
+
+    window.__dsRefresh = function () {
+      var panel = layer.querySelector(".ds-modal-panel");
+      if (!panel) return;
+      var s = pgSize.value;
+      if (s === "sm") panel.style.width = "min(280px, calc(100vw - 48px))";
+      else if (s === "lg") panel.style.width = "min(520px, calc(100vw - 48px))";
+      else panel.style.width = "min(calc(var(--component-modal-w, 440) * 1px), calc(100vw - 48px))";
+    };
+    pgVariant.disabled = true;
+    pgSize.disabled = false;
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+
+    matrixShell(L5, function (lbl) {
+      return (
+        '<div style="width:100%;max-width:200px;margin:0 auto;border-radius:calc(var(--component-modal-panel-radius,16)*1px);' +
+        'background:var(--component-modal-panel-bg);box-shadow:var(--component-modal-panel-shadow);' +
+        'padding:10px;font-size:12px;color:var(--component-modal-body-text);text-align:left;' +
+        (lbl === "Disabled" ? "opacity:0.45;" : "") +
+        '">' +
+        lbl +
+        "</div>"
+      );
+    });
+  }
+
+  function mountCheckbox() {
+    liveRoot.innerHTML =
+      '<label class="ds-cb"><input type="checkbox" id="cbx" />' +
+      '<span class="ds-cb-box"></span><span class="ds-cb-label">Remember me</span></label>';
+    pgVariant.disabled = true;
+    pgSize.disabled = true;
+    window.__dsRefresh = function () {};
+    matrixShell(L5, function (_l, i) {
+      var states = [
+        ['unchecked', ""],
+        ['hover', " style=\"border-color:var(--component-checkbox-unchecked-border-hover)\""],
+        ['active', " style=\"transform:scale(0.96)\""],
+        ['focus', " style=\"box-shadow:0 0 0 2px var(--component-input-ring-focus)\""],
+        ['disabled', " disabled"],
+      ][i];
+      var dis = states[1];
+      return (
+        '<label class="ds-cb"><input type="checkbox"' +
+        dis +
+        (i === 4 ? " disabled" : "") +
+        (i === 2 ? " checked" : "") +
+        ' /><span class="ds-cb-box"></span><span class="ds-cb-label">Option</span></label>'
+      );
+    });
+  }
+
+  function mountRadio() {
+    liveRoot.innerHTML =
+      '<div class="ds-rg" role="radiogroup" aria-label="Demo">' +
+      '<label class="ds-rb"><input type="radio" name="dsg" value="a" checked /><span>Option A</span></label>' +
+      '<label class="ds-rb"><input type="radio" name="dsg" value="b" /><span>Option B</span></label>' +
+      "</div>";
+    pgVariant.disabled = true;
+    pgSize.disabled = true;
+    window.__dsRefresh = function () {};
+    matrixShell(L5, function (_l, i) {
+      var chk = i === 2 ? " checked" : "";
+      var dis = i === 4 ? " disabled" : "";
+      return (
+        '<label class="ds-rb"><input type="radio" name="mx' +
+        i +
+        '"' +
+        chk +
+        dis +
+        ' /><span>Choice</span></label>'
+      );
+    });
+  }
+
+  function mountSelect() {
+    liveRoot.innerHTML =
+      '<div class="ds-sel">' +
+      '<button type="button" class="ds-sel-trg" id="stg" aria-haspopup="listbox" aria-expanded="false">' +
+      '<span id="stgL">Select city</span><span class="chev" aria-hidden="true"></span></button>' +
+      '<div class="ds-sel-list" id="stl" role="listbox" hidden>' +
+      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Beijing">Beijing</div>' +
+      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Shanghai">Shanghai</div>' +
+      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Shenzhen">Shenzhen</div></div></div>';
+
+    var stg = document.getElementById("stg");
+    var stl = document.getElementById("stl");
+    var stgL = document.getElementById("stgL");
+    function close() {
+      stl.hidden = true;
+      stg.setAttribute("aria-expanded", "false");
+    }
+    function toggle() {
+      stl.hidden = !stl.hidden;
+      stg.setAttribute("aria-expanded", stl.hidden ? "false" : "true");
+    }
+    stg.addEventListener("click", function (e) {
+      e.stopPropagation();
+      toggle();
+    });
+    document.addEventListener("click", function () {
+      close();
+    });
+    liveRoot.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+    stl.querySelectorAll(".ds-sel-item").forEach(function (it) {
+      it.addEventListener("click", function () {
+        stgL.textContent = it.getAttribute("data-v");
+        close();
+      });
+    });
+    pgVariant.disabled = true;
+    pgSize.disabled = true;
+    window.__dsRefresh = function () {};
+    matrixShell(L5, function (_l, i) {
+      var cls = ["", "is-hover", "is-active", "is-foc", "is-dis"][i];
+      return (
+        '<div class="ds-sel-item ' +
+        cls +
+        '" style="width:100%">' +
+        ["Default", "Hover", "Active", "Focus", "Disabled"][i] +
+        "</div>"
+      );
+    });
+  }
+
+  function mountGeneric() {
+    var names = readVars(PREFIX);
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    if (!names.length) {
+      liveRoot.innerHTML =
+        '<p class="muted" style="text-align:center;margin:0">No <code>--component-' +
+        PREFIX +
+        '-*</code> tokens found. Extend <code>studio_runtime.js</code> for this component.</p>';
+      matrixRoot.innerHTML = "";
+      window.__dsRefresh = function () {};
+      return;
+    }
+    var bgD =
+      pickExact(names, "bg-default") ||
+      pickExact(names, "bgdefault") ||
+      names.find(function (n) {
+        return n.toLowerCase().indexOf("bg") !== -1;
+      });
+    var fgD =
+      pickExact(names, "text-default") ||
+      pickExact(names, "textdefault") ||
+      pickExact(names, "text") ||
+      null;
+    liveRoot.innerHTML =
+      '<button type="button" class="ds-gen-chip ds-ripple-host" id="gchip" tabindex="0">Sample</button>';
+    var chip = document.getElementById("gchip");
+    if (bgD) chip.style.background = "var(" + bgD + ")";
+    if (fgD) chip.style.color = "var(" + fgD + ")";
+    bindRipple(chip);
+
+    var bgH = pickExact(names, "bg-hover") || pickExact(names, "bghover") || bgD;
+    var bgA = pickExact(names, "bg-active") || pickExact(names, "bgactive") || bgH;
+    var bgDis = pickExact(names, "bg-disabled") || pickExact(names, "bgdisabled") || bgD;
+
+    window.__dsRefresh = function () {
+      var s = pgSize.value;
+      chip.style.padding = s === "sm" ? "6px 10px" : s === "lg" ? "14px 18px" : "10px 14px";
+      chip.style.fontSize = s === "sm" ? "12px" : s === "lg" ? "16px" : "14px";
+      var v = pgVariant.value;
+      if (v === "ghost") {
+        chip.style.background = "transparent";
+        chip.style.border = "1px solid var(--component-button-outline-border-default, #999)";
+        chip.style.color = "var(--semantic-text-primary, #222)";
+      } else if (v === "neutral") {
+        chip.style.background = "var(--component-button-neutral-bg-default)";
+        chip.style.color = "var(--component-button-neutral-text-default)";
+        chip.style.border = "1px solid var(--component-button-neutral-border-default)";
+      } else if (v === "danger") {
+        chip.style.background = "var(--component-button-danger-bg-default)";
+        chip.style.color = "var(--component-button-danger-text-default)";
+        chip.style.border = "1px solid transparent";
+      } else {
+        chip.style.background = bgD ? "var(" + bgD + ")" : "var(--semantic-bg-surface)";
+        chip.style.color = fgD ? "var(" + fgD + ")" : "var(--semantic-text-primary)";
+        chip.style.border = "1px solid var(--semantic-border-subtle)";
+      }
+      matrixShell(L5, function (_l, i) {
+        var st = [
+          { bg: bgD, ex: "" },
+          { bg: bgH, ex: "" },
+          { bg: bgA, ex: "transform:scale(0.97);" },
+          { bg: bgD, ex: "box-shadow:0 0 0 2px var(--component-input-ring-focus);" },
+          { bg: bgDis, ex: "opacity:0.5;" },
+        ][i];
+        var bg = st.bg ? "var(" + st.bg + ")" : "var(--semantic-bg-page)";
+        var col = fgD ? "var(" + fgD + ")" : "var(--semantic-text-primary)";
+        return (
+          '<div class="ds-gen-chip" style="background:' +
+          bg +
+          ";color:" +
+          col +
+          ";" +
+          st.ex +
+          '">State</div>'
+        );
+      });
+    };
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+    pgVariant.addEventListener("change", window.__dsRefresh);
+  }
+
+  function init() {
+    if (!liveRoot || !matrixRoot || !pgSize || !pgVariant) return;
+
+    var mountMap = {
+      button: mountButton,
+      switch: mountSwitch,
+      modal: mountModal,
+      input: mountInput,
+      "input-number": mountInputNumber,
+      checkbox: mountCheckbox,
+      radio: mountRadio,
+      select: mountSelect,
+    };
+    (mountMap[SLUG] || mountGeneric)();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+
+    </script>
+    
+  </body>
+</html>
