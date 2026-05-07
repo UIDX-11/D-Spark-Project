@@ -171,7 +171,7 @@
 .live-canvas {
   border-radius: 12px;
   border: 1px solid var(--semantic-border-subtle, #e8e8e8);
-  background: var(--semantic-bg-page, #f7f7f7);
+  background: #fff;
   padding: 28px 20px;
   min-height: 140px;
   display: flex;
@@ -187,36 +187,36 @@
 }
 
 .matrix-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-}
-
-@media (max-width: 840px) {
-  .matrix-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 .matrix-card {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
   border: 1px solid var(--semantic-border-subtle, #e8e8e8);
   border-radius: 10px;
-  padding: 12px 10px;
+  padding: 10px 12px;
   background: var(--semantic-bg-surface, #fff);
-  min-height: 72px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  min-height: 56px;
 }
 
 .matrix-card .matrix-label {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--semantic-text-secondary, #666);
+}
+
+.matrix-card .matrix-preview {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
 }
 
 /* ---- Ripple ---- */
@@ -1004,6 +1004,199 @@
   pointer-events: none;
 }
 
+/* ---- Alert ---- */
+.ds-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
+  /* 无 title：左图标与正文垂直居中；有 title：见 .with-title（对齐 Arco with-title） */
+  padding-top: 14px;
+  padding-bottom: 8px;
+  padding-inline: 16px;
+  border: 1px solid transparent;
+  color: var(--component-alert-text, #222);
+}
+
+/* 有 title：图标与标题行垂直居中；右侧 action / close 与整块内容垂直居中 */
+.ds-alert.with-title {
+  align-items: flex-start;
+}
+
+.ds-alert.with-title .ds-alert-icon {
+  align-self: flex-start;
+  /* (title line-height 22px - icon 16px) / 2 */
+  margin-top: 3px;
+}
+
+.ds-alert.with-title .ds-alert-action,
+.ds-alert.with-title .ds-alert-close-btn {
+  align-self: center;
+}
+
+.ds-alert.is-md {
+  min-height: 32px;
+  border-radius: 6px;
+  padding-block: 6px;
+  padding-inline: 16px;
+}
+
+.ds-alert.is-auto {
+  min-height: auto;
+  padding-top: 14px;
+  padding-bottom: 12px;
+  padding-inline: 16px;
+}
+
+.ds-alert.is-banner {
+  border: none;
+  border-radius: 0;
+}
+
+/* Arco: .arco-alert-center { justify-content: center; .arco-alert-body { flex: initial } } */
+.ds-alert.is-center {
+  justify-content: center;
+}
+
+.ds-alert.is-center .ds-alert-body {
+  flex: initial;
+}
+
+.ds-alert-icon {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.ds-alert-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ds-alert-title {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--component-alert-title-text, #222);
+}
+
+/* Arco: default slot lives in .arco-alert-content */
+.ds-alert-content {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--component-alert-text, #222);
+}
+
+/* Arco: #action 外包一层 .arco-alert-action */
+.ds-alert-action {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ds-alert-action-btn {
+  border: 1px solid var(--component-alert-action-border, #999);
+  background: transparent;
+  color: var(--component-alert-action-text, #222);
+  border-radius: 4px;
+  height: 24px;
+  padding: 0 8px;
+  font-size: 12px;
+  line-height: 16px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Arco: closable 为 div.arco-alert-close-btn，非 button */
+.ds-alert-close-btn {
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  color: var(--component-alert-close-icon, #999);
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* close-element 槽位：任意节点，不强制 16×16 图标格 */
+.ds-alert-close-btn.is-slot {
+  width: auto;
+  max-width: none;
+  min-width: auto;
+  height: auto;
+  min-height: 16px;
+  padding: 0 4px;
+  overflow: visible;
+  font-size: 12px;
+}
+
+.ds-alert.t-info {
+  background: var(--component-alert-tone-info-bg, #ecf2fc);
+}
+
+.ds-alert.t-success {
+  background: var(--component-alert-tone-success-bg, #e6f7ef);
+}
+
+.ds-alert.t-warning {
+  background: var(--component-alert-tone-warning-bg, #fff7e8);
+}
+
+.ds-alert.t-error {
+  background: var(--component-alert-tone-error-bg, #feeded);
+}
+
+.ds-alert.t-normal {
+  background: var(--semantic-bg-surface, #fff);
+  border-color: var(--semantic-border-subtle, #e8e8e8);
+}
+
+.ds-alert.t-info .ds-alert-icon {
+  color: var(--component-alert-tone-info-icon, #3f78e4);
+}
+
+.ds-alert.t-success .ds-alert-icon {
+  color: var(--component-alert-tone-success-icon, #09aa5c);
+}
+
+.ds-alert.t-warning .ds-alert-icon {
+  color: var(--component-alert-tone-warning-icon, #ffad14);
+}
+
+.ds-alert.t-error .ds-alert-icon {
+  color: var(--component-alert-tone-error-icon, #f14846);
+}
+
+.ds-alert.t-normal .ds-alert-icon {
+  color: var(--semantic-text-secondary, #666);
+}
+
 /* ---- Generic token chip ---- */
 .ds-gen-chip {
   min-width: 160px;
@@ -1035,6 +1228,18 @@
         <div class="studio-main card">
           <div class="card-b">
             
+    <div class="card" style="border-radius:10px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 docs/components/pincode.md）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">Figma node shows a square cell of 36×36 with radius 8 (baseline). If future sizes are introduced, add a size table.</div>
+        
+      </div>
+      <div style="padding:12px;">
+        <div style="height:36px; width:min(360px,100%); border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" aria-hidden="true"></div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">按文档 Figma 标注进行比对。</div>
+      </div>
+    </div>
+    
             <section>
               <h2 class="sec-head">Live</h2>
               <p class="sec-sub">Visuals follow <code>tokens.css</code> (see <code>docs/design.md</code> — tokens first). Pseudo-states + small JS for ripple, switch, modal, select.</p>
@@ -1083,6 +1288,33 @@
   const matrixRoot = document.getElementById("matrixRoot");
   const pgSize = document.getElementById("pgSize");
   const pgVariant = document.getElementById("pgVariant");
+  let SNAPSHOT_TOKENS = null;
+
+  function readSnapshotTokens() {
+    if (SNAPSHOT_TOKENS) return SNAPSHOT_TOKENS;
+    const el = document.getElementById("ds-component-tokens");
+    if (!el) {
+      SNAPSHOT_TOKENS = {};
+      return SNAPSHOT_TOKENS;
+    }
+    try {
+      SNAPSHOT_TOKENS = JSON.parse(el.textContent || "{}") || {};
+    } catch (_e) {
+      SNAPSHOT_TOKENS = {};
+    }
+    return SNAPSHOT_TOKENS;
+  }
+
+  function applySnapshotTokensToRoot(pref) {
+    const pre = "--component-" + pref + "-";
+    const snap = readSnapshotTokens();
+    Object.keys(snap).forEach(function (k) {
+      if (!k || !k.startsWith(pre)) return;
+      const existing = getComputedStyle(root).getPropertyValue(k).trim();
+      if (existing) return;
+      root.style.setProperty(k, String(snap[k]));
+    });
+  }
 
   function bindRipple(el) {
     if (!el || el.dataset.rippleBound) return;
@@ -1109,6 +1341,7 @@
   function readVars(pref) {
     const pre = "--component-" + pref + "-";
     const names = [];
+    const seen = new Set();
     for (const sheet of Array.from(document.styleSheets)) {
       let rules;
       try {
@@ -1123,9 +1356,22 @@
         const style = rule.style;
         for (let i = 0; i < style.length; i++) {
           const p = style[i];
-          if (p && p.startsWith(pre)) names.push(p);
+          if (p && p.startsWith(pre) && !seen.has(p)) {
+            seen.add(p);
+            names.push(p);
+          }
         }
       }
+    }
+    // file:// often blocks cssRules for linked stylesheets; fall back to embedded snapshot.
+    if (!names.length) {
+      const snap = readSnapshotTokens();
+      Object.keys(snap).forEach(function (k) {
+        if (k && k.startsWith(pre) && !seen.has(k)) {
+          seen.add(k);
+          names.push(k);
+        }
+      });
     }
     return names.sort();
   }
@@ -1144,9 +1390,9 @@
       html +=
         '<div class="matrix-card"><div class="matrix-label">' +
         labels[i] +
-        "</div>" +
+        '</div><div class="matrix-preview">' +
         innerHtmlFn(labels[i], i) +
-        "</div>";
+        "</div></div>";
     }
     matrixRoot.innerHTML = html;
   }
@@ -1450,6 +1696,131 @@
     });
   }
 
+  function mountAlert() {
+    var alShowIcon = document.getElementById("alShowIcon");
+    var alTitle = document.getElementById("alTitle");
+    var alClosable = document.getElementById("alClosable");
+    var alCustomClose = document.getElementById("alCustomClose");
+    var alAction = document.getElementById("alAction");
+    var alBanner = document.getElementById("alBanner");
+    var alCenter = document.getElementById("alCenter");
+    var toneLabel = {
+      info: "Info",
+      success: "Success",
+      warning: "Warning",
+      error: "Error",
+      normal: "Normal",
+    };
+
+    function renderAlert(opts) {
+      var sizeClass = opts.size === "md" ? "is-md" : opts.size === "auto" ? "is-auto" : "";
+      var cls =
+        "ds-alert t-" +
+        opts.type +
+        (sizeClass ? " " + sizeClass : "") +
+        (opts.banner ? " is-banner" : "") +
+        (opts.center ? " is-center" : "") +
+        (opts.withTitle ? " with-title" : "");
+      /* Arco DOM: icon? → body(title? + content) → action? → close-btn? */
+      /* Arco: show icon unless type===normal and no #icon slot (iconSlot=true simulates slot) */
+      var iconVisible = opts.showIcon && !(opts.type === "normal" && !opts.iconSlot);
+      var iconHtml = iconVisible
+        ? '<div class="ds-alert-icon" aria-hidden="true">' + (opts.type === "normal" ? "!" : "●") + "</div>"
+        : "";
+      var titleHtml = opts.withTitle ? '<div class="ds-alert-title">' + toneLabel[opts.type] + "</div>" : "";
+      var msg =
+        opts.multiline || opts.withTitle
+          ? "Here is an example text Here is an example text Here is an example text."
+          : "Here is an example text";
+      var bodyHtml =
+        '<div class="ds-alert-body">' +
+        titleHtml +
+        '<div class="ds-alert-content">' +
+        msg +
+        "</div></div>";
+      var actionHtml = opts.action
+        ? '<div class="ds-alert-action"><button type="button" class="ds-alert-action-btn">Detail</button></div>'
+        : "";
+      var closeHtml = opts.closable
+        ? '<div class="ds-alert-close-btn' +
+          (opts.customClose ? " is-slot" : "") +
+          '" tabindex="-1" role="button" aria-label="Close">' +
+          (opts.customClose ? "Close" : "×") +
+          "</div>"
+        : "";
+      return (
+        '<div class="' +
+        cls +
+        '" role="alert">' +
+        iconHtml +
+        bodyHtml +
+        actionHtml +
+        closeHtml +
+        "</div>"
+      );
+    }
+
+    function matrixVariant(idx) {
+      return [
+        { withTitle: false, multiline: false, closable: false, action: false, label: "Default" },
+        { withTitle: false, multiline: true, closable: false, action: false, label: "Multiline" },
+        { withTitle: true, multiline: false, closable: false, action: false, label: "With title" },
+        { withTitle: false, multiline: false, closable: true, action: true, label: "Closable + action" },
+        { withTitle: false, multiline: false, closable: false, action: false, banner: true, center: true, label: "Banner + center" },
+      ][idx];
+    }
+
+    window.__dsRefresh = function () {
+      var opts = {
+        type: pgVariant.value || "info",
+        size: pgSize.value || "lg",
+        showIcon: !!(alShowIcon && alShowIcon.checked),
+        withTitle: !!(alTitle && alTitle.checked),
+        closable: !!(alClosable && alClosable.checked),
+        customClose: !!(alCustomClose && alCustomClose.checked),
+        action: !!(alAction && alAction.checked),
+        banner: !!(alBanner && alBanner.checked),
+        center: !!(alCenter && alCenter.checked),
+        multiline: pgSize.value === "auto",
+      };
+      if (opts.type === "normal" && !opts.showIcon) {
+        // Arco: normal type does not show icon by default.
+      }
+      liveRoot.innerHTML = renderAlert(opts);
+      var closeBtn = liveRoot.querySelector(".ds-alert-close-btn");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function (ev) {
+          var host = ev.currentTarget.closest(".ds-alert");
+          if (host) host.remove();
+        });
+      }
+      matrixShell(L5, function (_l, i) {
+        var v = matrixVariant(i);
+        return renderAlert({
+          type: opts.type,
+          size: i === 1 || i === 2 ? "auto" : opts.size,
+          showIcon: opts.type === "normal" ? false : true,
+          withTitle: v.withTitle,
+          multiline: v.multiline,
+          closable: v.closable,
+          customClose: false,
+          action: v.action,
+          banner: !!v.banner,
+          center: !!v.center,
+        });
+      });
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    [alShowIcon, alTitle, alClosable, alCustomClose, alAction, alBanner, alCenter].forEach(function (el) {
+      if (el) el.addEventListener("change", window.__dsRefresh);
+    });
+  }
+
   function mountGeneric() {
     var names = readVars(PREFIX);
     pgVariant.disabled = false;
@@ -1535,6 +1906,7 @@
 
   function init() {
     if (!liveRoot || !matrixRoot || !pgSize || !pgVariant) return;
+    applySnapshotTokensToRoot(PREFIX);
 
     var mountMap = {
       button: mountButton,
@@ -1545,6 +1917,7 @@
       checkbox: mountCheckbox,
       radio: mountRadio,
       select: mountSelect,
+      alert: mountAlert,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

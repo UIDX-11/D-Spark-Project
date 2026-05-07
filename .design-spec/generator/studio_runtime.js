@@ -7,6 +7,33 @@
   const matrixRoot = document.getElementById("matrixRoot");
   const pgSize = document.getElementById("pgSize");
   const pgVariant = document.getElementById("pgVariant");
+  let SNAPSHOT_TOKENS = null;
+
+  function readSnapshotTokens() {
+    if (SNAPSHOT_TOKENS) return SNAPSHOT_TOKENS;
+    const el = document.getElementById("ds-component-tokens");
+    if (!el) {
+      SNAPSHOT_TOKENS = {};
+      return SNAPSHOT_TOKENS;
+    }
+    try {
+      SNAPSHOT_TOKENS = JSON.parse(el.textContent || "{}") || {};
+    } catch (_e) {
+      SNAPSHOT_TOKENS = {};
+    }
+    return SNAPSHOT_TOKENS;
+  }
+
+  function applySnapshotTokensToRoot(pref) {
+    const pre = "--component-" + pref + "-";
+    const snap = readSnapshotTokens();
+    Object.keys(snap).forEach(function (k) {
+      if (!k || !k.startsWith(pre)) return;
+      const existing = getComputedStyle(root).getPropertyValue(k).trim();
+      if (existing) return;
+      root.style.setProperty(k, String(snap[k]));
+    });
+  }
 
   function bindRipple(el) {
     if (!el || el.dataset.rippleBound) return;
@@ -33,6 +60,7 @@
   function readVars(pref) {
     const pre = "--component-" + pref + "-";
     const names = [];
+    const seen = new Set();
     for (const sheet of Array.from(document.styleSheets)) {
       let rules;
       try {
@@ -47,9 +75,22 @@
         const style = rule.style;
         for (let i = 0; i < style.length; i++) {
           const p = style[i];
-          if (p && p.startsWith(pre)) names.push(p);
+          if (p && p.startsWith(pre) && !seen.has(p)) {
+            seen.add(p);
+            names.push(p);
+          }
         }
       }
+    }
+    // file:// often blocks cssRules for linked stylesheets; fall back to embedded snapshot.
+    if (!names.length) {
+      const snap = readSnapshotTokens();
+      Object.keys(snap).forEach(function (k) {
+        if (k && k.startsWith(pre) && !seen.has(k)) {
+          seen.add(k);
+          names.push(k);
+        }
+      });
     }
     return names.sort();
   }
@@ -68,9 +109,9 @@
       html +=
         '<div class="matrix-card"><div class="matrix-label">' +
         labels[i] +
-        "</div>" +
+        '</div><div class="matrix-preview">' +
         innerHtmlFn(labels[i], i) +
-        "</div>";
+        "</div></div>";
     }
     matrixRoot.innerHTML = html;
   }
@@ -374,6 +415,131 @@
     });
   }
 
+  function mountAlert() {
+    var alShowIcon = document.getElementById("alShowIcon");
+    var alTitle = document.getElementById("alTitle");
+    var alClosable = document.getElementById("alClosable");
+    var alCustomClose = document.getElementById("alCustomClose");
+    var alAction = document.getElementById("alAction");
+    var alBanner = document.getElementById("alBanner");
+    var alCenter = document.getElementById("alCenter");
+    var toneLabel = {
+      info: "Info",
+      success: "Success",
+      warning: "Warning",
+      error: "Error",
+      normal: "Normal",
+    };
+
+    function renderAlert(opts) {
+      var sizeClass = opts.size === "md" ? "is-md" : opts.size === "auto" ? "is-auto" : "";
+      var cls =
+        "ds-alert t-" +
+        opts.type +
+        (sizeClass ? " " + sizeClass : "") +
+        (opts.banner ? " is-banner" : "") +
+        (opts.center ? " is-center" : "") +
+        (opts.withTitle ? " with-title" : "");
+      /* Arco DOM: icon? → body(title? + content) → action? → close-btn? */
+      /* Arco: show icon unless type===normal and no #icon slot (iconSlot=true simulates slot) */
+      var iconVisible = opts.showIcon && !(opts.type === "normal" && !opts.iconSlot);
+      var iconHtml = iconVisible
+        ? '<div class="ds-alert-icon" aria-hidden="true">' + (opts.type === "normal" ? "!" : "●") + "</div>"
+        : "";
+      var titleHtml = opts.withTitle ? '<div class="ds-alert-title">' + toneLabel[opts.type] + "</div>" : "";
+      var msg =
+        opts.multiline || opts.withTitle
+          ? "Here is an example text Here is an example text Here is an example text."
+          : "Here is an example text";
+      var bodyHtml =
+        '<div class="ds-alert-body">' +
+        titleHtml +
+        '<div class="ds-alert-content">' +
+        msg +
+        "</div></div>";
+      var actionHtml = opts.action
+        ? '<div class="ds-alert-action"><button type="button" class="ds-alert-action-btn">Detail</button></div>'
+        : "";
+      var closeHtml = opts.closable
+        ? '<div class="ds-alert-close-btn' +
+          (opts.customClose ? " is-slot" : "") +
+          '" tabindex="-1" role="button" aria-label="Close">' +
+          (opts.customClose ? "Close" : "×") +
+          "</div>"
+        : "";
+      return (
+        '<div class="' +
+        cls +
+        '" role="alert">' +
+        iconHtml +
+        bodyHtml +
+        actionHtml +
+        closeHtml +
+        "</div>"
+      );
+    }
+
+    function matrixVariant(idx) {
+      return [
+        { withTitle: false, multiline: false, closable: false, action: false, label: "Default" },
+        { withTitle: false, multiline: true, closable: false, action: false, label: "Multiline" },
+        { withTitle: true, multiline: false, closable: false, action: false, label: "With title" },
+        { withTitle: false, multiline: false, closable: true, action: true, label: "Closable + action" },
+        { withTitle: false, multiline: false, closable: false, action: false, banner: true, center: true, label: "Banner + center" },
+      ][idx];
+    }
+
+    window.__dsRefresh = function () {
+      var opts = {
+        type: pgVariant.value || "info",
+        size: pgSize.value || "lg",
+        showIcon: !!(alShowIcon && alShowIcon.checked),
+        withTitle: !!(alTitle && alTitle.checked),
+        closable: !!(alClosable && alClosable.checked),
+        customClose: !!(alCustomClose && alCustomClose.checked),
+        action: !!(alAction && alAction.checked),
+        banner: !!(alBanner && alBanner.checked),
+        center: !!(alCenter && alCenter.checked),
+        multiline: pgSize.value === "auto",
+      };
+      if (opts.type === "normal" && !opts.showIcon) {
+        // Arco: normal type does not show icon by default.
+      }
+      liveRoot.innerHTML = renderAlert(opts);
+      var closeBtn = liveRoot.querySelector(".ds-alert-close-btn");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function (ev) {
+          var host = ev.currentTarget.closest(".ds-alert");
+          if (host) host.remove();
+        });
+      }
+      matrixShell(L5, function (_l, i) {
+        var v = matrixVariant(i);
+        return renderAlert({
+          type: opts.type,
+          size: i === 1 || i === 2 ? "auto" : opts.size,
+          showIcon: opts.type === "normal" ? false : true,
+          withTitle: v.withTitle,
+          multiline: v.multiline,
+          closable: v.closable,
+          customClose: false,
+          action: v.action,
+          banner: !!v.banner,
+          center: !!v.center,
+        });
+      });
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    window.__dsRefresh();
+    pgSize.addEventListener("change", window.__dsRefresh);
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    [alShowIcon, alTitle, alClosable, alCustomClose, alAction, alBanner, alCenter].forEach(function (el) {
+      if (el) el.addEventListener("change", window.__dsRefresh);
+    });
+  }
+
   function mountGeneric() {
     var names = readVars(PREFIX);
     pgVariant.disabled = false;
@@ -459,6 +625,7 @@
 
   function init() {
     if (!liveRoot || !matrixRoot || !pgSize || !pgVariant) return;
+    applySnapshotTokensToRoot(PREFIX);
 
     var mountMap = {
       button: mountButton,
@@ -469,6 +636,7 @@
       checkbox: mountCheckbox,
       radio: mountRadio,
       select: mountSelect,
+      alert: mountAlert,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

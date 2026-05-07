@@ -9,6 +9,8 @@ from pathlib import Path
 
 
 RE_TITLE = re.compile(r"^#\s*Component:\s*(.+?)\s*$", re.IGNORECASE)
+RE_H2 = re.compile(r"^##\s+(.+?)\s*$")
+RE_MD_LINK = re.compile(r"\[([^\]]+)\]\((https?://[^)]+)\)")
 
 
 @dataclass(frozen=True)
@@ -34,6 +36,37 @@ def _read_title(md_path: Path) -> str:
             return m.group(1).strip()
     # fallback: filename without extension
     return md_path.stem
+
+
+def _read_md_sections(md_path: Path) -> dict[str, str]:
+    text = md_path.read_text(encoding="utf-8", errors="replace")
+    sections: dict[str, list[str]] = {}
+    current: str | None = None
+    for line in text.splitlines():
+        m = RE_H2.match(line.strip())
+        if m:
+            current = m.group(1).strip().lower()
+            sections[current] = []
+            continue
+        if current is not None:
+            sections[current].append(line)
+    return {k: "\n".join(v).strip() for k, v in sections.items()}
+
+
+def _first_non_empty_line(text: str) -> str:
+    for line in text.splitlines():
+        s = line.strip()
+        if s:
+            return s
+    return ""
+
+
+def _md_inline_to_plain(text: str) -> str:
+    # Keep this lightweight; we only need a readable hint sentence in demo cards.
+    text = RE_MD_LINK.sub(r"\1", text)
+    text = re.sub(r"[`*_#>|]", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
 
 
 def _collect_components(components_dir: Path) -> list[ComponentSpec]:
@@ -159,7 +192,7 @@ def _html_page(title: str, body: str, tokens_href: str) -> str:
 """
 
 
-def _component_size_guide_block(slug: str) -> str:
+def _component_size_guide_block(slug: str, md_path: Path) -> str:
     """
     Static Figma dimension hints, bound by slug. Emitted only by the generator — no hand-edited HTML.
     """
@@ -238,7 +271,33 @@ def _component_size_guide_block(slug: str) -> str:
     </div>
     """
 
-    return ""
+    sections = _read_md_sections(md_path)
+    figma_section = sections.get("figma", "")
+    sizes_section = sections.get("sizes", "")
+    figma_line = _md_inline_to_plain(_first_non_empty_line(figma_section))
+    sizes_line = _md_inline_to_plain(_first_non_empty_line(sizes_section))
+    md_rel = f"docs/components/{md_path.name}"
+    figma_link = ""
+    m_link = RE_MD_LINK.search(figma_section)
+    if m_link:
+        label = html.escape(m_link.group(1).strip())
+        href = html.escape(m_link.group(2).strip())
+        figma_link = f'<div class="muted" style="margin-top:4px; font-size:12px;">Figma: <a href="{href}">{label}</a></div>'
+    if not sizes_line:
+        sizes_line = "请参考对应组件文档中的 Sizes 章节。"
+    return f"""
+    <div class="card" style="border-radius:10px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 {html.escape(md_rel)}）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">{html.escape(sizes_line)}</div>
+        {figma_link}
+      </div>
+      <div style="padding:12px;">
+        <div style="height:36px; width:min(360px,100%); border-radius:8px; {chip}" aria-hidden="true"></div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">{html.escape(figma_line or '按文档 Figma 标注进行比对。')}</div>
+      </div>
+    </div>
+    """
 
 
 def _snapshot_component_tokens(tokens_css_text: str, token_prefix: str) -> dict[str, str]:
@@ -275,10 +334,45 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
     studio_js = (gen_dir / "studio_runtime.js").read_text(encoding="utf-8")
     studio_js = studio_js.replace("__DS_SLUG__", json.dumps(spec.slug))
     studio_js = studio_js.replace("__DS_TOKEN_PREFIX__", json.dumps(spec.token_prefix))
-    size_guide = _component_size_guide_block(spec.slug)
+    size_guide = _component_size_guide_block(spec.slug, spec.source_path)
     token_snap = _snapshot_component_tokens(tokens_css_text, spec.token_prefix)
     token_json = json.dumps(token_snap, ensure_ascii=False).replace("</", "<\\/")
-    if spec.slug == "input":
+    if spec.slug == "alert":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            Aligns with <code>docs/components/alert.md</code> and Arco Alert props:
+            <code>type</code>, <code>show-icon</code>, <code>closable</code>, <code>title</code>,
+            <code>banner</code>, <code>center</code>, plus action slot behavior.
+          </p>
+          <label class="pg-field">
+            <span>Type</span>
+            <select id="pgVariant" aria-label="Alert type">
+              <option value="info" selected>info</option>
+              <option value="success">success</option>
+              <option value="warning">warning</option>
+              <option value="error">error</option>
+              <option value="normal">normal</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size</span>
+            <select id="pgSize" aria-label="Alert size">
+              <option value="lg" selected>LG (36)</option>
+              <option value="md">MD (32)</option>
+              <option value="auto">AUTO (multiline/title)</option>
+            </select>
+          </label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alShowIcon" checked /><span>show-icon</span></label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alTitle" /><span>title</span></label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alClosable" /><span>closable</span></label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alCustomClose" /><span>close-element slot</span></label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alAction" /><span>action slot</span></label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alBanner" /><span>banner</span></label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alCenter" /><span>center</span></label>
+        </aside>"""
+    elif spec.slug == "input":
         aside_block = """
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
@@ -369,7 +463,18 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
             </select>
           </label>
         </aside>"""
-    if spec.slug == "input-number":
+    if spec.slug == "alert":
+        live_intro_sub = (
+            "Behavior matches Arco Alert API and Figma variants: "
+            "<code>type=info|success|warning|error|normal</code>, "
+            "<code>show-icon</code>, <code>closable</code>, <code>title</code>, "
+            "<code>banner</code>, <code>center</code>, and action slot."
+        )
+        matrix_rows_help = (
+            "Rows represent variant set from docs/Figma: Default · Multiline · With title · "
+            "Closable + action · Banner + center."
+        )
+    elif spec.slug == "input-number":
         live_intro_sub = (
             "Visuals follow <code>tokens.css</code>. Live preview follows "
             "<code>docs/components/input-number.md</code> Executable rules (Arco React): "
