@@ -1827,6 +1827,81 @@
   margin-top: 16px;
 }
 
+.ds-modal-tip {
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  background: var(--semantic-bg-page, #f7f7f7);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--semantic-text-secondary, #666);
+}
+
+.ds-modal-tip-txt {
+  margin: 0;
+}
+
+.ds-modal-panel--matrix {
+  width: 100%;
+  max-width: min(220px, 100%);
+  margin: 0 auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.ds-modal-panel--matrix .ds-modal-h {
+  padding: 10px;
+  padding-bottom: 8px;
+}
+
+.ds-modal-panel--matrix .ds-modal-body {
+  padding: 10px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.ds-modal-panel--matrix .ds-modal-title {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.ds-modal-panel--matrix .ds-modal-actions {
+  margin-top: 10px;
+  padding: 0 10px 10px;
+  flex-wrap: wrap;
+}
+
+.ds-modal-panel--fig {
+  width: min(calc(var(--component-modal-w) * 1px), 100%);
+  max-height: none;
+  overflow: visible;
+}
+
+.ds-modal-panel.is-hov {
+  box-shadow: var(--component-modal-panel-shadow), 0 0 0 1px var(--semantic-border-default, #ccc);
+}
+
+.ds-modal-panel.is-act {
+  outline: 1px dashed var(--semantic-border-default, #ccc);
+  outline-offset: 2px;
+}
+
+.ds-modal-panel.is-foc {
+  box-shadow: var(--component-modal-panel-shadow), 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-modal-panel.is-dis {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.ds-modal-x:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
 .ds-mini-btn {
   height: 32px;
   padding: 0 12px;
@@ -1843,6 +1918,11 @@
   background: var(--component-button-primary-bg-default, #222);
   color: var(--component-button-primary-text-default, #fff);
   border-color: var(--component-button-primary-bg-default, #222);
+}
+
+.ds-mini-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
 }
 
 /* ---- Checkbox ---- */
@@ -5534,29 +5614,51 @@
             
     <div class="card" style="border-radius:10px;">
       <div style="padding:12px 12px 0 12px;">
-        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（自动生成）</div>
-        <div class="muted" style="margin-top:6px; font-size:12px;">
-          紧凑对话框参考宽度：<strong>280px</strong>
-        </div>
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 docs/components/modal.md）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">Figma shows w=440 (default) and w=464 (with tip). Tokenize width/radius/padding; enforce viewport max constraints.</div>
+        
       </div>
       <div style="padding:12px;">
-        <div style="position:relative; display:inline-block; margin-top:18px;">
-          <div style="font-size:11px; font-weight:600; color:var(--semantic-text-secondary,#666); position:absolute; left:0; bottom:100%; margin-bottom:6px;">280px</div>
-          <div style="width:280px; height:28px; border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" title="宽度 280px" aria-hidden="true"></div>
+        <div style="height:36px; width:min(440px,100%); border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" aria-hidden="true"></div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">- 遮罩：modal.mask → --component-modal-mask。</div>
+      </div>
+    </div>
+    
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">遮罩 + 面板壳 <code>ds-modal-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <div style="padding:18px;border-radius:10px;background:var(--component-modal-mask);" data-ds-annotate-target="1">
+          <div class="ds-modal-panel ds-modal-panel--fig" role="dialog" aria-modal="true" aria-labelledby="mdlFigT" aria-describedby="mdlFigD">
+            <header class="ds-modal-h">
+              <h2 class="ds-modal-title" id="mdlFigT">Modal title</h2>
+              <button type="button" class="ds-modal-x" tabindex="-1" aria-hidden="true">×</button>
+            </header>
+            <div class="ds-modal-div" aria-hidden="true"></div>
+            <div class="ds-modal-body">
+              <p id="mdlFigD" style="margin:0;">Body text for token compare.</p>
+            </div>
+            <div class="ds-modal-actions">
+              <button type="button" class="ds-mini-btn" tabindex="-1">Cancel</button>
+              <button type="button" class="ds-mini-btn primary" tabindex="-1">OK</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     
             <section>
               <h2 class="sec-head">Live</h2>
-              <p class="sec-sub">Visuals follow <code>tokens.css</code> (see <code>docs/design.md</code> — tokens first). Pseudo-states + small JS for ripple, switch, modal, select.</p>
+              <p class="sec-sub">Live：<code>button#dsmOpen.ds-open-modal</code> 打开 <code>#dsmLayer.ds-modal-layer</code>（去 <code>hidden</code>）；<code>.ds-modal-backdrop</code> 点击关闭；面板 <code>.ds-modal-panel</code> 为 <code>role="dialog"</code> + <code>aria-modal="true"</code> + <code>aria-labelledby</code> / <code>aria-describedby</code>；<strong>with-tip</strong> 时在正文顶渲染 <code>.ds-modal-tip</code>；宽度由侧栏 Width 下拉写入内联 <code>min(..., var(--component-modal-w*)...)</code>；<code>Escape</code> 关闭；样式 <code>--component-modal-*</code>（见 <code>docs/components/modal.md</code>）。</p>
               <div class="live-canvas">
                 <div id="liveRoot"></div>
               </div>
             </section>
             <section style="margin-top:8px;">
               <h2 class="sec-head">Status matrix</h2>
-              <p class="sec-sub">Five rows (label left · preview right): Default · Hover · Active · Focus · Disabled</p>
+              <p class="sec-sub">五行静态迷你面板：Default · Hover（<code>is-hov</code>）· Active（<code>is-act</code>）· Focus（<code>is-foc</code>）· Disabled（<code>is-dis</code>）；与侧栏 Layout/Width 无关。</p>
               <div id="matrixRoot" class="matrix-grid"></div>
             </section>
           </div>
@@ -5564,21 +5666,23 @@
 
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/modal.md</code> 与 Arco Vue <code>Modal</code>（<code>width</code> / <code>footer</code> / <code>maskClosable</code> / <code>escToExit</code> 等）；遮罩与面板走 <code>--component-modal-mask</code>、<code>--component-modal-panel-*</code>，内边距与宽度走 <code>--component-modal-p</code>、<code>--component-modal-w</code> / <code>--component-modal-w-with-tip</code>。
+          </p>
           <label class="pg-field">
-            <span>Size</span>
-            <select id="pgSize" aria-label="Preview size">
-              <option value="sm">Small</option>
-              <option value="md" selected>Medium</option>
-              <option value="lg">Large</option>
+            <span>Layout（演示）</span>
+            <select id="pgVariant" aria-label="Modal demo layout">
+              <option value="standard" selected>standard（正文 only）</option>
+              <option value="with-tip">with-tip（顶部提示区）</option>
             </select>
           </label>
           <label class="pg-field">
-            <span>Variant</span>
-            <select id="pgVariant" aria-label="Preview variant">
-              <option value="primary" selected>Primary</option>
-              <option value="neutral">Neutral</option>
-              <option value="danger">Danger</option>
-              <option value="ghost">Ghost</option>
+            <span>Width（token）</span>
+            <select id="pgSize" aria-label="Modal demo width">
+              <option value="md" selected>MD · 440px（<code>--component-modal-w</code>）</option>
+              <option value="md-tip">MD + tip · 464px（<code>--component-modal-w-with-tip</code>）</option>
+              <option value="sm">SM · 280px（紧凑示意）</option>
+              <option value="lg">LG · 520px（宽示意）</option>
             </select>
           </label>
         </aside>
@@ -6745,63 +6849,120 @@
   }
 
   function mountModal() {
-    liveRoot.innerHTML =
-      '<button type="button" class="ds-open-modal ds-ripple-host" id="dsmOpen">Open modal</button>' +
-      '<div class="ds-modal-layer" id="dsmLayer" hidden>' +
-      '<div class="ds-modal-backdrop" id="dsmBd" tabindex="-1"></div>' +
-      '<div class="ds-modal-panel" role="dialog" aria-modal="true" aria-labelledby="dsmT">' +
-      '<header class="ds-modal-h"><h2 class="ds-modal-title" id="dsmT">Dialog</h2>' +
-      '<button type="button" class="ds-modal-x" id="dsmX" aria-label="Close">×</button></header>' +
-      '<div class="ds-modal-div"></div>' +
-      '<div class="ds-modal-body">Click backdrop, ×, Cancel, OK, or press Escape to close.</div>' +
-      '<div class="ds-modal-actions">' +
-      '<button type="button" class="ds-mini-btn" id="dsmCancel">Cancel</button>' +
-      '<button type="button" class="ds-mini-btn primary" id="dsmOk">OK</button></div></div></div>';
+    var escHandler = null;
 
-    var layer = document.getElementById("dsmLayer");
-    var bd = document.getElementById("dsmBd");
-    var openB = document.getElementById("dsmOpen");
-    function close() {
-      layer.hidden = true;
+    function kind() {
+      return (pgVariant && pgVariant.value) || "standard";
     }
-    function openM() {
-      layer.hidden = false;
-      document.getElementById("dsmX").focus();
-    }
-    openB.addEventListener("click", openM);
-    bd.addEventListener("click", close);
-    document.getElementById("dsmX").addEventListener("click", close);
-    document.getElementById("dsmCancel").addEventListener("click", close);
-    document.getElementById("dsmOk").addEventListener("click", close);
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !layer.hidden) close();
-    });
-    bindRipple(openB);
 
-    window.__dsRefresh = function () {
+    function sizeKey() {
+      return (pgSize && pgSize.value) || "md";
+    }
+
+    function liveHtml() {
+      var tip = kind() === "with-tip";
+      var tipHtml = tip
+        ? '<div class="ds-modal-tip" role="note"><p class="ds-modal-tip-txt">Tip: verify inputs before submitting.</p></div>'
+        : "";
+      return (
+        '<button type="button" class="ds-open-modal ds-ripple-host" id="dsmOpen">Open modal</button>' +
+        '<div class="ds-modal-layer" id="dsmLayer" hidden>' +
+        '<div class="ds-modal-backdrop" id="dsmBd" tabindex="-1"></div>' +
+        '<div class="ds-modal-panel" role="dialog" aria-modal="true" aria-labelledby="dsmT" aria-describedby="dsmD">' +
+        '<header class="ds-modal-h"><h2 class="ds-modal-title" id="dsmT">Dialog</h2>' +
+        '<button type="button" class="ds-modal-x" id="dsmX" aria-label="Close">×</button></header>' +
+        '<div class="ds-modal-div"></div>' +
+        '<div class="ds-modal-body">' +
+        tipHtml +
+        '<p id="dsmD">Click backdrop, ×, Cancel, OK, or press Escape to close.</p></div>' +
+        '<div class="ds-modal-actions">' +
+        '<button type="button" class="ds-mini-btn" id="dsmCancel">Cancel</button>' +
+        '<button type="button" class="ds-mini-btn primary" id="dsmOk">OK</button></div></div></div>'
+      );
+    }
+
+    function wire() {
+      var layer = document.getElementById("dsmLayer");
+      if (!layer) return;
+      var bd = document.getElementById("dsmBd");
+      var openB = document.getElementById("dsmOpen");
+      function close() {
+        layer.hidden = true;
+      }
+      function openM() {
+        layer.hidden = false;
+        var x = document.getElementById("dsmX");
+        if (x) x.focus();
+      }
+      if (openB) openB.onclick = openM;
+      if (bd) bd.onclick = close;
+      var xb = document.getElementById("dsmX");
+      if (xb) xb.onclick = close;
+      var c = document.getElementById("dsmCancel");
+      var o = document.getElementById("dsmOk");
+      if (c) c.onclick = close;
+      if (o) o.onclick = close;
+      if (escHandler) document.removeEventListener("keydown", escHandler);
+      escHandler = function (e) {
+        if (e.key === "Escape" && layer && !layer.hidden) close();
+      };
+      document.addEventListener("keydown", escHandler);
+      if (openB) bindRipple(openB);
+    }
+
+    function applyPanelWidth() {
+      var layer = document.getElementById("dsmLayer");
+      if (!layer) return;
       var panel = layer.querySelector(".ds-modal-panel");
       if (!panel) return;
-      var s = pgSize.value;
+      panel.style.width = "";
+      var s = sizeKey();
       if (s === "sm") panel.style.width = "min(280px, calc(100vw - 48px))";
+      else if (s === "md-tip")
+        panel.style.width = "min(calc(var(--component-modal-w-with-tip) * 1px), calc(100vw - 48px))";
       else if (s === "lg") panel.style.width = "min(520px, calc(100vw - 48px))";
-      else panel.style.width = "min(calc(var(--component-modal-w, 440) * 1px), calc(100vw - 48px))";
-    };
-    pgVariant.disabled = true;
-    pgSize.disabled = false;
-    window.__dsRefresh();
-    pgSize.addEventListener("change", window.__dsRefresh);
+      else panel.style.width = "min(calc(var(--component-modal-w) * 1px), calc(100vw - 48px))";
+    }
 
-    matrixShell(L5, function (lbl) {
-      return (
-        '<div style="width:100%;max-width:200px;margin:0 auto;border-radius:calc(var(--component-modal-panel-radius,16)*1px);' +
-        'background:var(--component-modal-panel-bg);box-shadow:var(--component-modal-panel-shadow);' +
-        'padding:10px;font-size:12px;color:var(--component-modal-body-text);text-align:left;' +
-        (lbl === "Disabled" ? "opacity:0.45;" : "") +
-        '">' +
-        lbl +
-        "</div>"
-      );
-    });
+    function renderLive() {
+      liveRoot.innerHTML = liveHtml();
+      wire();
+      applyPanelWidth();
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (lbl, i) {
+        var cls = "ds-modal-panel ds-modal-panel--matrix";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-act";
+        if (i === 3) cls += " is-foc";
+        if (i === 4) cls += " is-dis";
+        return (
+          '<div class="' +
+          cls +
+          '" role="presentation">' +
+          '<header class="ds-modal-h"><h2 class="ds-modal-title">Title</h2></header>' +
+          '<div class="ds-modal-div"></div>' +
+          '<div class="ds-modal-body">' +
+          lbl +
+          "</div>" +
+          '<div class="ds-modal-actions">' +
+          '<button type="button" class="ds-mini-btn" tabindex="-1">Cancel</button>' +
+          '<button type="button" class="ds-mini-btn primary" tabindex="-1">OK</button></div></div>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
   }
 
   function mountCheckbox() {

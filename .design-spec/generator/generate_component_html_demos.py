@@ -212,22 +212,60 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
     """
     chip = "border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);"
     if slug in ("modal", "dialog"):
-        return """
+        sections = _read_md_sections(md_path)
+        figma_section = sections.get("figma", "")
+        sizes_section = sections.get("sizes", "")
+        figma_line = _md_inline_to_plain(_first_non_empty_line(figma_section))
+        sizes_line = _md_inline_to_plain(_first_non_empty_line(sizes_section))
+        md_rel = f"docs/components/{md_path.name}"
+        figma_link = ""
+        m_link = RE_MD_LINK.search(figma_section)
+        if m_link:
+            label = html.escape(m_link.group(1).strip())
+            href = html.escape(m_link.group(2).strip())
+            figma_link = f'<div class="muted" style="margin-top:4px; font-size:12px;">Figma: <a href="{href}">{label}</a></div>'
+        if not sizes_line:
+            sizes_line = "默认宽度 440px；带提示区 464px（`--component-modal-w` / `--component-modal-w-with-tip`）。"
+        size_hint_card = f"""
     <div class="card" style="border-radius:10px;">
       <div style="padding:12px 12px 0 12px;">
-        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（自动生成）</div>
-        <div class="muted" style="margin-top:6px; font-size:12px;">
-          紧凑对话框参考宽度：<strong>280px</strong>
-        </div>
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 {html.escape(md_rel)}）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">{html.escape(sizes_line)}</div>
+        {figma_link}
       </div>
       <div style="padding:12px;">
-        <div style="position:relative; display:inline-block; margin-top:18px;">
-          <div style="font-size:11px; font-weight:600; color:var(--semantic-text-secondary,#666); position:absolute; left:0; bottom:100%; margin-bottom:6px;">280px</div>
-          <div style="width:280px; height:28px; border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" title="宽度 280px" aria-hidden="true"></div>
+        <div style="height:36px; width:min(440px,100%); border-radius:8px; {chip}" aria-hidden="true"></div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">{html.escape(figma_line or "按文档 Figma 标注进行比对。")}</div>
+      </div>
+    </div>
+    """
+        static_mdl = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">遮罩 + 面板壳 <code>ds-modal-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <div style="padding:18px;border-radius:10px;background:var(--component-modal-mask);" data-ds-annotate-target="1">
+          <div class="ds-modal-panel ds-modal-panel--fig" role="dialog" aria-modal="true" aria-labelledby="mdlFigT" aria-describedby="mdlFigD">
+            <header class="ds-modal-h">
+              <h2 class="ds-modal-title" id="mdlFigT">Modal title</h2>
+              <button type="button" class="ds-modal-x" tabindex="-1" aria-hidden="true">\u00d7</button>
+            </header>
+            <div class="ds-modal-div" aria-hidden="true"></div>
+            <div class="ds-modal-body">
+              <p id="mdlFigD" style="margin:0;">Body text for token compare.</p>
+            </div>
+            <div class="ds-modal-actions">
+              <button type="button" class="ds-mini-btn" tabindex="-1">Cancel</button>
+              <button type="button" class="ds-mini-btn primary" tabindex="-1">OK</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     """
+        return size_hint_card + static_mdl
 
     if slug in ("input", "input-range", "input-adornment", "input-ip", "input-number"):
         return f"""
@@ -1472,6 +1510,30 @@ def _component_demo_body(
             <option value="md" selected>md</option>
           </select>
         </aside>"""
+    elif spec.slug == "modal":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/modal.md</code> 与 Arco Vue <code>Modal</code>（<code>width</code> / <code>footer</code> / <code>maskClosable</code> / <code>escToExit</code> 等）；遮罩与面板走 <code>--component-modal-mask</code>、<code>--component-modal-panel-*</code>，内边距与宽度走 <code>--component-modal-p</code>、<code>--component-modal-w</code> / <code>--component-modal-w-with-tip</code>。
+          </p>
+          <label class="pg-field">
+            <span>Layout（演示）</span>
+            <select id="pgVariant" aria-label="Modal demo layout">
+              <option value="standard" selected>standard（正文 only）</option>
+              <option value="with-tip">with-tip（顶部提示区）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Width（token）</span>
+            <select id="pgSize" aria-label="Modal demo width">
+              <option value="md" selected>MD · 440px（<code>--component-modal-w</code>）</option>
+              <option value="md-tip">MD + tip · 464px（<code>--component-modal-w-with-tip</code>）</option>
+              <option value="sm">SM · 280px（紧凑示意）</option>
+              <option value="lg">LG · 520px（宽示意）</option>
+            </select>
+          </label>
+        </aside>"""
     elif spec.slug == "button":
         aside_block = """
         <aside class="studio-aside card">
@@ -1764,6 +1826,16 @@ def _component_demo_body(
         )
         matrix_rows_help = (
             "五行静态：Info·status · Success·status · Warning·status · Error·alert · Info·closable；与侧栏 Type 无关。"
+        )
+    elif spec.slug == "modal":
+        live_intro_sub = (
+            "Live：<code>button#dsmOpen.ds-open-modal</code> 打开 <code>#dsmLayer.ds-modal-layer</code>（去 <code>hidden</code>）；"
+            "<code>.ds-modal-backdrop</code> 点击关闭；面板 <code>.ds-modal-panel</code> 为 <code>role=\"dialog\"</code> + <code>aria-modal=\"true\"</code> + <code>aria-labelledby</code> / <code>aria-describedby</code>；"
+            "<strong>with-tip</strong> 时在正文顶渲染 <code>.ds-modal-tip</code>；宽度由侧栏 Width 下拉写入内联 <code>min(..., var(--component-modal-w*)...)</code>；"
+            "<code>Escape</code> 关闭；样式 <code>--component-modal-*</code>（见 <code>docs/components/modal.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态迷你面板：Default · Hover（<code>is-hov</code>）· Active（<code>is-act</code>）· Focus（<code>is-foc</code>）· Disabled（<code>is-dis</code>）；与侧栏 Layout/Width 无关。"
         )
     elif spec.slug == "notification":
         live_intro_sub = (
@@ -2059,59 +2131,21 @@ def _component_preview_block(slug: str) -> str:
         return (
             shared
             + """
-        <style>
-          .mdl-mask {
-            width: 520px;
-            padding: 18px;
-            border-radius: 10px;
-            background: var(--component-modal-mask, rgba(0,0,0,0.4));
-          }
-          .mdl-panel {
-            width: calc(var(--component-modal-w, 440) * 1px);
-            background: var(--component-modal-panel-bg, #fff);
-            border-radius: calc(var(--component-modal-panel-radius, 16) * 1px);
-            box-shadow: var(--component-modal-panel-shadow, 0px 4px 10px 0px rgba(0,0,0,0.1));
-            overflow:hidden;
-          }
-          .mdl-h {
-            display:flex; align-items:center; justify-content: space-between;
-            padding: calc(var(--component-modal-p, 24) * 1px);
-            padding-bottom: 14px;
-          }
-          .mdl-title {
-            color: var(--component-modal-title-text,#222);
-            font-size: 16px; line-height: 22px; font-weight: 600;
-          }
-          .mdl-x {
-            width: 16px; height: 16px; border-radius: 4px;
-            background: var(--component-modal-close-icon,#999);
-            opacity: 0.9;
-          }
-          .mdl-div { height:1px; background: var(--component-modal-divider,#e8e8e8); }
-          .mdl-b { padding: calc(var(--component-modal-p, 24) * 1px); }
-          .mdl-text { color: var(--component-modal-body-text,#222); font-size: 14px; line-height: 20px; }
-          .mdl-actions { display:flex; justify-content:flex-end; gap: 12px; margin-top: 16px; }
-          .mini-btn {
-            height: 32px; padding: 0 12px; border-radius: 6px; border: 1px solid #ccc;
-            background: #fff; font-size: 14px; line-height: 20px; font-weight: 500;
-          }
-          .mini-btn.primary { background: #222; color:#fff; border-color: #222; }
-        </style>
-        <div class="mdl-mask" aria-label="modal preview">
-          <section class="mdl-panel" role="dialog" aria-modal="true" aria-label="modal" data-ds-annotate-target="1">
-            <header class="mdl-h">
-              <div class="mdl-title">Modal title</div>
-              <div class="mdl-x" aria-hidden="true"></div>
+        <div style="padding:18px;border-radius:10px;max-width:520px;background:var(--component-modal-mask,rgba(0,0,0,0.4));" aria-label="modal preview">
+          <div class="ds-modal-panel ds-modal-panel--fig" role="dialog" aria-modal="true" aria-labelledby="mdlPvT" aria-describedby="mdlPvD" data-ds-annotate-target="1">
+            <header class="ds-modal-h">
+              <h2 class="ds-modal-title" id="mdlPvT">Modal title</h2>
+              <button type="button" class="ds-modal-x" tabindex="-1" aria-hidden="true">&#215;</button>
             </header>
-            <div class="mdl-div" aria-hidden="true"></div>
-            <div class="mdl-b">
-              <div class="mdl-text">Body text for 1:1 visual compare.</div>
-              <div class="mdl-actions">
-                <button class="mini-btn">Cancel</button>
-                <button class="mini-btn primary">OK</button>
-              </div>
+            <div class="ds-modal-div" aria-hidden="true"></div>
+            <div class="ds-modal-body">
+              <p id="mdlPvD" style="margin:0;">Body text for 1:1 visual compare.</p>
             </div>
-          </section>
+            <div class="ds-modal-actions">
+              <button type="button" class="ds-mini-btn" tabindex="-1">Cancel</button>
+              <button type="button" class="ds-mini-btn primary" tabindex="-1">OK</button>
+            </div>
+          </div>
         </div>
         """
             + end

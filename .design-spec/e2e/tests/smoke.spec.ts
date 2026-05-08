@@ -57,6 +57,9 @@ const dropdownDemo = pathToFileURL(
 const messageDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/message.html")
 ).href;
+const modalDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/modal.html")
+).href;
 const notificationDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/notification.html")
 ).href;
@@ -390,6 +393,32 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await page.goto(messageDemo);
     await page.getByLabel("Message demo type").focus();
     await expect(page.getByLabel("Message demo type")).toBeFocused();
+  });
+
+  test("modal: live mounts open button and layer", async ({ page }) => {
+    await page.goto(modalDemo);
+    await page.waitForFunction(
+      () =>
+        !!document.querySelector("#liveRoot #dsmOpen") && !!document.querySelector("#liveRoot #dsmLayer"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #dsmOpen")).toBeVisible();
+    await expect(page.locator("#liveRoot #dsmLayer")).toBeAttached();
+  });
+
+  test("modal: opening layer removes hidden", async ({ page }) => {
+    await page.goto(modalDemo);
+    await page.locator("#dsmOpen").click();
+    await expect(page.locator("#dsmLayer")).not.toHaveAttribute("hidden");
+  });
+
+  test("modal: layout and width selects are keyboard-reachable", async ({ page }) => {
+    await page.goto(modalDemo);
+    await page.getByLabel("Modal demo layout").focus();
+    await expect(page.getByLabel("Modal demo layout")).toBeFocused();
+    await page.getByLabel("Modal demo width").focus();
+    await expect(page.getByLabel("Modal demo width")).toBeFocused();
   });
 
   test("notification: live mounts notification root", async ({ page }) => {

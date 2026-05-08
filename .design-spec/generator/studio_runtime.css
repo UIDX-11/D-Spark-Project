@@ -1727,6 +1727,81 @@
   margin-top: 16px;
 }
 
+.ds-modal-tip {
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  background: var(--semantic-bg-page, #f7f7f7);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--semantic-text-secondary, #666);
+}
+
+.ds-modal-tip-txt {
+  margin: 0;
+}
+
+.ds-modal-panel--matrix {
+  width: 100%;
+  max-width: min(220px, 100%);
+  margin: 0 auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.ds-modal-panel--matrix .ds-modal-h {
+  padding: 10px;
+  padding-bottom: 8px;
+}
+
+.ds-modal-panel--matrix .ds-modal-body {
+  padding: 10px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.ds-modal-panel--matrix .ds-modal-title {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.ds-modal-panel--matrix .ds-modal-actions {
+  margin-top: 10px;
+  padding: 0 10px 10px;
+  flex-wrap: wrap;
+}
+
+.ds-modal-panel--fig {
+  width: min(calc(var(--component-modal-w) * 1px), 100%);
+  max-height: none;
+  overflow: visible;
+}
+
+.ds-modal-panel.is-hov {
+  box-shadow: var(--component-modal-panel-shadow), 0 0 0 1px var(--semantic-border-default, #ccc);
+}
+
+.ds-modal-panel.is-act {
+  outline: 1px dashed var(--semantic-border-default, #ccc);
+  outline-offset: 2px;
+}
+
+.ds-modal-panel.is-foc {
+  box-shadow: var(--component-modal-panel-shadow), 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-modal-panel.is-dis {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.ds-modal-x:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
 .ds-mini-btn {
   height: 32px;
   padding: 0 12px;
@@ -1743,6 +1818,11 @@
   background: var(--component-button-primary-bg-default, #222);
   color: var(--component-button-primary-text-default, #fff);
   border-color: var(--component-button-primary-bg-default, #222);
+}
+
+.ds-mini-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
 }
 
 /* ---- Checkbox ---- */

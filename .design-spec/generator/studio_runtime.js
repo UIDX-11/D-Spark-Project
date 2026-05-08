@@ -1157,63 +1157,120 @@
   }
 
   function mountModal() {
-    liveRoot.innerHTML =
-      '<button type="button" class="ds-open-modal ds-ripple-host" id="dsmOpen">Open modal</button>' +
-      '<div class="ds-modal-layer" id="dsmLayer" hidden>' +
-      '<div class="ds-modal-backdrop" id="dsmBd" tabindex="-1"></div>' +
-      '<div class="ds-modal-panel" role="dialog" aria-modal="true" aria-labelledby="dsmT">' +
-      '<header class="ds-modal-h"><h2 class="ds-modal-title" id="dsmT">Dialog</h2>' +
-      '<button type="button" class="ds-modal-x" id="dsmX" aria-label="Close">×</button></header>' +
-      '<div class="ds-modal-div"></div>' +
-      '<div class="ds-modal-body">Click backdrop, ×, Cancel, OK, or press Escape to close.</div>' +
-      '<div class="ds-modal-actions">' +
-      '<button type="button" class="ds-mini-btn" id="dsmCancel">Cancel</button>' +
-      '<button type="button" class="ds-mini-btn primary" id="dsmOk">OK</button></div></div></div>';
+    var escHandler = null;
 
-    var layer = document.getElementById("dsmLayer");
-    var bd = document.getElementById("dsmBd");
-    var openB = document.getElementById("dsmOpen");
-    function close() {
-      layer.hidden = true;
+    function kind() {
+      return (pgVariant && pgVariant.value) || "standard";
     }
-    function openM() {
-      layer.hidden = false;
-      document.getElementById("dsmX").focus();
-    }
-    openB.addEventListener("click", openM);
-    bd.addEventListener("click", close);
-    document.getElementById("dsmX").addEventListener("click", close);
-    document.getElementById("dsmCancel").addEventListener("click", close);
-    document.getElementById("dsmOk").addEventListener("click", close);
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !layer.hidden) close();
-    });
-    bindRipple(openB);
 
-    window.__dsRefresh = function () {
+    function sizeKey() {
+      return (pgSize && pgSize.value) || "md";
+    }
+
+    function liveHtml() {
+      var tip = kind() === "with-tip";
+      var tipHtml = tip
+        ? '<div class="ds-modal-tip" role="note"><p class="ds-modal-tip-txt">Tip: verify inputs before submitting.</p></div>'
+        : "";
+      return (
+        '<button type="button" class="ds-open-modal ds-ripple-host" id="dsmOpen">Open modal</button>' +
+        '<div class="ds-modal-layer" id="dsmLayer" hidden>' +
+        '<div class="ds-modal-backdrop" id="dsmBd" tabindex="-1"></div>' +
+        '<div class="ds-modal-panel" role="dialog" aria-modal="true" aria-labelledby="dsmT" aria-describedby="dsmD">' +
+        '<header class="ds-modal-h"><h2 class="ds-modal-title" id="dsmT">Dialog</h2>' +
+        '<button type="button" class="ds-modal-x" id="dsmX" aria-label="Close">×</button></header>' +
+        '<div class="ds-modal-div"></div>' +
+        '<div class="ds-modal-body">' +
+        tipHtml +
+        '<p id="dsmD">Click backdrop, ×, Cancel, OK, or press Escape to close.</p></div>' +
+        '<div class="ds-modal-actions">' +
+        '<button type="button" class="ds-mini-btn" id="dsmCancel">Cancel</button>' +
+        '<button type="button" class="ds-mini-btn primary" id="dsmOk">OK</button></div></div></div>'
+      );
+    }
+
+    function wire() {
+      var layer = document.getElementById("dsmLayer");
+      if (!layer) return;
+      var bd = document.getElementById("dsmBd");
+      var openB = document.getElementById("dsmOpen");
+      function close() {
+        layer.hidden = true;
+      }
+      function openM() {
+        layer.hidden = false;
+        var x = document.getElementById("dsmX");
+        if (x) x.focus();
+      }
+      if (openB) openB.onclick = openM;
+      if (bd) bd.onclick = close;
+      var xb = document.getElementById("dsmX");
+      if (xb) xb.onclick = close;
+      var c = document.getElementById("dsmCancel");
+      var o = document.getElementById("dsmOk");
+      if (c) c.onclick = close;
+      if (o) o.onclick = close;
+      if (escHandler) document.removeEventListener("keydown", escHandler);
+      escHandler = function (e) {
+        if (e.key === "Escape" && layer && !layer.hidden) close();
+      };
+      document.addEventListener("keydown", escHandler);
+      if (openB) bindRipple(openB);
+    }
+
+    function applyPanelWidth() {
+      var layer = document.getElementById("dsmLayer");
+      if (!layer) return;
       var panel = layer.querySelector(".ds-modal-panel");
       if (!panel) return;
-      var s = pgSize.value;
+      panel.style.width = "";
+      var s = sizeKey();
       if (s === "sm") panel.style.width = "min(280px, calc(100vw - 48px))";
+      else if (s === "md-tip")
+        panel.style.width = "min(calc(var(--component-modal-w-with-tip) * 1px), calc(100vw - 48px))";
       else if (s === "lg") panel.style.width = "min(520px, calc(100vw - 48px))";
-      else panel.style.width = "min(calc(var(--component-modal-w, 440) * 1px), calc(100vw - 48px))";
-    };
-    pgVariant.disabled = true;
-    pgSize.disabled = false;
-    window.__dsRefresh();
-    pgSize.addEventListener("change", window.__dsRefresh);
+      else panel.style.width = "min(calc(var(--component-modal-w) * 1px), calc(100vw - 48px))";
+    }
 
-    matrixShell(L5, function (lbl) {
-      return (
-        '<div style="width:100%;max-width:200px;margin:0 auto;border-radius:calc(var(--component-modal-panel-radius,16)*1px);' +
-        'background:var(--component-modal-panel-bg);box-shadow:var(--component-modal-panel-shadow);' +
-        'padding:10px;font-size:12px;color:var(--component-modal-body-text);text-align:left;' +
-        (lbl === "Disabled" ? "opacity:0.45;" : "") +
-        '">' +
-        lbl +
-        "</div>"
-      );
-    });
+    function renderLive() {
+      liveRoot.innerHTML = liveHtml();
+      wire();
+      applyPanelWidth();
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (lbl, i) {
+        var cls = "ds-modal-panel ds-modal-panel--matrix";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-act";
+        if (i === 3) cls += " is-foc";
+        if (i === 4) cls += " is-dis";
+        return (
+          '<div class="' +
+          cls +
+          '" role="presentation">' +
+          '<header class="ds-modal-h"><h2 class="ds-modal-title">Title</h2></header>' +
+          '<div class="ds-modal-div"></div>' +
+          '<div class="ds-modal-body">' +
+          lbl +
+          "</div>" +
+          '<div class="ds-modal-actions">' +
+          '<button type="button" class="ds-mini-btn" tabindex="-1">Cancel</button>' +
+          '<button type="button" class="ds-mini-btn primary" tabindex="-1">OK</button></div></div>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
   }
 
   function mountCheckbox() {
