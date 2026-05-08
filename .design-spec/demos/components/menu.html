@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>menu — D.Spark Design System Demo</title>
+    <title>Menu — D.Spark Design System Demo</title>
     <link rel="stylesheet" href="../../tokens/dist/tokens.css" />
     <style>
       :root {
@@ -87,7 +87,7 @@
     <div class="wrap">
       <div class="top">
         <div>
-          <h1 style="margin:0; font-size:20px; line-height:1.2;">menu</h1>
+          <h1 style="margin:0; font-size:20px; line-height:1.2;">Menu</h1>
           <div class="muted" style="margin-top:6px;">Slug <code>menu</code> · tokens <code>--component-menu-*</code> · behavior source <code>Arco Vue</code></div>
         </div>
         <div class="pill">
@@ -2804,6 +2804,200 @@
 
 .ds-sel--matrix .ds-sel-item {
   width: 100%;
+}
+
+/* ---- Menu (side + pop; --component-menu-*) ---- */
+.ds-mu-root {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.ds-mu-nav {
+  box-sizing: border-box;
+  width: calc(var(--component-menu-container-w-expanded) * 1px);
+  max-width: 100%;
+  background: var(--component-menu-container-bg);
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  border-radius: 10px;
+  padding: 8px 0;
+}
+
+.ds-mu-nav--collapsed {
+  width: calc(var(--component-menu-container-w-collapsed) * 1px);
+}
+
+.ds-mu-item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--component-menu-item-gap) * 1px);
+  min-height: calc(var(--component-menu-item-h-1) * 1px);
+  padding: 0 calc(var(--component-menu-item-px) * 1px);
+  margin: 4px 8px;
+  width: calc(100% - 16px);
+  border: 0;
+  border-radius: 2px;
+  background: var(--component-menu-item-bg-default);
+  color: var(--component-menu-item-text);
+  font-size: 14px;
+  line-height: 20px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.ds-mu-item:hover {
+  background: var(--component-menu-item-bg-hover);
+  color: var(--component-menu-item-text-hover);
+}
+
+.ds-mu-item.is-hov {
+  background: var(--component-menu-item-bg-hover);
+  color: var(--component-menu-item-text-hover);
+}
+
+.ds-mu-item[aria-selected="true"],
+.ds-mu-item.is-sel {
+  background: var(--component-menu-item-bg-selected);
+  color: var(--component-menu-item-text-selected);
+  font-weight: 500;
+}
+
+.ds-mu-item:disabled,
+.ds-mu-item.is-dis {
+  color: var(--component-menu-item-text-disabled);
+  cursor: default;
+}
+
+.ds-mu-item:disabled .ds-mu-ic,
+.ds-mu-item.is-dis .ds-mu-ic {
+  background: var(--component-menu-icon-disabled);
+  opacity: 0.6;
+}
+
+.ds-mu-item:focus {
+  outline: none;
+}
+
+.ds-mu-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-mu-item.is-foc {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-mu-ic {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--component-menu-icon);
+  opacity: 0.85;
+}
+
+.ds-mu-lbl {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-mu-nav--collapsed .ds-mu-lbl {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ds-mu-nav--collapsed .ds-mu-item {
+  justify-content: center;
+  padding: 0;
+  width: calc(100% - 8px);
+}
+
+.ds-mu-nav--collapsed .ds-mu-chev {
+  display: none;
+}
+
+.ds-mu-chev {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--component-menu-chevron);
+  border-bottom: 2px solid var(--component-menu-chevron);
+  transform: rotate(-45deg);
+}
+
+.ds-mu-group {
+  padding: 8px 16px 4px 16px;
+  color: var(--component-menu-group-title);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ds-mu-pop {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: calc(var(--component-menu-pop-min-w) * 1px);
+  max-width: 100%;
+  background: var(--component-menu-pop-bg);
+  border-radius: calc(var(--component-menu-pop-radius) * 1px);
+  box-shadow: var(--component-menu-pop-shadow);
+  padding: 4px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+}
+
+.ds-mu-pop-item {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: calc(var(--component-menu-pop-item-py) * 1px) calc(var(--component-menu-pop-item-px) * 1px);
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--semantic-text-primary, #222);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ds-mu-pop-item:hover {
+  background: var(--semantic-bg-page, #f7f7f7);
+}
+
+.ds-mu-pop-item.is-hov {
+  background: var(--semantic-bg-page, #f7f7f7);
+}
+
+.ds-mu-pop-item:disabled,
+.ds-mu-pop-item.is-dis {
+  color: var(--semantic-text-muted, #ccc);
+  cursor: default;
+}
+
+.ds-mu-pop-item:focus {
+  outline: none;
+}
+
+.ds-mu-pop-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-mu-nav--matrix {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+.ds-mu-nav--fig {
+  width: min(calc(var(--component-menu-container-w-expanded) * 1px), 100%);
 }
 
 /* ---- Dropdown (Arco Ddropdown-aligned; --component-dropdown-*) ---- */
@@ -5615,25 +5809,47 @@
     <div class="card" style="border-radius:10px;">
       <div style="padding:12px 12px 0 12px;">
         <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 docs/components/menu.md）</div>
-        <div class="muted" style="margin-top:6px; font-size:12px;">请参考对应组件文档中的 Sizes 章节。</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">- 侧栏展开宽度：220px（--component-menu-container-w-expanded）；收起：48px（--component-menu-container-w-collapsed）。</div>
         
       </div>
       <div style="padding:12px;">
-        <div style="height:36px; width:min(360px,100%); border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" aria-hidden="true"></div>
-        <div class="muted" style="margin-top:8px; font-size:12px;">按文档 Figma 标注进行比对。</div>
+        <div style="height:38px; width:min(220px,100%); border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" aria-hidden="true"></div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">- 侧栏容器：展开宽 menu.container.wExpanded（220px）、收起 wCollapsed（48px），背景 menu.container.bg。</div>
+      </div>
+    </div>
+    
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">侧栏 + 弹出菜单；类名 <code>ds-mu-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px; display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+        <nav class="ds-mu-nav ds-mu-nav--fig" role="presentation" aria-label="menu static side" data-ds-annotate-target="1">
+          <div class="ds-mu-group" aria-hidden="true">Section</div>
+          <button type="button" class="ds-mu-item" tabindex="-1" role="presentation">
+            <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Item</span><span class="ds-mu-chev" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="ds-mu-item is-sel" tabindex="-1" role="presentation">
+            <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Selected</span><span class="ds-mu-chev" aria-hidden="true"></span>
+          </button>
+        </nav>
+        <div class="ds-mu-pop" role="presentation" aria-label="menu static pop" data-ds-annotate-target="1">
+          <button type="button" class="ds-mu-pop-item" tabindex="-1" role="presentation">Pop item</button>
+          <button type="button" class="ds-mu-pop-item is-hov" tabindex="-1" role="presentation">Hover</button>
+        </div>
       </div>
     </div>
     
             <section>
               <h2 class="sec-head">Live</h2>
-              <p class="sec-sub">Visuals follow <code>tokens.css</code> (see <code>docs/design.md</code> — tokens first). Pseudo-states + small JS for ripple, switch, modal, select.</p>
+              <p class="sec-sub">Live：<code>#muRoot</code> 在 <strong>inline</strong> 时为 <code>nav.ds-mu-nav[role="menu"]</code>，内含 <code>button.ds-mu-item[role="menuitem"]</code> + <code>span.ds-mu-ic</code> / <code>span.ds-mu-lbl</code> / <code>span.ds-mu-chev</code>；<strong>collapsed</strong> 时容器 <code>ds-mu-nav--collapsed</code>（48px，文案 <code>sr-only</code>）；<strong>pop</strong> 时为 <code>div.ds-mu-pop[role="menu"]</code> + <code>button.ds-mu-pop-item</code>；键盘 <code>ArrowUp</code>/<code>ArrowDown</code> 在可用 <code>menuitem</code> 间移动焦点；样式 <code>--component-menu-*</code>（见 <code>docs/components/menu.md</code>）。</p>
               <div class="live-canvas">
                 <div id="liveRoot"></div>
               </div>
             </section>
             <section style="margin-top:8px;">
               <h2 class="sec-head">Status matrix</h2>
-              <p class="sec-sub">Five rows (label left · preview right): Default · Hover · Active · Focus · Disabled</p>
+              <p class="sec-sub">五行静态侧栏行：Default · Hover（<code>is-hov</code>）· Selected（<code>is-sel</code> + <code>aria-selected</code>）· Focus（<code>is-foc</code>）· Disabled；与侧栏 View/Width 无关。</p>
               <div id="matrixRoot" class="matrix-grid"></div>
             </section>
           </div>
@@ -5641,21 +5857,21 @@
 
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/menu.md</code> 与 Arco Vue <code>Menu</code>（侧栏 / 折叠 / 子菜单弹出等）；容器与行走 <code>--component-menu-container-*</code>、<code>--component-menu-item-*</code>，弹出层走 <code>--component-menu-pop-*</code>。
+          </p>
           <label class="pg-field">
-            <span>Size</span>
-            <select id="pgSize" aria-label="Preview size">
-              <option value="sm">Small</option>
-              <option value="md" selected>Medium</option>
-              <option value="lg">Large</option>
+            <span>View（演示）</span>
+            <select id="pgVariant" aria-label="Menu demo view">
+              <option value="inline" selected>inline · 侧栏菜单</option>
+              <option value="pop">pop · 弹出菜单面板</option>
             </select>
           </label>
           <label class="pg-field">
-            <span>Variant</span>
-            <select id="pgVariant" aria-label="Preview variant">
-              <option value="primary" selected>Primary</option>
-              <option value="neutral">Neutral</option>
-              <option value="danger">Danger</option>
-              <option value="ghost">Ghost</option>
+            <span>Side width（仅 inline）</span>
+            <select id="pgSize" aria-label="Menu demo side width">
+              <option value="expanded" selected>expanded · 220px</option>
+              <option value="collapsed">collapsed · 48px（仅图标）</option>
             </select>
           </label>
         </aside>
@@ -6935,6 +7151,130 @@
     pgSize.disabled = false;
     pgVariant.addEventListener("change", window.__dsRefresh);
     pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountMenu() {
+    function mode() {
+      return (pgVariant && pgVariant.value) === "pop" ? "pop" : "inline";
+    }
+
+    function widthMode() {
+      return (pgSize && pgSize.value) === "collapsed" ? "collapsed" : "expanded";
+    }
+
+    function liveHtml() {
+      if (mode() === "pop") {
+        return (
+          '<div id="muRoot" class="ds-mu-root">' +
+          '<div class="ds-mu-pop" role="menu" aria-label="Demo pop menu">' +
+          '<button type="button" role="menuitem" class="ds-mu-pop-item" tabindex="0">Alpha</button>' +
+          '<button type="button" role="menuitem" class="ds-mu-pop-item" tabindex="-1">Beta</button>' +
+          '<button type="button" role="menuitem" class="ds-mu-pop-item" tabindex="-1" disabled>Gamma (disabled)</button>' +
+          "</div></div>"
+        );
+      }
+      var coll = widthMode() === "collapsed";
+      var navCls = "ds-mu-nav" + (coll ? " ds-mu-nav--collapsed" : "");
+      return (
+        '<nav id="muRoot" class="' +
+        navCls +
+        '" role="menu" aria-label="Demo side menu">' +
+        '<div class="ds-mu-group" aria-hidden="true">Section</div>' +
+        '<button type="button" role="menuitem" class="ds-mu-item" tabindex="0">' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">Dashboard</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        '<button type="button" role="menuitem" class="ds-mu-item is-sel" aria-selected="true" tabindex="-1">' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">List</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        '<button type="button" role="menuitem" class="ds-mu-item" tabindex="-1">' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">Settings</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        '<button type="button" role="menuitem" class="ds-mu-item" tabindex="-1" disabled>' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">Disabled</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        "</nav>"
+      );
+    }
+
+    function menuFromRoot(root) {
+      if (!root) return null;
+      return root.getAttribute("role") === "menu" ? root : root.querySelector('[role="menu"]');
+    }
+
+    function wireMenu() {
+      var root = document.getElementById("muRoot");
+      var menuEl = menuFromRoot(root);
+      if (!menuEl) return;
+      function enabledItems() {
+        return [].slice.call(menuEl.querySelectorAll('[role="menuitem"]')).filter(function (n) {
+          return !n.disabled;
+        });
+      }
+      menuEl.onkeydown = function (e) {
+        if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+        e.preventDefault();
+        var list = enabledItems();
+        if (!list.length) return;
+        var doc = document.activeElement;
+        var i = list.indexOf(doc);
+        if (i < 0) i = 0;
+        var ni = e.key === "ArrowDown" ? Math.min(list.length - 1, i + 1) : Math.max(0, i - 1);
+        var t = list[ni];
+        if (t) {
+          t.focus();
+          list.forEach(function (n) {
+            n.setAttribute("tabindex", n === t ? "0" : "-1");
+          });
+        }
+      };
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (_lbl, i) {
+        var cls = "ds-mu-item";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-sel";
+        if (i === 3) cls += " is-foc";
+        if (i === 4) cls += " is-dis";
+        var dis = i === 4 ? " disabled" : "";
+        var sel = i === 2 ? ' aria-selected="true"' : ' aria-selected="false"';
+        return (
+          '<div class="ds-mu-nav ds-mu-nav--matrix" role="presentation">' +
+          '<button type="button" role="menuitem" class="' +
+          cls +
+          '"' +
+          sel +
+          dis +
+          ' tabindex="-1">' +
+          '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+          '<span class="ds-mu-lbl">' +
+          L5[i] +
+          "</span>" +
+          '<span class="ds-mu-chev" aria-hidden="true"></span></button></div>'
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = liveHtml();
+      wireMenu();
+      if (pgSize) pgSize.disabled = mode() === "pop";
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    if (pgSize) pgSize.disabled = mode() === "pop";
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (pgSize) pgSize.addEventListener("change", window.__dsRefresh);
     window.__dsRefresh();
   }
 
@@ -10139,6 +10479,7 @@
       tag: mountTag,
       progress: mountProgress,
       dropdown: mountDropdown,
+      menu: mountMenu,
       message: mountMessage,
       notification: mountNotification,
       pincode: mountPincode,

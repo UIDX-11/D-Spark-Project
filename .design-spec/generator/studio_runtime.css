@@ -2706,6 +2706,200 @@
   width: 100%;
 }
 
+/* ---- Menu (side + pop; --component-menu-*) ---- */
+.ds-mu-root {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.ds-mu-nav {
+  box-sizing: border-box;
+  width: calc(var(--component-menu-container-w-expanded) * 1px);
+  max-width: 100%;
+  background: var(--component-menu-container-bg);
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  border-radius: 10px;
+  padding: 8px 0;
+}
+
+.ds-mu-nav--collapsed {
+  width: calc(var(--component-menu-container-w-collapsed) * 1px);
+}
+
+.ds-mu-item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--component-menu-item-gap) * 1px);
+  min-height: calc(var(--component-menu-item-h-1) * 1px);
+  padding: 0 calc(var(--component-menu-item-px) * 1px);
+  margin: 4px 8px;
+  width: calc(100% - 16px);
+  border: 0;
+  border-radius: 2px;
+  background: var(--component-menu-item-bg-default);
+  color: var(--component-menu-item-text);
+  font-size: 14px;
+  line-height: 20px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.ds-mu-item:hover {
+  background: var(--component-menu-item-bg-hover);
+  color: var(--component-menu-item-text-hover);
+}
+
+.ds-mu-item.is-hov {
+  background: var(--component-menu-item-bg-hover);
+  color: var(--component-menu-item-text-hover);
+}
+
+.ds-mu-item[aria-selected="true"],
+.ds-mu-item.is-sel {
+  background: var(--component-menu-item-bg-selected);
+  color: var(--component-menu-item-text-selected);
+  font-weight: 500;
+}
+
+.ds-mu-item:disabled,
+.ds-mu-item.is-dis {
+  color: var(--component-menu-item-text-disabled);
+  cursor: default;
+}
+
+.ds-mu-item:disabled .ds-mu-ic,
+.ds-mu-item.is-dis .ds-mu-ic {
+  background: var(--component-menu-icon-disabled);
+  opacity: 0.6;
+}
+
+.ds-mu-item:focus {
+  outline: none;
+}
+
+.ds-mu-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-mu-item.is-foc {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-mu-ic {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--component-menu-icon);
+  opacity: 0.85;
+}
+
+.ds-mu-lbl {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-mu-nav--collapsed .ds-mu-lbl {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ds-mu-nav--collapsed .ds-mu-item {
+  justify-content: center;
+  padding: 0;
+  width: calc(100% - 8px);
+}
+
+.ds-mu-nav--collapsed .ds-mu-chev {
+  display: none;
+}
+
+.ds-mu-chev {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--component-menu-chevron);
+  border-bottom: 2px solid var(--component-menu-chevron);
+  transform: rotate(-45deg);
+}
+
+.ds-mu-group {
+  padding: 8px 16px 4px 16px;
+  color: var(--component-menu-group-title);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ds-mu-pop {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: calc(var(--component-menu-pop-min-w) * 1px);
+  max-width: 100%;
+  background: var(--component-menu-pop-bg);
+  border-radius: calc(var(--component-menu-pop-radius) * 1px);
+  box-shadow: var(--component-menu-pop-shadow);
+  padding: 4px;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+}
+
+.ds-mu-pop-item {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: calc(var(--component-menu-pop-item-py) * 1px) calc(var(--component-menu-pop-item-px) * 1px);
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--semantic-text-primary, #222);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ds-mu-pop-item:hover {
+  background: var(--semantic-bg-page, #f7f7f7);
+}
+
+.ds-mu-pop-item.is-hov {
+  background: var(--semantic-bg-page, #f7f7f7);
+}
+
+.ds-mu-pop-item:disabled,
+.ds-mu-pop-item.is-dis {
+  color: var(--semantic-text-muted, #ccc);
+  cursor: default;
+}
+
+.ds-mu-pop-item:focus {
+  outline: none;
+}
+
+.ds-mu-pop-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.ds-mu-nav--matrix {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+.ds-mu-nav--fig {
+  width: min(calc(var(--component-menu-container-w-expanded) * 1px), 100%);
+}
+
 /* ---- Dropdown (Arco Ddropdown-aligned; --component-dropdown-*) ---- */
 .ds-dd {
   position: relative;

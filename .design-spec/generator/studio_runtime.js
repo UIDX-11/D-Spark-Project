@@ -1273,6 +1273,130 @@
     window.__dsRefresh();
   }
 
+  function mountMenu() {
+    function mode() {
+      return (pgVariant && pgVariant.value) === "pop" ? "pop" : "inline";
+    }
+
+    function widthMode() {
+      return (pgSize && pgSize.value) === "collapsed" ? "collapsed" : "expanded";
+    }
+
+    function liveHtml() {
+      if (mode() === "pop") {
+        return (
+          '<div id="muRoot" class="ds-mu-root">' +
+          '<div class="ds-mu-pop" role="menu" aria-label="Demo pop menu">' +
+          '<button type="button" role="menuitem" class="ds-mu-pop-item" tabindex="0">Alpha</button>' +
+          '<button type="button" role="menuitem" class="ds-mu-pop-item" tabindex="-1">Beta</button>' +
+          '<button type="button" role="menuitem" class="ds-mu-pop-item" tabindex="-1" disabled>Gamma (disabled)</button>' +
+          "</div></div>"
+        );
+      }
+      var coll = widthMode() === "collapsed";
+      var navCls = "ds-mu-nav" + (coll ? " ds-mu-nav--collapsed" : "");
+      return (
+        '<nav id="muRoot" class="' +
+        navCls +
+        '" role="menu" aria-label="Demo side menu">' +
+        '<div class="ds-mu-group" aria-hidden="true">Section</div>' +
+        '<button type="button" role="menuitem" class="ds-mu-item" tabindex="0">' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">Dashboard</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        '<button type="button" role="menuitem" class="ds-mu-item is-sel" aria-selected="true" tabindex="-1">' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">List</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        '<button type="button" role="menuitem" class="ds-mu-item" tabindex="-1">' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">Settings</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        '<button type="button" role="menuitem" class="ds-mu-item" tabindex="-1" disabled>' +
+        '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+        '<span class="ds-mu-lbl">Disabled</span>' +
+        '<span class="ds-mu-chev" aria-hidden="true"></span></button>' +
+        "</nav>"
+      );
+    }
+
+    function menuFromRoot(root) {
+      if (!root) return null;
+      return root.getAttribute("role") === "menu" ? root : root.querySelector('[role="menu"]');
+    }
+
+    function wireMenu() {
+      var root = document.getElementById("muRoot");
+      var menuEl = menuFromRoot(root);
+      if (!menuEl) return;
+      function enabledItems() {
+        return [].slice.call(menuEl.querySelectorAll('[role="menuitem"]')).filter(function (n) {
+          return !n.disabled;
+        });
+      }
+      menuEl.onkeydown = function (e) {
+        if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+        e.preventDefault();
+        var list = enabledItems();
+        if (!list.length) return;
+        var doc = document.activeElement;
+        var i = list.indexOf(doc);
+        if (i < 0) i = 0;
+        var ni = e.key === "ArrowDown" ? Math.min(list.length - 1, i + 1) : Math.max(0, i - 1);
+        var t = list[ni];
+        if (t) {
+          t.focus();
+          list.forEach(function (n) {
+            n.setAttribute("tabindex", n === t ? "0" : "-1");
+          });
+        }
+      };
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (_lbl, i) {
+        var cls = "ds-mu-item";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-sel";
+        if (i === 3) cls += " is-foc";
+        if (i === 4) cls += " is-dis";
+        var dis = i === 4 ? " disabled" : "";
+        var sel = i === 2 ? ' aria-selected="true"' : ' aria-selected="false"';
+        return (
+          '<div class="ds-mu-nav ds-mu-nav--matrix" role="presentation">' +
+          '<button type="button" role="menuitem" class="' +
+          cls +
+          '"' +
+          sel +
+          dis +
+          ' tabindex="-1">' +
+          '<span class="ds-mu-ic" aria-hidden="true"></span>' +
+          '<span class="ds-mu-lbl">' +
+          L5[i] +
+          "</span>" +
+          '<span class="ds-mu-chev" aria-hidden="true"></span></button></div>'
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = liveHtml();
+      wireMenu();
+      if (pgSize) pgSize.disabled = mode() === "pop";
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    if (pgSize) pgSize.disabled = mode() === "pop";
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (pgSize) pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
   function mountCheckbox() {
     function syncLive() {
       var inp = document.getElementById("cbx");
@@ -4474,6 +4598,7 @@
       tag: mountTag,
       progress: mountProgress,
       dropdown: mountDropdown,
+      menu: mountMenu,
       message: mountMessage,
       notification: mountNotification,
       pincode: mountPincode,

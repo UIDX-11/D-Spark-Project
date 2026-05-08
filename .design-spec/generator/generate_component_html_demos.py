@@ -415,6 +415,61 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
     </div>
     """
         return size_hint_card + static_ntf
+    if slug == "menu":
+        sections = _read_md_sections(md_path)
+        figma_section = sections.get("figma", "")
+        sizes_section = sections.get("sizes", "")
+        figma_line = _md_inline_to_plain(_first_non_empty_line(figma_section))
+        sizes_line = _md_inline_to_plain(_first_non_empty_line(sizes_section))
+        md_rel = f"docs/components/{md_path.name}"
+        figma_link = ""
+        m_link = RE_MD_LINK.search(figma_section)
+        if m_link:
+            label = html.escape(m_link.group(1).strip())
+            href = html.escape(m_link.group(2).strip())
+            figma_link = f'<div class="muted" style="margin-top:4px; font-size:12px;">Figma: <a href="{href}">{label}</a></div>'
+        if not sizes_line:
+            sizes_line = (
+                "侧栏展开宽 220px / 收起 48px（`--component-menu-container-w-expanded` / `w-collapsed`）；"
+                "弹出菜单最小宽 182px（`--component-menu-pop-min-w`）。"
+            )
+        size_hint_card = f"""
+    <div class="card" style="border-radius:10px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 {html.escape(md_rel)}）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">{html.escape(sizes_line)}</div>
+        {figma_link}
+      </div>
+      <div style="padding:12px;">
+        <div style="height:38px; width:min(220px,100%); border-radius:8px; {chip}" aria-hidden="true"></div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">{html.escape(figma_line or "按文档 Figma 标注进行比对。")}</div>
+      </div>
+    </div>
+    """
+        static_mu = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">侧栏 + 弹出菜单；类名 <code>ds-mu-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px; display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+        <nav class="ds-mu-nav ds-mu-nav--fig" role="presentation" aria-label="menu static side" data-ds-annotate-target="1">
+          <div class="ds-mu-group" aria-hidden="true">Section</div>
+          <button type="button" class="ds-mu-item" tabindex="-1" role="presentation">
+            <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Item</span><span class="ds-mu-chev" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="ds-mu-item is-sel" tabindex="-1" role="presentation">
+            <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Selected</span><span class="ds-mu-chev" aria-hidden="true"></span>
+          </button>
+        </nav>
+        <div class="ds-mu-pop" role="presentation" aria-label="menu static pop" data-ds-annotate-target="1">
+          <button type="button" class="ds-mu-pop-item" tabindex="-1" role="presentation">Pop item</button>
+          <button type="button" class="ds-mu-pop-item is-hov" tabindex="-1" role="presentation">Hover</button>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_mu
     if slug == "pincode":
         static_pc = """
     <div class="card" style="border-radius:10px; margin-top:8px;">
@@ -1400,6 +1455,28 @@ def _component_demo_body(
             </select>
           </label>
         </aside>"""
+    elif spec.slug == "menu":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/menu.md</code> 与 Arco Vue <code>Menu</code>（侧栏 / 折叠 / 子菜单弹出等）；容器与行走 <code>--component-menu-container-*</code>、<code>--component-menu-item-*</code>，弹出层走 <code>--component-menu-pop-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>View（演示）</span>
+            <select id="pgVariant" aria-label="Menu demo view">
+              <option value="inline" selected>inline · 侧栏菜单</option>
+              <option value="pop">pop · 弹出菜单面板</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Side width（仅 inline）</span>
+            <select id="pgSize" aria-label="Menu demo side width">
+              <option value="expanded" selected>expanded · 220px</option>
+              <option value="collapsed">collapsed · 48px（仅图标）</option>
+            </select>
+          </label>
+        </aside>"""
     elif spec.slug == "dropdown":
         aside_block = """
         <aside class="studio-aside card">
@@ -1798,6 +1875,16 @@ def _component_demo_body(
             "五行：下拉项 Default · Hover · Active（选中底）· Focus（内描边示意）· Disabled；"
             "行高与圆角随侧栏 Size 的 <code>data-size</code>。"
         )
+    elif spec.slug == "menu":
+        live_intro_sub = (
+            "Live：<code>#muRoot</code> 在 <strong>inline</strong> 时为 <code>nav.ds-mu-nav[role=\"menu\"]</code>，内含 <code>button.ds-mu-item[role=\"menuitem\"]</code> + <code>span.ds-mu-ic</code> / <code>span.ds-mu-lbl</code> / <code>span.ds-mu-chev</code>；"
+            "<strong>collapsed</strong> 时容器 <code>ds-mu-nav--collapsed</code>（48px，文案 <code>sr-only</code>）；"
+            "<strong>pop</strong> 时为 <code>div.ds-mu-pop[role=\"menu\"]</code> + <code>button.ds-mu-pop-item</code>；"
+            "键盘 <code>ArrowUp</code>/<code>ArrowDown</code> 在可用 <code>menuitem</code> 间移动焦点；样式 <code>--component-menu-*</code>（见 <code>docs/components/menu.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态侧栏行：Default · Hover（<code>is-hov</code>）· Selected（<code>is-sel</code> + <code>aria-selected</code>）· Focus（<code>is-foc</code>）· Disabled；与侧栏 View/Width 无关。"
+        )
     elif spec.slug == "dropdown":
         live_intro_sub = (
             "Live：<code>button#ddTrig.ds-dd-trg</code>，<code>aria-haspopup=\"menu\"</code> + <code>aria-controls=\"ddMenu\"</code> / <code>aria-expanded</code>；"
@@ -1955,79 +2042,26 @@ def _component_preview_block(slug: str) -> str:
         return (
             shared
             + """
-        <style>
-          .m-wrap { display:flex; gap: 16px; align-items:flex-start; flex-wrap: wrap; }
-          .m-container {
-            width: calc(var(--component-menu-container-w-expanded, 220) * 1px);
-            background: var(--component-menu-container-bg, #fff);
-            border-radius: 10px;
-            border: 1px solid var(--semantic-border-subtle,#e8e8e8);
-            padding: 8px 0;
-          }
-          .m-item {
-            height: calc(var(--component-menu-item-h-1, 38) * 1px);
-            padding: 0 calc(var(--component-menu-item-px, 12) * 1px);
-            display:flex;
-            align-items:center;
-            justify-content: space-between;
-            gap: calc(var(--component-menu-item-gap, 12) * 1px);
-            color: var(--component-menu-item-text, #666);
-            background: var(--component-menu-item-bg-default, #fff);
-            font-size: 14px;
-            line-height: 20px;
-            border-radius: 2px;
-            margin: 4px 8px;
-          }
-          .m-item .label { flex: 1; color: inherit; }
-          .m-item.hover { background: var(--component-menu-item-bg-hover, #f7f7f7); color: var(--component-menu-item-text-hover, #222); }
-          .m-item.selected { background: var(--component-menu-item-bg-selected, #f7f7f7); color: var(--component-menu-item-text-selected, #222); font-weight: 500; }
-          .m-item.disabled { color: var(--component-menu-item-text-disabled, #ccc); }
-          .m-group {
-            padding: 8px 16px 4px 16px;
-            color: var(--component-menu-group-title, #999);
-            font-size: 14px;
-            line-height: 20px;
-          }
-          .m-icon { width: 16px; height: 16px; border-radius: 4px; background: var(--component-menu-icon, #666); opacity: 0.85; }
-          .m-chevron {
-            width: 10px; height: 10px;
-            border-right: 2px solid var(--component-menu-chevron, #666);
-            border-bottom: 2px solid var(--component-menu-chevron, #666);
-            transform: rotate(-45deg);
-          }
-          .m-pop {
-            min-width: calc(var(--component-menu-pop-min-w, 182) * 1px);
-            background: var(--component-menu-pop-bg, #fff);
-            border-radius: calc(var(--component-menu-pop-radius, 8) * 1px);
-            box-shadow: var(--component-menu-pop-shadow, 0px 4px 10px 0px rgba(0,0,0,0.1));
-            padding: 4px;
-            border: 1px solid var(--semantic-border-subtle,#e8e8e8);
-          }
-          .m-pop-item {
-            padding: calc(var(--component-menu-pop-item-py, 9) * 1px) calc(var(--component-menu-pop-item-px, 12) * 1px);
-            border-radius: 2px;
-            font-size: 14px;
-            line-height: 20px;
-            color: var(--semantic-text-primary,#222);
-          }
-          .m-pop-item.hover { background: var(--semantic-bg-page,#f7f7f7); }
-          .m-pop-item.disabled { color: var(--semantic-text-muted,#ccc); }
-          .m-pop-item.selected { font-weight: 500; }
-        </style>
-        <div class="m-wrap">
-          <nav class="m-container" aria-label="menu preview">
-            <div class="m-item" data-ds-annotate-target="1"><span class="m-icon" aria-hidden="true"></span><span class="label">Default</span><span class="m-chevron" aria-hidden="true"></span></div>
-            <div class="m-item hover" data-ds-annotate-target="1"><span class="m-icon" aria-hidden="true"></span><span class="label">Hover</span><span class="m-chevron" aria-hidden="true"></span></div>
-            <div class="m-item selected" data-ds-annotate-target="1"><span class="m-icon" aria-hidden="true"></span><span class="label">Selected</span><span class="m-chevron" aria-hidden="true"></span></div>
-            <div class="m-item disabled" data-ds-annotate-target="1"><span class="m-icon" aria-hidden="true"></span><span class="label">Disabled</span><span class="m-chevron" aria-hidden="true"></span></div>
-            <div class="m-group">菜单组 1</div>
-            <div class="m-item"><span class="m-icon" aria-hidden="true"></span><span class="label">Item 1</span></div>
+        <div style="display:flex; gap: 16px; align-items:flex-start; flex-wrap:wrap;">
+          <nav class="ds-mu-nav ds-mu-nav--fig" role="menu" aria-label="menu preview side">
+            <div class="ds-mu-group" aria-hidden="true">Section</div>
+            <button type="button" class="ds-mu-item" role="menuitem" tabindex="-1" data-ds-annotate-target="1">
+              <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Default</span><span class="ds-mu-chev" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="ds-mu-item is-hov" role="menuitem" tabindex="-1" data-ds-annotate-target="1">
+              <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Hover</span><span class="ds-mu-chev" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="ds-mu-item is-sel" role="menuitem" tabindex="-1" aria-selected="true" data-ds-annotate-target="1">
+              <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Selected</span><span class="ds-mu-chev" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="ds-mu-item" role="menuitem" tabindex="-1" disabled data-ds-annotate-target="1">
+              <span class="ds-mu-ic" aria-hidden="true"></span><span class="ds-mu-lbl">Disabled</span><span class="ds-mu-chev" aria-hidden="true"></span>
+            </button>
           </nav>
-          <div class="m-pop" aria-label="pop menu preview">
-            <div class="m-pop-item" data-ds-annotate-target="1">Default</div>
-            <div class="m-pop-item hover" data-ds-annotate-target="1">Hover</div>
-            <div class="m-pop-item selected" data-ds-annotate-target="1">Selected</div>
-            <div class="m-pop-item disabled" data-ds-annotate-target="1">Disabled</div>
+          <div class="ds-mu-pop" role="menu" aria-label="menu preview pop">
+            <button type="button" class="ds-mu-pop-item" role="menuitem" tabindex="-1" data-ds-annotate-target="1">Default</button>
+            <button type="button" class="ds-mu-pop-item is-hov" role="menuitem" tabindex="-1" data-ds-annotate-target="1">Hover</button>
+            <button type="button" class="ds-mu-pop-item" role="menuitem" tabindex="-1" disabled data-ds-annotate-target="1">Disabled</button>
           </div>
         </div>
         """

@@ -54,6 +54,9 @@ const selectDemo = pathToFileURL(
 const dropdownDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/dropdown.html")
 ).href;
+const menuDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/menu.html")
+).href;
 const messageDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/message.html")
 ).href;
@@ -377,6 +380,24 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await page.goto(dropdownDemo);
     await page.getByLabel("Dropdown demo variant").focus();
     await expect(page.getByLabel("Dropdown demo variant")).toBeFocused();
+  });
+
+  test("menu: live mounts menu root", async ({ page }) => {
+    await page.goto(menuDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot #muRoot"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #muRoot").first()).toBeVisible();
+  });
+
+  test("menu: view and width selects are keyboard-reachable", async ({ page }) => {
+    await page.goto(menuDemo);
+    await page.getByLabel("Menu demo view").focus();
+    await expect(page.getByLabel("Menu demo view")).toBeFocused();
+    await page.getByLabel("Menu demo side width").focus();
+    await expect(page.getByLabel("Menu demo side width")).toBeFocused();
   });
 
   test("message: live mounts message surface", async ({ page }) => {
