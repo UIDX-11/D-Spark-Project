@@ -192,6 +192,20 @@ def _html_page(title: str, body: str, tokens_href: str) -> str:
 """
 
 
+def _read_behavior_source(repo_root: Path) -> str:
+    cfg = repo_root / ".design-spec" / "sources" / "behavior-source.json"
+    if not cfg.exists():
+        return "unknown"
+    try:
+        raw = json.loads(cfg.read_text(encoding="utf-8"))
+    except Exception:
+        return "unknown"
+    value = str(raw.get("behaviorSource", "")).strip().lower()
+    if value == "arco-vue":
+        return "Arco Vue"
+    return value or "unknown"
+
+
 def _component_size_guide_block(slug: str, md_path: Path) -> str:
     """
     Static Figma dimension hints, bound by slug. Emitted only by the generator — no hand-edited HTML.
@@ -259,7 +273,30 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
         figma_link = f'<div class="muted" style="margin-top:4px; font-size:12px;">Figma: <a href="{href}">{label}</a></div>'
     if not sizes_line:
         sizes_line = "请参考对应组件文档中的 Sizes 章节。"
-    return f"""
+    if slug == "dropdown":
+        static_dd = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">面板 + 菜单项 default / hover / selected（勾选）/ focus / disabled + 分隔与 danger；类名见 <code>studio_runtime.css</code> 中 <code>ds-dd-*</code>。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-dd ds-dd--fig" data-trigger="m" data-item="md" aria-label="dropdown static compare">
+          <div class="ds-dd-panel ds-dd-panel--fig" role="menu" aria-label="menu sample">
+            <button type="button" class="ds-dd-item ds-dd-item--static" role="menuitem" data-ds-annotate-target="1"><span>Default</span><span></span></button>
+            <button type="button" class="ds-dd-item ds-dd-item--static is-dd-hover" role="menuitem" data-ds-annotate-target="1"><span>Hover</span><span></span></button>
+            <button type="button" class="ds-dd-item ds-dd-item--static ds-dd-item--checked" role="menuitem" data-ds-annotate-target="1"><span>Selected</span><span class="ds-dd-check" aria-hidden="true"></span></button>
+            <button type="button" class="ds-dd-item ds-dd-item--static is-dd-foc" role="menuitem" data-ds-annotate-target="1"><span>Focus</span><span></span></button>
+            <button type="button" class="ds-dd-item ds-dd-item--static" role="menuitem" disabled data-ds-annotate-target="1"><span>Disabled</span><span></span></button>
+            <hr class="ds-dd-divider" aria-hidden="true" />
+            <button type="button" class="ds-dd-item ds-dd-item--static ds-dd-item--danger" role="menuitem" data-ds-annotate-target="1"><span>Danger</span><span></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+        return (
+            f"""
     <div class="card" style="border-radius:10px;">
       <div style="padding:12px 12px 0 12px;">
         <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 {html.escape(md_rel)}）</div>
@@ -272,6 +309,262 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
       </div>
     </div>
     """
+            + static_dd
+        )
+    size_hint_card = f"""
+    <div class="card" style="border-radius:10px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 {html.escape(md_rel)}）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">{html.escape(sizes_line)}</div>
+        {figma_link}
+      </div>
+      <div style="padding:12px;">
+        <div style="height:36px; width:min(360px,100%); border-radius:8px; {chip}" aria-hidden="true"></div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">{html.escape(figma_line or '按文档 Figma 标注进行比对。')}</div>
+      </div>
+    </div>
+    """
+    if slug == "message":
+        static_msg = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">多 tone 纵向堆叠示意；类名 <code>ds-msg</code> / <code>ds-msg-stack</code>。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-msg-stack" aria-label="message static samples">
+          <div class="ds-msg" data-tone="info" role="status" data-ds-annotate-target="1">
+            <span class="ds-msg-ic" aria-hidden="true">i</span><span class="ds-msg-txt">Info sample</span>
+          </div>
+          <div class="ds-msg" data-tone="success" role="status" data-ds-annotate-target="1">
+            <span class="ds-msg-ic" aria-hidden="true">\u2713</span><span class="ds-msg-txt">Success sample</span>
+          </div>
+          <div class="ds-msg" data-tone="error" role="alert" data-ds-annotate-target="1">
+            <span class="ds-msg-ic" aria-hidden="true">\u2715</span><span class="ds-msg-txt">Error sample</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_msg
+    if slug == "pincode":
+        static_pc = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">单格五态：Default · Active（<code>is-act</code>）· Filled · Error · Disabled；与 Status matrix 同源类名，见 <code>studio_runtime.css</code> 中 <code>ds-pc-*</code>。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-pc ds-pc--matrix" aria-label="pincode static cell states">
+          <div class="ds-pc-row"><input class="ds-pc-cell" type="text" readonly tabindex="-1" aria-hidden="true" data-ds-annotate-target="1" /></div>
+          <div class="ds-pc-row"><input class="ds-pc-cell is-act" type="text" readonly tabindex="-1" aria-hidden="true" data-ds-annotate-target="1" /></div>
+          <div class="ds-pc-row"><input class="ds-pc-cell is-filled" type="text" value="3" readonly tabindex="-1" aria-hidden="true" data-ds-annotate-target="1" /></div>
+          <div class="ds-pc-row"><input class="ds-pc-cell is-err" type="text" value="3" readonly tabindex="-1" aria-hidden="true" data-ds-annotate-target="1" /></div>
+          <div class="ds-pc-row"><input class="ds-pc-cell is-dis" type="text" disabled aria-hidden="true" data-ds-annotate-target="1" /></div>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_pc
+    if slug == "steps":
+        static_st = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">横向四步：completed → current（含描述）→ pending → disabled；类名 <code>ds-st-*</code>，与 Live 同源（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <nav class="ds-st ds-st--fig" data-size="lg" data-orientation="horizontal" aria-label="steps static sample">
+          <ol class="ds-st-list" role="list">
+            <li class="ds-st-item" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--completed" aria-hidden="true"><span class="ds-st-icon-glyph">\u2713</span></span>
+                <div class="ds-st-body">
+                  <p class="ds-st-title">Succeeded</p>
+                </div>
+              </div>
+              <div class="ds-st-connector ds-st-connector--completed" aria-hidden="true"></div>
+            </li>
+            <li class="ds-st-item" aria-current="step" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--current" aria-hidden="true"><span class="ds-st-icon-glyph">2</span></span>
+                <div class="ds-st-body">
+                  <p class="ds-st-title ds-st-title--current">Processing</p>
+                  <p class="ds-st-desc">This is a description for the current step.</p>
+                </div>
+              </div>
+              <div class="ds-st-connector" aria-hidden="true"></div>
+            </li>
+            <li class="ds-st-item" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--pending" aria-hidden="true"><span class="ds-st-icon-glyph">3</span></span>
+                <div class="ds-st-body">
+                  <p class="ds-st-title ds-st-title--pending">Pending</p>
+                </div>
+              </div>
+              <div class="ds-st-connector" aria-hidden="true"></div>
+            </li>
+            <li class="ds-st-item" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--disabled" aria-hidden="true"><span class="ds-st-icon-glyph">4</span></span>
+                <div class="ds-st-body">
+                  <p class="ds-st-title ds-st-title--disabled">Disabled</p>
+                </div>
+              </div>
+              <div class="ds-st-connector" aria-hidden="true"></div>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_st
+    if slug == "card":
+        static_cd = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">带描边 + 标题/正文/分隔/meta；类名 <code>ds-card-*</code>，与 Live 同源（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-card-live-wrap">
+          <section class="ds-card ds-card--fig" data-size="md" data-bordered="true" aria-labelledby="cdFigTitle" data-ds-annotate-target="1">
+            <div class="ds-card-stack">
+              <h3 class="ds-card-title" id="cdFigTitle">Card title</h3>
+              <p class="ds-card-body">Static sample body for token compare.</p>
+            </div>
+            <div class="ds-card-divider" role="separator" aria-hidden="true"></div>
+            <p class="ds-card-body ds-card-body--meta">Footer / meta line</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_cd
+    if slug == "pageheader":
+        static_ph = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">Back + 竖线 + 标题/副标题 + 右侧双按钮；类名 <code>ds-ph-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <header class="ds-ph" aria-labelledby="phFigTitle" data-ds-annotate-target="1">
+          <div class="ds-ph-row">
+            <div class="ds-ph-left">
+              <button type="button" class="ds-ph-back" aria-label="Back"><span class="ds-ph-back-ic" aria-hidden="true">\u2190</span></button>
+              <div class="ds-ph-vdiv" aria-hidden="true"></div>
+              <div class="ds-ph-main">
+                <h1 class="ds-ph-title" id="phFigTitle">Page title</h1>
+                <p class="ds-ph-desc">Static Figma compare sample.</p>
+              </div>
+            </div>
+            <div class="ds-ph-right">
+              <div class="ds-ph-actions">
+                <button type="button" class="ds-ph-btn">Secondary</button>
+                <button type="button" class="ds-ph-btn ds-ph-btn--pri">Primary</button>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_ph
+    if slug == "select":
+        static_compare = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">触发器 default / hover / focus / error / disabled + 下拉项三态；类名见 <code>studio_runtime.css</code> 中 <code>ds-sel--fig</code>。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-sel ds-sel--fig" data-size="lg" aria-label="select static compare">
+          <div class="ds-sel-fig-col">
+            <div class="ds-sel-trg ds-sel-trg--static" data-ds-annotate-target="1" role="presentation">
+              <span class="ds-sel-ph">Default</span><span class="chev" aria-hidden="true"></span>
+            </div>
+            <div class="ds-sel-trg ds-sel-trg--static ds-sel-trg--demo-hover" data-ds-annotate-target="1" role="presentation">
+              <span class="ds-sel-ph">Hover</span><span class="chev" aria-hidden="true"></span>
+            </div>
+            <div class="ds-sel-trg ds-sel-trg--static ds-sel-trg--demo-focus" data-ds-annotate-target="1" role="presentation">
+              <span class="ds-sel-ph">Focus</span><span class="chev" aria-hidden="true"></span>
+            </div>
+            <div class="ds-sel-trg ds-sel-trg--static ds-sel-trg--err" data-ds-annotate-target="1" role="presentation">
+              <span class="ds-sel-ph">Error</span><span class="chev" aria-hidden="true"></span>
+            </div>
+            <div class="ds-sel-trg ds-sel-trg--static ds-sel-trg--dis" data-ds-annotate-target="1" role="presentation">
+              <span class="ds-sel-ph">Disabled</span><span class="chev" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="ds-sel-list ds-sel-list--fig" role="listbox" aria-label="dropdown sample">
+            <div class="ds-sel-item" data-ds-annotate-target="1">Default</div>
+            <div class="ds-sel-item is-hover" data-ds-annotate-target="1">Hover</div>
+            <div class="ds-sel-item is-active" data-ds-annotate-target="1">Selected</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_compare
+    if slug == "cascader":
+        static_cs = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">三列路径 + 多选勾选示意；类名 <code>ds-casc-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-casc" data-size="lg" aria-label="cascader static compare" data-ds-annotate-target="1">
+          <div class="ds-casc-panel" role="region" aria-label="Static cascader columns">
+            <div class="ds-casc-cols">
+              <div class="ds-casc-col">
+                <ul class="ds-casc-ul" role="listbox" aria-label="Level 1">
+                  <li role="presentation">
+                    <button type="button" class="ds-casc-item is-act" role="option" aria-selected="true">
+                      <span class="ds-casc-cb is-ind" aria-hidden="true"></span>
+                      <span class="ds-casc-item-lbl">Zhejiang</span>
+                      <span class="ds-casc-item-chev" aria-hidden="true">\u203a</span>
+                    </button>
+                  </li>
+                  <li role="presentation">
+                    <button type="button" class="ds-casc-item" role="option">
+                      <span class="ds-casc-cb" aria-hidden="true"></span>
+                      <span class="ds-casc-item-lbl">Guangdong</span>
+                      <span class="ds-casc-item-chev" aria-hidden="true">\u203a</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="ds-casc-col">
+                <ul class="ds-casc-ul" role="listbox" aria-label="Level 2">
+                  <li role="presentation">
+                    <button type="button" class="ds-casc-item is-act" role="option" aria-selected="true">
+                      <span class="ds-casc-cb is-ind" aria-hidden="true"></span>
+                      <span class="ds-casc-item-lbl">Hangzhou</span>
+                      <span class="ds-casc-item-chev" aria-hidden="true">\u203a</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="ds-casc-col">
+                <ul class="ds-casc-ul" role="listbox" aria-label="Level 3">
+                  <li role="presentation">
+                    <button type="button" class="ds-casc-item is-act" role="option" aria-selected="true">
+                      <span class="ds-casc-cb is-on" aria-hidden="true"></span>
+                      <span class="ds-casc-item-lbl">West Lake</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_cs
+    return size_hint_card
 
 
 def _snapshot_component_tokens(tokens_css_text: str, token_prefix: str) -> dict[str, str]:
@@ -299,7 +592,9 @@ def _snapshot_component_tokens(tokens_css_text: str, token_prefix: str) -> dict[
     return out
 
 
-def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_text: str) -> str:
+def _component_demo_body(
+    spec: ComponentSpec, index_href: str, *, tokens_css_text: str, behavior_source: str
+) -> str:
     title = html.escape(spec.title)
     slug_esc = html.escape(spec.slug)
     token_prefix_esc = html.escape(spec.token_prefix)
@@ -549,6 +844,134 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
             </select>
           </label>
         </aside>"""
+    elif spec.slug == "progress":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/progress.md</code> 与 Arco Vue <code>Progress</code>（<code>type</code> / <code>percent</code> / <code>status</code> 等）；样式仅 <code>--component-progress-*</code>（见 <code>studio_runtime.css</code>）。
+          </p>
+          <label class="pg-field">
+            <span>Kind（形态）</span>
+            <select id="pgVariant" aria-label="Progress demo kind">
+              <option value="line" selected>line</option>
+              <option value="circle">circle</option>
+              <option value="mini">mini</option>
+              <option value="step">step</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（line 高度 / circle 直径档）</span>
+            <select id="pgSize" aria-label="Progress demo size">
+              <option value="sm" selected>SM · line 4px / circle SM</option>
+              <option value="md">MD · circle MD</option>
+              <option value="lg">LG · line 8px / circle LG</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>State（演示态）</span>
+            <select id="pgProgState" aria-label="Progress demo state">
+              <option value="running" selected>in-progress（66%）</option>
+              <option value="zero">not-started（0%）</option>
+              <option value="success">success（100%）</option>
+              <option value="error">error（100%）</option>
+              <option value="busy">indeterminate</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "steps":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/steps.md</code> 与 Arco Vue <code>Steps</code>（<code>direction</code> / <code>current</code> / <code>status</code> 等）；图标与文案走 <code>--component-steps-icon-*</code>、<code>--component-steps-title-*</code>，排版走 <code>--component-steps-layout-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Layout（演示）</span>
+            <select id="pgVariant" aria-label="Steps demo layout">
+              <option value="h">horizontal · title only</option>
+              <option value="h-desc" selected>horizontal · with description</option>
+              <option value="v">vertical · with description</option>
+              <option value="h-err">horizontal · error on active step</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（LG / MD）</span>
+            <select id="pgSize" aria-label="Steps demo size">
+              <option value="lg" selected>LG · 28px icon</option>
+              <option value="md">MD · 24px icon</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "card":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/card.md</code> 与 Arco Vue <code>Card</code>（<code>bordered</code> / <code>hoverable</code> / <code>size</code> 等）；面与分隔走 <code>--component-card-panel-*</code>、<code>--component-card-divider-*</code>，排版走 <code>--component-card-layout-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Kind（演示）</span>
+            <select id="pgVariant" aria-label="Card demo kind">
+              <option value="default" selected>default（无描边）</option>
+              <option value="bordered">bordered</option>
+              <option value="hoverable">hoverable</option>
+              <option value="clickable">clickable（可聚焦）</option>
+              <option value="disabled">disabled</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（MD / SM）</span>
+            <select id="pgSize" aria-label="Card demo size">
+              <option value="md" selected>MD · 16px padding</option>
+              <option value="sm">SM · 12px padding</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "pageheader":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/pageheader.md</code> 与 Arco Vue <code>PageHeader</code>（<code>title</code> / <code>subtitle</code> / <code>back</code> / <code>extra</code> 等）；样式仅 <code>--component-page-header-*</code>（见 <code>studio_runtime.css</code> 中 <code>ds-ph-*</code>）。
+          </p>
+          <label class="pg-field">
+            <span>Layout（演示）</span>
+            <select id="pgVariant" aria-label="PageHeader demo layout">
+              <option value="default" selected>default</option>
+              <option value="breadcrumb">with breadcrumb</option>
+              <option value="actions">with actions</option>
+              <option value="controls">with controls（分段单选）</option>
+              <option value="minimal">minimal（无副标题）</option>
+            </select>
+          </label>
+          <select id="pgSize" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="md" selected>md</option>
+          </select>
+        </aside>"""
+    elif spec.slug == "cascader":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/cascader.md</code> 与 Arco Vue <code>Cascader</code>（<code>multiple</code> / <code>check-strictly</code> / <code>error</code> 等）；触发器走 <code>--component-cascader-trigger-*</code> 与 <code>--component-cascader-layout-*</code>，列与项走 <code>--component-cascader-column-*</code> / <code>--component-cascader-item-*</code>，多选勾选外观复用 <code>--component-checkbox-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Mode（演示）</span>
+            <select id="pgVariant" aria-label="Cascader demo mode">
+              <option value="single" selected>single（路径文案）</option>
+              <option value="multiple">multiple（列内 checkbox）</option>
+              <option value="error">error（触发器错误描边）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（LG / SM）</span>
+            <select id="pgSize" aria-label="Cascader demo size">
+              <option value="lg" selected>LG · 32px 触发器</option>
+              <option value="sm">SM · 28px 触发器</option>
+            </select>
+          </label>
+        </aside>"""
     elif spec.slug == "input":
         aside_block = """
         <aside class="studio-aside card">
@@ -694,6 +1117,121 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
             <option value="primary" selected>primary</option>
           </select>
         </aside>"""
+    elif spec.slug == "select":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/select.md</code> 与 Arco Vue <code>Select</code>（<code>multiple</code> / <code>allow-search</code> 等）；触发器与下拉项尺寸走 <code>select.layout.*</code>，色面走 <code>select.trigger.*</code> / <code>select.item.*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Kind（演示）</span>
+            <select id="pgVariant" aria-label="Select demo kind">
+              <option value="single" selected>single</option>
+              <option value="multiple-tags">multiple · tags</option>
+              <option value="multiple-count">multiple · count</option>
+              <option value="searchable">searchable</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（xl / lg / md / sm）</span>
+            <select id="pgSize" aria-label="Select demo size">
+              <option value="xl">XL · 36px</option>
+              <option value="lg" selected>LG · 32px</option>
+              <option value="md">MD · 28px</option>
+              <option value="sm">SM · 24px</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Trigger state</span>
+            <select id="pgSelState" aria-label="Select demo trigger state">
+              <option value="default" selected>default</option>
+              <option value="error">error</option>
+              <option value="disabled">disabled</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "dropdown":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/dropdown.md</code> 与 Arco Vue <code>Dropdown</code>（<code>trigger</code> / <code>popup-visible</code> / <code>position</code> 等）；面板与菜单项走 <code>dropdown.panel.*</code>、<code>dropdown.item.*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Variant（演示）</span>
+            <select id="pgVariant" aria-label="Dropdown demo variant">
+              <option value="basic" selected>basic（仅操作项）</option>
+              <option value="search">search + danger 组</option>
+              <option value="danger-group">divider + danger</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Trigger size（M / L）</span>
+            <select id="pgSize" aria-label="Dropdown demo trigger size">
+              <option value="m" selected>M · 32px</option>
+              <option value="l">L · 36px</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Item size（MD / SM）</span>
+            <select id="pgDdItem" aria-label="Dropdown demo menu item size">
+              <option value="md" selected>MD · 32px 行高</option>
+              <option value="sm">SM · 28px 行高</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "pincode":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/pincode.md</code> 与 Arco Vue <code>VerificationCode</code> / <code>PinCode</code>（位数、粘贴、键盘）；单元格尺寸走 <code>pinCode.layout.*</code>，态色走 <code>pinCode.cell.*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Length（格数）</span>
+            <select id="pgVariant" aria-label="PinCode demo length">
+              <option value="4">4</option>
+              <option value="6" selected>6</option>
+              <option value="8">8</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>State</span>
+            <select id="pgPinState" aria-label="PinCode demo state">
+              <option value="default" selected>default</option>
+              <option value="error">error（全格 + 错误文案）</option>
+              <option value="disabled">disabled</option>
+            </select>
+          </label>
+          <select id="pgSize" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="md" selected>md</option>
+          </select>
+        </aside>"""
+    elif spec.slug == "message":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/message.md</code> 与 Arco Vue <code>Message</code>（<code>type</code> / <code>duration</code> / <code>closable</code> 等）；色面走 <code>message.tone.*</code>，排版走 <code>message.px</code> / <code>message.py</code> / <code>message.gap</code>。
+          </p>
+          <label class="pg-field">
+            <span>Type（tone）</span>
+            <select id="pgVariant" aria-label="Message demo type">
+              <option value="info" selected>info</option>
+              <option value="success">success</option>
+              <option value="warning">warning</option>
+              <option value="error">error</option>
+            </select>
+          </label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="msgClosable" />
+            <span>closable（关闭按钮）</span>
+          </label>
+          <select id="pgSize" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="md" selected>md</option>
+          </select>
+        </aside>"""
     elif spec.slug == "button":
         aside_block = """
         <aside class="studio-aside card">
@@ -815,6 +1353,52 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
             "五行：Default · Hover（thumb 示意）· Active（thumb 示意）· Focus（thumb 示意）· Disabled；"
             "静态单滑块示意，与侧栏 Marks 无关。"
         )
+    elif spec.slug == "progress":
+        live_intro_sub = (
+            "Live：<strong>line</strong> 为 <code>role=\"progressbar\"</code> + <code>aria-valuenow</code> 或 <code>aria-valuetext=\"Loading\"</code>（busy）；"
+            "<strong>circle</strong> 为 SVG 环 + 中心文案；<strong>mini</strong> / <strong>step</strong> 为示意结构；"
+            "样式仅 <code>--component-progress-*</code>（见 <code>docs/components/progress.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：静态 line · SM（20% / 40% / 66% / 100% / 0%）与 success 行示意；与侧栏 Kind 无关。"
+        )
+    elif spec.slug == "steps":
+        live_intro_sub = (
+            "Live：<code>nav#stNav.ds-st</code> 包裹 <code>ol.ds-st-list</code>（<code>role=\"list\"</code>）+ <code>li.ds-st-item</code>；"
+            "当前步 <code>aria-current=\"step\"</code>；<code>data-orientation</code>（horizontal / vertical）与 <code>data-size</code>（lg / md）驱动图标与排版 token；"
+            "连接器 <code>.ds-st-connector</code> / <code>.ds-st-connector--completed</code>；样式 <code>--component-steps-*</code>（见 <code>docs/components/steps.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：单步静态 · Completed · Current · Pending · Error · Disabled；与侧栏 Layout 无关，尺寸随 Size。"
+        )
+    elif spec.slug == "card":
+        live_intro_sub = (
+            "Live：<code>#cdRoot.ds-card</code> 包裹标题 <code>h3.ds-card-title</code>、正文 <code>p.ds-card-body</code>、"
+            "<code>div.ds-card-divider</code> 与 meta 行；<code>data-bordered</code> / <code>data-hoverable</code> / <code>data-clickable</code> / <code>data-disabled</code> 与 <code>data-size</code>（md / sm）驱动样式；"
+            "可点击时 <code>tabindex=\"0\"</code> + <code>role=\"region\"</code> 与 <code>:focus-visible</code> 环（<code>--component-card-clickable-focus-ring</code>）；见 <code>docs/components/card.md</code>。"
+        )
+        matrix_rows_help = (
+            "五行静态：Default（无描边）· Bordered · Hover（<code>is-cd-hover</code>）· Clickable（<code>is-cd-foc</code> 示意环）· Small（<code>data-size=\"sm\"</code>）；与侧栏 Kind 无关。"
+        )
+    elif spec.slug == "pageheader":
+        live_intro_sub = (
+            "Live：<code>header#phRoot.ds-ph</code>；可选 <code>nav.ds-ph-bc</code>（<code>aria-label=\"Breadcrumb\"</code>）；"
+            "主行 <code>.ds-ph-row</code> 内左侧 <code>button.ds-ph-back</code>（<code>aria-label=\"Back\"</code>）+ 竖分隔 <code>.ds-ph-vdiv</code> + <code>h1.ds-ph-title</code> / <code>p.ds-ph-desc</code>；"
+            "右侧 <code>.ds-ph-actions</code> 或 <code>.ds-ph-controls</code>（<code>role=\"radiogroup\"</code>，<code>#phSeg</code> 点击切换 <code>aria-checked</code>）；样式 <code>--component-page-header-*</code>（见 <code>docs/components/pageheader.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态：Default · Breadcrumb · Actions · Controls · No description（仅标题）；与侧栏 Layout 无关。"
+        )
+    elif spec.slug == "cascader":
+        live_intro_sub = (
+            "Live：<code>#csRoot.ds-casc</code>；<code>button#csTrig.ds-casc-trg</code> 为 <code>role=\"combobox\"</code> + <code>aria-controls=\"csPanel\"</code> / <code>aria-expanded</code>；"
+            "<code>#csPanel.ds-casc-panel</code> 内 <code>.ds-casc-cols</code> 三列 <code>ul[role=\"listbox\"]</code> + <code>button.ds-casc-item[role=\"option\"]</code>；"
+            "<strong>multiple</strong> 时行前加 <code>span.ds-casc-cb</code>（<code>is-ind</code> / <code>is-on</code>）；<strong>error</strong> 时触发器 <code>ds-casc-trg--err</code> + <code>aria-invalid</code>；"
+            "<code>Escape</code> 关闭面板；样式 <code>--component-cascader-*</code>（见 <code>docs/components/cascader.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态：Default · Hover（<code>is-hov</code>）· Selected（<code>is-act</code>）· Disabled · Checked（<code>ds-casc-cb.is-on</code>）；尺寸随侧栏 Size 的 <code>data-size</code>。"
+        )
     elif spec.slug == "input":
         live_intro_sub = (
             "Live 为 <code>#inLive.ds-input</code>，外层 <code>.ds-in-row[data-size=s|l|xl]</code>；"
@@ -872,6 +1456,45 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
         matrix_rows_help = (
             "五行：Default · Hover · Active · Focus · Disabled；尺寸随侧栏 Size token（matrix 使用 <code>layout.matrix*</code>）。"
         )
+    elif spec.slug == "select":
+        live_intro_sub = (
+            "Live：<code>button#stg.ds-sel-trg</code> 为 <code>role=\"combobox\"</code> + <code>aria-controls</code> / <code>aria-expanded</code>，"
+            "<code>#stl</code> 为 <code>role=\"listbox\"</code>；<strong>searchable</strong> 时顶部为 <code>input.ds-sel-search</code> 过滤选项；"
+            "多选 tags / count 为静态示意；尺寸 <code>data-size</code> 映射 <code>select.layout.*</code>（见 <code>docs/components/select.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：下拉项 Default · Hover · Active（选中底）· Focus（内描边示意）· Disabled；"
+            "行高与圆角随侧栏 Size 的 <code>data-size</code>。"
+        )
+    elif spec.slug == "dropdown":
+        live_intro_sub = (
+            "Live：<code>button#ddTrig.ds-dd-trg</code>，<code>aria-haspopup=\"menu\"</code> + <code>aria-controls=\"ddMenu\"</code> / <code>aria-expanded</code>；"
+            "<code>#ddMenu.ds-dd-panel</code> 为 <code>role=\"menu\"</code>，子项为 <code>button[role=\"menuitem\"]</code>；"
+            "<strong>search</strong> 变体含过滤与面板最小高度（<code>dropdown.panel.searchMinHeight</code> → <code>--component-dropdown-panel-search-min-height</code>）；样式 <code>--component-dropdown-*</code>（见 <code>docs/components/dropdown.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：Default · Hover（<code>is-dd-hover</code>）· Selected（勾选）· Focus（<code>is-dd-foc</code>）· Disabled；"
+            "触发器 <code>data-trigger</code>（m/l）与菜单 <code>data-item</code>（md/sm）随侧栏。"
+        )
+    elif spec.slug == "pincode":
+        live_intro_sub = (
+            "Live：<code>div#pcGroup.ds-pc</code> 为 <code>role=\"group\"</code> + <code>aria-labelledby</code>；"
+            "每格 <code>input.ds-pc-cell</code>（<code>inputmode=\"numeric\"</code>、<code>maxlength=\"1\"</code>、<code>autocomplete=\"one-time-code\"</code>）；"
+            "组上粘贴整段验证码、<code>ArrowLeft</code>/<code>ArrowRight</code> 与 <code>Backspace</code> 导航；"
+            "态色 <code>--component-pin-code-cell-*</code>，布局 <code>--component-pin-code-layout-*</code>（见 <code>docs/components/pincode.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态单格：Default · Active（<code>is-act</code>）· Filled（<code>is-filled</code>）· Error（<code>is-err</code>）· Disabled（<code>is-dis</code>）；与侧栏 State 无关。"
+        )
+    elif spec.slug == "message":
+        live_intro_sub = (
+            "Live 为 <code>div.ds-msg[data-tone]</code>：<strong>error</strong> 使用 <code>role=\"alert\"</code>，其余 tone 使用 <code>role=\"status\"</code>；"
+            "可选 <code>button.ds-msg-close</code>（<code>aria-label=\"Close message\"</code>）点击移除当前条；"
+            "样式仅 <code>--component-message-*</code>（见 <code>docs/components/message.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态：Info·status · Success·status · Warning·status · Error·alert · Info·closable；与侧栏 Type 无关。"
+        )
     else:
         live_intro_sub = (
             "Visuals follow <code>tokens.css</code> (see <code>docs/design.md</code> — tokens first). "
@@ -886,7 +1509,7 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
       <div class="top">
         <div>
           <h1 style="margin:0; font-size:20px; line-height:1.2;">{title}</h1>
-          <div class="muted" style="margin-top:6px;">Slug <code>{slug_esc}</code> · tokens <code>--component-{token_prefix_esc}-*</code></div>
+          <div class="muted" style="margin-top:6px;">Slug <code>{slug_esc}</code> · tokens <code>--component-{token_prefix_esc}-*</code> · behavior source <code>{html.escape(behavior_source)}</code></div>
         </div>
         <div class="pill">
           <span class="swatch"></span>
@@ -931,7 +1554,7 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
     """
     )
 
-def _index_body(components: list[ComponentSpec], tokens_href: str) -> str:
+def _index_body(components: list[ComponentSpec], tokens_href: str, behavior_source: str) -> str:
     items = "\n".join(
         f'<li style="margin:6px 0;"><a href="components/{html.escape(c.slug)}.html">{html.escape(c.title)}</a>'
         f' <span class="muted">(<code>{html.escape(c.slug)}</code>)</span></li>'
@@ -942,7 +1565,7 @@ def _index_body(components: list[ComponentSpec], tokens_href: str) -> str:
       <div class="top">
         <div>
           <h1 style="margin:0; font-size:20px; line-height:1.2;">Component demos</h1>
-          <div class="muted" style="margin-top:6px;">Live token studio per component · <code>{html.escape(tokens_href)}</code></div>
+          <div class="muted" style="margin-top:6px;">Live token studio per component · <code>{html.escape(tokens_href)}</code> · behavior source <code>{html.escape(behavior_source)}</code></div>
         </div>
       </div>
       <div class="card">
@@ -975,58 +1598,6 @@ def _component_preview_block(slug: str) -> str:
       </div>
     </div>
     """
-
-    if slug == "dropdown":
-        return (
-            shared
-            + """
-        <style>
-          .dd-panel {
-            width: 240px;
-            padding: 4px;
-            border-radius: var(--component-dropdown-panel-radius, 8px);
-            background: var(--component-dropdown-panel-bg, #fff);
-            box-shadow: var(--component-dropdown-panel-shadow, 0px 4px 10px 0px rgba(0,0,0,0.1));
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-          }
-          .dd-item {
-            height: calc(var(--component-dropdown-item-h-md, 32) * 1px);
-            padding: 6px 8px;
-            border-radius: calc(var(--component-dropdown-item-radius-md, 6) * 1px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            background: var(--component-dropdown-item-bg-default, #fff);
-            color: var(--component-dropdown-item-text, #222);
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 500;
-          }
-          .dd-item.hover { background: var(--component-dropdown-item-bg-hover, #f7f7f7); }
-          .dd-item.disabled { color: var(--component-dropdown-item-text-disabled, #ccc); }
-          .dd-item.danger { color: var(--component-dropdown-item-text-danger, #f14846); }
-          .dd-divider { height: 1px; background: var(--component-dropdown-divider, #e8e8e8); margin: 2px 4px; }
-          .dd-check {
-            width: 16px; height: 16px; border-radius: 4px;
-            background: var(--component-dropdown-check-icon, #222);
-            opacity: 0.0;
-          }
-          .dd-item.selected .dd-check { opacity: 1; }
-        </style>
-        <div class="dd-panel" role="menu" aria-label="dropdown preview">
-          <div class="dd-item" data-ds-annotate-target="1"><span>Default</span></div>
-          <div class="dd-item hover" data-ds-annotate-target="1"><span>Hover</span></div>
-          <div class="dd-item selected" data-ds-annotate-target="1"><span>Selected</span><span class="dd-check" aria-hidden="true"></span></div>
-          <div class="dd-item disabled" data-ds-annotate-target="1"><span>Disabled</span></div>
-          <div class="dd-divider" aria-hidden="true"></div>
-          <div class="dd-item danger" data-ds-annotate-target="1"><span>Danger</span></div>
-        </div>
-        """
-            + end
-        )
 
     if slug == "menu":
         return (
@@ -1115,55 +1686,41 @@ def _component_preview_block(slug: str) -> str:
         return (
             shared
             + """
-        <style>
-          .st { display:flex; align-items:center; gap: 16px; flex-wrap: wrap; }
-          .st-item { display:flex; align-items:center; gap: 4px; }
-          .st-icon {
-            width: calc(var(--component-steps-icon-size-lg, 28) * 1px);
-            height: calc(var(--component-steps-icon-size-lg, 28) * 1px);
-            border-radius: 999px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size: 16px;
-            line-height: 22px;
-            font-weight: 500;
-            box-sizing: border-box;
-          }
-          .st-icon.current { background: var(--component-steps-icon-bg-current,#222); color: var(--component-steps-icon-text-on-current,#fff); }
-          .st-icon.pending { border: 1px solid var(--component-steps-icon-border-pending,#666); color: var(--component-steps-icon-text-pending,#666); background: transparent; }
-          .st-icon.disabled { border: 1px solid var(--component-steps-icon-border-disabled,#ccc); color: var(--component-steps-icon-text-disabled,#ccc); background: transparent; }
-          .st-icon.completed { border: 1px solid var(--component-steps-icon-border-completed,#222); background: var(--component-steps-icon-bg-completed,#fff); }
-          .st-title { color: var(--component-steps-title-text,#222); font-size:16px; line-height:22px; font-weight:600; }
-          .st-title.pending { color: var(--component-steps-title-text-pending,#666); font-weight:500; }
-          .st-desc { color: var(--component-steps-desc-text,#999); font-size:14px; line-height:20px; font-weight:500; }
-          .st-connector { width: calc(var(--component-steps-connector-length,28) * 1px); height: 1px; background: var(--component-steps-connector-track,#e8e8e8); }
-          .st-connector.completed { background: var(--component-steps-connector-track-completed,#222); }
-        </style>
-        <div class="st" aria-label="steps preview">
-          <div class="st-item" data-ds-annotate-target="1">
-            <div class="st-icon completed" aria-hidden="true"></div>
-            <div class="st-title">Succeeded</div>
-          </div>
-          <div class="st-connector completed" aria-hidden="true"></div>
-          <div class="st-item" data-ds-annotate-target="1">
-            <div class="st-icon current">2</div>
-            <div>
-              <div class="st-title">Processing</div>
-              <div class="st-desc">This is a description</div>
-            </div>
-          </div>
-          <div class="st-connector" aria-hidden="true"></div>
-          <div class="st-item" data-ds-annotate-target="1">
-            <div class="st-icon pending">3</div>
-            <div class="st-title pending">Pending</div>
-          </div>
-          <div class="st-connector" aria-hidden="true"></div>
-          <div class="st-item" data-ds-annotate-target="1">
-            <div class="st-icon disabled">4</div>
-            <div class="st-title pending" style="color: var(--component-steps-title-text-disabled,#ccc);">Disabled</div>
-          </div>
-        </div>
+        <nav class="ds-st" data-size="lg" data-orientation="horizontal" aria-label="steps preview">
+          <ol class="ds-st-list" role="list">
+            <li class="ds-st-item" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--completed" aria-hidden="true"><span class="ds-st-icon-glyph">\u2713</span></span>
+                <div class="ds-st-body"><p class="ds-st-title">Succeeded</p></div>
+              </div>
+              <div class="ds-st-connector ds-st-connector--completed" aria-hidden="true"></div>
+            </li>
+            <li class="ds-st-item" aria-current="step" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--current" aria-hidden="true"><span class="ds-st-icon-glyph">2</span></span>
+                <div class="ds-st-body">
+                  <p class="ds-st-title ds-st-title--current">Processing</p>
+                  <p class="ds-st-desc">This is a description</p>
+                </div>
+              </div>
+              <div class="ds-st-connector" aria-hidden="true"></div>
+            </li>
+            <li class="ds-st-item" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--pending" aria-hidden="true"><span class="ds-st-icon-glyph">3</span></span>
+                <div class="ds-st-body"><p class="ds-st-title ds-st-title--pending">Pending</p></div>
+              </div>
+              <div class="ds-st-connector" aria-hidden="true"></div>
+            </li>
+            <li class="ds-st-item" data-ds-annotate-target="1">
+              <div class="ds-st-item-top">
+                <span class="ds-st-icon ds-st-icon--disabled" aria-hidden="true"><span class="ds-st-icon-glyph">4</span></span>
+                <div class="ds-st-body"><p class="ds-st-title ds-st-title--disabled">Disabled</p></div>
+              </div>
+              <div class="ds-st-connector" aria-hidden="true"></div>
+            </li>
+          </ol>
+        </nav>
         """
             + end
         )
@@ -1275,77 +1832,6 @@ def _component_preview_block(slug: str) -> str:
               </div>
             </div>
           </section>
-        </div>
-        """
-            + end
-        )
-
-    if slug == "select":
-        return (
-            shared
-            + """
-        <style>
-          .sel-wrap { display:flex; gap: 16px; align-items:flex-start; flex-wrap:wrap; }
-          .sel-trigger {
-            width: 260px;
-            height: 36px;
-            border-radius: 8px;
-            padding: 0 12px;
-            display:flex;
-            align-items:center;
-            justify-content: space-between;
-            gap: 12px;
-            background: var(--component-select-trigger-bg-default,#f7f7f7);
-            border: 1px solid var(--component-select-trigger-border-default,#f7f7f7);
-          }
-          .sel-trigger.hover { background: var(--component-select-trigger-bg-hover,#e8e8e8); border-color: var(--component-select-trigger-border-hover,#e8e8e8); }
-          .sel-trigger.focus { border-color: var(--component-select-trigger-border-focus,#222); box-shadow: 0 0 0 2px var(--component-select-trigger-ring-focus,#6985bf); }
-          .sel-trigger.error { border-color: var(--component-select-trigger-border-error,#f14846); box-shadow: 0 0 0 2px var(--component-select-trigger-ring-error,#f14846); }
-          .sel-trigger.disabled { background: var(--component-select-trigger-bg-disabled,#fafafa); border-color: var(--component-select-trigger-border-disabled,#fafafa); }
-          .sel-text { color: var(--component-select-trigger-text-default,#999); font-size: 14px; line-height: 20px; font-weight: 500; }
-          .sel-trigger.disabled .sel-text { color: var(--component-select-trigger-text-disabled,#ccc); }
-          .sel-icon { width: 12px; height: 12px; border-right:2px solid var(--component-select-trigger-icon-default,#999); border-bottom:2px solid var(--component-select-trigger-icon-default,#999); transform: rotate(45deg); }
-          .sel-trigger.disabled .sel-icon { border-color: var(--component-select-trigger-icon-disabled,#ccc); }
-
-          .sel-dd {
-            width: 260px;
-            padding: 4px;
-            border-radius: calc(var(--component-select-dropdown-radius,6) * 1px);
-            background: var(--component-select-dropdown-bg,#fff);
-            box-shadow: var(--component-select-dropdown-shadow,0px 4px 10px 0px rgba(0,0,0,0.1));
-          }
-          .sel-item {
-            height: 32px;
-            border-radius: 6px;
-            padding: 0 12px;
-            display:flex;
-            align-items:center;
-            background: var(--component-select-item-bg-default,#fff);
-            color: var(--component-select-item-text,#222);
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 500;
-          }
-          .sel-item.hover { background: var(--component-select-item-bg-hover,#f7f7f7); }
-          .sel-item.selected { background: var(--component-select-item-bg-selected,#f7f7f7); }
-        </style>
-        <div class="sel-wrap" aria-label="select preview">
-          <div>
-            <div class="sel-trigger" data-ds-annotate-target="1"><span class="sel-text" style="color: var(--component-select-trigger-placeholder,#999);">Default</span><span class="sel-icon" aria-hidden="true"></span></div>
-            <div style="height:10px;"></div>
-            <div class="sel-trigger hover" data-ds-annotate-target="1"><span class="sel-text">Hover</span><span class="sel-icon" aria-hidden="true"></span></div>
-            <div style="height:10px;"></div>
-            <div class="sel-trigger focus" data-ds-annotate-target="1"><span class="sel-text">Focus</span><span class="sel-icon" aria-hidden="true"></span></div>
-            <div style="height:10px;"></div>
-            <div class="sel-trigger error" data-ds-annotate-target="1"><span class="sel-text">Error</span><span class="sel-icon" aria-hidden="true"></span></div>
-            <div style="height:10px;"></div>
-            <div class="sel-trigger disabled" data-ds-annotate-target="1"><span class="sel-text">Disabled</span><span class="sel-icon" aria-hidden="true"></span></div>
-          </div>
-          <div class="sel-dd" role="listbox" aria-label="dropdown">
-            <div class="sel-item" data-ds-annotate-target="1">Default</div>
-            <div class="sel-item hover" data-ds-annotate-target="1">Hover</div>
-            <div class="sel-item selected" data-ds-annotate-target="1">Selected</div>
-          </div>
         </div>
         """
             + end
@@ -1479,39 +1965,38 @@ def _component_preview_block(slug: str) -> str:
             + end
         )
 
+    if slug == "pageheader":
+        return (
+            shared
+            + """
+        <header class="ds-ph" aria-labelledby="phPvTitle" data-ds-annotate-target="1">
+          <div class="ds-ph-row">
+            <div class="ds-ph-left">
+              <button type="button" class="ds-ph-back" aria-label="Back"><span class="ds-ph-back-ic" aria-hidden="true">\u2190</span></button>
+              <div class="ds-ph-vdiv" aria-hidden="true"></div>
+              <div class="ds-ph-main">
+                <h1 class="ds-ph-title" id="phPvTitle">Page title</h1>
+                <p class="ds-ph-desc">Preview index sample description.</p>
+              </div>
+            </div>
+          </div>
+        </header>
+        """
+            + end
+        )
+
     if slug == "card":
         return (
             shared
             + """
-        <style>
-          .c {
-            width: 320px;
-            border-radius: calc(var(--component-card-panel-radius, 12) * 1px);
-            background: var(--component-card-panel-bg, #fff);
-            border: 1px solid var(--component-card-panel-border, #e8e8e8);
-            box-shadow: var(--component-card-panel-shadow, 0px 1px 2px 0px rgba(0,0,0,0.06));
-            padding: calc(var(--component-card-p, 16) * 1px);
-          }
-          .c-title {
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 20px;
-            color: var(--component-card-title-text, #222);
-          }
-          .c-body {
-            margin-top: 8px;
-            font-size: 12px;
-            line-height: 18px;
-            color: var(--component-card-body-text, #666);
-          }
-          .c-div { height: 1px; background: var(--component-card-divider,#e8e8e8); margin: 12px 0; }
-        </style>
-        <div style="display:flex; gap: 12px; flex-wrap:wrap; align-items:flex-start;">
-          <section class="c" aria-label="card preview" data-ds-annotate-target="1">
-            <div class="c-title">Card title</div>
-            <div class="c-body">Body text. Compare radius/border/shadow/padding with Figma.</div>
-            <div class="c-div" aria-hidden="true"></div>
-            <div class="c-body">Footer/meta</div>
+        <div class="ds-card-live-wrap">
+          <section class="ds-card" data-size="md" data-bordered="true" aria-labelledby="cdPvTitle" data-ds-annotate-target="1">
+            <div class="ds-card-stack">
+              <h3 class="ds-card-title" id="cdPvTitle">Card title</h3>
+              <p class="ds-card-body">Body text. Compare radius, border, shadow, and padding with Figma.</p>
+            </div>
+            <div class="ds-card-divider" role="separator" aria-hidden="true"></div>
+            <p class="ds-card-body ds-card-body--meta">Footer / meta</p>
           </section>
         </div>
         """
@@ -1564,6 +2049,20 @@ def _component_preview_block(slug: str) -> str:
             + end
         )
 
+    if slug == "cascader":
+        return (
+            shared
+            + """
+        <div class="ds-casc" data-size="lg" aria-label="cascader preview">
+          <button type="button" class="ds-casc-trg" role="presentation" tabindex="-1" data-ds-annotate-target="1">
+            <span class="ds-casc-trg-txt">Zhejiang / Hangzhou / West Lake</span>
+            <span class="ds-casc-trg-chev" aria-hidden="true"></span>
+          </button>
+        </div>
+        """
+            + end
+        )
+
     return """
     <div class="card" style="border-radius:10px;">
       <div style="padding:12px;">
@@ -1590,6 +2089,7 @@ def main() -> int:
 
     components = _collect_components(components_dir)
     components.sort(key=lambda c: c.slug)
+    behavior_source = _read_behavior_source(repo_root)
 
     out_components_dir.mkdir(parents=True, exist_ok=True)
     tokens_css_text = tokens_css.read_text(encoding="utf-8", errors="replace")
@@ -1602,14 +2102,19 @@ def main() -> int:
 
     # Write per-component HTML
     for c in components:
-        body = _component_demo_body(c, index_href="../index.html", tokens_css_text=tokens_css_text)
+        body = _component_demo_body(
+            c,
+            index_href="../index.html",
+            tokens_css_text=tokens_css_text,
+            behavior_source=behavior_source,
+        )
         html_text = _html_page(title=c.title, body=body, tokens_href=tokens_href_components)
         (out_components_dir / f"{c.slug}.html").write_text(html_text, encoding="utf-8")
 
     # Write index
     index_html = _html_page(
         title="Component demos",
-        body=_index_body(components, tokens_href=tokens_href_index),
+        body=_index_body(components, tokens_href=tokens_href_index, behavior_source=behavior_source),
         tokens_href=tokens_href_index,
     )
     (out_dir / "index.html").write_text(index_html, encoding="utf-8")

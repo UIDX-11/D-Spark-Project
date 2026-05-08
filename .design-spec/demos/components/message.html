@@ -88,7 +88,7 @@
       <div class="top">
         <div>
           <h1 style="margin:0; font-size:20px; line-height:1.2;">Message</h1>
-          <div class="muted" style="margin-top:6px;">Slug <code>message</code> · tokens <code>--component-message-*</code></div>
+          <div class="muted" style="margin-top:6px;">Slug <code>message</code> · tokens <code>--component-message-*</code> · behavior source <code>Arco Vue</code></div>
         </div>
         <div class="pill">
           <span class="swatch"></span>
@@ -1278,6 +1278,228 @@
   color: var(--component-input-text-disabled);
 }
 
+/* ---- Progress (line / circle / mini / step; tokens only) ---- */
+.ds-pr-line-wrap {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+  width: min(100%, calc(var(--component-input-max-width) * 1px));
+}
+
+.ds-pr-line {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  border-radius: calc(var(--component-progress-line-radius) * 1px);
+  overflow: hidden;
+}
+
+.ds-pr-line--sm {
+  height: calc(var(--component-progress-line-h-sm) * 1px);
+}
+
+.ds-pr-line--lg {
+  height: calc(var(--component-progress-line-h-lg) * 1px);
+}
+
+.ds-pr-line-track {
+  position: absolute;
+  inset: 0;
+  background: var(--component-progress-line-track);
+  border-radius: inherit;
+}
+
+.ds-pr-line-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-radius: inherit;
+  transition: width 0.25s ease;
+}
+
+.ds-pr-line-fill--active {
+  background: var(--component-progress-line-fill-active);
+}
+
+.ds-pr-line-fill--success {
+  background: var(--component-progress-line-fill-success);
+}
+
+.ds-pr-line-fill--error {
+  background: var(--component-progress-line-fill-error);
+}
+
+.ds-pr-line--busy .ds-pr-line-fill--active {
+  width: 38% !important;
+  animation: ds-pr-line-indet 1.15s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-pr-line--busy .ds-pr-line-fill--active {
+    animation: none;
+    opacity: 0.88;
+  }
+}
+
+@keyframes ds-pr-line-indet {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(270%);
+  }
+}
+
+.ds-pr-line-lbl {
+  flex-shrink: 0;
+  font-size: calc(var(--component-input-layout-s-font-size) * 1px);
+  line-height: calc(var(--component-input-layout-s-line-height) * 1px);
+  color: var(--component-progress-label-text);
+}
+
+.ds-pr-circ-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+  width: min(100%, calc(var(--component-input-max-width) * 1px));
+}
+
+.ds-pr-circ {
+  position: relative;
+  width: calc(var(--component-progress-circle-size-sm) * 1px);
+  height: calc(var(--component-progress-circle-size-sm) * 1px);
+}
+
+.ds-pr-circ[data-size="md"] {
+  width: calc(var(--component-progress-circle-size-md) * 1px);
+  height: calc(var(--component-progress-circle-size-md) * 1px);
+}
+
+.ds-pr-circ[data-size="lg"] {
+  width: calc(var(--component-progress-circle-size-lg) * 1px);
+  height: calc(var(--component-progress-circle-size-lg) * 1px);
+}
+
+.ds-pr-circ svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ds-pr-circ-tr {
+  fill: none;
+  stroke: var(--component-progress-circle-track);
+  stroke-width: calc(var(--component-progress-line-h-lg) * 1px);
+}
+
+.ds-pr-circ-fi {
+  fill: none;
+  stroke: var(--component-progress-circle-stroke-active);
+  stroke-width: calc(var(--component-progress-line-h-lg) * 1px);
+  stroke-linecap: round;
+}
+
+.ds-pr-circ-fi--success {
+  stroke: var(--component-progress-circle-stroke-success);
+}
+
+.ds-pr-circ-fi--error {
+  stroke: var(--component-progress-circle-stroke-error);
+}
+
+.ds-pr-circ-txt {
+  font-size: calc(var(--component-input-layout-l-font-size) * 1px);
+  line-height: calc(var(--component-input-layout-l-line-height) * 1px);
+  color: var(--component-progress-circle-text);
+  font-weight: 600;
+}
+
+.ds-pr-mini {
+  width: calc(var(--component-progress-mini-size) * 1px);
+  height: calc(var(--component-progress-mini-size) * 1px);
+  border-radius: calc(var(--component-progress-line-radius) * 1px);
+  background: var(--component-progress-line-track);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ds-pr-mini-ic {
+  font-size: calc(var(--component-input-layout-s-font-size) * 1px);
+  line-height: 1;
+  color: var(--component-progress-line-fill-success);
+}
+
+.ds-pr-mini-ic--err {
+  color: var(--component-progress-line-fill-error);
+}
+
+.ds-pr-mini-ic--muted {
+  color: var(--component-progress-label-text);
+}
+
+.ds-pr-step-row {
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+  width: min(100%, calc(var(--component-input-max-width) * 1px));
+}
+
+.ds-pr-step {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--component-progress-step-h) * 1px);
+  border-radius: calc(var(--component-progress-step-radius) * 1px);
+  font-size: calc(var(--component-input-layout-s-font-size) * 1px);
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.ds-pr-step--todo {
+  background: var(--component-progress-step-bg);
+  color: var(--component-progress-label-text);
+}
+
+.ds-pr-step--done {
+  background: var(--component-progress-step-fill);
+  color: var(--component-progress-step-text-on-fill);
+}
+
+.ds-pr-step--active {
+  background: var(--component-progress-line-fill-active);
+  color: var(--component-progress-step-text-on-fill);
+}
+
+.ds-pr-circ--busy .ds-pr-circ-fi {
+  animation: ds-pr-circ-busy 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-pr-circ--busy .ds-pr-circ-fi {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+@keyframes ds-pr-circ-busy {
+  0%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  50% {
+    stroke-dashoffset: 52;
+    opacity: 0.55;
+  }
+}
+
 /* ---- Slider (single / range; tokens only) ---- */
 .ds-sl {
   position: relative;
@@ -2154,49 +2376,208 @@
   box-shadow: 0 0 0 2px var(--component-tag-focus-ring);
 }
 
-/* ---- Select ---- */
+/* ---- Select (tokens: --component-select-*, layout by data-size) ---- */
 .ds-sel {
   position: relative;
-  width: min(100%, 280px);
+  width: min(100%, calc(var(--component-input-max-width) * 1px));
+  box-sizing: border-box;
 }
 
 .ds-sel-trg {
   width: 100%;
-  height: 36px;
-  border-radius: 8px;
-  padding: 0 12px;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  border: 1px solid var(--component-select-trigger-border-default, #f7f7f7);
-  background: var(--component-select-trigger-bg-default, #f7f7f7);
-  color: var(--semantic-text-primary, #222);
-  font-size: 14px;
+  gap: calc(var(--component-tag-group-gap) * 1px);
+  border: 1px solid var(--component-select-trigger-border-default);
+  background: var(--component-select-trigger-bg-default);
+  color: var(--semantic-text-primary);
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   box-sizing: border-box;
+  text-align: left;
 }
 
-.ds-sel-trg:hover {
-  background: var(--component-select-trigger-bg-hover, #e8e8e8);
-  border-color: var(--component-select-trigger-border-hover, #e8e8e8);
+.ds-sel-trg:hover:not(:disabled):not(.ds-sel-trg--dis):not(.ds-sel-trg--static) {
+  background: var(--component-select-trigger-bg-hover);
+  border-color: var(--component-select-trigger-border-hover);
 }
 
 .ds-sel-trg:focus {
   outline: none;
-  border-color: var(--component-select-trigger-border-focus, #222);
-  box-shadow: 0 0 0 2px var(--component-select-trigger-ring-focus, #6985bf);
+}
+
+.ds-sel-trg:focus-visible:not(:disabled):not(.ds-sel-trg--dis):not(.ds-sel-trg--static) {
+  border-color: var(--component-select-trigger-border-focus);
+  box-shadow: 0 0 0 2px var(--component-select-trigger-ring-focus);
+}
+
+.ds-sel-trg.ds-sel-trg--err {
+  border-color: var(--component-select-trigger-border-error);
+  box-shadow: 0 0 0 2px var(--component-select-trigger-ring-error);
+}
+
+.ds-sel-trg.ds-sel-trg--err:focus-visible {
+  border-color: var(--component-select-trigger-border-error);
+  box-shadow: 0 0 0 2px var(--component-select-trigger-ring-error);
+}
+
+.ds-sel-trg:disabled,
+.ds-sel-trg.ds-sel-trg--dis {
+  background: var(--component-select-trigger-bg-disabled);
+  border-color: var(--component-select-trigger-border-disabled);
+  color: var(--component-select-trigger-text-disabled);
+  cursor: default;
+}
+
+.ds-sel-ph {
+  color: var(--component-select-trigger-placeholder);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-sel-val {
+  color: var(--component-select-trigger-text-focus);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-sel-val.ds-sel-val--multi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--component-tag-group-gap) * 1px);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.ds-sel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--component-tag-group-gap) * 1px);
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--component-tag-group-py) * 1px) calc(var(--component-tag-group-px) * 1px);
+  border-radius: calc(var(--component-tag-group-radius) * 1px);
+  background: var(--component-tag-group-bg-default);
+  color: var(--component-tag-group-text-default);
+  font-size: inherit;
+  font-weight: 500;
+}
+
+.ds-sel-chip--count {
+  background: var(--component-tag-group-bg-default);
+}
+
+.ds-sel-chip-lb {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+}
+
+.ds-sel-chip-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 calc(var(--component-tag-group-gap) * 1px);
+  border: none;
+  border-radius: calc(var(--component-tag-group-radius) * 1px);
+  background: transparent;
+  color: var(--component-tag-group-icon-default);
+  cursor: pointer;
+  font-size: inherit;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.ds-sel-chip-x:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-tag-focus-ring);
+}
+
+.ds-sel[data-size="xl"] .ds-sel-trg {
+  height: calc(var(--component-select-layout-xl-trigger-height) * 1px);
+  border-radius: calc(var(--component-select-layout-xl-trigger-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-xl-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-xl-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-xl-trigger-line-height) * 1px);
+}
+
+.ds-sel[data-size="lg"] .ds-sel-trg {
+  height: calc(var(--component-select-layout-lg-trigger-height) * 1px);
+  border-radius: calc(var(--component-select-layout-lg-trigger-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-lg-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-lg-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-lg-trigger-line-height) * 1px);
+}
+
+.ds-sel[data-size="md"] .ds-sel-trg {
+  height: calc(var(--component-select-layout-md-trigger-height) * 1px);
+  border-radius: calc(var(--component-select-layout-md-trigger-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-md-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-md-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-md-trigger-line-height) * 1px);
+}
+
+.ds-sel[data-size="sm"] .ds-sel-trg {
+  height: calc(var(--component-select-layout-sm-trigger-height) * 1px);
+  border-radius: calc(var(--component-select-layout-sm-trigger-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-sm-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-sm-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-sm-trigger-line-height) * 1px);
 }
 
 .ds-sel-trg .chev {
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid var(--component-select-trigger-icon-default, #999);
-  border-bottom: 2px solid var(--component-select-trigger-icon-default, #999);
+  flex-shrink: 0;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-color: var(--component-select-trigger-icon-default);
+  border-right-width: calc(var(--component-select-trigger-chev-stroke-width) * 1px);
+  border-bottom-width: calc(var(--component-select-trigger-chev-stroke-width) * 1px);
   transform: rotate(45deg);
-  margin-bottom: 4px;
+  box-sizing: border-box;
+  margin-bottom: calc(var(--component-select-dropdown-offset-y) * 1px);
+}
+
+.ds-sel[data-size="xl"] .chev {
+  width: calc(var(--component-select-layout-xl-chev-size) * 1px);
+  height: calc(var(--component-select-layout-xl-chev-size) * 1px);
+}
+
+.ds-sel[data-size="lg"] .chev {
+  width: calc(var(--component-select-layout-lg-chev-size) * 1px);
+  height: calc(var(--component-select-layout-lg-chev-size) * 1px);
+}
+
+.ds-sel[data-size="md"] .chev {
+  width: calc(var(--component-select-layout-md-chev-size) * 1px);
+  height: calc(var(--component-select-layout-md-chev-size) * 1px);
+}
+
+.ds-sel[data-size="sm"] .chev {
+  width: calc(var(--component-select-layout-sm-chev-size) * 1px);
+  height: calc(var(--component-select-layout-sm-chev-size) * 1px);
+}
+
+.ds-sel-trg:disabled .chev,
+.ds-sel-trg.ds-sel-trg--dis .chev {
+  border-color: var(--component-select-trigger-icon-disabled);
+}
+
+.ds-sel-trg:disabled .ds-sel-ph,
+.ds-sel-trg.ds-sel-trg--dis .ds-sel-ph {
+  color: var(--component-select-trigger-text-disabled);
 }
 
 .ds-sel-list {
@@ -2204,47 +2585,1359 @@
   z-index: 5;
   left: 0;
   right: 0;
-  top: calc(100% + 4px);
-  padding: 4px;
-  border-radius: calc(var(--component-select-dropdown-radius, 6) * 1px);
-  background: var(--component-select-dropdown-bg, #fff);
-  box-shadow: var(--component-select-dropdown-shadow, 0 4px 10px rgba(0, 0, 0, 0.1));
+  top: calc(100% + (var(--component-select-dropdown-offset-y) * 1px));
+  padding: calc(var(--component-select-dropdown-padding) * 1px);
+  border-radius: calc(var(--component-select-dropdown-radius) * 1px);
+  background: var(--component-select-dropdown-bg);
+  box-shadow: var(--component-select-dropdown-shadow);
+  box-sizing: border-box;
 }
 
 .ds-sel-list[hidden] {
   display: none !important;
 }
 
+.ds-sel-list--fig {
+  position: relative;
+  top: auto;
+  left: auto;
+  flex: 0 0 auto;
+  width: min(100%, calc(var(--component-input-max-width) * 1px));
+}
+
+.ds-sel--fig {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+}
+
+.ds-sel-fig-col {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+}
+
+.ds-sel-trg--static {
+  cursor: default;
+}
+
+.ds-sel-trg.ds-sel-trg--demo-hover {
+  background: var(--component-select-trigger-bg-hover);
+  border-color: var(--component-select-trigger-border-hover);
+}
+
+.ds-sel-trg.ds-sel-trg--demo-focus {
+  border-color: var(--component-select-trigger-border-focus);
+  box-shadow: 0 0 0 2px var(--component-select-trigger-ring-focus);
+}
+
 .ds-sel-item {
-  height: 32px;
-  padding: 0 12px;
   display: flex;
   align-items: center;
-  border-radius: 6px;
-  font-size: 14px;
   font-weight: 500;
-  color: var(--component-select-item-text, #222);
-  background: var(--component-select-item-bg-default, #fff);
+  color: var(--component-select-item-text);
+  background: var(--component-select-item-bg-default);
   cursor: pointer;
+  box-sizing: border-box;
+}
+
+.ds-sel[data-size="xl"] .ds-sel-item {
+  height: calc(var(--component-select-layout-xl-item-height) * 1px);
+  border-radius: calc(var(--component-select-layout-xl-item-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-xl-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-xl-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-xl-trigger-line-height) * 1px);
+}
+
+.ds-sel[data-size="lg"] .ds-sel-item {
+  height: calc(var(--component-select-layout-lg-item-height) * 1px);
+  border-radius: calc(var(--component-select-layout-lg-item-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-lg-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-lg-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-lg-trigger-line-height) * 1px);
+}
+
+.ds-sel[data-size="md"] .ds-sel-item {
+  height: calc(var(--component-select-layout-md-item-height) * 1px);
+  border-radius: calc(var(--component-select-layout-md-item-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-md-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-md-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-md-trigger-line-height) * 1px);
+}
+
+.ds-sel[data-size="sm"] .ds-sel-item {
+  height: calc(var(--component-select-layout-sm-item-height) * 1px);
+  border-radius: calc(var(--component-select-layout-sm-item-radius) * 1px);
+  padding: 0 calc(var(--component-select-layout-sm-trigger-padding-x) * 1px);
+  font-size: calc(var(--component-select-layout-sm-trigger-font-size) * 1px);
+  line-height: calc(var(--component-select-layout-sm-trigger-line-height) * 1px);
 }
 
 .ds-sel-item:hover,
 .ds-sel-item.is-hover {
-  background: var(--component-select-item-bg-hover, #f7f7f7);
+  background: var(--component-select-item-bg-hover);
 }
 
 .ds-sel-item.is-active {
-  background: var(--component-select-item-bg-selected, #f7f7f7);
+  background: var(--component-select-item-bg-selected);
 }
 
 .ds-sel-item.is-foc {
   outline: none;
-  box-shadow: inset 0 0 0 2px var(--component-input-ring-focus, #6985bf);
+  box-shadow: inset 0 0 0 2px var(--component-select-trigger-ring-focus);
 }
 
 .ds-sel-item.is-dis {
   opacity: 0.45;
   pointer-events: none;
+}
+
+.ds-sel-search-row {
+  margin-bottom: calc(var(--component-select-dropdown-padding) * 1px);
+}
+
+.ds-sel-search {
+  width: 100%;
+  box-sizing: border-box;
+  height: calc(var(--component-input-layout-s-height) * 1px);
+  border-radius: calc(var(--component-input-layout-s-radius) * 1px);
+  border: 1px solid var(--component-select-trigger-border-default);
+  padding: 0 calc(var(--component-input-layout-s-padding-x) * 1px);
+  font-size: calc(var(--component-input-layout-s-font-size) * 1px);
+  line-height: calc(var(--component-input-layout-s-line-height) * 1px);
+  background: var(--component-select-dropdown-bg);
+  color: var(--semantic-text-primary);
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.ds-sel-search::placeholder {
+  color: var(--component-select-trigger-placeholder);
+}
+
+.ds-sel-search:focus-visible {
+  outline: none;
+  border-color: var(--component-select-trigger-border-focus);
+  box-shadow: 0 0 0 2px var(--component-select-trigger-ring-focus);
+}
+
+.ds-sel--matrix .ds-sel-item {
+  width: 100%;
+}
+
+/* ---- Dropdown (Arco Ddropdown-aligned; --component-dropdown-*) ---- */
+.ds-dd {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  max-width: 100%;
+}
+
+.ds-dd-trg {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: none;
+  border-radius: calc(var(--component-dropdown-trigger-radius) * 1px);
+  padding: 0 calc(var(--component-dropdown-trigger-px) * 1px);
+  background: var(--component-dropdown-panel-bg);
+  color: var(--component-dropdown-trigger-text);
+  font-weight: 500;
+  font-family: inherit;
+  font-size: calc(var(--component-dropdown-item-font-size) * 1px);
+  line-height: calc(var(--component-dropdown-item-line-height) * 1px);
+  cursor: pointer;
+}
+
+.ds-dd[data-trigger="m"] .ds-dd-trg {
+  min-height: calc(var(--component-dropdown-trigger-h-m) * 1px);
+}
+
+.ds-dd[data-trigger="l"] .ds-dd-trg {
+  min-height: calc(var(--component-dropdown-trigger-h-l) * 1px);
+}
+
+.ds-dd-trg:hover {
+  background: var(--component-dropdown-trigger-bg-hover);
+}
+
+.ds-dd-trg:active {
+  background: var(--component-dropdown-trigger-bg-active);
+}
+
+.ds-dd-trg:focus {
+  outline: none;
+}
+
+.ds-dd-trg:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-dd-panel {
+  position: absolute;
+  z-index: 6;
+  left: 0;
+  top: calc(100% + (var(--component-dropdown-panel-offset-y) * 1px));
+  box-sizing: border-box;
+  min-width: 100%;
+  width: max-content;
+  padding: calc(var(--component-dropdown-panel-padding) * 1px);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-dropdown-panel-gap) * 1px);
+  border-radius: calc(var(--component-dropdown-panel-radius) * 1px);
+  background: var(--component-dropdown-panel-bg);
+  box-shadow: var(--component-dropdown-panel-shadow);
+}
+
+.ds-dd-panel[hidden] {
+  display: none !important;
+}
+
+.ds-dd-panel--search {
+  min-height: calc(var(--component-dropdown-panel-search-min-height) * 1px);
+}
+
+.ds-dd-panel--fig {
+  position: relative;
+  top: auto;
+  left: auto;
+  min-width: calc(var(--component-dropdown-panel-min-width) * 1px);
+}
+
+.ds-dd-search {
+  width: 100%;
+  box-sizing: border-box;
+  height: calc(var(--component-input-layout-s-height) * 1px);
+  border-radius: calc(var(--component-input-layout-s-radius) * 1px);
+  border: 1px solid var(--semantic-border-default);
+  padding: 0 calc(var(--component-input-layout-s-padding-x) * 1px);
+  font-size: calc(var(--component-input-layout-s-font-size) * 1px);
+  line-height: calc(var(--component-input-layout-s-line-height) * 1px);
+  background: var(--component-dropdown-panel-bg);
+  color: var(--semantic-text-primary);
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.ds-dd-search::placeholder {
+  color: var(--semantic-text-placeholder);
+}
+
+.ds-dd-search:focus-visible {
+  outline: none;
+  border-color: var(--semantic-text-primary);
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-dd-item {
+  margin: 0;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background: var(--component-dropdown-item-bg-default);
+  color: var(--component-dropdown-item-text);
+}
+
+.ds-dd[data-item="md"] .ds-dd-item {
+  min-height: calc(var(--component-dropdown-item-h-md) * 1px);
+  border-radius: calc(var(--component-dropdown-item-radius-md) * 1px);
+  padding: calc(var(--component-dropdown-item-py-md) * 1px) calc(var(--component-dropdown-item-px) * 1px);
+  font-size: calc(var(--component-dropdown-item-font-size) * 1px);
+  line-height: calc(var(--component-dropdown-item-line-height) * 1px);
+  gap: calc(var(--component-dropdown-item-gap-md) * 1px);
+}
+
+.ds-dd[data-item="sm"] .ds-dd-item {
+  min-height: calc(var(--component-dropdown-item-h-sm) * 1px);
+  border-radius: calc(var(--component-dropdown-item-radius-sm) * 1px);
+  padding: calc(var(--component-dropdown-item-py-sm) * 1px) calc(var(--component-dropdown-item-px) * 1px);
+  font-size: calc(var(--component-dropdown-item-font-size) * 1px);
+  line-height: calc(var(--component-dropdown-item-line-height) * 1px);
+  gap: calc(var(--component-dropdown-item-gap-sm) * 1px);
+}
+
+.ds-dd-item:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--component-dropdown-item-bg-hover);
+}
+
+.ds-dd-item--danger {
+  color: var(--component-dropdown-item-text-danger);
+}
+
+.ds-dd-item:disabled,
+.ds-dd-item[aria-disabled="true"] {
+  color: var(--component-dropdown-item-text-disabled);
+  cursor: default;
+}
+
+.ds-dd-item:focus {
+  outline: none;
+}
+
+.ds-dd-item:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-dd-check {
+  width: calc(var(--component-dropdown-check-size) * 1px);
+  height: calc(var(--component-dropdown-check-size) * 1px);
+  border-radius: calc(var(--component-dropdown-check-radius) * 1px);
+  background: var(--component-dropdown-check-icon);
+  flex-shrink: 0;
+  opacity: 0;
+}
+
+.ds-dd-item.ds-dd-item--checked .ds-dd-check {
+  opacity: 1;
+}
+
+.ds-dd-divider {
+  height: 1px;
+  margin: calc(var(--component-dropdown-divider-margin-y) * 1px) calc(var(--component-dropdown-divider-margin-x) * 1px);
+  background: var(--component-dropdown-divider);
+  border: none;
+  flex-shrink: 0;
+}
+
+.ds-dd-item--static {
+  pointer-events: none;
+  cursor: default;
+}
+
+.ds-dd-item.is-dd-hover {
+  background: var(--component-dropdown-item-bg-hover);
+}
+
+.ds-dd-item.is-dd-foc {
+  box-shadow: inset 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-dd--matrix .ds-dd-item {
+  width: 100%;
+}
+
+/* ---- Cascader (--component-cascader-*) ---- */
+.ds-casc {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+}
+
+.ds-casc-trg {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--component-cascader-item-gap) * 1px);
+  margin: 0;
+  font-family: inherit;
+  font-weight: 500;
+  text-align: left;
+  cursor: default;
+  border-style: solid;
+  border-width: 1px;
+  background: var(--component-cascader-trigger-bg-default);
+  border-color: var(--component-cascader-trigger-border-default);
+  color: var(--component-cascader-trigger-text-value);
+}
+
+.ds-casc-trg:hover {
+  background: var(--component-cascader-trigger-bg-hover);
+}
+
+.ds-casc-trg:focus {
+  outline: none;
+}
+
+.ds-casc-trg:focus-visible {
+  box-shadow: 0 0 0 2px var(--component-cascader-trigger-ring-focus);
+  border-color: var(--component-cascader-trigger-border-focus);
+}
+
+.ds-casc-trg--err {
+  border-color: var(--component-cascader-trigger-border-error);
+}
+
+.ds-casc-trg--err:focus-visible {
+  box-shadow: 0 0 0 2px var(--component-cascader-trigger-ring-focus);
+}
+
+.ds-casc[data-size="lg"] .ds-casc-trg {
+  min-height: calc(var(--component-cascader-layout-trigger-height-lg) * 1px);
+  border-radius: calc(var(--component-cascader-layout-trigger-radius-lg) * 1px);
+  padding: 0 calc(var(--component-cascader-layout-trigger-pad-lg) * 1px);
+  font-size: calc(var(--component-cascader-layout-trigger-font-lg) * 1px);
+  line-height: calc(var(--component-cascader-layout-trigger-line-lg) * 1px);
+}
+
+.ds-casc[data-size="sm"] .ds-casc-trg {
+  min-height: calc(var(--component-cascader-layout-trigger-height-sm) * 1px);
+  border-radius: calc(var(--component-cascader-layout-trigger-radius-sm) * 1px);
+  padding: 0 calc(var(--component-cascader-layout-trigger-pad-sm) * 1px);
+  font-size: calc(var(--component-cascader-layout-trigger-font-sm) * 1px);
+  line-height: calc(var(--component-cascader-layout-trigger-line-sm) * 1px);
+}
+
+.ds-casc-trg-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-casc-trg-chev {
+  flex-shrink: 0;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-color: var(--component-cascader-item-icon-default);
+  border-right-width: calc(var(--component-cascader-layout-chev-stroke-width) * 1px);
+  border-bottom-width: calc(var(--component-cascader-layout-chev-stroke-width) * 1px);
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+
+.ds-casc[data-size="lg"] .ds-casc-trg-chev {
+  width: calc(var(--component-cascader-layout-chev-lg) * 1px);
+  height: calc(var(--component-cascader-layout-chev-lg) * 1px);
+}
+
+.ds-casc[data-size="sm"] .ds-casc-trg-chev {
+  width: calc(var(--component-cascader-layout-chev-sm) * 1px);
+  height: calc(var(--component-cascader-layout-chev-sm) * 1px);
+}
+
+.ds-casc-panel {
+  box-sizing: border-box;
+  margin-top: calc(var(--component-cascader-popup-p) * 1px);
+  background: var(--component-cascader-popup-bg);
+  border-radius: calc(var(--component-cascader-popup-radius) * 1px);
+  box-shadow: var(--component-cascader-popup-shadow);
+  padding: calc(var(--component-cascader-popup-p) * 1px);
+}
+
+.ds-casc-cols {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0;
+}
+
+.ds-casc-col {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: calc(var(--component-cascader-column-width) * 1px);
+  max-width: 100%;
+  background: var(--component-cascader-column-bg);
+  padding: calc(var(--component-cascader-column-p) * 1px);
+  border-right: 1px solid var(--component-cascader-column-divider);
+}
+
+.ds-casc-col:last-child {
+  border-right: none;
+}
+
+.ds-casc-col--flat {
+  width: 100%;
+  border-right: none;
+}
+
+.ds-casc-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-casc-item {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--component-cascader-item-gap) * 1px);
+  margin: 0;
+  padding: 0 calc(var(--component-cascader-item-px) * 1px);
+  border: none;
+  background: var(--component-cascader-item-bg-default);
+  color: var(--component-cascader-item-text-default);
+  font-family: inherit;
+  font-weight: 500;
+  text-align: left;
+  cursor: default;
+  min-width: 0;
+}
+
+.ds-casc[data-size="lg"] .ds-casc-item {
+  padding-top: calc(var(--component-cascader-item-py-lg) * 1px);
+  padding-bottom: calc(var(--component-cascader-item-py-lg) * 1px);
+  border-radius: calc(var(--component-cascader-item-radius-lg) * 1px);
+  font-size: calc(var(--component-cascader-layout-trigger-font-lg) * 1px);
+  line-height: calc(var(--component-cascader-layout-trigger-line-lg) * 1px);
+}
+
+.ds-casc[data-size="sm"] .ds-casc-item {
+  padding-top: calc(var(--component-cascader-item-py-sm) * 1px);
+  padding-bottom: calc(var(--component-cascader-item-py-sm) * 1px);
+  border-radius: calc(var(--component-cascader-item-radius-sm) * 1px);
+  font-size: calc(var(--component-cascader-layout-trigger-font-sm) * 1px);
+  line-height: calc(var(--component-cascader-layout-trigger-line-sm) * 1px);
+}
+
+.ds-casc-item:hover {
+  background: var(--component-cascader-item-bg-hover);
+}
+
+.ds-casc-item.is-hov {
+  background: var(--component-cascader-item-bg-hover);
+}
+
+.ds-casc-item.is-act {
+  background: var(--component-cascader-item-bg-active);
+}
+
+.ds-casc-item.is-dis,
+.ds-casc-item:disabled {
+  color: var(--component-cascader-item-text-disabled);
+  cursor: default;
+}
+
+.ds-casc-item.is-dis .ds-casc-item-chev,
+.ds-casc-item:disabled .ds-casc-item-chev {
+  color: var(--component-cascader-item-icon-disabled);
+  border-color: var(--component-cascader-item-icon-disabled);
+}
+
+.ds-casc-item:focus {
+  outline: none;
+}
+
+.ds-casc-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-casc-item-lbl {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-casc-item-chev {
+  flex-shrink: 0;
+  margin-left: calc(var(--component-cascader-item-gap) * 1px);
+  font-size: calc(var(--component-cascader-layout-chev-lg) * 1px);
+  line-height: 1;
+  color: var(--component-cascader-item-icon-default);
+}
+
+.ds-casc[data-size="sm"] .ds-casc-item-chev {
+  font-size: calc(var(--component-cascader-layout-chev-sm) * 1px);
+}
+
+.ds-casc-cb {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: calc(var(--component-cascader-check-size) * 1px);
+  height: calc(var(--component-cascader-check-size) * 1px);
+  border-radius: calc(var(--component-checkbox-box-radius) * 1px);
+  border: 1px solid var(--semantic-border-default);
+  background: var(--component-checkbox-unchecked-bg-default);
+  margin-right: calc(var(--component-cascader-item-gap-with-checkbox) * 0.5 * 1px);
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+
+.ds-casc-cb.is-on {
+  background: var(--component-checkbox-checked-bg-default);
+  border-color: var(--component-checkbox-checked-bg-default);
+}
+
+.ds-casc-cb.is-on::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: calc(var(--component-checkbox-layout-mark-width) * 1px);
+  height: calc(var(--component-checkbox-layout-mark-height) * 1px);
+  border-left: calc(var(--component-checkbox-layout-mark-border) * 1px) solid var(--component-checkbox-checked-mark-default);
+  border-bottom: calc(var(--component-checkbox-layout-mark-border) * 1px) solid var(--component-checkbox-checked-mark-default);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-sizing: border-box;
+}
+
+.ds-casc-cb.is-ind {
+  background: var(--component-checkbox-indeterminate-bg-default);
+  border-color: var(--component-checkbox-indeterminate-border-default);
+}
+
+.ds-casc-cb.is-ind::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--component-checkbox-layout-indeterminate-bar-width) * 1px);
+  height: calc(var(--component-checkbox-layout-indeterminate-bar-height) * 1px);
+  background: var(--component-checkbox-indeterminate-dash-default);
+  transform: translate(-50%, -50%);
+}
+
+.ds-casc--matrix {
+  max-width: 100%;
+}
+
+/* ---- PageHeader (--component-page-header-*) ---- */
+.ds-ph {
+  box-sizing: border-box;
+  width: 100%;
+  background: var(--component-page-header-bg);
+  padding: calc(var(--component-page-header-py) * 1px) calc(var(--component-page-header-px) * 1px);
+}
+
+.ds-ph-bc {
+  margin-bottom: calc(var(--component-page-header-gap) * 0.5 * 1px);
+}
+
+.ds-ph-bc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--component-page-header-gap) * 0.5 * 1px);
+  color: var(--component-page-header-desc-text);
+  font-size: calc(var(--component-page-header-layout-desc-font-size) * 1px);
+  line-height: calc(var(--component-page-header-layout-desc-line-height) * 1px);
+}
+
+.ds-ph-bc-item {
+  margin: 0;
+  padding: 0;
+}
+
+.ds-ph-bc-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ds-ph-bc-current {
+  color: var(--component-page-header-title-text);
+  font-weight: 500;
+}
+
+.ds-ph-bc-sep {
+  color: var(--component-page-header-desc-text);
+  user-select: none;
+}
+
+.ds-ph-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--component-page-header-gap) * 1px);
+}
+
+.ds-ph-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-page-header-gap) * 1px);
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.ds-ph-back {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(var(--component-page-header-layout-back-hit-min) * 1px);
+  min-height: calc(var(--component-page-header-layout-back-hit-min) * 1px);
+  border-radius: calc(var(--component-page-header-action-radius) * 1px);
+  color: var(--component-page-header-back-icon);
+}
+
+.ds-ph-back:focus {
+  outline: none;
+}
+
+.ds-ph-back:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ph-back-ic {
+  display: block;
+  font-size: calc(var(--component-page-header-back-icon-size) * 1px);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.ds-ph-vdiv {
+  flex-shrink: 0;
+  width: calc(var(--component-page-header-divider-thickness) * 1px);
+  height: calc(var(--component-page-header-layout-inner-divider-height) * 1px);
+  background: var(--component-page-header-divider);
+}
+
+.ds-ph-main {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-page-header-gap) * 0.25 * 1px);
+}
+
+.ds-ph-title {
+  margin: 0;
+  color: var(--component-page-header-title-text);
+  font-size: calc(var(--component-page-header-layout-title-font-size) * 1px);
+  line-height: calc(var(--component-page-header-layout-title-line-height) * 1px);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-ph-desc {
+  margin: 0;
+  color: var(--component-page-header-desc-text);
+  font-size: calc(var(--component-page-header-layout-desc-font-size) * 1px);
+  line-height: calc(var(--component-page-header-layout-desc-line-height) * 1px);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-ph-right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-page-header-action-group-gap) * 1px);
+}
+
+.ds-ph-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: calc(var(--component-page-header-action-group-gap) * 1px);
+  align-items: center;
+}
+
+.ds-ph-btn {
+  box-sizing: border-box;
+  margin: 0;
+  cursor: default;
+  border-radius: calc(var(--component-page-header-action-radius) * 1px);
+  border: 1px solid var(--component-page-header-action-border);
+  background: var(--component-page-header-action-bg);
+  color: var(--component-page-header-action-text);
+  padding: calc(var(--component-page-header-action-padding-y) * 1px) calc(var(--component-page-header-action-padding-x) * 1px);
+  font-family: inherit;
+  font-size: calc(var(--component-page-header-layout-desc-font-size) * 1px);
+  line-height: calc(var(--component-page-header-layout-desc-line-height) * 1px);
+  font-weight: 500;
+}
+
+.ds-ph-btn:focus {
+  outline: none;
+}
+
+.ds-ph-btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ph-btn--pri {
+  border-color: transparent;
+  background: var(--component-page-header-action-primary-bg);
+  color: var(--component-page-header-action-primary-text);
+}
+
+.ds-ph-controls {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0;
+  border-radius: calc(var(--component-page-header-action-radius) * 1px);
+  overflow: hidden;
+  border: 1px solid var(--component-page-header-seg-border);
+}
+
+.ds-ph-seg {
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+  border-right: 1px solid var(--component-page-header-seg-border);
+  background: var(--component-page-header-seg-bg);
+  color: var(--component-page-header-seg-text);
+  padding: calc(var(--component-page-header-action-padding-y) * 1px) calc(var(--component-page-header-action-padding-x) * 1px);
+  font-family: inherit;
+  font-size: calc(var(--component-page-header-layout-desc-font-size) * 1px);
+  line-height: calc(var(--component-page-header-layout-desc-line-height) * 1px);
+  font-weight: 500;
+  cursor: default;
+}
+
+.ds-ph-seg:last-child {
+  border-right: none;
+}
+
+.ds-ph-seg[aria-checked="true"] {
+  background: var(--component-page-header-seg-bg-active);
+  box-shadow: inset 0 0 0 1px var(--component-page-header-seg-border-active);
+}
+
+.ds-ph-seg:focus {
+  outline: none;
+}
+
+.ds-ph-seg:focus-visible {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ph--matrix {
+  max-width: 100%;
+}
+
+.ds-ph--matrix .ds-ph-right {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* ---- Card (--component-card-*) ---- */
+.ds-card-live-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: calc(var(--component-card-layout-demo-row-gap) * 1px);
+}
+
+.ds-card {
+  box-sizing: border-box;
+  display: block;
+  max-width: calc(var(--component-card-layout-max-width) * 1px);
+  border-radius: calc(var(--component-card-panel-radius) * 1px);
+  background: var(--component-card-panel-bg);
+  border-style: solid;
+  border-width: calc(var(--component-card-panel-border-width) * 1px);
+  border-color: transparent;
+  box-shadow: var(--component-card-panel-shadow);
+}
+
+.ds-card[data-bordered="true"] {
+  border-color: var(--component-card-panel-border);
+}
+
+.ds-card[data-size="md"] {
+  padding: calc(var(--component-card-layout-padding-md) * 1px);
+}
+
+.ds-card[data-size="sm"] {
+  padding: calc(var(--component-card-layout-padding-sm) * 1px);
+}
+
+.ds-card[data-hoverable="true"]:hover {
+  background: var(--component-card-panel-bg-hover);
+}
+
+.ds-card.is-cd-hover {
+  background: var(--component-card-panel-bg-hover);
+}
+
+.ds-card[data-clickable="true"] {
+  cursor: default;
+}
+
+.ds-card[data-clickable="true"]:focus {
+  outline: none;
+}
+
+.ds-card[data-clickable="true"]:focus-visible {
+  box-shadow: var(--component-card-panel-shadow), 0 0 0 2px var(--component-card-clickable-focus-ring);
+}
+
+.ds-card.is-cd-foc {
+  box-shadow: var(--component-card-panel-shadow), 0 0 0 2px var(--component-card-clickable-focus-ring);
+}
+
+.ds-card[data-disabled="true"] {
+  opacity: var(--component-card-disabled-opacity);
+  pointer-events: none;
+}
+
+.ds-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-card-layout-title-body-gap) * 1px);
+}
+
+.ds-card-title {
+  margin: 0;
+  color: var(--component-card-title-text);
+  font-size: calc(var(--component-card-title-font-size) * 1px);
+  line-height: calc(var(--component-card-title-line-height) * 1px);
+  font-weight: var(--component-card-title-font-weight);
+}
+
+.ds-card-body {
+  margin: 0;
+  color: var(--component-card-body-text);
+  font-size: calc(var(--component-card-body-font-size) * 1px);
+  line-height: calc(var(--component-card-body-line-height) * 1px);
+}
+
+.ds-card-body--meta {
+  color: var(--component-card-body-text-meta);
+}
+
+.ds-card-divider {
+  display: block;
+  width: 100%;
+  height: calc(var(--component-card-divider-thickness) * 1px);
+  margin: calc(var(--component-card-divider-margin-y) * 1px) 0;
+  padding: 0;
+  border: none;
+  background: var(--component-card-divider-bg);
+}
+
+.ds-card--matrix {
+  width: 100%;
+  max-width: min(100%, calc(var(--component-card-layout-max-width) * 1px));
+}
+
+/* ---- Steps (stepper; --component-steps-*) ---- */
+.ds-st {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.ds-st-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: calc(var(--component-steps-gap) * 1px);
+}
+
+.ds-st[data-orientation="horizontal"] .ds-st-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.ds-st[data-orientation="vertical"] .ds-st-list {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ds-st-item {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.ds-st[data-orientation="horizontal"] .ds-st-item {
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-steps-gap) * 1px);
+}
+
+.ds-st[data-orientation="vertical"] .ds-st-item {
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(var(--component-steps-gap) * 1px);
+}
+
+.ds-st-item-top {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: calc(var(--component-steps-gap) * 1px);
+  min-width: 0;
+}
+
+.ds-st[data-orientation="horizontal"] .ds-st-item-top {
+  flex: 0 1 auto;
+}
+
+.ds-st[data-orientation="vertical"] .ds-st-item-top {
+  flex: 0 1 auto;
+}
+
+.ds-st-icon {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.ds-st[data-size="lg"] .ds-st-icon {
+  width: calc(var(--component-steps-icon-size-lg) * 1px);
+  height: calc(var(--component-steps-icon-size-lg) * 1px);
+  font-size: calc(var(--component-steps-layout-icon-inner-font-lg) * 1px);
+  line-height: calc(var(--component-steps-layout-icon-inner-line-lg) * 1px);
+}
+
+.ds-st[data-size="md"] .ds-st-icon {
+  width: calc(var(--component-steps-icon-size-md) * 1px);
+  height: calc(var(--component-steps-icon-size-md) * 1px);
+  font-size: calc(var(--component-steps-layout-icon-inner-font-md) * 1px);
+  line-height: calc(var(--component-steps-layout-icon-inner-line-md) * 1px);
+}
+
+.ds-st-icon--completed {
+  background: var(--component-steps-icon-bg-completed);
+  border-color: var(--component-steps-icon-border-completed);
+  color: var(--component-steps-title-text);
+}
+
+.ds-st-icon--current {
+  background: var(--component-steps-icon-bg-current);
+  border-color: transparent;
+  color: var(--component-steps-icon-text-on-current);
+}
+
+.ds-st-icon--pending {
+  background: transparent;
+  border-color: var(--component-steps-icon-border-pending);
+  color: var(--component-steps-icon-text-pending);
+}
+
+.ds-st-icon--error {
+  background: var(--component-steps-icon-bg-error);
+  border-color: transparent;
+  color: var(--component-steps-icon-text-on-current);
+}
+
+.ds-st-icon--disabled {
+  background: transparent;
+  border-color: var(--component-steps-icon-border-disabled);
+  color: var(--component-steps-icon-text-disabled);
+}
+
+.ds-st-icon-glyph {
+  display: block;
+  line-height: 1;
+}
+
+.ds-st-body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-steps-gap) * 0.25 * 1px);
+  min-width: 0;
+}
+
+.ds-st[data-size="lg"] .ds-st-title {
+  font-size: calc(var(--component-steps-layout-title-font-size-lg) * 1px);
+  line-height: calc(var(--component-steps-layout-title-line-height-lg) * 1px);
+}
+
+.ds-st[data-size="md"] .ds-st-title {
+  font-size: calc(var(--component-steps-layout-title-font-size-md) * 1px);
+  line-height: calc(var(--component-steps-layout-title-line-height-md) * 1px);
+}
+
+.ds-st-title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--component-steps-title-text);
+}
+
+.ds-st-title--current {
+  color: var(--component-steps-title-text-current);
+  font-weight: 600;
+}
+
+.ds-st-title--pending {
+  color: var(--component-steps-title-text-pending);
+  font-weight: 500;
+}
+
+.ds-st-title--error {
+  color: var(--component-steps-title-text-error);
+  font-weight: 600;
+}
+
+.ds-st-title--disabled {
+  color: var(--component-steps-title-text-disabled);
+  font-weight: 500;
+}
+
+.ds-st-desc {
+  margin: 0;
+  font-weight: 500;
+  font-size: calc(var(--component-steps-layout-desc-font-size) * 1px);
+  line-height: calc(var(--component-steps-layout-desc-line-height) * 1px);
+  color: var(--component-steps-desc-text);
+}
+
+.ds-st-connector {
+  flex-shrink: 0;
+  background: var(--component-steps-connector-track);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ds-st[data-orientation="horizontal"] .ds-st-connector {
+  width: calc(var(--component-steps-connector-length) * 1px);
+  height: calc(var(--component-steps-connector-thickness) * 1px);
+  align-self: center;
+}
+
+.ds-st[data-orientation="vertical"] .ds-st-connector {
+  width: 100%;
+  height: calc(var(--component-steps-connector-thickness) * 1px);
+  align-self: stretch;
+}
+
+.ds-st-item:last-child .ds-st-connector {
+  display: none;
+}
+
+.ds-st-connector--completed {
+  background: var(--component-steps-connector-track-completed);
+}
+
+.ds-st--matrix .ds-st-list {
+  width: 100%;
+  justify-content: center;
+}
+
+.ds-st--matrix .ds-st-item {
+  flex: 0 0 auto;
+}
+
+.ds-st--matrix .ds-st-connector {
+  display: none;
+}
+
+/* ---- PinCode (OTP; --component-pin-code-*) ---- */
+.ds-pc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+.ds-pc-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: calc(var(--component-pin-code-layout-gap) * 1px);
+  align-items: center;
+}
+
+.ds-pc-cell {
+  box-sizing: border-box;
+  margin: 0;
+  width: calc(var(--component-pin-code-layout-cell-size) * 1px);
+  height: calc(var(--component-pin-code-layout-cell-size) * 1px);
+  border-radius: calc(var(--component-pin-code-layout-cell-radius) * 1px);
+  border: 1px solid var(--component-pin-code-cell-border-default);
+  background: var(--component-pin-code-cell-bg-default);
+  color: var(--component-pin-code-cell-text-default);
+  text-align: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: calc(var(--component-pin-code-layout-font-size) * 1px);
+  line-height: calc(var(--component-pin-code-layout-line-height) * 1px);
+  padding: 0;
+}
+
+.ds-pc-cell:focus {
+  outline: none;
+}
+
+.ds-pc-cell:focus-visible:not(:disabled) {
+  caret-color: var(--component-pin-code-cell-caret);
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+  border-color: var(--component-pin-code-cell-border-active);
+  background: var(--component-pin-code-cell-bg-active);
+}
+
+.ds-pc-cell.is-act {
+  border-color: var(--component-pin-code-cell-border-active);
+  background: var(--component-pin-code-cell-bg-active);
+}
+
+.ds-pc-cell.is-filled {
+  border-color: var(--component-pin-code-cell-border-filled);
+  background: var(--component-pin-code-cell-bg-filled);
+  color: var(--component-pin-code-cell-text-filled);
+}
+
+.ds-pc-cell.is-err {
+  border-color: var(--component-pin-code-cell-border-error);
+  background: var(--component-pin-code-cell-bg-error);
+}
+
+.ds-pc--error .ds-pc-cell:not(:disabled) {
+  border-color: var(--component-pin-code-cell-border-error);
+  background: var(--component-pin-code-cell-bg-error);
+}
+
+.ds-pc-cell:disabled,
+.ds-pc-cell.is-dis {
+  background: var(--component-pin-code-cell-bg-disabled);
+  border-color: var(--component-pin-code-cell-border-disabled);
+  color: var(--component-pin-code-cell-text-disabled);
+  cursor: default;
+}
+
+.ds-pc-help {
+  margin: 0;
+  margin-top: calc(var(--component-pin-code-layout-gap) * 1px);
+  color: var(--component-pin-code-help-text);
+  font-size: calc(var(--component-pin-code-layout-font-size) * 1px);
+  line-height: calc(var(--component-pin-code-layout-line-height) * 1px);
+  font-weight: 500;
+}
+
+.ds-pc-err {
+  margin: 0;
+  margin-top: calc(var(--component-pin-code-layout-gap) * 1px);
+  color: var(--component-pin-code-error-text);
+  font-size: calc(var(--component-pin-code-layout-font-size) * 1px);
+  line-height: calc(var(--component-pin-code-layout-line-height) * 1px);
+  font-weight: 500;
+}
+
+.ds-pc--matrix .ds-pc-row {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ---- Message (toast / global feedback; --component-message-*) ---- */
+.ds-msg {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: calc(var(--component-message-gap) * 1px);
+  box-sizing: border-box;
+  max-width: min(100%, calc(var(--component-input-max-width) * 1px));
+  padding: calc(var(--component-message-py) * 1px) calc(var(--component-message-px) * 1px);
+  border-radius: calc(var(--component-message-radius) * 1px);
+}
+
+.ds-msg[data-tone="info"] {
+  background: var(--component-message-tone-info-bg);
+}
+
+.ds-msg[data-tone="success"] {
+  background: var(--component-message-tone-success-bg);
+}
+
+.ds-msg[data-tone="warning"] {
+  background: var(--component-message-tone-warning-bg);
+}
+
+.ds-msg[data-tone="error"] {
+  background: var(--component-message-tone-error-bg);
+}
+
+.ds-msg-ic {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--component-message-icon-size) * 1px);
+  height: calc(var(--component-message-icon-size) * 1px);
+  font-size: calc(var(--component-message-font-size) * 1px);
+  line-height: 1;
+  font-weight: 600;
+}
+
+.ds-msg[data-tone="info"] .ds-msg-ic {
+  color: var(--component-message-tone-info-icon);
+}
+
+.ds-msg[data-tone="success"] .ds-msg-ic {
+  color: var(--component-message-tone-success-icon);
+}
+
+.ds-msg[data-tone="warning"] .ds-msg-ic {
+  color: var(--component-message-tone-warning-icon);
+}
+
+.ds-msg[data-tone="error"] .ds-msg-ic {
+  color: var(--component-message-tone-error-icon);
+}
+
+.ds-msg-txt {
+  flex: 1;
+  min-width: 0;
+  color: var(--component-message-text);
+  font-size: calc(var(--component-message-font-size) * 1px);
+  line-height: calc(var(--component-message-line-height) * 1px);
+  font-weight: 500;
+}
+
+.ds-msg-close {
+  flex-shrink: 0;
+  margin: 0;
+  margin-left: calc(var(--component-message-gap) * 1px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(var(--component-message-icon-size) * 1px);
+  min-height: calc(var(--component-message-icon-size) * 1px);
+  padding: 0;
+  border: none;
+  border-radius: calc(var(--component-message-radius) * 1px);
+  background: transparent;
+  color: var(--component-message-close-icon);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: calc(var(--component-message-font-size) * 1px);
+  line-height: 1;
+}
+
+.ds-msg-close:focus {
+  outline: none;
+}
+
+.ds-msg-close:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-msg-stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-message-gap) * 1px);
+  align-items: flex-start;
 }
 
 /* ---- Alert ---- */
@@ -2676,25 +4369,45 @@
     <div class="card" style="border-radius:10px;">
       <div style="padding:12px 12px 0 12px;">
         <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（来自 docs/components/message.md）</div>
-        <div class="muted" style="margin-top:6px; font-size:12px;">Figma shows a single size with px=16, py=8, radius=8, icon=16, text=14/20. If more sizes appear later, extend this table.</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">数值与 CSS 变量：message.px / py / radius / gap / iconSize / fontSize / lineHeight → --component-message-。若 Figma 增加多档尺寸，先扩展 token 再更新本表与 demo。</div>
         
       </div>
       <div style="padding:12px;">
         <div style="height:36px; width:min(360px,100%); border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" aria-hidden="true"></div>
-        <div class="muted" style="margin-top:8px; font-size:12px;">按文档 Figma 标注进行比对。</div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">- 当前稿面为 单一 MD 尺寸：px / py / radius / 图标与正文见 Sizes；与 tokens/src/component.json 中 message. 一致。</div>
+      </div>
+    </div>
+    
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">多 tone 纵向堆叠示意；类名 <code>ds-msg</code> / <code>ds-msg-stack</code>。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-msg-stack" aria-label="message static samples">
+          <div class="ds-msg" data-tone="info" role="status" data-ds-annotate-target="1">
+            <span class="ds-msg-ic" aria-hidden="true">i</span><span class="ds-msg-txt">Info sample</span>
+          </div>
+          <div class="ds-msg" data-tone="success" role="status" data-ds-annotate-target="1">
+            <span class="ds-msg-ic" aria-hidden="true">✓</span><span class="ds-msg-txt">Success sample</span>
+          </div>
+          <div class="ds-msg" data-tone="error" role="alert" data-ds-annotate-target="1">
+            <span class="ds-msg-ic" aria-hidden="true">✕</span><span class="ds-msg-txt">Error sample</span>
+          </div>
+        </div>
       </div>
     </div>
     
             <section>
               <h2 class="sec-head">Live</h2>
-              <p class="sec-sub">Visuals follow <code>tokens.css</code> (see <code>docs/design.md</code> — tokens first). Pseudo-states + small JS for ripple, switch, modal, select.</p>
+              <p class="sec-sub">Live 为 <code>div.ds-msg[data-tone]</code>：<strong>error</strong> 使用 <code>role="alert"</code>，其余 tone 使用 <code>role="status"</code>；可选 <code>button.ds-msg-close</code>（<code>aria-label="Close message"</code>）点击移除当前条；样式仅 <code>--component-message-*</code>（见 <code>docs/components/message.md</code>）。</p>
               <div class="live-canvas">
                 <div id="liveRoot"></div>
               </div>
             </section>
             <section style="margin-top:8px;">
               <h2 class="sec-head">Status matrix</h2>
-              <p class="sec-sub">Five rows (label left · preview right): Default · Hover · Active · Focus · Disabled</p>
+              <p class="sec-sub">五行静态：Info·status · Success·status · Warning·status · Error·alert · Info·closable；与侧栏 Type 无关。</p>
               <div id="matrixRoot" class="matrix-grid"></div>
             </section>
           </div>
@@ -2702,27 +4415,29 @@
 
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/message.md</code> 与 Arco Vue <code>Message</code>（<code>type</code> / <code>duration</code> / <code>closable</code> 等）；色面走 <code>message.tone.*</code>，排版走 <code>message.px</code> / <code>message.py</code> / <code>message.gap</code>。
+          </p>
           <label class="pg-field">
-            <span>Size</span>
-            <select id="pgSize" aria-label="Preview size">
-              <option value="sm">Small</option>
-              <option value="md" selected>Medium</option>
-              <option value="lg">Large</option>
+            <span>Type（tone）</span>
+            <select id="pgVariant" aria-label="Message demo type">
+              <option value="info" selected>info</option>
+              <option value="success">success</option>
+              <option value="warning">warning</option>
+              <option value="error">error</option>
             </select>
           </label>
-          <label class="pg-field">
-            <span>Variant</span>
-            <select id="pgVariant" aria-label="Preview variant">
-              <option value="primary" selected>Primary</option>
-              <option value="neutral">Neutral</option>
-              <option value="danger">Danger</option>
-              <option value="ghost">Ghost</option>
-            </select>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="msgClosable" />
+            <span>closable（关闭按钮）</span>
           </label>
+          <select id="pgSize" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="md" selected>md</option>
+          </select>
         </aside>
       </div>
     </div>
-    <script type="application/json" id="ds-component-tokens">{"--component-message-close-icon": "#999999", "--component-message-gap": "8", "--component-message-px": "16", "--component-message-py": "8", "--component-message-radius": "8", "--component-message-text": "#222222", "--component-message-tone-error-bg": "#FEEDED", "--component-message-tone-error-icon": "#F14846", "--component-message-tone-info-bg": "#ECF2FC", "--component-message-tone-info-icon": "#3F78E4", "--component-message-tone-success-bg": "#E6F7EF", "--component-message-tone-success-icon": "#09AA5C", "--component-message-tone-warning-bg": "#FFF7E8", "--component-message-tone-warning-icon": "#FFAD14"}</script>
+    <script type="application/json" id="ds-component-tokens">{"--component-message-close-icon": "#999999", "--component-message-font-size": "14", "--component-message-gap": "8", "--component-message-icon-size": "16", "--component-message-line-height": "20", "--component-message-px": "16", "--component-message-py": "8", "--component-message-radius": "8", "--component-message-text": "#222222", "--component-message-tone-error-bg": "#FEEDED", "--component-message-tone-error-icon": "#F14846", "--component-message-tone-info-bg": "#ECF2FC", "--component-message-tone-info-icon": "#3F78E4", "--component-message-tone-success-bg": "#E6F7EF", "--component-message-tone-success-icon": "#09AA5C", "--component-message-tone-warning-bg": "#FFF7E8", "--component-message-tone-warning-icon": "#FFAD14"}</script>
     <script>
 (function () {
   "use strict";
@@ -4487,55 +6202,1183 @@
   }
 
   function mountSelect() {
-    liveRoot.innerHTML =
-      '<div class="ds-sel">' +
-      '<button type="button" class="ds-sel-trg" id="stg" aria-haspopup="listbox" aria-expanded="false">' +
-      '<span id="stgL">Select city</span><span class="chev" aria-hidden="true"></span></button>' +
-      '<div class="ds-sel-list" id="stl" role="listbox" hidden>' +
-      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Beijing">Beijing</div>' +
-      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Shanghai">Shanghai</div>' +
-      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Shenzhen">Shenzhen</div></div></div>';
+    var pgSelState = document.getElementById("pgSelState");
+    if (typeof window.__dsSelSingleVal !== "string") window.__dsSelSingleVal = "";
 
-    var stg = document.getElementById("stg");
-    var stl = document.getElementById("stl");
-    var stgL = document.getElementById("stgL");
-    function close() {
-      stl.hidden = true;
-      stg.setAttribute("aria-expanded", "false");
+    function kind() {
+      return (pgVariant && pgVariant.value) || "single";
     }
-    function toggle() {
-      stl.hidden = !stl.hidden;
-      stg.setAttribute("aria-expanded", stl.hidden ? "false" : "true");
+    function sizeVal() {
+      return (pgSize && pgSize.value) || "lg";
     }
-    stg.addEventListener("click", function (e) {
-      e.stopPropagation();
-      toggle();
-    });
-    document.addEventListener("click", function () {
-      close();
-    });
-    liveRoot.addEventListener("click", function (e) {
-      e.stopPropagation();
-    });
-    stl.querySelectorAll(".ds-sel-item").forEach(function (it) {
-      it.addEventListener("click", function () {
-        stgL.textContent = it.getAttribute("data-v");
-        close();
-      });
-    });
-    pgVariant.disabled = true;
-    pgSize.disabled = true;
-    window.__dsRefresh = function () {};
-    matrixShell(L5, function (_l, i) {
-      var cls = ["", "is-hover", "is-active", "is-foc", "is-dis"][i];
+    function trig() {
+      return (pgSelState && pgSelState.value) || "default";
+    }
+
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderValueInner() {
+      var k = kind();
+      if (k === "multiple-tags") {
+        return (
+          '<span class="ds-sel-val ds-sel-val--multi" id="stgL">' +
+          '<span class="ds-sel-chip"><span class="ds-sel-chip-lb">Beijing</span>' +
+          '<button type="button" class="ds-sel-chip-x" aria-label="Remove Beijing">\u00d7</button></span>' +
+          '<span class="ds-sel-chip"><span class="ds-sel-chip-lb">Shanghai</span>' +
+          '<button type="button" class="ds-sel-chip-x" aria-label="Remove Shanghai">\u00d7</button></span>' +
+          "</span>"
+        );
+      }
+      if (k === "multiple-count") {
+        return (
+          '<span class="ds-sel-val ds-sel-val--multi" id="stgL">' +
+          '<span class="ds-sel-chip ds-sel-chip--count"><span class="ds-sel-chip-lb">2 selected</span></span>' +
+          "</span>"
+        );
+      }
+      var sv = window.__dsSelSingleVal;
+      if (sv) return '<span class="ds-sel-val" id="stgL">' + escHtml(sv) + "</span>";
+      return '<span class="ds-sel-ph" id="stgL">Select city</span>';
+    }
+
+    function trigClass() {
+      var t = trig();
+      if (t === "error") return " ds-sel-trg--err";
+      if (t === "disabled") return " ds-sel-trg--dis";
+      return "";
+    }
+
+    function trigDisabledAttr() {
+      return trig() === "disabled" ? " disabled" : "";
+    }
+
+    function trigAriaInvalid() {
+      return trig() === "error" ? ' aria-invalid="true"' : "";
+    }
+
+    function buildListHtml() {
+      var k = kind();
+      var search =
+        k === "searchable"
+          ? '<div class="ds-sel-search-row"><input type="search" class="ds-sel-search" id="selFilter" autocomplete="off" aria-label="Filter options" placeholder="Search" /></div>'
+          : "";
+      var rows = [
+        { v: "Beijing", l: "Beijing" },
+        { v: "Shanghai", l: "Shanghai" },
+        { v: "Shenzhen", l: "Shenzhen" },
+        { v: "Guangzhou", l: "Guangzhou" },
+      ];
+      var items = rows
+        .map(function (o) {
+          return (
+            '<div class="ds-sel-item" role="option" tabindex="-1" data-v="' +
+            escHtml(o.v) +
+            '">' +
+            escHtml(o.l) +
+            "</div>"
+          );
+        })
+        .join("");
+      return search + items;
+    }
+
+    function buildLiveHtml() {
+      var k = kind();
+      var sz = sizeVal();
       return (
-        '<div class="ds-sel-item ' +
-        cls +
-        '" style="width:100%">' +
-        ["Default", "Hover", "Active", "Focus", "Disabled"][i] +
+        '<span id="selDemoLbl" class="ds-sr-only">City</span>' +
+        '<div class="ds-sel" data-size="' +
+        sz +
+        '" data-kind="' +
+        escHtml(k) +
+        '">' +
+        '<button type="button" class="ds-sel-trg' +
+        trigClass() +
+        '" id="stg" role="combobox" aria-labelledby="selDemoLbl" aria-controls="stl" aria-haspopup="listbox" aria-expanded="false"' +
+        trigAriaInvalid() +
+        trigDisabledAttr() +
+        ">" +
+        renderValueInner() +
+        '<span class="chev" aria-hidden="true"></span></button>' +
+        '<div class="ds-sel-list" id="stl" role="listbox" aria-labelledby="selDemoLbl" hidden>' +
+        buildListHtml() +
+        "</div></div>"
+      );
+    }
+
+    function wireLive() {
+      var stg = document.getElementById("stg");
+      var stl = document.getElementById("stl");
+      if (!stg || !stl) return;
+
+      function close() {
+        stl.hidden = true;
+        stg.setAttribute("aria-expanded", "false");
+      }
+      function toggle() {
+        if (stg.disabled) return;
+        var opening = stl.hidden;
+        stl.hidden = !opening;
+        stg.setAttribute("aria-expanded", opening ? "true" : "false");
+      }
+
+      stg.addEventListener("click", function (e) {
+        e.stopPropagation();
+        toggle();
+      });
+      stg.addEventListener("keydown", function (e) {
+        if (stg.disabled) return;
+        if (e.key === "Escape" || e.key === "Esc") {
+          if (!stl.hidden) {
+            e.preventDefault();
+            close();
+          }
+          return;
+        }
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          toggle();
+        }
+      });
+
+      stl.querySelectorAll(".ds-sel-item").forEach(function (it) {
+        it.addEventListener("click", function () {
+          var kk = kind();
+          if (kk === "multiple-tags" || kk === "multiple-count") return;
+          window.__dsSelSingleVal = it.getAttribute("data-v") || "";
+          close();
+          window.__dsRefresh();
+        });
+      });
+
+      stl.querySelectorAll(".ds-sel-chip-x").forEach(function (bx) {
+        bx.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+      });
+
+      var flt = document.getElementById("selFilter");
+      if (flt) {
+        flt.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+        flt.addEventListener("input", function () {
+          var q = (flt.value || "").toLowerCase();
+          stl.querySelectorAll(".ds-sel-item").forEach(function (row) {
+            var t = (row.getAttribute("data-v") || "").toLowerCase();
+            row.style.display = t.indexOf(q) !== -1 ? "" : "none";
+          });
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var sz = sizeVal();
+      matrixShell(L5, function (_l, i) {
+        var cls = ["", "is-hover", "is-active", "is-foc", "is-dis"][i];
+        return (
+          '<div class="ds-sel ds-sel--matrix" data-size="' +
+          sz +
+          '"><div class="ds-sel-item ' +
+          cls +
+          '">' +
+          ["Default", "Hover", "Active", "Focus", "Disabled"][i] +
+          "</div></div>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = buildLiveHtml();
+      wireLive();
+      paintMatrix();
+    };
+
+    if (!window.__dsSelectDocOnce) {
+      window.__dsSelectDocOnce = true;
+      document.addEventListener("click", function () {
+        var wrap = liveRoot.querySelector(".ds-sel");
+        if (!wrap) return;
+        var stl = wrap.querySelector(".ds-sel-list");
+        var stg = wrap.querySelector("#stg");
+        if (stl && stg && !stl.hidden) {
+          stl.hidden = true;
+          stg.setAttribute("aria-expanded", "false");
+        }
+      });
+      liveRoot.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    if (pgSelState) pgSelState.disabled = false;
+
+    pgVariant.addEventListener("change", function () {
+      var kk = kind();
+      if (kk !== "single" && kk !== "searchable") window.__dsSelSingleVal = "";
+      window.__dsRefresh();
+    });
+    pgSize.addEventListener("change", window.__dsRefresh);
+    if (pgSelState) pgSelState.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
+  function mountDropdown() {
+    var pgDdItem = document.getElementById("pgDdItem");
+
+    function variant() {
+      return (pgVariant && pgVariant.value) || "basic";
+    }
+    function triggerSz() {
+      return (pgSize && pgSize.value) === "l" ? "l" : "m";
+    }
+    function itemSz() {
+      return (pgDdItem && pgDdItem.value) === "sm" ? "sm" : "md";
+    }
+
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function buildMenuInner() {
+      var v = variant();
+      var search =
+        v === "search"
+          ? '<input type="search" class="ds-dd-search" id="ddFilter" autocomplete="off" aria-label="Filter menu" placeholder="Search" />'
+          : "";
+      var rows = [
+        { id: "edit", lab: "Edit", check: false },
+        { id: "copy", lab: "Copy", check: true },
+        { id: "share", lab: "Share", check: false },
+      ];
+      var btns = rows
+        .map(function (r) {
+          var chk = r.check ? '<span class="ds-dd-check" aria-hidden="true"></span>' : "<span></span>";
+          var c = "ds-dd-item" + (r.check ? " ds-dd-item--checked" : "");
+          return (
+            '<button type="button" class="' +
+            c +
+            '" role="menuitem" data-k="' +
+            r.id +
+            '"><span>' +
+            escHtml(r.lab) +
+            "</span>" +
+            chk +
+            "</button>"
+          );
+        })
+        .join("");
+      var dangerBlock = "";
+      if (v !== "basic") {
+        dangerBlock =
+          '<hr class="ds-dd-divider" aria-hidden="true" />' +
+          '<button type="button" class="ds-dd-item ds-dd-item--danger" role="menuitem" data-k="del">Delete</button>';
+      }
+      return search + btns + dangerBlock;
+    }
+
+    function buildLive() {
+      var tr = triggerSz();
+      var is = itemSz();
+      var v = variant();
+      var searchClass = v === "search" ? " ds-dd-panel--search" : "";
+      return (
+        '<span id="ddDemoLbl" class="ds-sr-only">Actions</span>' +
+        '<div class="ds-dd" id="ddRoot" data-trigger="' +
+        tr +
+        '" data-item="' +
+        is +
+        '">' +
+        '<button type="button" class="ds-dd-trg" id="ddTrig" aria-labelledby="ddDemoLbl" aria-haspopup="menu" aria-expanded="false" aria-controls="ddMenu">' +
+        "Open menu" +
+        "</button>" +
+        '<div class="ds-dd-panel' +
+        searchClass +
+        '" id="ddMenu" role="menu" aria-labelledby="ddDemoLbl" hidden>' +
+        buildMenuInner() +
+        "</div></div>"
+      );
+    }
+
+    function closePanel() {
+      var p = document.getElementById("ddMenu");
+      var t = document.getElementById("ddTrig");
+      if (p && t) {
+        p.hidden = true;
+        t.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    function wireLive() {
+      var trig = document.getElementById("ddTrig");
+      var panel = document.getElementById("ddMenu");
+      if (!trig || !panel) return;
+
+      trig.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var wasHidden = panel.hidden;
+        panel.hidden = !wasHidden;
+        trig.setAttribute("aria-expanded", wasHidden ? "true" : "false");
+      });
+      trig.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" || e.key === "Esc") {
+          if (!panel.hidden) {
+            e.preventDefault();
+            closePanel();
+          }
+        }
+      });
+
+      panel.querySelectorAll('[role="menuitem"]').forEach(function (mi) {
+        mi.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (mi.disabled || mi.getAttribute("aria-disabled") === "true") return;
+          closePanel();
+        });
+      });
+
+      var flt = document.getElementById("ddFilter");
+      if (flt) {
+        flt.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+        flt.addEventListener("input", function () {
+          var q = (flt.value || "").toLowerCase();
+          panel.querySelectorAll('[role="menuitem"]').forEach(function (mi) {
+            var t = (mi.textContent || "").trim().toLowerCase();
+            mi.style.display = t.indexOf(q) !== -1 ? "" : "none";
+          });
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var tr = triggerSz();
+      var is = itemSz();
+      matrixShell(L5, function (_l, i) {
+        var mod = ["", "is-dd-hover", "ds-dd-item--checked", "is-dd-foc", ""][i];
+        var dis = i === 4 ? " disabled" : "";
+        var chk = i === 2 ? '<span class="ds-dd-check" aria-hidden="true"></span>' : "<span></span>";
+        return (
+          '<div class="ds-dd ds-dd--matrix" data-trigger="' +
+          tr +
+          '" data-item="' +
+          is +
+          '"><button type="button" class="ds-dd-item' +
+          (mod ? " " + mod : "") +
+          '"' +
+          dis +
+          ' role="menuitem"><span>' +
+          ["Default", "Hover", "Selected", "Focus", "Disabled"][i] +
+          "</span>" +
+          chk +
+          "</button></div>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = buildLive();
+      wireLive();
+      paintMatrix();
+    };
+
+    if (!window.__dsDdDocOnce) {
+      window.__dsDdDocOnce = true;
+      document.addEventListener("click", function () {
+        var wrap = liveRoot.querySelector(".ds-dd");
+        if (!wrap) return;
+        var panel = wrap.querySelector("#ddMenu");
+        var trig = wrap.querySelector("#ddTrig");
+        if (panel && trig && !panel.hidden) {
+          panel.hidden = true;
+          trig.setAttribute("aria-expanded", "false");
+        }
+      });
+      liveRoot.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    if (pgDdItem) pgDdItem.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    if (pgDdItem) pgDdItem.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
+  function mountCascader() {
+    var csLabels = ["Default", "Hover", "Selected", "Disabled", "Checked"];
+
+    function mode() {
+      return (pgVariant && pgVariant.value) || "single";
+    }
+
+    function sizeKey() {
+      return (pgSize && pgSize.value) === "sm" ? "sm" : "lg";
+    }
+
+    function colsHtml() {
+      var multi = mode() === "multiple";
+      var c1 =
+        '<div class="ds-casc-col"><ul class="ds-casc-ul" role="listbox" aria-label="Level 1">' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-act" role="option" aria-selected="true" aria-expanded="true">' +
+        (multi ? '<span class="ds-casc-cb is-ind" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Zhejiang</span><span class="ds-casc-item-chev" aria-hidden="true">\u203a</span></button></li>' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-dis" role="option" aria-selected="false" disabled>' +
+        (multi ? '<span class="ds-casc-cb" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Jiangsu</span></button></li>' +
+        '<li role="presentation"><button type="button" class="ds-casc-item" role="option" aria-selected="false">' +
+        (multi ? '<span class="ds-casc-cb" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Guangdong</span><span class="ds-casc-item-chev" aria-hidden="true">\u203a</span></button></li>' +
+        "</ul></div>";
+      var c2 =
+        '<div class="ds-casc-col"><ul class="ds-casc-ul" role="listbox" aria-label="Level 2">' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-act" role="option" aria-selected="true" aria-expanded="true">' +
+        (multi ? '<span class="ds-casc-cb is-ind" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Hangzhou</span><span class="ds-casc-item-chev" aria-hidden="true">\u203a</span></button></li>' +
+        '<li role="presentation"><button type="button" class="ds-casc-item" role="option" aria-selected="false">' +
+        (multi ? '<span class="ds-casc-cb" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Ningbo</span></button></li>' +
+        "</ul></div>";
+      var c3 =
+        '<div class="ds-casc-col"><ul class="ds-casc-ul" role="listbox" aria-label="Level 3">' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-act" role="option" aria-selected="true">' +
+        (multi ? '<span class="ds-casc-cb is-on" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">West Lake</span></button></li>' +
+        "</ul></div>";
+      return '<div class="ds-casc-cols">' + c1 + c2 + c3 + "</div>";
+    }
+
+    function paintMatrix() {
+      matrixShell(csLabels, function (_lbl, i) {
+        var sk = sizeKey();
+        var cls = "ds-casc-item";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-act";
+        if (i === 3) cls += " is-dis";
+        var dis = i === 3 ? " disabled" : "";
+        var cb = i === 4 ? '<span class="ds-casc-cb is-on" aria-hidden="true"></span>' : "";
+        return (
+          '<div class="ds-casc ds-casc--matrix" data-size="' +
+          sk +
+          '"><div class="ds-casc-col ds-casc-col--flat"><ul class="ds-casc-ul" role="listbox"><li role="presentation"><button type="button" class="' +
+          cls +
+          '"' +
+          dis +
+          ' role="option">' +
+          cb +
+          '<span class="ds-casc-item-lbl">' +
+          csLabels[i] +
+          "</span></button></li></ul></div></div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      var m = mode();
+      var sk = sizeKey();
+      var err = m === "error";
+      liveRoot.innerHTML =
+        '<div class="ds-casc" id="csRoot" data-size="' +
+        sk +
+        '" data-mode="' +
+        m +
+        '">' +
+        '<button type="button" id="csTrig" class="ds-casc-trg' +
+        (err ? " ds-casc-trg--err" : "") +
+        '" role="combobox" aria-expanded="false" aria-controls="csPanel" aria-haspopup="listbox"' +
+        (err ? ' aria-invalid="true"' : "") +
+        '>' +
+        '<span class="ds-casc-trg-txt">Zhejiang / Hangzhou / West Lake</span>' +
+        '<span class="ds-casc-trg-chev" aria-hidden="true"></span></button>' +
+        '<div id="csPanel" class="ds-casc-panel" role="region" aria-label="Cascader menu" hidden>' +
+        colsHtml() +
+        "</div></div>";
+
+      var trig = document.getElementById("csTrig");
+      var panel = document.getElementById("csPanel");
+      function setOpen(open) {
+        if (!trig || !panel) return;
+        trig.setAttribute("aria-expanded", open ? "true" : "false");
+        if (open) {
+          panel.removeAttribute("hidden");
+        } else {
+          panel.setAttribute("hidden", "hidden");
+        }
+      }
+      if (trig && panel) {
+        trig.addEventListener("click", function (e) {
+          e.preventDefault();
+          var open = trig.getAttribute("aria-expanded") !== "true";
+          setOpen(open);
+        });
+      }
+      if (window.__dsCsEsc) {
+        document.removeEventListener("keydown", window.__dsCsEsc);
+        window.__dsCsEsc = null;
+      }
+      window.__dsCsEsc = function (ev) {
+        if (ev.key !== "Escape") return;
+        var p = document.getElementById("csPanel");
+        var t = document.getElementById("csTrig");
+        if (!p || !t || !liveRoot.contains(p)) return;
+        if (p.hasAttribute("hidden")) return;
+        t.setAttribute("aria-expanded", "false");
+        p.setAttribute("hidden", "hidden");
+      };
+      document.addEventListener("keydown", window.__dsCsEsc);
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountPageHeader() {
+    var phLabels = ["Default", "Breadcrumb", "Actions", "Controls", "No description"];
+
+    function kind() {
+      return (pgVariant && pgVariant.value) || "default";
+    }
+
+    function bcHtml() {
+      return (
+        '<nav class="ds-ph-bc" aria-label="Breadcrumb"><ol class="ds-ph-bc-list" role="list">' +
+        '<li class="ds-ph-bc-item"><a class="ds-ph-bc-link" href="#">Home</a></li>' +
+        '<li class="ds-ph-bc-sep" aria-hidden="true">/</li>' +
+        '<li class="ds-ph-bc-item"><span class="ds-ph-bc-current" aria-current="page">Current page</span></li>' +
+        "</ol></nav>"
+      );
+    }
+
+    function backVdiv() {
+      return (
+        '<button type="button" class="ds-ph-back" aria-label="Back"><span class="ds-ph-back-ic" aria-hidden="true">\u2190</span></button>' +
+        '<div class="ds-ph-vdiv" aria-hidden="true"></div>'
+      );
+    }
+
+    function mainBlock(withDesc, layoutMode) {
+      var tid = layoutMode === "live" ? ' id="phTitle"' : "";
+      var desc =
+        withDesc ? '<p class="ds-ph-desc">Short description for this view.</p>' : "";
+      return (
+        '<div class="ds-ph-main">' +
+        '<h1 class="ds-ph-title"' +
+        tid +
+        ">Page title</h1>" +
+        desc +
         "</div>"
       );
-    });
+    }
+
+    function rightBlock(mode) {
+      if (mode === "actions") {
+        return (
+          '<div class="ds-ph-right"><div class="ds-ph-actions">' +
+          '<button type="button" class="ds-ph-btn">Secondary</button>' +
+          '<button type="button" class="ds-ph-btn ds-ph-btn--pri">Primary</button>' +
+          "</div></div>"
+        );
+      }
+      if (mode === "controls") {
+        return (
+          '<div class="ds-ph-right"><div class="ds-ph-controls" role="radiogroup" aria-label="Preview size" id="phSeg">' +
+          '<button type="button" class="ds-ph-seg" role="radio" aria-checked="true">Large</button>' +
+          '<button type="button" class="ds-ph-seg" role="radio" aria-checked="false">Medium</button>' +
+          '<button type="button" class="ds-ph-seg" role="radio" aria-checked="false">Small</button>' +
+          "</div></div>"
+        );
+      }
+      return "";
+    }
+
+    function buildStrip(layoutMode, showBc, rightMode, withDesc) {
+      var top = showBc ? bcHtml() : "";
+      var left = withDesc ? backVdiv() + mainBlock(true, layoutMode) : backVdiv() + mainBlock(false, layoutMode);
+      var right = rightBlock(rightMode);
+      var idAttr = layoutMode === "live" ? ' id="phRoot"' : "";
+      var cls = "ds-ph" + (layoutMode === "matrix" ? " ds-ph--matrix" : "");
+      return (
+        "<header class=\"" +
+        cls +
+        "\"" +
+        idAttr +
+        ">" +
+        top +
+        '<div class="ds-ph-row"><div class="ds-ph-left">' +
+        left +
+        "</div>" +
+        right +
+        "</div></header>"
+      );
+    }
+
+    function wireSeg() {
+      var g = document.getElementById("phSeg");
+      if (!g) return;
+      g.addEventListener("click", function (e) {
+        var t = e.target;
+        if (!t || t.getAttribute("role") !== "radio") return;
+        var rs = g.querySelectorAll('[role="radio"]');
+        for (var i = 0; i < rs.length; i++) {
+          rs[i].setAttribute("aria-checked", rs[i] === t ? "true" : "false");
+        }
+      });
+    }
+
+    function paintMatrix() {
+      matrixShell(phLabels, function (_lbl, i) {
+        var showBc = i === 1;
+        var right = i === 2 ? "actions" : i === 3 ? "controls" : "";
+        var withDesc = i !== 4;
+        return buildStrip("matrix", showBc, right, withDesc);
+      });
+    }
+
+    function renderLive() {
+      var k = kind();
+      var showBc = k === "breadcrumb";
+      var right = k === "actions" ? "actions" : k === "controls" ? "controls" : "";
+      var withDesc = k !== "minimal";
+      liveRoot.innerHTML = buildStrip("live", showBc, right, withDesc);
+      wireSeg();
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountCard() {
+    var cdLabels = ["Default", "Bordered", "Hover", "Clickable", "Small"];
+
+    function variant() {
+      return (pgVariant && pgVariant.value) || "default";
+    }
+
+    function size() {
+      return (pgSize && pgSize.value) === "sm" ? "sm" : "md";
+    }
+
+    function innerBlock(titleId) {
+      return (
+        '<div class="ds-card-stack">' +
+        '<h3 class="ds-card-title" id="' +
+        titleId +
+        '">Card title</h3>' +
+        '<p class="ds-card-body">Body text. Compare radius, border, shadow, and padding with Figma.</p>' +
+        "</div>" +
+        '<div class="ds-card-divider" role="separator" aria-hidden="true"></div>' +
+        '<p class="ds-card-body ds-card-body--meta">Footer / secondary line</p>'
+      );
+    }
+
+    function renderLive() {
+      var v = variant();
+      var s = size();
+      var bordered =
+        v === "bordered" || v === "hoverable" || v === "clickable" || v === "disabled";
+      var hoverable = v === "hoverable";
+      var clickable = v === "clickable";
+      var disabled = v === "disabled";
+      var tab = clickable ? ' tabindex="0"' : "";
+      var reg = clickable ? ' role="region"' : "";
+      var hov = hoverable ? ' data-hoverable="true"' : "";
+      var clk = clickable ? ' data-clickable="true"' : "";
+      var dis = disabled ? ' data-disabled="true"' : "";
+      liveRoot.innerHTML =
+        '<div class="ds-card-live-wrap">' +
+        '<section id="cdRoot" class="ds-card"' +
+        reg +
+        tab +
+        ' aria-labelledby="cdTitle"' +
+        ' data-size="' +
+        s +
+        '" data-bordered="' +
+        (bordered ? "true" : "false") +
+        '"' +
+        hov +
+        clk +
+        dis +
+        ">" +
+        innerBlock("cdTitle") +
+        "</section></div>";
+    }
+
+    function paintMatrix() {
+      matrixShell(cdLabels, function (_lbl, i) {
+        var bordered = i >= 1 ? "true" : "false";
+        var sz = i === 4 ? "sm" : "md";
+        var hov = i === 2 ? ' data-hoverable="true"' : "";
+        var cls = "";
+        if (i === 2) cls = " is-cd-hover";
+        if (i === 3) cls += " is-cd-foc";
+        var clk = i === 3 ? ' data-clickable="true" tabindex="0" role="region"' : "";
+        var tid = "cdMx" + i;
+        return (
+          '<section class="ds-card ds-card--matrix' +
+          cls +
+          '" data-size="' +
+          sz +
+          '" data-bordered="' +
+          bordered +
+          '"' +
+          hov +
+          clk +
+          ' aria-labelledby="' +
+          tid +
+          '" data-ds-annotate-target="1">' +
+          '<div class="ds-card-stack">' +
+          '<h3 class="ds-card-title" id="' +
+          tid +
+          '">' +
+          cdLabels[i] +
+          "</h3>" +
+          '<p class="ds-card-body">Matrix static row</p></div></section>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountSteps() {
+    var stepLabels = ["Completed", "Current", "Pending", "Error", "Disabled"];
+
+    function parseVariant() {
+      var v = (pgVariant && pgVariant.value) || "h-desc";
+      return {
+        orientation: v === "v" ? "vertical" : "horizontal",
+        showDesc: v !== "h",
+        errorFlow: v === "h-err",
+      };
+    }
+
+    function sizeAttr() {
+      return (pgSize && pgSize.value) === "md" ? "md" : "lg";
+    }
+
+    function iconInner(state, ch) {
+      var g = "";
+      if (state === "completed") g = "\u2713";
+      else if (state === "error") g = "\u2715";
+      else if (ch) g = String(ch);
+      return (
+        '<span class="ds-st-icon ds-st-icon--' +
+        state +
+        '" aria-hidden="true">' +
+        (g ? '<span class="ds-st-icon-glyph">' + g + "</span>" : "") +
+        "</span>"
+      );
+    }
+
+    function liStep(iconState, digit, titleCls, titleText, descText, showDesc, ariaCurrent, connCompleted) {
+      var descHtml =
+        showDesc && descText ? '<p class="ds-st-desc">' + descText + "</p>" : "";
+      var ac = ariaCurrent ? ' aria-current="step"' : "";
+      var ccls = connCompleted ? " ds-st-connector--completed" : "";
+      return (
+        '<li class="ds-st-item"' +
+        ac +
+        ">" +
+        '<div class="ds-st-item-top">' +
+        iconInner(iconState, digit) +
+        '<div class="ds-st-body">' +
+        '<p class="' +
+        titleCls +
+        '">' +
+        titleText +
+        "</p>" +
+        descHtml +
+        "</div></div>" +
+        '<div class="ds-st-connector' +
+        ccls +
+        '" aria-hidden="true"></div></li>'
+      );
+    }
+
+    function renderNav() {
+      var p = parseVariant();
+      var sz = sizeAttr();
+      var o = p.orientation;
+      var d = p.showDesc;
+      var err = p.errorFlow;
+      var descProcessing = "This is a description for the current step.";
+      var descErr = "Fix errors below, then try again.";
+      var html = "";
+      html +=
+        '<nav class="ds-st" id="stNav" aria-label="Order progress" data-size="' +
+        sz +
+        '" data-orientation="' +
+        o +
+        '">';
+      html += '<ol class="ds-st-list" role="list">';
+      if (err) {
+        html += liStep("completed", "", "ds-st-title", "Succeeded", "", false, false, true);
+        html += liStep(
+          "error",
+          "",
+          "ds-st-title ds-st-title--error",
+          "Verification failed",
+          descErr,
+          d,
+          true,
+          false
+        );
+        html += liStep("pending", "3", "ds-st-title ds-st-title--pending", "Pending", "", false, false, false);
+      } else {
+        html += liStep("completed", "", "ds-st-title", "Succeeded", "", false, false, true);
+        html += liStep(
+          "current",
+          "2",
+          "ds-st-title ds-st-title--current",
+          "Processing",
+          d ? descProcessing : "",
+          d,
+          true,
+          false
+        );
+        html += liStep("pending", "3", "ds-st-title ds-st-title--pending", "Pending", "", false, false, false);
+        html += liStep(
+          "disabled",
+          "4",
+          "ds-st-title ds-st-title--disabled",
+          "Disabled",
+          "",
+          false,
+          false,
+          false
+        );
+      }
+      html += "</ol></nav>";
+      return html;
+    }
+
+    function paintMatrix() {
+      var sz = sizeAttr();
+      var rows = ["completed", "current", "pending", "error", "disabled"];
+      matrixShell(stepLabels, function (_lbl, i) {
+        var st = rows[i];
+        var ch = st === "completed" || st === "error" ? "" : st === "current" ? "2" : "5";
+        var ttl =
+          st === "completed"
+            ? "Completed"
+            : st === "current"
+              ? "Current"
+              : st === "pending"
+                ? "Pending"
+                : st === "error"
+                  ? "Error"
+                  : "Disabled";
+        var tcls =
+          st === "pending"
+            ? "ds-st-title ds-st-title--pending"
+            : st === "error"
+              ? "ds-st-title ds-st-title--error"
+              : st === "disabled"
+                ? "ds-st-title ds-st-title--disabled"
+                : st === "current"
+                  ? "ds-st-title ds-st-title--current"
+                  : "ds-st-title";
+        return (
+          '<nav class="ds-st ds-st--matrix" data-size="' +
+          sz +
+          '" data-orientation="horizontal" aria-hidden="true">' +
+          '<ol class="ds-st-list" role="presentation"><li class="ds-st-item"><div class="ds-st-item-top">' +
+          iconInner(st, ch) +
+          '<div class="ds-st-body"><p class="' +
+          tcls +
+          '">' +
+          ttl +
+          "</p></div></div></li></ol></nav>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = renderNav();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountPincode() {
+    var pgPinState = document.getElementById("pgPinState");
+
+    function len() {
+      var v = (pgVariant && pgVariant.value) || "6";
+      var n = parseInt(v, 10);
+      if (n === 4 || n === 6 || n === 8) return n;
+      return 6;
+    }
+
+    function state() {
+      return (pgPinState && pgPinState.value) || "default";
+    }
+
+    function renderLive() {
+      var n = len();
+      var st = state();
+      var dis = st === "disabled";
+      var err = st === "error";
+      var errHtml = err
+        ? '<p id="pcErr" class="ds-pc-err" role="alert">\u9a8c\u8bc1\u7801\u9519\u8bef\uff0c\u8bf7\u91cd\u65b0\u8f93\u5165</p>'
+        : '<p id="pcHelp" class="ds-pc-help">Resend available in 44s</p>';
+      var aDesc = err ? ' aria-describedby="pcErr"' : ' aria-describedby="pcHelp"';
+      var inputs = "";
+      for (var i = 0; i < n; i++) {
+        inputs +=
+          '<input id="pcSeg' +
+          i +
+          '" class="ds-pc-cell" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" aria-label="Digit ' +
+          (i + 1) +
+          " of " +
+          n +
+          '"' +
+          (dis ? " disabled" : "") +
+          " />";
+      }
+      liveRoot.innerHTML =
+        '<span id="pcLbl" class="ds-sr-only">Verification code</span>' +
+        '<div id="pcGroup" class="ds-pc' +
+        (err ? " ds-pc--error" : "") +
+        '" role="group" aria-labelledby="pcLbl"' +
+        (err ? ' aria-invalid="true"' : "") +
+        aDesc +
+        ">" +
+        '<div class="ds-pc-row">' +
+        inputs +
+        "</div>" +
+        errHtml +
+        "</div>";
+
+      var group = document.getElementById("pcGroup");
+      var ss = [];
+      for (var j = 0; j < n; j++) {
+        var el = document.getElementById("pcSeg" + j);
+        if (el) ss.push(el);
+      }
+
+      function applyFromString(str, startIdx) {
+        var digits = String(str || "").replace(/\D/g, "");
+        for (var a = 0; a < ss.length; a++) {
+          ss[a].value = "";
+        }
+        var si = Math.max(0, Math.min(startIdx || 0, ss.length - 1));
+        for (var b = 0; b < digits.length && si + b < ss.length; b++) {
+          ss[si + b].value = digits.charAt(b);
+        }
+      }
+
+      if (group) {
+        group.addEventListener(
+          "paste",
+          function (e) {
+            if (dis) return;
+            var t = (e.clipboardData && e.clipboardData.getData("text")) || "";
+            e.preventDefault();
+            var tg = e.target;
+            var idx = 0;
+            if (tg && tg.id && String(tg.id).indexOf("pcSeg") === 0) {
+              idx = parseInt(String(tg.id).replace("pcSeg", ""), 10) || 0;
+            }
+            applyFromString(t, idx);
+            var dlen = t.replace(/\D/g, "").length;
+            var ni = Math.min(idx + Math.max(0, dlen - 1), ss.length - 1);
+            if (ss[ni]) ss[ni].focus();
+          },
+          true
+        );
+      }
+
+      for (var idx = 0; idx < ss.length; idx++) {
+        (function (seg, i) {
+          if (!seg) return;
+          seg.addEventListener("keydown", function (e) {
+            if (dis) return;
+            if (e.key === "ArrowRight" && i < ss.length - 1) {
+              e.preventDefault();
+              ss[i + 1].focus();
+            } else if (e.key === "ArrowLeft" && i > 0) {
+              e.preventDefault();
+              ss[i - 1].focus();
+            } else if (e.key === "Backspace") {
+              if (seg.value) {
+                seg.value = "";
+              } else if (i > 0) {
+                e.preventDefault();
+                ss[i - 1].focus();
+                ss[i - 1].value = "";
+              }
+            }
+          });
+          seg.addEventListener("input", function () {
+            if (dis) return;
+            var v2 = seg.value.replace(/\D/g, "");
+            if (v2.length > 1) v2 = v2.charAt(v2.length - 1);
+            seg.value = v2;
+            if (v2 && i < ss.length - 1) ss[i + 1].focus();
+          });
+        })(ss[idx], idx);
+      }
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (_l, i) {
+        var cls = ["", "is-act", "is-filled", "is-err", "is-dis"][i];
+        var dis = i === 4 ? " disabled" : "";
+        var val = i === 2 || i === 3 ? ' value="3"' : "";
+        var c = "ds-pc-cell" + (cls ? " " + cls : "");
+        return (
+          '<div class="ds-pc ds-pc--matrix"><div class="ds-pc-row">' +
+          '<input class="' +
+          c +
+          '" type="text" maxlength="1" inputmode="numeric"' +
+          val +
+          dis +
+          ' readonly tabindex="-1" aria-hidden="true" /></div></div>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    if (pgPinState) pgPinState.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (pgPinState) pgPinState.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
+  function mountMessage() {
+    var msgClosable = document.getElementById("msgClosable");
+
+    function tone() {
+      return (pgVariant && pgVariant.value) || "info";
+    }
+    function closable() {
+      return !!(msgClosable && msgClosable.checked);
+    }
+
+    function roleFor(t) {
+      return t === "error" ? "alert" : "status";
+    }
+
+    function iconChar(t) {
+      if (t === "success") return "\u2713";
+      if (t === "warning") return "!";
+      if (t === "error") return "\u2715";
+      return "i";
+    }
+
+    function renderMsg(t, withClose) {
+      var closeHtml = withClose
+        ? '<button type="button" class="ds-msg-close" aria-label="Close message"><span aria-hidden="true">\u00d7</span></button>'
+        : "";
+      return (
+        '<div class="ds-msg" data-tone="' +
+        t +
+        '" role="' +
+        roleFor(t) +
+        '">' +
+        '<span class="ds-msg-ic" aria-hidden="true">' +
+        iconChar(t) +
+        "</span>" +
+        '<span class="ds-msg-txt">This is a short message for demo.</span>' +
+        closeHtml +
+        "</div>"
+      );
+    }
+
+    function wireClose(root) {
+      var closeBtn = root.querySelector(".ds-msg-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          var host = closeBtn.closest(".ds-msg");
+          if (host) host.remove();
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var labels = [
+        "Info · role=status",
+        "Success · status",
+        "Warning · status",
+        "Error · role=alert",
+        "Info · closable",
+      ];
+      var tones = ["info", "success", "warning", "error", "info"];
+      var cls = [false, false, false, false, true];
+      matrixShell(labels, function (_l, i) {
+        return renderMsg(tones[i], cls[i]);
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = renderMsg(tone(), closable());
+      wireClose(liveRoot);
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    if (msgClosable) msgClosable.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (msgClosable) msgClosable.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
   }
 
   function mountAlert() {
@@ -4857,6 +7700,197 @@
     });
   }
 
+  function mountProgress() {
+    var pgProgState = document.getElementById("pgProgState");
+
+    function kind() {
+      var v = pgVariant && pgVariant.value;
+      if (v === "circle" || v === "mini" || v === "step") return v;
+      return "line";
+    }
+
+    function lineKind() {
+      var s = pgSize && pgSize.value;
+      return s === "lg" ? "lg" : "sm";
+    }
+
+    function circleDataSize() {
+      var s = pgSize && pgSize.value;
+      if (s === "sm") return "sm";
+      if (s === "lg") return "lg";
+      return "md";
+    }
+
+    function state() {
+      return (pgProgState && pgProgState.value) || "running";
+    }
+
+    function pct() {
+      var st = state();
+      if (st === "zero") return 0;
+      if (st === "busy") return null;
+      if (st === "success" || st === "error") return 100;
+      return 66;
+    }
+
+    function lineFillMod() {
+      var st = state();
+      if (st === "error") return "error";
+      if (st === "success") return "success";
+      return "active";
+    }
+
+    function renderLine() {
+      var lk = lineKind();
+      var p = pct();
+      var st = state();
+      var mod = lineFillMod();
+      var busy = st === "busy" ? " ds-pr-line--busy" : "";
+      var aria =
+        st === "busy"
+          ? ' role="progressbar" aria-label="Task loading" aria-valuemin="0" aria-valuemax="100" aria-valuetext="Loading"'
+          : ' role="progressbar" aria-label="Task progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
+            String(p == null ? 0 : p) +
+            '"';
+      return (
+        '<div class="ds-pr-line-wrap">' +
+        '<div class="ds-pr-line ds-pr-line--' +
+        lk +
+        busy +
+        '"' +
+        aria +
+        ">" +
+        '<div class="ds-pr-line-track"></div>' +
+        '<div class="ds-pr-line-fill ds-pr-line-fill--' +
+        mod +
+        '" style="width:' +
+        (p == null ? "36%" : String(p) + "%") +
+        '"></div></div>' +
+        (st !== "busy"
+          ? '<span class="ds-pr-line-lbl">' + (st === "zero" ? "0%" : String(p) + "%") + "</span>"
+          : '<span class="ds-pr-line-lbl" aria-hidden="true">\u2026</span>') +
+        "</div>"
+      );
+    }
+
+    function renderCircle() {
+      var sz = circleDataSize();
+      var p = pct();
+      var st = state();
+      var mod = lineFillMod();
+      var busy = st === "busy";
+      var r = 42;
+      var c = 2 * Math.PI * r;
+      var f = busy ? c * 0.3 : p == null ? c * 0.36 : (p / 100) * c;
+      var g = Math.max(0.001, c - f);
+      var dash = f + " " + g;
+      var aria =
+        busy
+          ? ' role="progressbar" aria-label="Task loading" aria-valuemin="0" aria-valuemax="100" aria-valuetext="Loading"'
+          : ' role="progressbar" aria-label="Task progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
+            String(p == null ? 0 : p) +
+            '"';
+      var txt = busy ? "\u2026" : p == null ? "" : String(p) + "%";
+      return (
+        '<div class="ds-pr-circ-wrap"' +
+        aria +
+        ">" +
+        '<div class="ds-pr-circ' +
+        (busy ? " ds-pr-circ--busy" : "") +
+        '" data-size="' +
+        sz +
+        '">' +
+        '<svg viewBox="0 0 100 100" aria-hidden="true">' +
+        '<circle class="ds-pr-circ-tr" cx="50" cy="50" r="' +
+        r +
+        '" />' +
+        '<circle class="ds-pr-circ-fi ds-pr-circ-fi--' +
+        mod +
+        '" cx="50" cy="50" r="' +
+        r +
+        '" stroke-dasharray="' +
+        dash +
+        '" />' +
+        "</svg></div>" +
+        '<span class="ds-pr-circ-txt">' +
+        txt +
+        "</span></div>"
+      );
+    }
+
+    function renderMini() {
+      var st = state();
+      var ic =
+        st === "error" ? "\u2715" : st === "success" ? "\u2713" : st === "busy" ? "\u2026" : "\u00B7";
+      var icl =
+        st === "error"
+          ? "ds-pr-mini-ic ds-pr-mini-ic--err"
+          : st === "success"
+            ? "ds-pr-mini-ic"
+            : st === "busy"
+              ? "ds-pr-mini-ic ds-pr-mini-ic--muted"
+              : "ds-pr-mini-ic ds-pr-mini-ic--muted";
+      var lab =
+        st === "success" ? "Success" : st === "error" ? "Failed" : st === "busy" ? "Loading" : "In progress";
+      return (
+        '<div class="ds-pr-mini" role="img" aria-label="' +
+        lab +
+        '"><span class="' +
+        icl +
+        '" aria-hidden="true">' +
+        ic +
+        "</span></div>"
+      );
+    }
+
+    function renderStep() {
+      return (
+        '<div class="ds-pr-step-row" role="group" aria-label="Steps">' +
+        '<div class="ds-pr-step ds-pr-step--done">1</div>' +
+        '<div class="ds-pr-step ds-pr-step--active">2</div>' +
+        '<div class="ds-pr-step ds-pr-step--todo">3</div>' +
+        "</div>"
+      );
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (_lbl, i) {
+        var pcts = [20, 40, 66, 100, 0];
+        var mods = ["active", "active", "success", "success", "active"];
+        var pc = pcts[i];
+        var md = mods[i];
+        return (
+          '<div class="ds-pr-line-wrap"><div class="ds-pr-line ds-pr-line--sm" role="presentation"><div class="ds-pr-line-track"></div><div class="ds-pr-line-fill ds-pr-line-fill--' +
+          md +
+          '" style="width:' +
+          pc +
+          '%"></div></div><span class="ds-pr-line-lbl">' +
+          (pc === 0 ? "0%" : pc + "%") +
+          "</span></div>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      var k = kind();
+      if (pgSize) pgSize.disabled = k === "mini" || k === "step";
+      var html = "";
+      if (k === "circle") html = renderCircle();
+      else if (k === "mini") html = renderMini();
+      else if (k === "step") html = renderStep();
+      else html = renderLine();
+      liveRoot.innerHTML = html;
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    if (pgProgState) pgProgState.disabled = false;
+    window.__dsRefresh();
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    if (pgProgState) pgProgState.addEventListener("change", window.__dsRefresh);
+  }
+
   function mountGeneric() {
     var names = readVars(PREFIX);
     pgVariant.disabled = false;
@@ -4959,8 +7993,16 @@
       select: mountSelect,
       alert: mountAlert,
       breadcrumb: mountBreadcrumb,
+      cascader: mountCascader,
       badge: mountBadge,
       tag: mountTag,
+      progress: mountProgress,
+      dropdown: mountDropdown,
+      message: mountMessage,
+      pincode: mountPincode,
+      card: mountCard,
+      pageheader: mountPageHeader,
+      steps: mountSteps,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

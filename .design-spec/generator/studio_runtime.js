@@ -1761,55 +1761,1183 @@
   }
 
   function mountSelect() {
-    liveRoot.innerHTML =
-      '<div class="ds-sel">' +
-      '<button type="button" class="ds-sel-trg" id="stg" aria-haspopup="listbox" aria-expanded="false">' +
-      '<span id="stgL">Select city</span><span class="chev" aria-hidden="true"></span></button>' +
-      '<div class="ds-sel-list" id="stl" role="listbox" hidden>' +
-      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Beijing">Beijing</div>' +
-      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Shanghai">Shanghai</div>' +
-      '<div class="ds-sel-item" role="option" tabindex="0" data-v="Shenzhen">Shenzhen</div></div></div>';
+    var pgSelState = document.getElementById("pgSelState");
+    if (typeof window.__dsSelSingleVal !== "string") window.__dsSelSingleVal = "";
 
-    var stg = document.getElementById("stg");
-    var stl = document.getElementById("stl");
-    var stgL = document.getElementById("stgL");
-    function close() {
-      stl.hidden = true;
-      stg.setAttribute("aria-expanded", "false");
+    function kind() {
+      return (pgVariant && pgVariant.value) || "single";
     }
-    function toggle() {
-      stl.hidden = !stl.hidden;
-      stg.setAttribute("aria-expanded", stl.hidden ? "false" : "true");
+    function sizeVal() {
+      return (pgSize && pgSize.value) || "lg";
     }
-    stg.addEventListener("click", function (e) {
-      e.stopPropagation();
-      toggle();
-    });
-    document.addEventListener("click", function () {
-      close();
-    });
-    liveRoot.addEventListener("click", function (e) {
-      e.stopPropagation();
-    });
-    stl.querySelectorAll(".ds-sel-item").forEach(function (it) {
-      it.addEventListener("click", function () {
-        stgL.textContent = it.getAttribute("data-v");
-        close();
-      });
-    });
-    pgVariant.disabled = true;
-    pgSize.disabled = true;
-    window.__dsRefresh = function () {};
-    matrixShell(L5, function (_l, i) {
-      var cls = ["", "is-hover", "is-active", "is-foc", "is-dis"][i];
+    function trig() {
+      return (pgSelState && pgSelState.value) || "default";
+    }
+
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderValueInner() {
+      var k = kind();
+      if (k === "multiple-tags") {
+        return (
+          '<span class="ds-sel-val ds-sel-val--multi" id="stgL">' +
+          '<span class="ds-sel-chip"><span class="ds-sel-chip-lb">Beijing</span>' +
+          '<button type="button" class="ds-sel-chip-x" aria-label="Remove Beijing">\u00d7</button></span>' +
+          '<span class="ds-sel-chip"><span class="ds-sel-chip-lb">Shanghai</span>' +
+          '<button type="button" class="ds-sel-chip-x" aria-label="Remove Shanghai">\u00d7</button></span>' +
+          "</span>"
+        );
+      }
+      if (k === "multiple-count") {
+        return (
+          '<span class="ds-sel-val ds-sel-val--multi" id="stgL">' +
+          '<span class="ds-sel-chip ds-sel-chip--count"><span class="ds-sel-chip-lb">2 selected</span></span>' +
+          "</span>"
+        );
+      }
+      var sv = window.__dsSelSingleVal;
+      if (sv) return '<span class="ds-sel-val" id="stgL">' + escHtml(sv) + "</span>";
+      return '<span class="ds-sel-ph" id="stgL">Select city</span>';
+    }
+
+    function trigClass() {
+      var t = trig();
+      if (t === "error") return " ds-sel-trg--err";
+      if (t === "disabled") return " ds-sel-trg--dis";
+      return "";
+    }
+
+    function trigDisabledAttr() {
+      return trig() === "disabled" ? " disabled" : "";
+    }
+
+    function trigAriaInvalid() {
+      return trig() === "error" ? ' aria-invalid="true"' : "";
+    }
+
+    function buildListHtml() {
+      var k = kind();
+      var search =
+        k === "searchable"
+          ? '<div class="ds-sel-search-row"><input type="search" class="ds-sel-search" id="selFilter" autocomplete="off" aria-label="Filter options" placeholder="Search" /></div>'
+          : "";
+      var rows = [
+        { v: "Beijing", l: "Beijing" },
+        { v: "Shanghai", l: "Shanghai" },
+        { v: "Shenzhen", l: "Shenzhen" },
+        { v: "Guangzhou", l: "Guangzhou" },
+      ];
+      var items = rows
+        .map(function (o) {
+          return (
+            '<div class="ds-sel-item" role="option" tabindex="-1" data-v="' +
+            escHtml(o.v) +
+            '">' +
+            escHtml(o.l) +
+            "</div>"
+          );
+        })
+        .join("");
+      return search + items;
+    }
+
+    function buildLiveHtml() {
+      var k = kind();
+      var sz = sizeVal();
       return (
-        '<div class="ds-sel-item ' +
-        cls +
-        '" style="width:100%">' +
-        ["Default", "Hover", "Active", "Focus", "Disabled"][i] +
+        '<span id="selDemoLbl" class="ds-sr-only">City</span>' +
+        '<div class="ds-sel" data-size="' +
+        sz +
+        '" data-kind="' +
+        escHtml(k) +
+        '">' +
+        '<button type="button" class="ds-sel-trg' +
+        trigClass() +
+        '" id="stg" role="combobox" aria-labelledby="selDemoLbl" aria-controls="stl" aria-haspopup="listbox" aria-expanded="false"' +
+        trigAriaInvalid() +
+        trigDisabledAttr() +
+        ">" +
+        renderValueInner() +
+        '<span class="chev" aria-hidden="true"></span></button>' +
+        '<div class="ds-sel-list" id="stl" role="listbox" aria-labelledby="selDemoLbl" hidden>' +
+        buildListHtml() +
+        "</div></div>"
+      );
+    }
+
+    function wireLive() {
+      var stg = document.getElementById("stg");
+      var stl = document.getElementById("stl");
+      if (!stg || !stl) return;
+
+      function close() {
+        stl.hidden = true;
+        stg.setAttribute("aria-expanded", "false");
+      }
+      function toggle() {
+        if (stg.disabled) return;
+        var opening = stl.hidden;
+        stl.hidden = !opening;
+        stg.setAttribute("aria-expanded", opening ? "true" : "false");
+      }
+
+      stg.addEventListener("click", function (e) {
+        e.stopPropagation();
+        toggle();
+      });
+      stg.addEventListener("keydown", function (e) {
+        if (stg.disabled) return;
+        if (e.key === "Escape" || e.key === "Esc") {
+          if (!stl.hidden) {
+            e.preventDefault();
+            close();
+          }
+          return;
+        }
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          toggle();
+        }
+      });
+
+      stl.querySelectorAll(".ds-sel-item").forEach(function (it) {
+        it.addEventListener("click", function () {
+          var kk = kind();
+          if (kk === "multiple-tags" || kk === "multiple-count") return;
+          window.__dsSelSingleVal = it.getAttribute("data-v") || "";
+          close();
+          window.__dsRefresh();
+        });
+      });
+
+      stl.querySelectorAll(".ds-sel-chip-x").forEach(function (bx) {
+        bx.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+      });
+
+      var flt = document.getElementById("selFilter");
+      if (flt) {
+        flt.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+        flt.addEventListener("input", function () {
+          var q = (flt.value || "").toLowerCase();
+          stl.querySelectorAll(".ds-sel-item").forEach(function (row) {
+            var t = (row.getAttribute("data-v") || "").toLowerCase();
+            row.style.display = t.indexOf(q) !== -1 ? "" : "none";
+          });
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var sz = sizeVal();
+      matrixShell(L5, function (_l, i) {
+        var cls = ["", "is-hover", "is-active", "is-foc", "is-dis"][i];
+        return (
+          '<div class="ds-sel ds-sel--matrix" data-size="' +
+          sz +
+          '"><div class="ds-sel-item ' +
+          cls +
+          '">' +
+          ["Default", "Hover", "Active", "Focus", "Disabled"][i] +
+          "</div></div>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = buildLiveHtml();
+      wireLive();
+      paintMatrix();
+    };
+
+    if (!window.__dsSelectDocOnce) {
+      window.__dsSelectDocOnce = true;
+      document.addEventListener("click", function () {
+        var wrap = liveRoot.querySelector(".ds-sel");
+        if (!wrap) return;
+        var stl = wrap.querySelector(".ds-sel-list");
+        var stg = wrap.querySelector("#stg");
+        if (stl && stg && !stl.hidden) {
+          stl.hidden = true;
+          stg.setAttribute("aria-expanded", "false");
+        }
+      });
+      liveRoot.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    if (pgSelState) pgSelState.disabled = false;
+
+    pgVariant.addEventListener("change", function () {
+      var kk = kind();
+      if (kk !== "single" && kk !== "searchable") window.__dsSelSingleVal = "";
+      window.__dsRefresh();
+    });
+    pgSize.addEventListener("change", window.__dsRefresh);
+    if (pgSelState) pgSelState.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
+  function mountDropdown() {
+    var pgDdItem = document.getElementById("pgDdItem");
+
+    function variant() {
+      return (pgVariant && pgVariant.value) || "basic";
+    }
+    function triggerSz() {
+      return (pgSize && pgSize.value) === "l" ? "l" : "m";
+    }
+    function itemSz() {
+      return (pgDdItem && pgDdItem.value) === "sm" ? "sm" : "md";
+    }
+
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function buildMenuInner() {
+      var v = variant();
+      var search =
+        v === "search"
+          ? '<input type="search" class="ds-dd-search" id="ddFilter" autocomplete="off" aria-label="Filter menu" placeholder="Search" />'
+          : "";
+      var rows = [
+        { id: "edit", lab: "Edit", check: false },
+        { id: "copy", lab: "Copy", check: true },
+        { id: "share", lab: "Share", check: false },
+      ];
+      var btns = rows
+        .map(function (r) {
+          var chk = r.check ? '<span class="ds-dd-check" aria-hidden="true"></span>' : "<span></span>";
+          var c = "ds-dd-item" + (r.check ? " ds-dd-item--checked" : "");
+          return (
+            '<button type="button" class="' +
+            c +
+            '" role="menuitem" data-k="' +
+            r.id +
+            '"><span>' +
+            escHtml(r.lab) +
+            "</span>" +
+            chk +
+            "</button>"
+          );
+        })
+        .join("");
+      var dangerBlock = "";
+      if (v !== "basic") {
+        dangerBlock =
+          '<hr class="ds-dd-divider" aria-hidden="true" />' +
+          '<button type="button" class="ds-dd-item ds-dd-item--danger" role="menuitem" data-k="del">Delete</button>';
+      }
+      return search + btns + dangerBlock;
+    }
+
+    function buildLive() {
+      var tr = triggerSz();
+      var is = itemSz();
+      var v = variant();
+      var searchClass = v === "search" ? " ds-dd-panel--search" : "";
+      return (
+        '<span id="ddDemoLbl" class="ds-sr-only">Actions</span>' +
+        '<div class="ds-dd" id="ddRoot" data-trigger="' +
+        tr +
+        '" data-item="' +
+        is +
+        '">' +
+        '<button type="button" class="ds-dd-trg" id="ddTrig" aria-labelledby="ddDemoLbl" aria-haspopup="menu" aria-expanded="false" aria-controls="ddMenu">' +
+        "Open menu" +
+        "</button>" +
+        '<div class="ds-dd-panel' +
+        searchClass +
+        '" id="ddMenu" role="menu" aria-labelledby="ddDemoLbl" hidden>' +
+        buildMenuInner() +
+        "</div></div>"
+      );
+    }
+
+    function closePanel() {
+      var p = document.getElementById("ddMenu");
+      var t = document.getElementById("ddTrig");
+      if (p && t) {
+        p.hidden = true;
+        t.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    function wireLive() {
+      var trig = document.getElementById("ddTrig");
+      var panel = document.getElementById("ddMenu");
+      if (!trig || !panel) return;
+
+      trig.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var wasHidden = panel.hidden;
+        panel.hidden = !wasHidden;
+        trig.setAttribute("aria-expanded", wasHidden ? "true" : "false");
+      });
+      trig.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" || e.key === "Esc") {
+          if (!panel.hidden) {
+            e.preventDefault();
+            closePanel();
+          }
+        }
+      });
+
+      panel.querySelectorAll('[role="menuitem"]').forEach(function (mi) {
+        mi.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (mi.disabled || mi.getAttribute("aria-disabled") === "true") return;
+          closePanel();
+        });
+      });
+
+      var flt = document.getElementById("ddFilter");
+      if (flt) {
+        flt.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+        flt.addEventListener("input", function () {
+          var q = (flt.value || "").toLowerCase();
+          panel.querySelectorAll('[role="menuitem"]').forEach(function (mi) {
+            var t = (mi.textContent || "").trim().toLowerCase();
+            mi.style.display = t.indexOf(q) !== -1 ? "" : "none";
+          });
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var tr = triggerSz();
+      var is = itemSz();
+      matrixShell(L5, function (_l, i) {
+        var mod = ["", "is-dd-hover", "ds-dd-item--checked", "is-dd-foc", ""][i];
+        var dis = i === 4 ? " disabled" : "";
+        var chk = i === 2 ? '<span class="ds-dd-check" aria-hidden="true"></span>' : "<span></span>";
+        return (
+          '<div class="ds-dd ds-dd--matrix" data-trigger="' +
+          tr +
+          '" data-item="' +
+          is +
+          '"><button type="button" class="ds-dd-item' +
+          (mod ? " " + mod : "") +
+          '"' +
+          dis +
+          ' role="menuitem"><span>' +
+          ["Default", "Hover", "Selected", "Focus", "Disabled"][i] +
+          "</span>" +
+          chk +
+          "</button></div>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = buildLive();
+      wireLive();
+      paintMatrix();
+    };
+
+    if (!window.__dsDdDocOnce) {
+      window.__dsDdDocOnce = true;
+      document.addEventListener("click", function () {
+        var wrap = liveRoot.querySelector(".ds-dd");
+        if (!wrap) return;
+        var panel = wrap.querySelector("#ddMenu");
+        var trig = wrap.querySelector("#ddTrig");
+        if (panel && trig && !panel.hidden) {
+          panel.hidden = true;
+          trig.setAttribute("aria-expanded", "false");
+        }
+      });
+      liveRoot.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    if (pgDdItem) pgDdItem.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    if (pgDdItem) pgDdItem.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
+  function mountCascader() {
+    var csLabels = ["Default", "Hover", "Selected", "Disabled", "Checked"];
+
+    function mode() {
+      return (pgVariant && pgVariant.value) || "single";
+    }
+
+    function sizeKey() {
+      return (pgSize && pgSize.value) === "sm" ? "sm" : "lg";
+    }
+
+    function colsHtml() {
+      var multi = mode() === "multiple";
+      var c1 =
+        '<div class="ds-casc-col"><ul class="ds-casc-ul" role="listbox" aria-label="Level 1">' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-act" role="option" aria-selected="true" aria-expanded="true">' +
+        (multi ? '<span class="ds-casc-cb is-ind" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Zhejiang</span><span class="ds-casc-item-chev" aria-hidden="true">\u203a</span></button></li>' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-dis" role="option" aria-selected="false" disabled>' +
+        (multi ? '<span class="ds-casc-cb" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Jiangsu</span></button></li>' +
+        '<li role="presentation"><button type="button" class="ds-casc-item" role="option" aria-selected="false">' +
+        (multi ? '<span class="ds-casc-cb" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Guangdong</span><span class="ds-casc-item-chev" aria-hidden="true">\u203a</span></button></li>' +
+        "</ul></div>";
+      var c2 =
+        '<div class="ds-casc-col"><ul class="ds-casc-ul" role="listbox" aria-label="Level 2">' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-act" role="option" aria-selected="true" aria-expanded="true">' +
+        (multi ? '<span class="ds-casc-cb is-ind" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Hangzhou</span><span class="ds-casc-item-chev" aria-hidden="true">\u203a</span></button></li>' +
+        '<li role="presentation"><button type="button" class="ds-casc-item" role="option" aria-selected="false">' +
+        (multi ? '<span class="ds-casc-cb" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">Ningbo</span></button></li>' +
+        "</ul></div>";
+      var c3 =
+        '<div class="ds-casc-col"><ul class="ds-casc-ul" role="listbox" aria-label="Level 3">' +
+        '<li role="presentation"><button type="button" class="ds-casc-item is-act" role="option" aria-selected="true">' +
+        (multi ? '<span class="ds-casc-cb is-on" aria-hidden="true"></span>' : "") +
+        '<span class="ds-casc-item-lbl">West Lake</span></button></li>' +
+        "</ul></div>";
+      return '<div class="ds-casc-cols">' + c1 + c2 + c3 + "</div>";
+    }
+
+    function paintMatrix() {
+      matrixShell(csLabels, function (_lbl, i) {
+        var sk = sizeKey();
+        var cls = "ds-casc-item";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-act";
+        if (i === 3) cls += " is-dis";
+        var dis = i === 3 ? " disabled" : "";
+        var cb = i === 4 ? '<span class="ds-casc-cb is-on" aria-hidden="true"></span>' : "";
+        return (
+          '<div class="ds-casc ds-casc--matrix" data-size="' +
+          sk +
+          '"><div class="ds-casc-col ds-casc-col--flat"><ul class="ds-casc-ul" role="listbox"><li role="presentation"><button type="button" class="' +
+          cls +
+          '"' +
+          dis +
+          ' role="option">' +
+          cb +
+          '<span class="ds-casc-item-lbl">' +
+          csLabels[i] +
+          "</span></button></li></ul></div></div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      var m = mode();
+      var sk = sizeKey();
+      var err = m === "error";
+      liveRoot.innerHTML =
+        '<div class="ds-casc" id="csRoot" data-size="' +
+        sk +
+        '" data-mode="' +
+        m +
+        '">' +
+        '<button type="button" id="csTrig" class="ds-casc-trg' +
+        (err ? " ds-casc-trg--err" : "") +
+        '" role="combobox" aria-expanded="false" aria-controls="csPanel" aria-haspopup="listbox"' +
+        (err ? ' aria-invalid="true"' : "") +
+        '>' +
+        '<span class="ds-casc-trg-txt">Zhejiang / Hangzhou / West Lake</span>' +
+        '<span class="ds-casc-trg-chev" aria-hidden="true"></span></button>' +
+        '<div id="csPanel" class="ds-casc-panel" role="region" aria-label="Cascader menu" hidden>' +
+        colsHtml() +
+        "</div></div>";
+
+      var trig = document.getElementById("csTrig");
+      var panel = document.getElementById("csPanel");
+      function setOpen(open) {
+        if (!trig || !panel) return;
+        trig.setAttribute("aria-expanded", open ? "true" : "false");
+        if (open) {
+          panel.removeAttribute("hidden");
+        } else {
+          panel.setAttribute("hidden", "hidden");
+        }
+      }
+      if (trig && panel) {
+        trig.addEventListener("click", function (e) {
+          e.preventDefault();
+          var open = trig.getAttribute("aria-expanded") !== "true";
+          setOpen(open);
+        });
+      }
+      if (window.__dsCsEsc) {
+        document.removeEventListener("keydown", window.__dsCsEsc);
+        window.__dsCsEsc = null;
+      }
+      window.__dsCsEsc = function (ev) {
+        if (ev.key !== "Escape") return;
+        var p = document.getElementById("csPanel");
+        var t = document.getElementById("csTrig");
+        if (!p || !t || !liveRoot.contains(p)) return;
+        if (p.hasAttribute("hidden")) return;
+        t.setAttribute("aria-expanded", "false");
+        p.setAttribute("hidden", "hidden");
+      };
+      document.addEventListener("keydown", window.__dsCsEsc);
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountPageHeader() {
+    var phLabels = ["Default", "Breadcrumb", "Actions", "Controls", "No description"];
+
+    function kind() {
+      return (pgVariant && pgVariant.value) || "default";
+    }
+
+    function bcHtml() {
+      return (
+        '<nav class="ds-ph-bc" aria-label="Breadcrumb"><ol class="ds-ph-bc-list" role="list">' +
+        '<li class="ds-ph-bc-item"><a class="ds-ph-bc-link" href="#">Home</a></li>' +
+        '<li class="ds-ph-bc-sep" aria-hidden="true">/</li>' +
+        '<li class="ds-ph-bc-item"><span class="ds-ph-bc-current" aria-current="page">Current page</span></li>' +
+        "</ol></nav>"
+      );
+    }
+
+    function backVdiv() {
+      return (
+        '<button type="button" class="ds-ph-back" aria-label="Back"><span class="ds-ph-back-ic" aria-hidden="true">\u2190</span></button>' +
+        '<div class="ds-ph-vdiv" aria-hidden="true"></div>'
+      );
+    }
+
+    function mainBlock(withDesc, layoutMode) {
+      var tid = layoutMode === "live" ? ' id="phTitle"' : "";
+      var desc =
+        withDesc ? '<p class="ds-ph-desc">Short description for this view.</p>' : "";
+      return (
+        '<div class="ds-ph-main">' +
+        '<h1 class="ds-ph-title"' +
+        tid +
+        ">Page title</h1>" +
+        desc +
         "</div>"
       );
-    });
+    }
+
+    function rightBlock(mode) {
+      if (mode === "actions") {
+        return (
+          '<div class="ds-ph-right"><div class="ds-ph-actions">' +
+          '<button type="button" class="ds-ph-btn">Secondary</button>' +
+          '<button type="button" class="ds-ph-btn ds-ph-btn--pri">Primary</button>' +
+          "</div></div>"
+        );
+      }
+      if (mode === "controls") {
+        return (
+          '<div class="ds-ph-right"><div class="ds-ph-controls" role="radiogroup" aria-label="Preview size" id="phSeg">' +
+          '<button type="button" class="ds-ph-seg" role="radio" aria-checked="true">Large</button>' +
+          '<button type="button" class="ds-ph-seg" role="radio" aria-checked="false">Medium</button>' +
+          '<button type="button" class="ds-ph-seg" role="radio" aria-checked="false">Small</button>' +
+          "</div></div>"
+        );
+      }
+      return "";
+    }
+
+    function buildStrip(layoutMode, showBc, rightMode, withDesc) {
+      var top = showBc ? bcHtml() : "";
+      var left = withDesc ? backVdiv() + mainBlock(true, layoutMode) : backVdiv() + mainBlock(false, layoutMode);
+      var right = rightBlock(rightMode);
+      var idAttr = layoutMode === "live" ? ' id="phRoot"' : "";
+      var cls = "ds-ph" + (layoutMode === "matrix" ? " ds-ph--matrix" : "");
+      return (
+        "<header class=\"" +
+        cls +
+        "\"" +
+        idAttr +
+        ">" +
+        top +
+        '<div class="ds-ph-row"><div class="ds-ph-left">' +
+        left +
+        "</div>" +
+        right +
+        "</div></header>"
+      );
+    }
+
+    function wireSeg() {
+      var g = document.getElementById("phSeg");
+      if (!g) return;
+      g.addEventListener("click", function (e) {
+        var t = e.target;
+        if (!t || t.getAttribute("role") !== "radio") return;
+        var rs = g.querySelectorAll('[role="radio"]');
+        for (var i = 0; i < rs.length; i++) {
+          rs[i].setAttribute("aria-checked", rs[i] === t ? "true" : "false");
+        }
+      });
+    }
+
+    function paintMatrix() {
+      matrixShell(phLabels, function (_lbl, i) {
+        var showBc = i === 1;
+        var right = i === 2 ? "actions" : i === 3 ? "controls" : "";
+        var withDesc = i !== 4;
+        return buildStrip("matrix", showBc, right, withDesc);
+      });
+    }
+
+    function renderLive() {
+      var k = kind();
+      var showBc = k === "breadcrumb";
+      var right = k === "actions" ? "actions" : k === "controls" ? "controls" : "";
+      var withDesc = k !== "minimal";
+      liveRoot.innerHTML = buildStrip("live", showBc, right, withDesc);
+      wireSeg();
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountCard() {
+    var cdLabels = ["Default", "Bordered", "Hover", "Clickable", "Small"];
+
+    function variant() {
+      return (pgVariant && pgVariant.value) || "default";
+    }
+
+    function size() {
+      return (pgSize && pgSize.value) === "sm" ? "sm" : "md";
+    }
+
+    function innerBlock(titleId) {
+      return (
+        '<div class="ds-card-stack">' +
+        '<h3 class="ds-card-title" id="' +
+        titleId +
+        '">Card title</h3>' +
+        '<p class="ds-card-body">Body text. Compare radius, border, shadow, and padding with Figma.</p>' +
+        "</div>" +
+        '<div class="ds-card-divider" role="separator" aria-hidden="true"></div>' +
+        '<p class="ds-card-body ds-card-body--meta">Footer / secondary line</p>'
+      );
+    }
+
+    function renderLive() {
+      var v = variant();
+      var s = size();
+      var bordered =
+        v === "bordered" || v === "hoverable" || v === "clickable" || v === "disabled";
+      var hoverable = v === "hoverable";
+      var clickable = v === "clickable";
+      var disabled = v === "disabled";
+      var tab = clickable ? ' tabindex="0"' : "";
+      var reg = clickable ? ' role="region"' : "";
+      var hov = hoverable ? ' data-hoverable="true"' : "";
+      var clk = clickable ? ' data-clickable="true"' : "";
+      var dis = disabled ? ' data-disabled="true"' : "";
+      liveRoot.innerHTML =
+        '<div class="ds-card-live-wrap">' +
+        '<section id="cdRoot" class="ds-card"' +
+        reg +
+        tab +
+        ' aria-labelledby="cdTitle"' +
+        ' data-size="' +
+        s +
+        '" data-bordered="' +
+        (bordered ? "true" : "false") +
+        '"' +
+        hov +
+        clk +
+        dis +
+        ">" +
+        innerBlock("cdTitle") +
+        "</section></div>";
+    }
+
+    function paintMatrix() {
+      matrixShell(cdLabels, function (_lbl, i) {
+        var bordered = i >= 1 ? "true" : "false";
+        var sz = i === 4 ? "sm" : "md";
+        var hov = i === 2 ? ' data-hoverable="true"' : "";
+        var cls = "";
+        if (i === 2) cls = " is-cd-hover";
+        if (i === 3) cls += " is-cd-foc";
+        var clk = i === 3 ? ' data-clickable="true" tabindex="0" role="region"' : "";
+        var tid = "cdMx" + i;
+        return (
+          '<section class="ds-card ds-card--matrix' +
+          cls +
+          '" data-size="' +
+          sz +
+          '" data-bordered="' +
+          bordered +
+          '"' +
+          hov +
+          clk +
+          ' aria-labelledby="' +
+          tid +
+          '" data-ds-annotate-target="1">' +
+          '<div class="ds-card-stack">' +
+          '<h3 class="ds-card-title" id="' +
+          tid +
+          '">' +
+          cdLabels[i] +
+          "</h3>" +
+          '<p class="ds-card-body">Matrix static row</p></div></section>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountSteps() {
+    var stepLabels = ["Completed", "Current", "Pending", "Error", "Disabled"];
+
+    function parseVariant() {
+      var v = (pgVariant && pgVariant.value) || "h-desc";
+      return {
+        orientation: v === "v" ? "vertical" : "horizontal",
+        showDesc: v !== "h",
+        errorFlow: v === "h-err",
+      };
+    }
+
+    function sizeAttr() {
+      return (pgSize && pgSize.value) === "md" ? "md" : "lg";
+    }
+
+    function iconInner(state, ch) {
+      var g = "";
+      if (state === "completed") g = "\u2713";
+      else if (state === "error") g = "\u2715";
+      else if (ch) g = String(ch);
+      return (
+        '<span class="ds-st-icon ds-st-icon--' +
+        state +
+        '" aria-hidden="true">' +
+        (g ? '<span class="ds-st-icon-glyph">' + g + "</span>" : "") +
+        "</span>"
+      );
+    }
+
+    function liStep(iconState, digit, titleCls, titleText, descText, showDesc, ariaCurrent, connCompleted) {
+      var descHtml =
+        showDesc && descText ? '<p class="ds-st-desc">' + descText + "</p>" : "";
+      var ac = ariaCurrent ? ' aria-current="step"' : "";
+      var ccls = connCompleted ? " ds-st-connector--completed" : "";
+      return (
+        '<li class="ds-st-item"' +
+        ac +
+        ">" +
+        '<div class="ds-st-item-top">' +
+        iconInner(iconState, digit) +
+        '<div class="ds-st-body">' +
+        '<p class="' +
+        titleCls +
+        '">' +
+        titleText +
+        "</p>" +
+        descHtml +
+        "</div></div>" +
+        '<div class="ds-st-connector' +
+        ccls +
+        '" aria-hidden="true"></div></li>'
+      );
+    }
+
+    function renderNav() {
+      var p = parseVariant();
+      var sz = sizeAttr();
+      var o = p.orientation;
+      var d = p.showDesc;
+      var err = p.errorFlow;
+      var descProcessing = "This is a description for the current step.";
+      var descErr = "Fix errors below, then try again.";
+      var html = "";
+      html +=
+        '<nav class="ds-st" id="stNav" aria-label="Order progress" data-size="' +
+        sz +
+        '" data-orientation="' +
+        o +
+        '">';
+      html += '<ol class="ds-st-list" role="list">';
+      if (err) {
+        html += liStep("completed", "", "ds-st-title", "Succeeded", "", false, false, true);
+        html += liStep(
+          "error",
+          "",
+          "ds-st-title ds-st-title--error",
+          "Verification failed",
+          descErr,
+          d,
+          true,
+          false
+        );
+        html += liStep("pending", "3", "ds-st-title ds-st-title--pending", "Pending", "", false, false, false);
+      } else {
+        html += liStep("completed", "", "ds-st-title", "Succeeded", "", false, false, true);
+        html += liStep(
+          "current",
+          "2",
+          "ds-st-title ds-st-title--current",
+          "Processing",
+          d ? descProcessing : "",
+          d,
+          true,
+          false
+        );
+        html += liStep("pending", "3", "ds-st-title ds-st-title--pending", "Pending", "", false, false, false);
+        html += liStep(
+          "disabled",
+          "4",
+          "ds-st-title ds-st-title--disabled",
+          "Disabled",
+          "",
+          false,
+          false,
+          false
+        );
+      }
+      html += "</ol></nav>";
+      return html;
+    }
+
+    function paintMatrix() {
+      var sz = sizeAttr();
+      var rows = ["completed", "current", "pending", "error", "disabled"];
+      matrixShell(stepLabels, function (_lbl, i) {
+        var st = rows[i];
+        var ch = st === "completed" || st === "error" ? "" : st === "current" ? "2" : "5";
+        var ttl =
+          st === "completed"
+            ? "Completed"
+            : st === "current"
+              ? "Current"
+              : st === "pending"
+                ? "Pending"
+                : st === "error"
+                  ? "Error"
+                  : "Disabled";
+        var tcls =
+          st === "pending"
+            ? "ds-st-title ds-st-title--pending"
+            : st === "error"
+              ? "ds-st-title ds-st-title--error"
+              : st === "disabled"
+                ? "ds-st-title ds-st-title--disabled"
+                : st === "current"
+                  ? "ds-st-title ds-st-title--current"
+                  : "ds-st-title";
+        return (
+          '<nav class="ds-st ds-st--matrix" data-size="' +
+          sz +
+          '" data-orientation="horizontal" aria-hidden="true">' +
+          '<ol class="ds-st-list" role="presentation"><li class="ds-st-item"><div class="ds-st-item-top">' +
+          iconInner(st, ch) +
+          '<div class="ds-st-body"><p class="' +
+          tcls +
+          '">' +
+          ttl +
+          "</p></div></div></li></ol></nav>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = renderNav();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
+  function mountPincode() {
+    var pgPinState = document.getElementById("pgPinState");
+
+    function len() {
+      var v = (pgVariant && pgVariant.value) || "6";
+      var n = parseInt(v, 10);
+      if (n === 4 || n === 6 || n === 8) return n;
+      return 6;
+    }
+
+    function state() {
+      return (pgPinState && pgPinState.value) || "default";
+    }
+
+    function renderLive() {
+      var n = len();
+      var st = state();
+      var dis = st === "disabled";
+      var err = st === "error";
+      var errHtml = err
+        ? '<p id="pcErr" class="ds-pc-err" role="alert">\u9a8c\u8bc1\u7801\u9519\u8bef\uff0c\u8bf7\u91cd\u65b0\u8f93\u5165</p>'
+        : '<p id="pcHelp" class="ds-pc-help">Resend available in 44s</p>';
+      var aDesc = err ? ' aria-describedby="pcErr"' : ' aria-describedby="pcHelp"';
+      var inputs = "";
+      for (var i = 0; i < n; i++) {
+        inputs +=
+          '<input id="pcSeg' +
+          i +
+          '" class="ds-pc-cell" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" aria-label="Digit ' +
+          (i + 1) +
+          " of " +
+          n +
+          '"' +
+          (dis ? " disabled" : "") +
+          " />";
+      }
+      liveRoot.innerHTML =
+        '<span id="pcLbl" class="ds-sr-only">Verification code</span>' +
+        '<div id="pcGroup" class="ds-pc' +
+        (err ? " ds-pc--error" : "") +
+        '" role="group" aria-labelledby="pcLbl"' +
+        (err ? ' aria-invalid="true"' : "") +
+        aDesc +
+        ">" +
+        '<div class="ds-pc-row">' +
+        inputs +
+        "</div>" +
+        errHtml +
+        "</div>";
+
+      var group = document.getElementById("pcGroup");
+      var ss = [];
+      for (var j = 0; j < n; j++) {
+        var el = document.getElementById("pcSeg" + j);
+        if (el) ss.push(el);
+      }
+
+      function applyFromString(str, startIdx) {
+        var digits = String(str || "").replace(/\D/g, "");
+        for (var a = 0; a < ss.length; a++) {
+          ss[a].value = "";
+        }
+        var si = Math.max(0, Math.min(startIdx || 0, ss.length - 1));
+        for (var b = 0; b < digits.length && si + b < ss.length; b++) {
+          ss[si + b].value = digits.charAt(b);
+        }
+      }
+
+      if (group) {
+        group.addEventListener(
+          "paste",
+          function (e) {
+            if (dis) return;
+            var t = (e.clipboardData && e.clipboardData.getData("text")) || "";
+            e.preventDefault();
+            var tg = e.target;
+            var idx = 0;
+            if (tg && tg.id && String(tg.id).indexOf("pcSeg") === 0) {
+              idx = parseInt(String(tg.id).replace("pcSeg", ""), 10) || 0;
+            }
+            applyFromString(t, idx);
+            var dlen = t.replace(/\D/g, "").length;
+            var ni = Math.min(idx + Math.max(0, dlen - 1), ss.length - 1);
+            if (ss[ni]) ss[ni].focus();
+          },
+          true
+        );
+      }
+
+      for (var idx = 0; idx < ss.length; idx++) {
+        (function (seg, i) {
+          if (!seg) return;
+          seg.addEventListener("keydown", function (e) {
+            if (dis) return;
+            if (e.key === "ArrowRight" && i < ss.length - 1) {
+              e.preventDefault();
+              ss[i + 1].focus();
+            } else if (e.key === "ArrowLeft" && i > 0) {
+              e.preventDefault();
+              ss[i - 1].focus();
+            } else if (e.key === "Backspace") {
+              if (seg.value) {
+                seg.value = "";
+              } else if (i > 0) {
+                e.preventDefault();
+                ss[i - 1].focus();
+                ss[i - 1].value = "";
+              }
+            }
+          });
+          seg.addEventListener("input", function () {
+            if (dis) return;
+            var v2 = seg.value.replace(/\D/g, "");
+            if (v2.length > 1) v2 = v2.charAt(v2.length - 1);
+            seg.value = v2;
+            if (v2 && i < ss.length - 1) ss[i + 1].focus();
+          });
+        })(ss[idx], idx);
+      }
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (_l, i) {
+        var cls = ["", "is-act", "is-filled", "is-err", "is-dis"][i];
+        var dis = i === 4 ? " disabled" : "";
+        var val = i === 2 || i === 3 ? ' value="3"' : "";
+        var c = "ds-pc-cell" + (cls ? " " + cls : "");
+        return (
+          '<div class="ds-pc ds-pc--matrix"><div class="ds-pc-row">' +
+          '<input class="' +
+          c +
+          '" type="text" maxlength="1" inputmode="numeric"' +
+          val +
+          dis +
+          ' readonly tabindex="-1" aria-hidden="true" /></div></div>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    if (pgPinState) pgPinState.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (pgPinState) pgPinState.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
+  function mountMessage() {
+    var msgClosable = document.getElementById("msgClosable");
+
+    function tone() {
+      return (pgVariant && pgVariant.value) || "info";
+    }
+    function closable() {
+      return !!(msgClosable && msgClosable.checked);
+    }
+
+    function roleFor(t) {
+      return t === "error" ? "alert" : "status";
+    }
+
+    function iconChar(t) {
+      if (t === "success") return "\u2713";
+      if (t === "warning") return "!";
+      if (t === "error") return "\u2715";
+      return "i";
+    }
+
+    function renderMsg(t, withClose) {
+      var closeHtml = withClose
+        ? '<button type="button" class="ds-msg-close" aria-label="Close message"><span aria-hidden="true">\u00d7</span></button>'
+        : "";
+      return (
+        '<div class="ds-msg" data-tone="' +
+        t +
+        '" role="' +
+        roleFor(t) +
+        '">' +
+        '<span class="ds-msg-ic" aria-hidden="true">' +
+        iconChar(t) +
+        "</span>" +
+        '<span class="ds-msg-txt">This is a short message for demo.</span>' +
+        closeHtml +
+        "</div>"
+      );
+    }
+
+    function wireClose(root) {
+      var closeBtn = root.querySelector(".ds-msg-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          var host = closeBtn.closest(".ds-msg");
+          if (host) host.remove();
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var labels = [
+        "Info · role=status",
+        "Success · status",
+        "Warning · status",
+        "Error · role=alert",
+        "Info · closable",
+      ];
+      var tones = ["info", "success", "warning", "error", "info"];
+      var cls = [false, false, false, false, true];
+      matrixShell(labels, function (_l, i) {
+        return renderMsg(tones[i], cls[i]);
+      });
+    }
+
+    window.__dsRefresh = function () {
+      liveRoot.innerHTML = renderMsg(tone(), closable());
+      wireClose(liveRoot);
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    if (msgClosable) msgClosable.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (msgClosable) msgClosable.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
   }
 
   function mountAlert() {
@@ -2131,6 +3259,197 @@
     });
   }
 
+  function mountProgress() {
+    var pgProgState = document.getElementById("pgProgState");
+
+    function kind() {
+      var v = pgVariant && pgVariant.value;
+      if (v === "circle" || v === "mini" || v === "step") return v;
+      return "line";
+    }
+
+    function lineKind() {
+      var s = pgSize && pgSize.value;
+      return s === "lg" ? "lg" : "sm";
+    }
+
+    function circleDataSize() {
+      var s = pgSize && pgSize.value;
+      if (s === "sm") return "sm";
+      if (s === "lg") return "lg";
+      return "md";
+    }
+
+    function state() {
+      return (pgProgState && pgProgState.value) || "running";
+    }
+
+    function pct() {
+      var st = state();
+      if (st === "zero") return 0;
+      if (st === "busy") return null;
+      if (st === "success" || st === "error") return 100;
+      return 66;
+    }
+
+    function lineFillMod() {
+      var st = state();
+      if (st === "error") return "error";
+      if (st === "success") return "success";
+      return "active";
+    }
+
+    function renderLine() {
+      var lk = lineKind();
+      var p = pct();
+      var st = state();
+      var mod = lineFillMod();
+      var busy = st === "busy" ? " ds-pr-line--busy" : "";
+      var aria =
+        st === "busy"
+          ? ' role="progressbar" aria-label="Task loading" aria-valuemin="0" aria-valuemax="100" aria-valuetext="Loading"'
+          : ' role="progressbar" aria-label="Task progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
+            String(p == null ? 0 : p) +
+            '"';
+      return (
+        '<div class="ds-pr-line-wrap">' +
+        '<div class="ds-pr-line ds-pr-line--' +
+        lk +
+        busy +
+        '"' +
+        aria +
+        ">" +
+        '<div class="ds-pr-line-track"></div>' +
+        '<div class="ds-pr-line-fill ds-pr-line-fill--' +
+        mod +
+        '" style="width:' +
+        (p == null ? "36%" : String(p) + "%") +
+        '"></div></div>' +
+        (st !== "busy"
+          ? '<span class="ds-pr-line-lbl">' + (st === "zero" ? "0%" : String(p) + "%") + "</span>"
+          : '<span class="ds-pr-line-lbl" aria-hidden="true">\u2026</span>') +
+        "</div>"
+      );
+    }
+
+    function renderCircle() {
+      var sz = circleDataSize();
+      var p = pct();
+      var st = state();
+      var mod = lineFillMod();
+      var busy = st === "busy";
+      var r = 42;
+      var c = 2 * Math.PI * r;
+      var f = busy ? c * 0.3 : p == null ? c * 0.36 : (p / 100) * c;
+      var g = Math.max(0.001, c - f);
+      var dash = f + " " + g;
+      var aria =
+        busy
+          ? ' role="progressbar" aria-label="Task loading" aria-valuemin="0" aria-valuemax="100" aria-valuetext="Loading"'
+          : ' role="progressbar" aria-label="Task progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
+            String(p == null ? 0 : p) +
+            '"';
+      var txt = busy ? "\u2026" : p == null ? "" : String(p) + "%";
+      return (
+        '<div class="ds-pr-circ-wrap"' +
+        aria +
+        ">" +
+        '<div class="ds-pr-circ' +
+        (busy ? " ds-pr-circ--busy" : "") +
+        '" data-size="' +
+        sz +
+        '">' +
+        '<svg viewBox="0 0 100 100" aria-hidden="true">' +
+        '<circle class="ds-pr-circ-tr" cx="50" cy="50" r="' +
+        r +
+        '" />' +
+        '<circle class="ds-pr-circ-fi ds-pr-circ-fi--' +
+        mod +
+        '" cx="50" cy="50" r="' +
+        r +
+        '" stroke-dasharray="' +
+        dash +
+        '" />' +
+        "</svg></div>" +
+        '<span class="ds-pr-circ-txt">' +
+        txt +
+        "</span></div>"
+      );
+    }
+
+    function renderMini() {
+      var st = state();
+      var ic =
+        st === "error" ? "\u2715" : st === "success" ? "\u2713" : st === "busy" ? "\u2026" : "\u00B7";
+      var icl =
+        st === "error"
+          ? "ds-pr-mini-ic ds-pr-mini-ic--err"
+          : st === "success"
+            ? "ds-pr-mini-ic"
+            : st === "busy"
+              ? "ds-pr-mini-ic ds-pr-mini-ic--muted"
+              : "ds-pr-mini-ic ds-pr-mini-ic--muted";
+      var lab =
+        st === "success" ? "Success" : st === "error" ? "Failed" : st === "busy" ? "Loading" : "In progress";
+      return (
+        '<div class="ds-pr-mini" role="img" aria-label="' +
+        lab +
+        '"><span class="' +
+        icl +
+        '" aria-hidden="true">' +
+        ic +
+        "</span></div>"
+      );
+    }
+
+    function renderStep() {
+      return (
+        '<div class="ds-pr-step-row" role="group" aria-label="Steps">' +
+        '<div class="ds-pr-step ds-pr-step--done">1</div>' +
+        '<div class="ds-pr-step ds-pr-step--active">2</div>' +
+        '<div class="ds-pr-step ds-pr-step--todo">3</div>' +
+        "</div>"
+      );
+    }
+
+    function paintMatrix() {
+      matrixShell(L5, function (_lbl, i) {
+        var pcts = [20, 40, 66, 100, 0];
+        var mods = ["active", "active", "success", "success", "active"];
+        var pc = pcts[i];
+        var md = mods[i];
+        return (
+          '<div class="ds-pr-line-wrap"><div class="ds-pr-line ds-pr-line--sm" role="presentation"><div class="ds-pr-line-track"></div><div class="ds-pr-line-fill ds-pr-line-fill--' +
+          md +
+          '" style="width:' +
+          pc +
+          '%"></div></div><span class="ds-pr-line-lbl">' +
+          (pc === 0 ? "0%" : pc + "%") +
+          "</span></div>"
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      var k = kind();
+      if (pgSize) pgSize.disabled = k === "mini" || k === "step";
+      var html = "";
+      if (k === "circle") html = renderCircle();
+      else if (k === "mini") html = renderMini();
+      else if (k === "step") html = renderStep();
+      else html = renderLine();
+      liveRoot.innerHTML = html;
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    if (pgProgState) pgProgState.disabled = false;
+    window.__dsRefresh();
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    if (pgProgState) pgProgState.addEventListener("change", window.__dsRefresh);
+  }
+
   function mountGeneric() {
     var names = readVars(PREFIX);
     pgVariant.disabled = false;
@@ -2233,8 +3552,16 @@
       select: mountSelect,
       alert: mountAlert,
       breadcrumb: mountBreadcrumb,
+      cascader: mountCascader,
       badge: mountBadge,
       tag: mountTag,
+      progress: mountProgress,
+      dropdown: mountDropdown,
+      message: mountMessage,
+      pincode: mountPincode,
+      card: mountCard,
+      pageheader: mountPageHeader,
+      steps: mountSteps,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

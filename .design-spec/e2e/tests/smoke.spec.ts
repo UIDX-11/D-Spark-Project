@@ -45,6 +45,33 @@ const inputRangeDemo = pathToFileURL(
 const inputAdornmentDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/input-adornment.html")
 ).href;
+const progressDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/progress.html")
+).href;
+const selectDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/select.html")
+).href;
+const dropdownDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/dropdown.html")
+).href;
+const messageDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/message.html")
+).href;
+const pincodeDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/pincode.html")
+).href;
+const stepsDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/steps.html")
+).href;
+const cardDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/card.html")
+).href;
+const pageheaderDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/pageheader.html")
+).href;
+const cascaderDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/cascader.html")
+).href;
 
 test.describe("Design-spec HTML demos (smoke)", () => {
   test("alert: live region mounts with role=alert", async ({ page }) => {
@@ -287,5 +314,157 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await page.goto(inputAdornmentDemo);
     await page.getByLabel("Input adornment demo variant").focus();
     await expect(page.getByLabel("Input adornment demo variant")).toBeFocused();
+  });
+
+  test("progress: live mounts progressbar", async ({ page }) => {
+    await page.goto(progressDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot [role='progressbar']"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot [role='progressbar']").first()).toBeVisible();
+  });
+
+  test("progress: kind select is keyboard-reachable", async ({ page }) => {
+    await page.goto(progressDemo);
+    await page.getByLabel("Progress demo kind").focus();
+    await expect(page.getByLabel("Progress demo kind")).toBeFocused();
+  });
+
+  test("select: live mounts combobox", async ({ page }) => {
+    await page.goto(selectDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot [role='combobox']"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot [role='combobox']").first()).toBeVisible();
+  });
+
+  test("select: kind select is keyboard-reachable", async ({ page }) => {
+    await page.goto(selectDemo);
+    await page.getByLabel("Select demo kind").focus();
+    await expect(page.getByLabel("Select demo kind")).toBeFocused();
+  });
+
+  test("dropdown: live mounts menu", async ({ page }) => {
+    await page.goto(dropdownDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot [role='menu']"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot [role='menu']").first()).toBeAttached();
+  });
+
+  test("dropdown: variant select is keyboard-reachable", async ({ page }) => {
+    await page.goto(dropdownDemo);
+    await page.getByLabel("Dropdown demo variant").focus();
+    await expect(page.getByLabel("Dropdown demo variant")).toBeFocused();
+  });
+
+  test("message: live mounts message surface", async ({ page }) => {
+    await page.goto(messageDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot .ds-msg"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot .ds-msg").first()).toBeVisible();
+  });
+
+  test("message: type select is keyboard-reachable", async ({ page }) => {
+    await page.goto(messageDemo);
+    await page.getByLabel("Message demo type").focus();
+    await expect(page.getByLabel("Message demo type")).toBeFocused();
+  });
+
+  test("pincode: live mounts OTP group", async ({ page }) => {
+    await page.goto(pincodeDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot #pcGroup[role='group']"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #pcGroup[role='group']").first()).toBeVisible();
+  });
+
+  test("pincode: length select is keyboard-reachable", async ({ page }) => {
+    await page.goto(pincodeDemo);
+    await page.getByLabel("PinCode demo length").focus();
+    await expect(page.getByLabel("PinCode demo length")).toBeFocused();
+  });
+
+  test("steps: live mounts step list with current step", async ({ page }) => {
+    await page.goto(stepsDemo);
+    await page.waitForFunction(
+      () =>
+        !!document.querySelector("#liveRoot #stNav ol.ds-st-list li[aria-current='step']"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(
+      page.locator("#liveRoot #stNav ol.ds-st-list li[aria-current='step']").first()
+    ).toBeVisible();
+  });
+
+  test("steps: layout select is keyboard-reachable", async ({ page }) => {
+    await page.goto(stepsDemo);
+    await page.getByLabel("Steps demo layout").focus();
+    await expect(page.getByLabel("Steps demo layout")).toBeFocused();
+  });
+
+  test("card: live mounts card surface", async ({ page }) => {
+    await page.goto(cardDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot #cdRoot.ds-card"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #cdRoot.ds-card").first()).toBeVisible();
+  });
+
+  test("card: kind select is keyboard-reachable", async ({ page }) => {
+    await page.goto(cardDemo);
+    await page.getByLabel("Card demo kind").focus();
+    await expect(page.getByLabel("Card demo kind")).toBeFocused();
+  });
+
+  test("pageheader: live mounts header with title", async ({ page }) => {
+    await page.goto(pageheaderDemo);
+    await page.waitForFunction(
+      () => !!document.querySelector("#liveRoot #phRoot.ds-ph h1.ds-ph-title"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #phRoot.ds-ph h1.ds-ph-title").first()).toBeVisible();
+  });
+
+  test("pageheader: layout select is keyboard-reachable", async ({ page }) => {
+    await page.goto(pageheaderDemo);
+    await page.getByLabel("PageHeader demo layout").focus();
+    await expect(page.getByLabel("PageHeader demo layout")).toBeFocused();
+  });
+
+  test("cascader: live mounts combobox and root", async ({ page }) => {
+    await page.goto(cascaderDemo);
+    await page.waitForFunction(
+      () =>
+        !!document.querySelector("#liveRoot #csRoot.ds-casc") &&
+        !!document.querySelector("#liveRoot #csTrig[role='combobox']"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #csRoot.ds-casc").first()).toBeVisible();
+    await expect(page.locator("#liveRoot #csTrig[role='combobox']").first()).toBeVisible();
+  });
+
+  test("cascader: mode and size selects are keyboard-reachable", async ({ page }) => {
+    await page.goto(cascaderDemo);
+    await page.getByLabel("Cascader demo mode").focus();
+    await expect(page.getByLabel("Cascader demo mode")).toBeFocused();
+    await page.getByLabel("Cascader demo size").focus();
+    await expect(page.getByLabel("Cascader demo size")).toBeFocused();
   });
 });
