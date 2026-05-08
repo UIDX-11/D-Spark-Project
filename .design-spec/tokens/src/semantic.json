@@ -68,6 +68,9 @@
       "warning": "{color.yellow.50}",
       "danger": "{color.red.50}",
       "info": "{color.blue.50}"
+    },
+    "layout": {
+      "buttonGroupGap": "12"
     }
   }
 }
