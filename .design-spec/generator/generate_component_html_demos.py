@@ -564,6 +564,45 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
     </div>
     """
         return size_hint_card + static_cs
+    if slug == "upload":
+        static_upl = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">按钮触发 + 列表一行 + 卡片占位；类名 <code>ds-upl-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-upl" data-size="md" aria-label="upload static compare" data-ds-annotate-target="1">
+          <p id="uplFigHint" class="ds-upl-hint">Accepted: PDF, PNG, JPG.</p>
+          <button type="button" class="ds-upl-trg ds-upl-trg--btn" aria-describedby="uplFigHint">
+            <span class="ds-upl-trg-plus" aria-hidden="true">+</span>
+            <span class="ds-upl-trg-stack">
+              <span class="ds-upl-trg-tit">Upload</span>
+              <span class="ds-upl-trg-desc">Static sample</span>
+            </span>
+          </button>
+          <ul class="ds-upl-list" role="list" aria-label="Static file list">
+            <li class="ds-upl-item" role="listitem">
+              <span class="ds-upl-item-ic" aria-hidden="true"></span>
+              <span class="ds-upl-item-name">sample.pdf</span>
+              <span class="ds-upl-item-act">
+                <button type="button" class="ds-upl-act" aria-label="Download sample.pdf">Download</button>
+              </span>
+            </li>
+          </ul>
+          <div class="ds-upl-cards" role="list" aria-label="Static picture cards">
+            <div class="ds-upl-card is-hov" role="listitem" tabindex="-1" aria-label="thumb.png">
+              <div class="ds-upl-card-ph" aria-hidden="true"></div>
+              <div class="ds-upl-card-mask">
+                <button type="button" class="ds-upl-act" aria-label="Delete thumb.png">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_upl
     return size_hint_card
 
 
@@ -969,6 +1008,30 @@ def _component_demo_body(
             <select id="pgSize" aria-label="Cascader demo size">
               <option value="lg" selected>LG · 32px 触发器</option>
               <option value="sm">SM · 28px 触发器</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "upload":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/upload.md</code> 与 Arco Vue <code>Upload</code>（<code>list-type</code> / <code>draggable</code> / <code>image-preview</code> / <code>disabled</code> 等）；触发区与列表走 <code>--component-upload-trigger-*</code>、<code>--component-upload-item-*</code>，照片墙走 <code>--component-upload-card-*</code>，排版走 <code>--component-upload-layout-*</code>；进度条示意复用 <code>--component-progress-line-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Kind（演示）</span>
+            <select id="pgVariant" aria-label="Upload demo kind">
+              <option value="file-btn" selected>file-list · button 触发</option>
+              <option value="file-drag">file-list · drag 触发</option>
+              <option value="picture-list">picture-list · 缩略图行</option>
+              <option value="picture-card">picture-card · 照片墙</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（MD / SM）</span>
+            <select id="pgSize" aria-label="Upload demo size">
+              <option value="md" selected>MD · 默认间距与触发高度</option>
+              <option value="sm">SM · 紧凑间距</option>
             </select>
           </label>
         </aside>"""
@@ -1398,6 +1461,16 @@ def _component_demo_body(
         )
         matrix_rows_help = (
             "五行静态：Default · Hover（<code>is-hov</code>）· Selected（<code>is-act</code>）· Disabled · Checked（<code>ds-casc-cb.is-on</code>）；尺寸随侧栏 Size 的 <code>data-size</code>。"
+        )
+    elif spec.slug == "upload":
+        live_intro_sub = (
+            "Live：<code>#uplRoot.ds-upl</code>；提示 <code>p#uplHint.ds-upl-hint</code>（<code>aria-describedby</code> 绑定触发区）；"
+            "<code>#uplTrig</code> 为 <code>button.ds-upl-trg.ds-upl-trg--btn</code> 或 <code>div[role=\"button\"].ds-upl-trg.ds-upl-trg--drag</code>；"
+            "列表 <code>ul.ds-upl-list</code> + <code>li.ds-upl-item</code>，操作 <code>button.ds-upl-act</code>（含 <code>aria-label</code> 带文件名）；"
+            "上传中行含 <code>role=\"progressbar\"</code> 与 <code>.ds-upl-prog</code>；照片墙 <code>.ds-upl-cards</code> / <code>.ds-upl-card</code> + <code>.ds-upl-card-mask</code>；样式 <code>--component-upload-*</code>（见 <code>docs/components/upload.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态：Default · Hover（<code>is-hov</code>）· Disabled · Drag hover（<code>is-drag</code>）· Focus（<code>is-foc</code>）；均为 <code>button.ds-upl-trg--btn</code> 示意，尺寸随 <code>data-size</code>。"
         )
     elif spec.slug == "input":
         live_intro_sub = (
@@ -2044,6 +2117,24 @@ def _component_preview_block(slug: str) -> str:
           <div class="tr-row" data-ds-annotate-target="1"><span class="tr-indent"></span><span style="width:10px;"></span><span>Default</span></div>
           <div class="tr-row selected" data-ds-annotate-target="1"><span class="tri" aria-hidden="true" style="transform: rotate(45deg);"></span><span>Selected</span></div>
           <div class="tr-row tr-disabled" data-ds-annotate-target="1"><span class="tri" aria-hidden="true"></span><span>Disabled</span></div>
+        </div>
+        """
+            + end
+        )
+
+    if slug == "upload":
+        return (
+            shared
+            + """
+        <div class="ds-upl" data-size="md" aria-label="upload preview">
+          <p class="ds-upl-hint">PDF / PNG / JPG</p>
+          <button type="button" class="ds-upl-trg ds-upl-trg--btn" aria-label="Upload files" data-ds-annotate-target="1">
+            <span class="ds-upl-trg-plus" aria-hidden="true">+</span>
+            <span class="ds-upl-trg-stack">
+              <span class="ds-upl-trg-tit">Click to upload</span>
+              <span class="ds-upl-trg-desc">or drag here</span>
+            </span>
+          </button>
         </div>
         """
             + end

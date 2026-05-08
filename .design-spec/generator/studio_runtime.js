@@ -2316,6 +2316,165 @@
     window.__dsRefresh();
   }
 
+  function mountUpload() {
+    var uplM = ["Default", "Hover", "Disabled", "Drag hover", "Focus"];
+
+    function variant() {
+      return (pgVariant && pgVariant.value) || "file-btn";
+    }
+
+    function sizeKey() {
+      return (pgSize && pgSize.value) === "sm" ? "sm" : "md";
+    }
+
+    function hintHtml() {
+      return '<p id="uplHint" class="ds-upl-hint">Accepted: PDF, PNG, JPG. Max 100MB per file.</p>';
+    }
+
+    function trigStack(tit, desc) {
+      return (
+        '<span class="ds-upl-trg-plus" aria-hidden="true">+</span>' +
+        '<span class="ds-upl-trg-stack">' +
+        '<span class="ds-upl-trg-tit">' +
+        tit +
+        "</span>" +
+        '<span class="ds-upl-trg-desc">' +
+        desc +
+        "</span></span>"
+      );
+    }
+
+    function buildTrigger(v) {
+      var tit = "Upload";
+      var desc = "Click or drag files here";
+      if (v === "picture-list" || v === "picture-card") {
+        tit = "Upload image";
+        desc = "PNG / JPG only";
+      }
+      var inner = trigStack(tit, desc);
+      var isDrag = v === "file-drag";
+      var dragCls = isDrag ? " ds-upl-trg--drag" : " ds-upl-trg--btn";
+      if (isDrag) {
+        return (
+          '<div id="uplTrig" role="button" tabindex="0" class="ds-upl-trg' +
+          dragCls +
+          '" aria-describedby="uplHint">' +
+          inner +
+          "</div>"
+        );
+      }
+      return (
+        '<button type="button" id="uplTrig" class="ds-upl-trg' +
+        dragCls +
+        '" aria-describedby="uplHint">' +
+        inner +
+        "</button>"
+      );
+    }
+
+    function fileListHtml(pic) {
+      var icCls = pic ? "ds-upl-thumb" : "ds-upl-item-ic";
+      var row1 =
+        '<li class="ds-upl-item" role="listitem">' +
+        '<span class="' +
+        icCls +
+        '" aria-hidden="true"></span>' +
+        '<span class="ds-upl-item-name">document.pdf</span>' +
+        '<span class="ds-upl-item-act">' +
+        '<button type="button" class="ds-upl-act" aria-label="Download document.pdf">Download</button>' +
+        '<button type="button" class="ds-upl-act" aria-label="Remove document.pdf from list">Remove</button>' +
+        "</span></li>";
+      var row2 =
+        '<li class="ds-upl-item" role="listitem">' +
+        '<span class="' +
+        icCls +
+        '" aria-hidden="true"></span>' +
+        '<span class="ds-upl-item-name">chart.png</span>' +
+        '<div class="ds-upl-prog" role="progressbar" aria-valuenow="44" aria-valuemin="0" aria-valuemax="100" aria-label="Upload progress for chart.png">' +
+        '<span class="ds-upl-prog-fill"></span></div>' +
+        '<button type="button" class="ds-upl-act" aria-label="Cancel upload for chart.png">Cancel</button>' +
+        "</li>";
+      var row3 =
+        '<li class="ds-upl-item ds-upl-item--err" role="listitem">' +
+        '<span class="' +
+        icCls +
+        '" aria-hidden="true"></span>' +
+        '<span class="ds-upl-item-name">bad.exe</span>' +
+        '<span class="ds-upl-item-act">' +
+        '<button type="button" class="ds-upl-act" aria-label="Retry upload for bad.exe">Retry</button>' +
+        '<button type="button" class="ds-upl-act" aria-label="Remove bad.exe from list">Remove</button>' +
+        "</span></li>";
+      return '<ul class="ds-upl-list" role="list" aria-label="Upload list">' + row1 + row2 + row3 + "</ul>";
+    }
+
+    function cardsHtml() {
+      return (
+        '<div class="ds-upl-cards" role="list" aria-label="Picture wall">' +
+        '<div class="ds-upl-card is-hov" role="listitem" tabindex="0" aria-label="photo-a.jpg">' +
+        '<div class="ds-upl-card-ph" aria-hidden="true"></div>' +
+        '<div class="ds-upl-card-mask">' +
+        '<button type="button" class="ds-upl-act" aria-label="Delete photo-a.jpg">Delete</button>' +
+        "</div></div>" +
+        '<div class="ds-upl-card ds-upl-card--busy" role="listitem" tabindex="0" aria-label="photo-b.jpg uploading">' +
+        '<div class="ds-upl-card-ph" aria-hidden="true"></div>' +
+        '<div class="ds-upl-card-busy" aria-hidden="true"><span class="ds-upl-card-busy-fill"></span></div>' +
+        "</div>" +
+        '<div class="ds-upl-card ds-upl-card--err" role="listitem" tabindex="0" aria-label="photo-c.jpg failed">' +
+        '<div class="ds-upl-card-ph" aria-hidden="true"></div>' +
+        '<span class="ds-upl-card-ic" aria-hidden="true">!</span>' +
+        "</div></div>"
+      );
+    }
+
+    function renderLive() {
+      var v = variant();
+      var sk = sizeKey();
+      var body = hintHtml() + buildTrigger(v);
+      if (v === "picture-card") {
+        body += cardsHtml();
+      } else {
+        body += fileListHtml(v === "picture-list");
+      }
+      liveRoot.innerHTML =
+        '<div id="uplRoot" class="ds-upl" data-variant="' + v + '" data-size="' + sk + '">' + body + "</div>";
+    }
+
+    function paintMatrix() {
+      matrixShell(uplM, function (_lbl, i) {
+        var sk = sizeKey();
+        var cls = "ds-upl-trg ds-upl-trg--btn";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-dis";
+        if (i === 3) cls += " is-drag";
+        if (i === 4) cls += " is-foc";
+        var dis = i === 2 ? " disabled" : "";
+        return (
+          '<div class="ds-upl ds-upl--matrix" data-size="' +
+          sk +
+          '"><button type="button" class="' +
+          cls +
+          '"' +
+          dis +
+          ' aria-label="Upload sample">' +
+          '<span class="ds-upl-trg-plus" aria-hidden="true">+</span>' +
+          '<span class="ds-upl-trg-stack"><span class="ds-upl-trg-tit">Upload</span>' +
+          '<span class="ds-upl-trg-desc">Matrix row</span></span></button></div>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
   function mountPageHeader() {
     var phLabels = ["Default", "Breadcrumb", "Actions", "Controls", "No description"];
 
@@ -3562,6 +3721,7 @@
       card: mountCard,
       pageheader: mountPageHeader,
       steps: mountSteps,
+      upload: mountUpload,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

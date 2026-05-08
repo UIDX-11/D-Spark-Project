@@ -916,6 +916,31 @@
         "mask": "rgba(0,0,0,0.6)",
         "bgUploading": "{bg.uploading}",
         "bgError": "{bg.statusDanger}"
+      },
+      "layout": {
+        "triggerRadius": "{radius.md}",
+        "triggerInsetX": 16,
+        "triggerInsetY": 12,
+        "triggerInsetXSm": 12,
+        "triggerInsetYSm": 8,
+        "btnMinH": 36,
+        "btnMinHSm": 32,
+        "dragMinH": 120,
+        "dragMinHSm": 100,
+        "plusSize": 24,
+        "titleFont": "{font.size.md}",
+        "titleLine": 20,
+        "descFont": "{font.size.sm}",
+        "descLine": 18,
+        "listGap": 8,
+        "rowRadius": "{radius.md}",
+        "rowInsetX": 12,
+        "rowMinH": 48,
+        "fileIcon": 24,
+        "thumb": 40,
+        "cardBox": 100,
+        "cardRadius": "{radius.md}",
+        "actionGap": 8
       }
     },
     "alert": {

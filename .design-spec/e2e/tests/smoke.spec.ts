@@ -72,6 +72,9 @@ const pageheaderDemo = pathToFileURL(
 const cascaderDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/cascader.html")
 ).href;
+const uploadDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/upload.html")
+).href;
 
 test.describe("Design-spec HTML demos (smoke)", () => {
   test("alert: live region mounts with role=alert", async ({ page }) => {
@@ -466,5 +469,26 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await expect(page.getByLabel("Cascader demo mode")).toBeFocused();
     await page.getByLabel("Cascader demo size").focus();
     await expect(page.getByLabel("Cascader demo size")).toBeFocused();
+  });
+
+  test("upload: live mounts root and trigger", async ({ page }) => {
+    await page.goto(uploadDemo);
+    await page.waitForFunction(
+      () =>
+        !!document.querySelector("#liveRoot #uplRoot.ds-upl") &&
+        !!document.querySelector("#liveRoot #uplTrig"),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #uplRoot.ds-upl").first()).toBeVisible();
+    await expect(page.locator("#liveRoot #uplTrig").first()).toBeVisible();
+  });
+
+  test("upload: kind and size selects are keyboard-reachable", async ({ page }) => {
+    await page.goto(uploadDemo);
+    await page.getByLabel("Upload demo kind").focus();
+    await expect(page.getByLabel("Upload demo kind")).toBeFocused();
+    await page.getByLabel("Upload demo size").focus();
+    await expect(page.getByLabel("Upload demo size")).toBeFocused();
   });
 });

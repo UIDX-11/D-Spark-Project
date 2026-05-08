@@ -3202,6 +3202,346 @@
   max-width: 100%;
 }
 
+/* ---- Upload (--component-upload-*) ---- */
+.ds-upl {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-upload-layout-list-gap) * 1px);
+}
+
+.ds-upl-hint {
+  margin: 0;
+  font-size: calc(var(--component-upload-layout-desc-font) * 1px);
+  line-height: calc(var(--component-upload-layout-desc-line) * 1px);
+  color: var(--semantic-text-secondary);
+}
+
+.ds-upl-trg {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-upload-layout-action-gap) * 1px);
+  margin: 0;
+  border-style: solid;
+  border-width: 1px;
+  background: var(--component-upload-trigger-bg-default);
+  border-color: var(--component-upload-trigger-border-default);
+  border-radius: calc(var(--component-upload-layout-trigger-radius) * 1px);
+  padding: calc(var(--component-upload-layout-trigger-inset-y) * 1px)
+    calc(var(--component-upload-layout-trigger-inset-x) * 1px);
+  cursor: default;
+  font-family: inherit;
+  text-align: left;
+}
+
+.ds-upl[data-size="sm"] .ds-upl-trg {
+  padding: calc(var(--component-upload-layout-trigger-inset-ysm) * 1px)
+    calc(var(--component-upload-layout-trigger-inset-xsm) * 1px);
+}
+
+.ds-upl-trg:hover:not(:disabled):not(.is-dis) {
+  background: var(--component-upload-trigger-bg-hover);
+  border-color: var(--component-upload-trigger-border-hover);
+}
+
+.ds-upl-trg.is-hov:not(:disabled) {
+  background: var(--component-upload-trigger-bg-hover);
+  border-color: var(--component-upload-trigger-border-hover);
+}
+
+.ds-upl-trg.is-drag:not(:disabled) {
+  background: var(--component-upload-trigger-bg-drag-hover);
+  border-color: var(--component-upload-trigger-border-drag-hover);
+}
+
+.ds-upl-trg:disabled,
+.ds-upl-trg.is-dis {
+  background: var(--component-upload-trigger-bg-disabled);
+  border-color: var(--component-upload-trigger-border-disabled);
+  cursor: default;
+}
+
+.ds-upl-trg:focus {
+  outline: none;
+}
+
+.ds-upl-trg:focus-visible:not(:disabled):not(.is-dis) {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-upl-trg.is-foc:not(:disabled) {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-upl-trg--btn {
+  min-height: calc(var(--component-upload-layout-btn-min-h) * 1px);
+}
+
+.ds-upl[data-size="sm"] .ds-upl-trg--btn {
+  min-height: calc(var(--component-upload-layout-btn-min-hsm) * 1px);
+}
+
+.ds-upl-trg--drag {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(var(--component-upload-layout-drag-min-h) * 1px);
+}
+
+.ds-upl[data-size="sm"] .ds-upl-trg--drag {
+  min-height: calc(var(--component-upload-layout-drag-min-hsm) * 1px);
+}
+
+.ds-upl-trg-plus {
+  flex-shrink: 0;
+  width: calc(var(--component-upload-layout-plus-size) * 1px);
+  height: calc(var(--component-upload-layout-plus-size) * 1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--component-upload-layout-plus-size) * 1px * 0.9);
+  line-height: 1;
+  font-weight: 500;
+  color: var(--component-upload-trigger-icon-default);
+}
+
+.ds-upl-trg:disabled .ds-upl-trg-plus,
+.ds-upl-trg.is-dis .ds-upl-trg-plus {
+  color: var(--component-upload-trigger-icon-disabled);
+}
+
+.ds-upl-trg-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.ds-upl-trg--drag .ds-upl-trg-stack {
+  align-items: center;
+  text-align: center;
+}
+
+.ds-upl-trg-tit {
+  font-size: calc(var(--component-upload-layout-title-font) * 1px);
+  line-height: calc(var(--component-upload-layout-title-line) * 1px);
+  font-weight: 500;
+  color: var(--component-upload-trigger-title);
+}
+
+.ds-upl-trg:disabled .ds-upl-trg-tit,
+.ds-upl-trg.is-dis .ds-upl-trg-tit {
+  color: var(--component-upload-trigger-title-disabled);
+}
+
+.ds-upl-trg-desc {
+  font-size: calc(var(--component-upload-layout-desc-font) * 1px);
+  line-height: calc(var(--component-upload-layout-desc-line) * 1px);
+  color: var(--component-upload-trigger-desc);
+}
+
+.ds-upl-trg:disabled .ds-upl-trg-desc,
+.ds-upl-trg.is-dis .ds-upl-trg-desc {
+  color: var(--component-upload-trigger-desc-disabled);
+}
+
+.ds-upl-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-upload-layout-list-gap) * 1px);
+}
+
+.ds-upl-item {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-upload-layout-action-gap) * 1px);
+  min-height: calc(var(--component-upload-layout-row-min-h) * 1px);
+  padding: 0 calc(var(--component-upload-layout-row-inset-x) * 1px);
+  border-radius: calc(var(--component-upload-layout-row-radius) * 1px);
+  background: var(--component-upload-item-bg);
+}
+
+.ds-upl-item-ic {
+  flex-shrink: 0;
+  width: calc(var(--component-upload-layout-file-icon) * 1px);
+  height: calc(var(--component-upload-layout-file-icon) * 1px);
+  border-radius: calc(var(--component-upload-layout-row-radius) * 1px);
+  background: var(--semantic-border-subtle);
+}
+
+.ds-upl-thumb {
+  flex-shrink: 0;
+  width: calc(var(--component-upload-layout-thumb) * 1px);
+  height: calc(var(--component-upload-layout-thumb) * 1px);
+  border-radius: calc(var(--component-upload-layout-row-radius) * 1px);
+  background-image: linear-gradient(
+    135deg,
+    var(--semantic-border-subtle),
+    var(--semantic-border-default)
+  );
+}
+
+.ds-upl-item-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: calc(var(--component-upload-layout-title-font) * 1px);
+  line-height: calc(var(--component-upload-layout-title-line) * 1px);
+  font-weight: 500;
+  color: var(--component-upload-item-filename);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-upl-item--err .ds-upl-item-name {
+  color: var(--component-upload-item-filename-error);
+}
+
+.ds-upl-item-act {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-upload-layout-action-gap) * 1px);
+}
+
+.ds-upl-act {
+  margin: 0;
+  padding: 0 calc(var(--component-upload-layout-action-gap) * 1px);
+  border: none;
+  background: transparent;
+  font-size: calc(var(--component-upload-layout-desc-font) * 1px);
+  line-height: calc(var(--component-upload-layout-desc-line) * 1px);
+  color: var(--semantic-text-link);
+  cursor: default;
+  font-family: inherit;
+}
+
+.ds-upl-act:focus {
+  outline: none;
+}
+
+.ds-upl-act:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-upl-prog {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: calc(var(--component-progress-line-h-sm) * 1px);
+  border-radius: calc(var(--component-progress-line-radius) * 1px);
+  background: var(--component-progress-line-track);
+  overflow: hidden;
+}
+
+.ds-upl-prog-fill {
+  height: 100%;
+  width: 44%;
+  border-radius: inherit;
+  background: var(--component-progress-line-fill-active);
+}
+
+.ds-upl-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--component-upload-layout-list-gap) * 1px);
+}
+
+.ds-upl-card {
+  position: relative;
+  box-sizing: border-box;
+  width: calc(var(--component-upload-layout-card-box) * 1px);
+  height: calc(var(--component-upload-layout-card-box) * 1px);
+  border-radius: calc(var(--component-upload-layout-card-radius) * 1px);
+  overflow: hidden;
+}
+
+.ds-upl-card-ph {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    135deg,
+    var(--semantic-border-subtle),
+    var(--semantic-border-default)
+  );
+}
+
+.ds-upl-card--busy .ds-upl-card-ph {
+  background: var(--component-upload-card-bg-uploading);
+  background-image: none;
+}
+
+.ds-upl-card--err .ds-upl-card-ph {
+  background: var(--component-upload-card-bg-error);
+  background-image: none;
+}
+
+.ds-upl-card-ic {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(var(--component-upload-layout-title-font) * 1px);
+  line-height: 1;
+  color: var(--semantic-text-secondary);
+}
+
+.ds-upl-card-mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--component-upload-layout-action-gap) * 1px);
+  background: var(--component-upload-card-mask);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ds-upl-card-mask .ds-upl-act {
+  color: var(--semantic-text-inverse);
+}
+
+.ds-upl-card:hover .ds-upl-card-mask,
+.ds-upl-card.is-hov .ds-upl-card-mask {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ds-upl-card-busy {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - calc(var(--component-upload-layout-row-inset-x) * 2 * 1px));
+  height: calc(var(--component-progress-line-h-sm) * 1px);
+  border-radius: calc(var(--component-progress-line-radius) * 1px);
+  background: var(--component-progress-line-track);
+  overflow: hidden;
+}
+
+.ds-upl-card-busy-fill {
+  height: 100%;
+  width: 55%;
+  background: var(--component-progress-line-fill-active);
+}
+
+.ds-upl--matrix .ds-upl-trg {
+  width: auto;
+  max-width: 100%;
+}
+
 /* ---- PageHeader (--component-page-header-*) ---- */
 .ds-ph {
   box-sizing: border-box;
@@ -6763,6 +7103,165 @@
     window.__dsRefresh();
   }
 
+  function mountUpload() {
+    var uplM = ["Default", "Hover", "Disabled", "Drag hover", "Focus"];
+
+    function variant() {
+      return (pgVariant && pgVariant.value) || "file-btn";
+    }
+
+    function sizeKey() {
+      return (pgSize && pgSize.value) === "sm" ? "sm" : "md";
+    }
+
+    function hintHtml() {
+      return '<p id="uplHint" class="ds-upl-hint">Accepted: PDF, PNG, JPG. Max 100MB per file.</p>';
+    }
+
+    function trigStack(tit, desc) {
+      return (
+        '<span class="ds-upl-trg-plus" aria-hidden="true">+</span>' +
+        '<span class="ds-upl-trg-stack">' +
+        '<span class="ds-upl-trg-tit">' +
+        tit +
+        "</span>" +
+        '<span class="ds-upl-trg-desc">' +
+        desc +
+        "</span></span>"
+      );
+    }
+
+    function buildTrigger(v) {
+      var tit = "Upload";
+      var desc = "Click or drag files here";
+      if (v === "picture-list" || v === "picture-card") {
+        tit = "Upload image";
+        desc = "PNG / JPG only";
+      }
+      var inner = trigStack(tit, desc);
+      var isDrag = v === "file-drag";
+      var dragCls = isDrag ? " ds-upl-trg--drag" : " ds-upl-trg--btn";
+      if (isDrag) {
+        return (
+          '<div id="uplTrig" role="button" tabindex="0" class="ds-upl-trg' +
+          dragCls +
+          '" aria-describedby="uplHint">' +
+          inner +
+          "</div>"
+        );
+      }
+      return (
+        '<button type="button" id="uplTrig" class="ds-upl-trg' +
+        dragCls +
+        '" aria-describedby="uplHint">' +
+        inner +
+        "</button>"
+      );
+    }
+
+    function fileListHtml(pic) {
+      var icCls = pic ? "ds-upl-thumb" : "ds-upl-item-ic";
+      var row1 =
+        '<li class="ds-upl-item" role="listitem">' +
+        '<span class="' +
+        icCls +
+        '" aria-hidden="true"></span>' +
+        '<span class="ds-upl-item-name">document.pdf</span>' +
+        '<span class="ds-upl-item-act">' +
+        '<button type="button" class="ds-upl-act" aria-label="Download document.pdf">Download</button>' +
+        '<button type="button" class="ds-upl-act" aria-label="Remove document.pdf from list">Remove</button>' +
+        "</span></li>";
+      var row2 =
+        '<li class="ds-upl-item" role="listitem">' +
+        '<span class="' +
+        icCls +
+        '" aria-hidden="true"></span>' +
+        '<span class="ds-upl-item-name">chart.png</span>' +
+        '<div class="ds-upl-prog" role="progressbar" aria-valuenow="44" aria-valuemin="0" aria-valuemax="100" aria-label="Upload progress for chart.png">' +
+        '<span class="ds-upl-prog-fill"></span></div>' +
+        '<button type="button" class="ds-upl-act" aria-label="Cancel upload for chart.png">Cancel</button>' +
+        "</li>";
+      var row3 =
+        '<li class="ds-upl-item ds-upl-item--err" role="listitem">' +
+        '<span class="' +
+        icCls +
+        '" aria-hidden="true"></span>' +
+        '<span class="ds-upl-item-name">bad.exe</span>' +
+        '<span class="ds-upl-item-act">' +
+        '<button type="button" class="ds-upl-act" aria-label="Retry upload for bad.exe">Retry</button>' +
+        '<button type="button" class="ds-upl-act" aria-label="Remove bad.exe from list">Remove</button>' +
+        "</span></li>";
+      return '<ul class="ds-upl-list" role="list" aria-label="Upload list">' + row1 + row2 + row3 + "</ul>";
+    }
+
+    function cardsHtml() {
+      return (
+        '<div class="ds-upl-cards" role="list" aria-label="Picture wall">' +
+        '<div class="ds-upl-card is-hov" role="listitem" tabindex="0" aria-label="photo-a.jpg">' +
+        '<div class="ds-upl-card-ph" aria-hidden="true"></div>' +
+        '<div class="ds-upl-card-mask">' +
+        '<button type="button" class="ds-upl-act" aria-label="Delete photo-a.jpg">Delete</button>' +
+        "</div></div>" +
+        '<div class="ds-upl-card ds-upl-card--busy" role="listitem" tabindex="0" aria-label="photo-b.jpg uploading">' +
+        '<div class="ds-upl-card-ph" aria-hidden="true"></div>' +
+        '<div class="ds-upl-card-busy" aria-hidden="true"><span class="ds-upl-card-busy-fill"></span></div>' +
+        "</div>" +
+        '<div class="ds-upl-card ds-upl-card--err" role="listitem" tabindex="0" aria-label="photo-c.jpg failed">' +
+        '<div class="ds-upl-card-ph" aria-hidden="true"></div>' +
+        '<span class="ds-upl-card-ic" aria-hidden="true">!</span>' +
+        "</div></div>"
+      );
+    }
+
+    function renderLive() {
+      var v = variant();
+      var sk = sizeKey();
+      var body = hintHtml() + buildTrigger(v);
+      if (v === "picture-card") {
+        body += cardsHtml();
+      } else {
+        body += fileListHtml(v === "picture-list");
+      }
+      liveRoot.innerHTML =
+        '<div id="uplRoot" class="ds-upl" data-variant="' + v + '" data-size="' + sk + '">' + body + "</div>";
+    }
+
+    function paintMatrix() {
+      matrixShell(uplM, function (_lbl, i) {
+        var sk = sizeKey();
+        var cls = "ds-upl-trg ds-upl-trg--btn";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-dis";
+        if (i === 3) cls += " is-drag";
+        if (i === 4) cls += " is-foc";
+        var dis = i === 2 ? " disabled" : "";
+        return (
+          '<div class="ds-upl ds-upl--matrix" data-size="' +
+          sk +
+          '"><button type="button" class="' +
+          cls +
+          '"' +
+          dis +
+          ' aria-label="Upload sample">' +
+          '<span class="ds-upl-trg-plus" aria-hidden="true">+</span>' +
+          '<span class="ds-upl-trg-stack"><span class="ds-upl-trg-tit">Upload</span>' +
+          '<span class="ds-upl-trg-desc">Matrix row</span></span></button></div>'
+        );
+      });
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
   function mountPageHeader() {
     var phLabels = ["Default", "Breadcrumb", "Actions", "Controls", "No description"];
 
@@ -8009,6 +8508,7 @@
       card: mountCard,
       pageheader: mountPageHeader,
       steps: mountSteps,
+      upload: mountUpload,
     };
     (mountMap[SLUG] || mountGeneric)();
   }
