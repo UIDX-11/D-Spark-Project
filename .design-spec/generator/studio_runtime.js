@@ -3659,6 +3659,147 @@
     window.__dsRefresh();
   }
 
+  function mountNotification() {
+    var ntfClosable = document.getElementById("ntfClosable");
+    var ntfActions = document.getElementById("ntfActions");
+
+    function tone() {
+      return (pgVariant && pgVariant.value) || "info";
+    }
+
+    function closable() {
+      return !!(ntfClosable && ntfClosable.checked);
+    }
+
+    function withActions() {
+      return !!(ntfActions && ntfActions.checked);
+    }
+
+    function roleFor(t) {
+      return t === "error" ? "alert" : "status";
+    }
+
+    function iconChar(t) {
+      if (t === "success") return "\u2713";
+      if (t === "warning") return "!";
+      if (t === "error") return "\u2715";
+      if (t === "default") return "";
+      return "i";
+    }
+
+    function renderNtf(t, opts) {
+      opts = opts || {};
+      var clos = opts.closable != null ? opts.closable : closable();
+      var act = opts.actions != null ? opts.actions : withActions();
+      var ic = iconChar(t);
+      var iconHtml =
+        t === "default" || !ic
+          ? ""
+          : '<span class="ds-ntf-ic" aria-hidden="true">' + ic + "</span>";
+      var closeHtml = clos
+        ? '<button type="button" class="ds-ntf-close" aria-label="Close notification"><span aria-hidden="true">\u00d7</span></button>'
+        : "";
+      var actionsHtml = act
+        ? '<div class="ds-ntf-actions">' +
+          '<button type="button" class="ds-ntf-btn">Cancel</button>' +
+          '<button type="button" class="ds-ntf-btn ds-ntf-btn--pri">OK</button>' +
+          "</div>"
+        : "";
+      var hasClose = clos ? " ds-ntf--has-close" : "";
+      return (
+        '<div id="ntfRoot" class="ds-ntf' +
+        hasClose +
+        '" data-tone="' +
+        t +
+        '" role="' +
+        roleFor(t) +
+        '">' +
+        closeHtml +
+        '<div class="ds-ntf-head">' +
+        iconHtml +
+        '<div class="ds-ntf-head-text">' +
+        '<p class="ds-ntf-title">Notification title</p>' +
+        "</div></div>" +
+        '<p class="ds-ntf-desc">Short description for the notification card (demo).</p>' +
+        actionsHtml +
+        "</div>"
+      );
+    }
+
+    function wireClose(root) {
+      var closeBtn = root.querySelector(".ds-ntf-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          var host = closeBtn.closest(".ds-ntf");
+          if (host) host.remove();
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var labels = [
+        "Info · status",
+        "Success · status",
+        "Warning · status",
+        "Error · alert · closable",
+        "Default · actions",
+      ];
+      var tones = ["info", "success", "warning", "error", "default"];
+      var clos = [false, false, false, true, true];
+      var act = [false, false, false, false, true];
+      matrixShell(labels, function (_l, i) {
+        var hov = i === 1 ? " is-hov" : "";
+        var hCls = clos[i] ? " ds-ntf--has-close" : "";
+        return (
+          '<div class="ds-ntf ds-ntf--matrix' +
+          hov +
+          hCls +
+          '" data-tone="' +
+          tones[i] +
+          '" role="' +
+          roleFor(tones[i]) +
+          '">' +
+          (clos[i]
+            ? '<button type="button" class="ds-ntf-close" tabindex="-1" aria-hidden="true"><span aria-hidden="true">\u00d7</span></button>'
+            : "") +
+          '<div class="ds-ntf-head">' +
+          (tones[i] === "default"
+            ? ""
+            : '<span class="ds-ntf-ic" aria-hidden="true">' + iconChar(tones[i]) + "</span>") +
+          '<div class="ds-ntf-head-text"><p class="ds-ntf-title">' +
+          labels[i].split(" \u00b7 ")[0] +
+          "</p></div></div>" +
+          '<p class="ds-ntf-desc">Matrix static row.</p>' +
+          (act[i]
+            ? '<div class="ds-ntf-actions"><button type="button" class="ds-ntf-btn" tabindex="-1">Cancel</button><button type="button" class="ds-ntf-btn ds-ntf-btn--pri" tabindex="-1">OK</button></div>'
+            : "") +
+          "</div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = renderNtf(tone(), {});
+      wireClose(liveRoot);
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    if (ntfClosable) ntfClosable.disabled = false;
+    if (ntfActions) ntfActions.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (ntfClosable) ntfClosable.addEventListener("change", window.__dsRefresh);
+    if (ntfActions) ntfActions.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
   function mountAlert() {
     var alShowIcon = document.getElementById("alShowIcon");
     var alTitle = document.getElementById("alTitle");
@@ -4277,6 +4418,7 @@
       progress: mountProgress,
       dropdown: mountDropdown,
       message: mountMessage,
+      notification: mountNotification,
       pincode: mountPincode,
       card: mountCard,
       pageheader: mountPageHeader,

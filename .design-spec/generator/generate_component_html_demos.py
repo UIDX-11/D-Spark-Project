@@ -347,6 +347,36 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
     </div>
     """
         return size_hint_card + static_msg
+    if slug == "notification":
+        static_ntf = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">多 tone 卡片 + 关闭 + 底部操作；类名 <code>ds-ntf-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px; display:flex; flex-direction:column; gap:12px;">
+        <div class="ds-ntf ds-ntf--fig ds-ntf--has-close" data-tone="info" role="status" aria-label="notification static info" data-ds-annotate-target="1">
+          <button type="button" class="ds-ntf-close" tabindex="-1" aria-hidden="true"><span aria-hidden="true">\u00d7</span></button>
+          <div class="ds-ntf-head">
+            <span class="ds-ntf-ic" aria-hidden="true">i</span>
+            <div class="ds-ntf-head-text"><p class="ds-ntf-title">Info</p></div>
+          </div>
+          <p class="ds-ntf-desc">Static sample description.</p>
+        </div>
+        <div class="ds-ntf ds-ntf--fig" data-tone="default" role="status" data-ds-annotate-target="1">
+          <div class="ds-ntf-head">
+            <div class="ds-ntf-head-text"><p class="ds-ntf-title">Default</p></div>
+          </div>
+          <p class="ds-ntf-desc">No tone icon; optional actions.</p>
+          <div class="ds-ntf-actions">
+            <button type="button" class="ds-ntf-btn" tabindex="-1">Cancel</button>
+            <button type="button" class="ds-ntf-btn ds-ntf-btn--pri" tabindex="-1">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_ntf
     if slug == "pincode":
         static_pc = """
     <div class="card" style="border-radius:10px; margin-top:8px;">
@@ -1413,6 +1443,35 @@ def _component_demo_body(
             <option value="md" selected>md</option>
           </select>
         </aside>"""
+    elif spec.slug == "notification":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/notification.md</code> 与 Arco Vue <code>Notification</code>（<code>type</code> / <code>title</code> / <code>content</code> / <code>closable</code> / <code>btn</code> 等）；色面走 <code>notification.tone.*</code>，卡片壳走 <code>notification.panel.*</code> 与 <code>notification.w</code> / <code>notification.p</code>，操作区间距走 <code>notification.actions.*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Type（tone）</span>
+            <select id="pgVariant" aria-label="Notification demo type">
+              <option value="info" selected>info</option>
+              <option value="success">success</option>
+              <option value="warning">warning</option>
+              <option value="error">error</option>
+              <option value="default">default（无 tone 图标）</option>
+            </select>
+          </label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="ntfClosable" checked />
+            <span>closable（关闭按钮）</span>
+          </label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="ntfActions" />
+            <span>actions（Cancel / OK）</span>
+          </label>
+          <select id="pgSize" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="md" selected>md</option>
+          </select>
+        </aside>"""
     elif spec.slug == "button":
         aside_block = """
         <aside class="studio-aside card">
@@ -1705,6 +1764,16 @@ def _component_demo_body(
         )
         matrix_rows_help = (
             "五行静态：Info·status · Success·status · Warning·status · Error·alert · Info·closable；与侧栏 Type 无关。"
+        )
+    elif spec.slug == "notification":
+        live_intro_sub = (
+            "Live：<code>#ntfRoot.ds-ntf[data-tone]</code>；<strong>error</strong> 为 <code>role=\"alert\"</code>，其余为 <code>role=\"status\"</code>；"
+            "头部 <code>.ds-ntf-head</code> 含可选 <code>span.ds-ntf-ic</code>（<code>default</code> 无图标）+ <code>.ds-ntf-title</code>；正文 <code>p.ds-ntf-desc</code>；"
+            "可选 <code>button.ds-ntf-close</code>（<code>aria-label=\"Close notification\"</code>）与 <code>.ds-ntf-actions</code> 内 <code>button.ds-ntf-btn</code> / <code>ds-ntf-btn--pri</code>；"
+            "样式 <code>--component-notification-*</code>（见 <code>docs/components/notification.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态：Info · Success · Warning（Success 行含 <code>is-hov</code> 示意）· Error+closable+alert · Default+actions；与侧栏 checkbox 无关。"
         )
     else:
         live_intro_sub = (
@@ -2302,6 +2371,22 @@ def _component_preview_block(slug: str) -> str:
               <span class="ds-upl-trg-desc">or drag here</span>
             </span>
           </button>
+        </div>
+        """
+            + end
+        )
+
+    if slug == "notification":
+        return (
+            shared
+            + """
+        <div class="ds-ntf ds-ntf--has-close" data-tone="info" role="status" aria-label="notification preview" data-ds-annotate-target="1">
+          <button type="button" class="ds-ntf-close" tabindex="-1" aria-hidden="true"><span aria-hidden="true">&#215;</span></button>
+          <div class="ds-ntf-head">
+            <span class="ds-ntf-ic" aria-hidden="true">i</span>
+            <div class="ds-ntf-head-text"><p class="ds-ntf-title">Preview title</p></div>
+          </div>
+          <p class="ds-ntf-desc">Preview description for token compare.</p>
         </div>
         """
             + end

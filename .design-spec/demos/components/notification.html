@@ -4837,6 +4837,176 @@
   justify-content: center;
 }
 
+/* ---- Notification (card; --component-notification-*) ---- */
+.ds-ntf {
+  position: relative;
+  box-sizing: border-box;
+  width: calc(var(--component-notification-w) * 1px);
+  max-width: 100%;
+  padding: calc(var(--component-notification-p) * 1px);
+  border-radius: calc(var(--component-notification-panel-radius) * 1px);
+  box-shadow: var(--component-notification-panel-shadow);
+}
+
+.ds-ntf[data-tone="info"] {
+  background: var(--component-notification-tone-info-bg);
+}
+
+.ds-ntf[data-tone="success"] {
+  background: var(--component-notification-tone-success-bg);
+}
+
+.ds-ntf[data-tone="warning"] {
+  background: var(--component-notification-tone-warning-bg);
+}
+
+.ds-ntf[data-tone="error"] {
+  background: var(--component-notification-tone-error-bg);
+}
+
+.ds-ntf[data-tone="default"] {
+  background: var(--component-notification-tone-default-bg);
+}
+
+.ds-ntf-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ds-ntf--has-close .ds-ntf-head {
+  padding-right: 28px;
+}
+
+.ds-ntf-ic {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.ds-ntf[data-tone="info"] .ds-ntf-ic {
+  color: var(--component-notification-tone-info-icon);
+}
+
+.ds-ntf[data-tone="success"] .ds-ntf-ic {
+  color: var(--component-notification-tone-success-icon);
+}
+
+.ds-ntf[data-tone="warning"] .ds-ntf-ic {
+  color: var(--component-notification-tone-warning-icon);
+}
+
+.ds-ntf[data-tone="error"] .ds-ntf-ic {
+  color: var(--component-notification-tone-error-icon);
+}
+
+.ds-ntf-head-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-ntf-title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--component-notification-title-text);
+}
+
+.ds-ntf-desc {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--component-notification-body-text);
+}
+
+.ds-ntf-close {
+  position: absolute;
+  top: calc(var(--component-notification-p) * 1px);
+  right: calc(var(--component-notification-p) * 1px);
+  margin: 0;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--component-notification-close-icon);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ds-ntf-close:focus {
+  outline: none;
+}
+
+.ds-ntf-close:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ntf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: calc(var(--component-notification-actions-gap) * 1px);
+  margin-top: calc(var(--component-notification-actions-mt) * 1px);
+}
+
+.ds-ntf-btn {
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--semantic-border-default);
+  background: var(--semantic-bg-surface);
+  color: var(--semantic-text-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ds-ntf-btn--pri {
+  border-color: var(--semantic-action-primary-bg);
+  background: var(--semantic-action-primary-bg);
+  color: var(--semantic-action-primary-text);
+}
+
+.ds-ntf-btn:focus {
+  outline: none;
+}
+
+.ds-ntf-btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ntf--matrix {
+  width: 100%;
+  max-width: min(100%, calc(var(--component-notification-w) * 1px));
+}
+
+.ds-ntf--matrix.is-hov {
+  filter: brightness(0.98);
+}
+
+.ds-ntf--fig {
+  width: 100%;
+  max-width: min(100%, calc(var(--component-notification-w) * 1px));
+}
+
 /* ---- Message (toast / global feedback; --component-message-*) ---- */
 .ds-msg {
   display: inline-flex;
@@ -5370,20 +5540,47 @@
       </div>
       <div style="padding:12px;">
         <div style="height:36px; width:min(360px,100%); border-radius:8px; border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);" aria-hidden="true"></div>
-        <div class="muted" style="margin-top:8px; font-size:12px;">按文档 Figma 标注进行比对。</div>
+        <div class="muted" style="margin-top:8px; font-size:12px;">- 卡片：宽度 notification.w（304）、内边距 notification.p（16）、圆角 notification.panel.radius、投影 notification.panel.shadow。</div>
+      </div>
+    </div>
+    
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">多 tone 卡片 + 关闭 + 底部操作；类名 <code>ds-ntf-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px; display:flex; flex-direction:column; gap:12px;">
+        <div class="ds-ntf ds-ntf--fig ds-ntf--has-close" data-tone="info" role="status" aria-label="notification static info" data-ds-annotate-target="1">
+          <button type="button" class="ds-ntf-close" tabindex="-1" aria-hidden="true"><span aria-hidden="true">×</span></button>
+          <div class="ds-ntf-head">
+            <span class="ds-ntf-ic" aria-hidden="true">i</span>
+            <div class="ds-ntf-head-text"><p class="ds-ntf-title">Info</p></div>
+          </div>
+          <p class="ds-ntf-desc">Static sample description.</p>
+        </div>
+        <div class="ds-ntf ds-ntf--fig" data-tone="default" role="status" data-ds-annotate-target="1">
+          <div class="ds-ntf-head">
+            <div class="ds-ntf-head-text"><p class="ds-ntf-title">Default</p></div>
+          </div>
+          <p class="ds-ntf-desc">No tone icon; optional actions.</p>
+          <div class="ds-ntf-actions">
+            <button type="button" class="ds-ntf-btn" tabindex="-1">Cancel</button>
+            <button type="button" class="ds-ntf-btn ds-ntf-btn--pri" tabindex="-1">OK</button>
+          </div>
+        </div>
       </div>
     </div>
     
             <section>
               <h2 class="sec-head">Live</h2>
-              <p class="sec-sub">Visuals follow <code>tokens.css</code> (see <code>docs/design.md</code> — tokens first). Pseudo-states + small JS for ripple, switch, modal, select.</p>
+              <p class="sec-sub">Live：<code>#ntfRoot.ds-ntf[data-tone]</code>；<strong>error</strong> 为 <code>role="alert"</code>，其余为 <code>role="status"</code>；头部 <code>.ds-ntf-head</code> 含可选 <code>span.ds-ntf-ic</code>（<code>default</code> 无图标）+ <code>.ds-ntf-title</code>；正文 <code>p.ds-ntf-desc</code>；可选 <code>button.ds-ntf-close</code>（<code>aria-label="Close notification"</code>）与 <code>.ds-ntf-actions</code> 内 <code>button.ds-ntf-btn</code> / <code>ds-ntf-btn--pri</code>；样式 <code>--component-notification-*</code>（见 <code>docs/components/notification.md</code>）。</p>
               <div class="live-canvas">
                 <div id="liveRoot"></div>
               </div>
             </section>
             <section style="margin-top:8px;">
               <h2 class="sec-head">Status matrix</h2>
-              <p class="sec-sub">Five rows (label left · preview right): Default · Hover · Active · Focus · Disabled</p>
+              <p class="sec-sub">五行静态：Info · Success · Warning（Success 行含 <code>is-hov</code> 示意）· Error+closable+alert · Default+actions；与侧栏 checkbox 无关。</p>
               <div id="matrixRoot" class="matrix-grid"></div>
             </section>
           </div>
@@ -5391,23 +5588,30 @@
 
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/notification.md</code> 与 Arco Vue <code>Notification</code>（<code>type</code> / <code>title</code> / <code>content</code> / <code>closable</code> / <code>btn</code> 等）；色面走 <code>notification.tone.*</code>，卡片壳走 <code>notification.panel.*</code> 与 <code>notification.w</code> / <code>notification.p</code>，操作区间距走 <code>notification.actions.*</code>。
+          </p>
           <label class="pg-field">
-            <span>Size</span>
-            <select id="pgSize" aria-label="Preview size">
-              <option value="sm">Small</option>
-              <option value="md" selected>Medium</option>
-              <option value="lg">Large</option>
+            <span>Type（tone）</span>
+            <select id="pgVariant" aria-label="Notification demo type">
+              <option value="info" selected>info</option>
+              <option value="success">success</option>
+              <option value="warning">warning</option>
+              <option value="error">error</option>
+              <option value="default">default（无 tone 图标）</option>
             </select>
           </label>
-          <label class="pg-field">
-            <span>Variant</span>
-            <select id="pgVariant" aria-label="Preview variant">
-              <option value="primary" selected>Primary</option>
-              <option value="neutral">Neutral</option>
-              <option value="danger">Danger</option>
-              <option value="ghost">Ghost</option>
-            </select>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="ntfClosable" checked />
+            <span>closable（关闭按钮）</span>
           </label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="ntfActions" />
+            <span>actions（Cancel / OK）</span>
+          </label>
+          <select id="pgSize" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="md" selected>md</option>
+          </select>
         </aside>
       </div>
     </div>
@@ -9074,6 +9278,147 @@
     window.__dsRefresh();
   }
 
+  function mountNotification() {
+    var ntfClosable = document.getElementById("ntfClosable");
+    var ntfActions = document.getElementById("ntfActions");
+
+    function tone() {
+      return (pgVariant && pgVariant.value) || "info";
+    }
+
+    function closable() {
+      return !!(ntfClosable && ntfClosable.checked);
+    }
+
+    function withActions() {
+      return !!(ntfActions && ntfActions.checked);
+    }
+
+    function roleFor(t) {
+      return t === "error" ? "alert" : "status";
+    }
+
+    function iconChar(t) {
+      if (t === "success") return "\u2713";
+      if (t === "warning") return "!";
+      if (t === "error") return "\u2715";
+      if (t === "default") return "";
+      return "i";
+    }
+
+    function renderNtf(t, opts) {
+      opts = opts || {};
+      var clos = opts.closable != null ? opts.closable : closable();
+      var act = opts.actions != null ? opts.actions : withActions();
+      var ic = iconChar(t);
+      var iconHtml =
+        t === "default" || !ic
+          ? ""
+          : '<span class="ds-ntf-ic" aria-hidden="true">' + ic + "</span>";
+      var closeHtml = clos
+        ? '<button type="button" class="ds-ntf-close" aria-label="Close notification"><span aria-hidden="true">\u00d7</span></button>'
+        : "";
+      var actionsHtml = act
+        ? '<div class="ds-ntf-actions">' +
+          '<button type="button" class="ds-ntf-btn">Cancel</button>' +
+          '<button type="button" class="ds-ntf-btn ds-ntf-btn--pri">OK</button>' +
+          "</div>"
+        : "";
+      var hasClose = clos ? " ds-ntf--has-close" : "";
+      return (
+        '<div id="ntfRoot" class="ds-ntf' +
+        hasClose +
+        '" data-tone="' +
+        t +
+        '" role="' +
+        roleFor(t) +
+        '">' +
+        closeHtml +
+        '<div class="ds-ntf-head">' +
+        iconHtml +
+        '<div class="ds-ntf-head-text">' +
+        '<p class="ds-ntf-title">Notification title</p>' +
+        "</div></div>" +
+        '<p class="ds-ntf-desc">Short description for the notification card (demo).</p>' +
+        actionsHtml +
+        "</div>"
+      );
+    }
+
+    function wireClose(root) {
+      var closeBtn = root.querySelector(".ds-ntf-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          var host = closeBtn.closest(".ds-ntf");
+          if (host) host.remove();
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var labels = [
+        "Info · status",
+        "Success · status",
+        "Warning · status",
+        "Error · alert · closable",
+        "Default · actions",
+      ];
+      var tones = ["info", "success", "warning", "error", "default"];
+      var clos = [false, false, false, true, true];
+      var act = [false, false, false, false, true];
+      matrixShell(labels, function (_l, i) {
+        var hov = i === 1 ? " is-hov" : "";
+        var hCls = clos[i] ? " ds-ntf--has-close" : "";
+        return (
+          '<div class="ds-ntf ds-ntf--matrix' +
+          hov +
+          hCls +
+          '" data-tone="' +
+          tones[i] +
+          '" role="' +
+          roleFor(tones[i]) +
+          '">' +
+          (clos[i]
+            ? '<button type="button" class="ds-ntf-close" tabindex="-1" aria-hidden="true"><span aria-hidden="true">\u00d7</span></button>'
+            : "") +
+          '<div class="ds-ntf-head">' +
+          (tones[i] === "default"
+            ? ""
+            : '<span class="ds-ntf-ic" aria-hidden="true">' + iconChar(tones[i]) + "</span>") +
+          '<div class="ds-ntf-head-text"><p class="ds-ntf-title">' +
+          labels[i].split(" \u00b7 ")[0] +
+          "</p></div></div>" +
+          '<p class="ds-ntf-desc">Matrix static row.</p>' +
+          (act[i]
+            ? '<div class="ds-ntf-actions"><button type="button" class="ds-ntf-btn" tabindex="-1">Cancel</button><button type="button" class="ds-ntf-btn ds-ntf-btn--pri" tabindex="-1">OK</button></div>'
+            : "") +
+          "</div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = renderNtf(tone(), {});
+      wireClose(liveRoot);
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    if (ntfClosable) ntfClosable.disabled = false;
+    if (ntfActions) ntfActions.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (ntfClosable) ntfClosable.addEventListener("change", window.__dsRefresh);
+    if (ntfActions) ntfActions.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
   function mountAlert() {
     var alShowIcon = document.getElementById("alShowIcon");
     var alTitle = document.getElementById("alTitle");
@@ -9692,6 +10037,7 @@
       progress: mountProgress,
       dropdown: mountDropdown,
       message: mountMessage,
+      notification: mountNotification,
       pincode: mountPincode,
       card: mountCard,
       pageheader: mountPageHeader,

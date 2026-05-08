@@ -57,6 +57,9 @@ const dropdownDemo = pathToFileURL(
 const messageDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/message.html")
 ).href;
+const notificationDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/notification.html")
+).href;
 const pincodeDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/pincode.html")
 ).href;
@@ -387,6 +390,24 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await page.goto(messageDemo);
     await page.getByLabel("Message demo type").focus();
     await expect(page.getByLabel("Message demo type")).toBeFocused();
+  });
+
+  test("notification: live mounts notification root", async ({ page }) => {
+    await page.goto(notificationDemo);
+    await page.waitForFunction(
+      () =>
+        !!document.querySelector("#liveRoot #ntfRoot.ds-ntf") &&
+        !!document.querySelector('#liveRoot [role="status"], #liveRoot [role="alert"]'),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #ntfRoot.ds-ntf").first()).toBeVisible();
+  });
+
+  test("notification: type select is keyboard-reachable", async ({ page }) => {
+    await page.goto(notificationDemo);
+    await page.getByLabel("Notification demo type").focus();
+    await expect(page.getByLabel("Notification demo type")).toBeFocused();
   });
 
   test("pincode: live mounts OTP group", async ({ page }) => {

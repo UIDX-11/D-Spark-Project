@@ -4737,6 +4737,176 @@
   justify-content: center;
 }
 
+/* ---- Notification (card; --component-notification-*) ---- */
+.ds-ntf {
+  position: relative;
+  box-sizing: border-box;
+  width: calc(var(--component-notification-w) * 1px);
+  max-width: 100%;
+  padding: calc(var(--component-notification-p) * 1px);
+  border-radius: calc(var(--component-notification-panel-radius) * 1px);
+  box-shadow: var(--component-notification-panel-shadow);
+}
+
+.ds-ntf[data-tone="info"] {
+  background: var(--component-notification-tone-info-bg);
+}
+
+.ds-ntf[data-tone="success"] {
+  background: var(--component-notification-tone-success-bg);
+}
+
+.ds-ntf[data-tone="warning"] {
+  background: var(--component-notification-tone-warning-bg);
+}
+
+.ds-ntf[data-tone="error"] {
+  background: var(--component-notification-tone-error-bg);
+}
+
+.ds-ntf[data-tone="default"] {
+  background: var(--component-notification-tone-default-bg);
+}
+
+.ds-ntf-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ds-ntf--has-close .ds-ntf-head {
+  padding-right: 28px;
+}
+
+.ds-ntf-ic {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.ds-ntf[data-tone="info"] .ds-ntf-ic {
+  color: var(--component-notification-tone-info-icon);
+}
+
+.ds-ntf[data-tone="success"] .ds-ntf-ic {
+  color: var(--component-notification-tone-success-icon);
+}
+
+.ds-ntf[data-tone="warning"] .ds-ntf-ic {
+  color: var(--component-notification-tone-warning-icon);
+}
+
+.ds-ntf[data-tone="error"] .ds-ntf-ic {
+  color: var(--component-notification-tone-error-icon);
+}
+
+.ds-ntf-head-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-ntf-title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--component-notification-title-text);
+}
+
+.ds-ntf-desc {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--component-notification-body-text);
+}
+
+.ds-ntf-close {
+  position: absolute;
+  top: calc(var(--component-notification-p) * 1px);
+  right: calc(var(--component-notification-p) * 1px);
+  margin: 0;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--component-notification-close-icon);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ds-ntf-close:focus {
+  outline: none;
+}
+
+.ds-ntf-close:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ntf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: calc(var(--component-notification-actions-gap) * 1px);
+  margin-top: calc(var(--component-notification-actions-mt) * 1px);
+}
+
+.ds-ntf-btn {
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--semantic-border-default);
+  background: var(--semantic-bg-surface);
+  color: var(--semantic-text-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ds-ntf-btn--pri {
+  border-color: var(--semantic-action-primary-bg);
+  background: var(--semantic-action-primary-bg);
+  color: var(--semantic-action-primary-text);
+}
+
+.ds-ntf-btn:focus {
+  outline: none;
+}
+
+.ds-ntf-btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ntf--matrix {
+  width: 100%;
+  max-width: min(100%, calc(var(--component-notification-w) * 1px));
+}
+
+.ds-ntf--matrix.is-hov {
+  filter: brightness(0.98);
+}
+
+.ds-ntf--fig {
+  width: 100%;
+  max-width: min(100%, calc(var(--component-notification-w) * 1px));
+}
+
 /* ---- Message (toast / global feedback; --component-message-*) ---- */
 .ds-msg {
   display: inline-flex;

@@ -4837,6 +4837,176 @@
   justify-content: center;
 }
 
+/* ---- Notification (card; --component-notification-*) ---- */
+.ds-ntf {
+  position: relative;
+  box-sizing: border-box;
+  width: calc(var(--component-notification-w) * 1px);
+  max-width: 100%;
+  padding: calc(var(--component-notification-p) * 1px);
+  border-radius: calc(var(--component-notification-panel-radius) * 1px);
+  box-shadow: var(--component-notification-panel-shadow);
+}
+
+.ds-ntf[data-tone="info"] {
+  background: var(--component-notification-tone-info-bg);
+}
+
+.ds-ntf[data-tone="success"] {
+  background: var(--component-notification-tone-success-bg);
+}
+
+.ds-ntf[data-tone="warning"] {
+  background: var(--component-notification-tone-warning-bg);
+}
+
+.ds-ntf[data-tone="error"] {
+  background: var(--component-notification-tone-error-bg);
+}
+
+.ds-ntf[data-tone="default"] {
+  background: var(--component-notification-tone-default-bg);
+}
+
+.ds-ntf-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ds-ntf--has-close .ds-ntf-head {
+  padding-right: 28px;
+}
+
+.ds-ntf-ic {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.ds-ntf[data-tone="info"] .ds-ntf-ic {
+  color: var(--component-notification-tone-info-icon);
+}
+
+.ds-ntf[data-tone="success"] .ds-ntf-ic {
+  color: var(--component-notification-tone-success-icon);
+}
+
+.ds-ntf[data-tone="warning"] .ds-ntf-ic {
+  color: var(--component-notification-tone-warning-icon);
+}
+
+.ds-ntf[data-tone="error"] .ds-ntf-ic {
+  color: var(--component-notification-tone-error-icon);
+}
+
+.ds-ntf-head-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-ntf-title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--component-notification-title-text);
+}
+
+.ds-ntf-desc {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--component-notification-body-text);
+}
+
+.ds-ntf-close {
+  position: absolute;
+  top: calc(var(--component-notification-p) * 1px);
+  right: calc(var(--component-notification-p) * 1px);
+  margin: 0;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--component-notification-close-icon);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ds-ntf-close:focus {
+  outline: none;
+}
+
+.ds-ntf-close:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ntf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: calc(var(--component-notification-actions-gap) * 1px);
+  margin-top: calc(var(--component-notification-actions-mt) * 1px);
+}
+
+.ds-ntf-btn {
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--semantic-border-default);
+  background: var(--semantic-bg-surface);
+  color: var(--semantic-text-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ds-ntf-btn--pri {
+  border-color: var(--semantic-action-primary-bg);
+  background: var(--semantic-action-primary-bg);
+  color: var(--semantic-action-primary-text);
+}
+
+.ds-ntf-btn:focus {
+  outline: none;
+}
+
+.ds-ntf-btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-ntf--matrix {
+  width: 100%;
+  max-width: min(100%, calc(var(--component-notification-w) * 1px));
+}
+
+.ds-ntf--matrix.is-hov {
+  filter: brightness(0.98);
+}
+
+.ds-ntf--fig {
+  width: 100%;
+  max-width: min(100%, calc(var(--component-notification-w) * 1px));
+}
+
 /* ---- Message (toast / global feedback; --component-message-*) ---- */
 .ds-msg {
   display: inline-flex;
@@ -9109,6 +9279,147 @@
     window.__dsRefresh();
   }
 
+  function mountNotification() {
+    var ntfClosable = document.getElementById("ntfClosable");
+    var ntfActions = document.getElementById("ntfActions");
+
+    function tone() {
+      return (pgVariant && pgVariant.value) || "info";
+    }
+
+    function closable() {
+      return !!(ntfClosable && ntfClosable.checked);
+    }
+
+    function withActions() {
+      return !!(ntfActions && ntfActions.checked);
+    }
+
+    function roleFor(t) {
+      return t === "error" ? "alert" : "status";
+    }
+
+    function iconChar(t) {
+      if (t === "success") return "\u2713";
+      if (t === "warning") return "!";
+      if (t === "error") return "\u2715";
+      if (t === "default") return "";
+      return "i";
+    }
+
+    function renderNtf(t, opts) {
+      opts = opts || {};
+      var clos = opts.closable != null ? opts.closable : closable();
+      var act = opts.actions != null ? opts.actions : withActions();
+      var ic = iconChar(t);
+      var iconHtml =
+        t === "default" || !ic
+          ? ""
+          : '<span class="ds-ntf-ic" aria-hidden="true">' + ic + "</span>";
+      var closeHtml = clos
+        ? '<button type="button" class="ds-ntf-close" aria-label="Close notification"><span aria-hidden="true">\u00d7</span></button>'
+        : "";
+      var actionsHtml = act
+        ? '<div class="ds-ntf-actions">' +
+          '<button type="button" class="ds-ntf-btn">Cancel</button>' +
+          '<button type="button" class="ds-ntf-btn ds-ntf-btn--pri">OK</button>' +
+          "</div>"
+        : "";
+      var hasClose = clos ? " ds-ntf--has-close" : "";
+      return (
+        '<div id="ntfRoot" class="ds-ntf' +
+        hasClose +
+        '" data-tone="' +
+        t +
+        '" role="' +
+        roleFor(t) +
+        '">' +
+        closeHtml +
+        '<div class="ds-ntf-head">' +
+        iconHtml +
+        '<div class="ds-ntf-head-text">' +
+        '<p class="ds-ntf-title">Notification title</p>' +
+        "</div></div>" +
+        '<p class="ds-ntf-desc">Short description for the notification card (demo).</p>' +
+        actionsHtml +
+        "</div>"
+      );
+    }
+
+    function wireClose(root) {
+      var closeBtn = root.querySelector(".ds-ntf-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          var host = closeBtn.closest(".ds-ntf");
+          if (host) host.remove();
+        });
+      }
+    }
+
+    function paintMatrix() {
+      var labels = [
+        "Info · status",
+        "Success · status",
+        "Warning · status",
+        "Error · alert · closable",
+        "Default · actions",
+      ];
+      var tones = ["info", "success", "warning", "error", "default"];
+      var clos = [false, false, false, true, true];
+      var act = [false, false, false, false, true];
+      matrixShell(labels, function (_l, i) {
+        var hov = i === 1 ? " is-hov" : "";
+        var hCls = clos[i] ? " ds-ntf--has-close" : "";
+        return (
+          '<div class="ds-ntf ds-ntf--matrix' +
+          hov +
+          hCls +
+          '" data-tone="' +
+          tones[i] +
+          '" role="' +
+          roleFor(tones[i]) +
+          '">' +
+          (clos[i]
+            ? '<button type="button" class="ds-ntf-close" tabindex="-1" aria-hidden="true"><span aria-hidden="true">\u00d7</span></button>'
+            : "") +
+          '<div class="ds-ntf-head">' +
+          (tones[i] === "default"
+            ? ""
+            : '<span class="ds-ntf-ic" aria-hidden="true">' + iconChar(tones[i]) + "</span>") +
+          '<div class="ds-ntf-head-text"><p class="ds-ntf-title">' +
+          labels[i].split(" \u00b7 ")[0] +
+          "</p></div></div>" +
+          '<p class="ds-ntf-desc">Matrix static row.</p>' +
+          (act[i]
+            ? '<div class="ds-ntf-actions"><button type="button" class="ds-ntf-btn" tabindex="-1">Cancel</button><button type="button" class="ds-ntf-btn ds-ntf-btn--pri" tabindex="-1">OK</button></div>'
+            : "") +
+          "</div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = renderNtf(tone(), {});
+      wireClose(liveRoot);
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = true;
+    if (ntfClosable) ntfClosable.disabled = false;
+    if (ntfActions) ntfActions.disabled = false;
+
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    if (ntfClosable) ntfClosable.addEventListener("change", window.__dsRefresh);
+    if (ntfActions) ntfActions.addEventListener("change", window.__dsRefresh);
+
+    window.__dsRefresh();
+  }
+
   function mountAlert() {
     var alShowIcon = document.getElementById("alShowIcon");
     var alTitle = document.getElementById("alTitle");
@@ -9727,6 +10038,7 @@
       progress: mountProgress,
       dropdown: mountDropdown,
       message: mountMessage,
+      notification: mountNotification,
       pincode: mountPincode,
       card: mountCard,
       pageheader: mountPageHeader,
