@@ -507,6 +507,38 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
     </div>
     """
         return size_hint_card + static_compare
+    if slug == "tabs":
+        static_tb = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">underline + pill 两行示意；类名 <code>ds-tabs-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px; display:flex; flex-direction:column; gap:16px;">
+        <div class="ds-tabs ds-tabs--underline" data-size="lg" aria-label="tabs underline static" data-ds-annotate-target="1">
+          <div class="ds-tabs-bar">
+            <div role="tablist" class="ds-tabs-list" aria-label="Static underline">
+              <button type="button" role="tab" id="tbFigT0" class="ds-tabs-tab" aria-selected="true" aria-controls="tbFigP0" tabindex="0">One</button>
+              <button type="button" role="tab" id="tbFigT1" class="ds-tabs-tab" aria-selected="false" aria-controls="tbFigP1" tabindex="-1">Two</button>
+            </div>
+          </div>
+          <div class="ds-tabs-panels">
+            <section id="tbFigP0" class="ds-tabs-panel" role="tabpanel" aria-labelledby="tbFigT0">Panel A</section>
+            <section id="tbFigP1" class="ds-tabs-panel" role="tabpanel" aria-labelledby="tbFigT1" hidden>Panel B</section>
+          </div>
+        </div>
+        <div class="ds-tabs ds-tabs--pill" aria-label="tabs pill static" data-ds-annotate-target="1">
+          <div class="ds-tabs-bar">
+            <div role="tablist" class="ds-tabs-list" aria-label="Static pill">
+              <button type="button" role="tab" class="ds-tabs-tab" aria-selected="true" tabindex="0">Alpha</button>
+              <button type="button" role="tab" class="ds-tabs-tab" aria-selected="false" tabindex="-1">Beta</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_tb
     if slug == "cascader":
         static_cs = """
     <div class="card" style="border-radius:10px; margin-top:8px;">
@@ -851,6 +883,34 @@ def _component_demo_body(
             <select id="pgSwitchState" aria-label="Switch demo state">
               <option value="default" selected>default</option>
               <option value="disabled">disabled</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "tabs":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/tabs.md</code> 与 Arco Vue <code>Tabs</code>（<code>type</code> / <code>direction</code> / <code>editable</code> / <code>show-add-button</code> 等）；样式仅 <code>--component-tabs-*</code>（见 <code>studio_runtime.css</code> 中 <code>ds-tabs-*</code>）。
+          </p>
+          <label class="pg-field">
+            <span>Kind（形态）</span>
+            <select id="pgVariant" aria-label="Tabs demo kind">
+              <option value="underline" selected>underline</option>
+              <option value="pill">pill</option>
+              <option value="segmented">segmented</option>
+              <option value="border">border</option>
+              <option value="vertical">vertical</option>
+              <option value="scrollable">scrollable（可关闭槽位）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（underline L/M · border S–XL）</span>
+            <select id="pgSize" aria-label="Tabs demo size">
+              <option value="xl">XL · border 最大档</option>
+              <option value="lg" selected>LG · underline L44 / border L</option>
+              <option value="md">MD · underline M32 / border M</option>
+              <option value="sm">SM · border S</option>
             </select>
           </label>
         </aside>"""
@@ -1404,6 +1464,16 @@ def _component_demo_body(
         matrix_rows_help = (
             "五行：Off · Hover（轨道 filter 示意）· On · On + Focus（示意环）· Disabled off；"
             "与侧栏 Variant / Size 同步。"
+        )
+    elif spec.slug == "tabs":
+        live_intro_sub = (
+            "Live：<code>#tbRoot</code> 根节点为 <code>ds-tabs</code> + 形态类（如 <code>ds-tabs--underline</code> / <code>ds-tabs--pill</code> 等）；"
+            "<code>.ds-tabs-bar</code> 内 <code>div[role=\"tablist\"].ds-tabs-list</code> + <code>button[role=\"tab\"].ds-tabs-tab</code>（<strong>scrollable</strong> 为 <code>div[role=\"tab\"]</code> 内含 <code>button.ds-tabs-close</code>）；"
+            "<code>.ds-tabs-panels</code> 内 <code>section.ds-tabs-panel[role=\"tabpanel\"]</code>；<code>aria-controls</code> / <code>aria-selected</code> 与 roving <code>tabindex</code>；"
+            "键盘 <code>ArrowLeft</code>/<code>ArrowRight</code>（水平）或 <code>ArrowUp</code>/<code>ArrowDown</code>（<code>data-orientation=\"vertical\"</code>）、<code>Home</code>/<code>End</code> 切换选中与面板显隐；样式 <code>--component-tabs-*</code>（见 <code>docs/components/tabs.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态：Default · Hover（<code>is-hov</code>）· Selected（<code>is-sel</code>）· Disabled · Focus（<code>is-foc</code>）；形态与侧栏 Kind 同步，underline/border 的档位随 Size。"
         )
     elif spec.slug == "slider":
         live_intro_sub = (
@@ -2117,6 +2187,22 @@ def _component_preview_block(slug: str) -> str:
           <div class="tr-row" data-ds-annotate-target="1"><span class="tr-indent"></span><span style="width:10px;"></span><span>Default</span></div>
           <div class="tr-row selected" data-ds-annotate-target="1"><span class="tri" aria-hidden="true" style="transform: rotate(45deg);"></span><span>Selected</span></div>
           <div class="tr-row tr-disabled" data-ds-annotate-target="1"><span class="tri" aria-hidden="true"></span><span>Disabled</span></div>
+        </div>
+        """
+            + end
+        )
+
+    if slug == "tabs":
+        return (
+            shared
+            + """
+        <div class="ds-tabs ds-tabs--underline" data-size="lg" aria-label="tabs preview">
+          <div class="ds-tabs-bar">
+            <div role="tablist" class="ds-tabs-list" aria-label="Preview tablist">
+              <button type="button" role="tab" class="ds-tabs-tab" aria-selected="true" tabindex="0" data-ds-annotate-target="1">Tab A</button>
+              <button type="button" role="tab" class="ds-tabs-tab" aria-selected="false" tabindex="-1" data-ds-annotate-target="1">Tab B</button>
+            </div>
+          </div>
         </div>
         """
             + end

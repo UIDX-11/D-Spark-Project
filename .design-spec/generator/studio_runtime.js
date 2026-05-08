@@ -2475,6 +2475,279 @@
     window.__dsRefresh();
   }
 
+  function mountTabs() {
+    var tbMx = ["Default", "Hover", "Selected", "Disabled", "Focus"];
+
+    function kind() {
+      return (pgVariant && pgVariant.value) || "underline";
+    }
+
+    function sizeAttr() {
+      return (pgSize && pgSize.value) || "lg";
+    }
+
+    function uSize(sz) {
+      return sz === "md" || sz === "sm" ? "md" : "lg";
+    }
+
+    function bSize(sz) {
+      if (sz === "xl") return "xl";
+      if (sz === "sm") return "sm";
+      if (sz === "md") return "md";
+      return "lg";
+    }
+
+    function panel(id, labelledby, hidden, inner) {
+      var h = hidden ? " hidden" : "";
+      return (
+        '<section id="' +
+        id +
+        '" class="ds-tabs-panel" role="tabpanel"' +
+        h +
+        ' aria-labelledby="' +
+        labelledby +
+        '">' +
+        inner +
+        "</section>"
+      );
+    }
+
+    function tabBtn(id, panelId, selected, label, disabled) {
+      var dis = disabled ? " disabled" : "";
+      var sel = selected ? "true" : "false";
+      var tabi = selected ? "0" : "-1";
+      return (
+        '<button type="button" role="tab" id="' +
+        id +
+        '" class="ds-tabs-tab" aria-selected="' +
+        sel +
+        '" aria-controls="' +
+        panelId +
+        '" tabindex="' +
+        tabi +
+        '"' +
+        dis +
+        ">" +
+        label +
+        "</button>"
+      );
+    }
+
+    function tabSlot(id, panelId, selected, label, disabled) {
+      var sel = selected ? "true" : "false";
+      var tabi = selected ? "0" : "-1";
+      var ad = disabled ? ' aria-disabled="true"' : "";
+      return (
+        '<div role="tab" id="' +
+        id +
+        '" class="ds-tabs-tab" tabindex="' +
+        tabi +
+        '" aria-selected="' +
+        sel +
+        '" aria-controls="' +
+        panelId +
+        '"' +
+        ad +
+        ">" +
+        '<span class="ds-tabs-tab-lbl">' +
+        label +
+        "</span>" +
+        '<button type="button" class="ds-tabs-close" tabindex="-1" aria-label="Close ' +
+        label +
+        '">\u00d7</button></div>'
+      );
+    }
+
+    function panelsHtml(t0, t1, t2) {
+      return (
+        '<div class="ds-tabs-panels">' +
+        panel("tbP0", t0, false, "<p>First tab panel.</p>") +
+        panel("tbP1", t1, true, "<p>Second tab panel.</p>") +
+        panel("tbP2", t2, true, "<p>Third tab panel.</p>") +
+        "</div>"
+      );
+    }
+
+    function liveHtml() {
+      var k = kind();
+      var sz = sizeAttr();
+      var udat = uSize(sz);
+      var bdd = bSize(sz);
+      var orient = k === "vertical" ? ' data-orientation="vertical"' : "";
+      var cls = "ds-tabs ds-tabs--" + k;
+      var extra = "";
+      if (k === "underline") extra = ' data-size="' + udat + '"';
+      else if (k === "border") extra = ' data-border-size="' + bdd + '"';
+      else if (k === "vertical") extra = ' data-size="' + udat + '"';
+
+      var t0 = "tbT0";
+      var t1 = "tbT1";
+      var t2 = "tbT2";
+      var listInner =
+        k === "scrollable"
+          ? tabSlot(t0, "tbP0", true, "Draft", false) +
+            tabSlot(t1, "tbP1", false, "Published", false) +
+            tabSlot(t2, "tbP2", false, "Archive", true)
+          : tabBtn(t0, "tbP0", true, "Overview", false) +
+            tabBtn(t1, "tbP1", false, "Details", false) +
+            tabBtn(t2, "tbP2", false, "Disabled", true);
+
+      return (
+        '<div id="tbRoot" class="' +
+        cls +
+        '"' +
+        orient +
+        extra +
+        ">" +
+        '<div class="ds-tabs-bar">' +
+        '<div role="tablist" class="ds-tabs-list" aria-label="Demo tabs">' +
+        listInner +
+        "</div></div>" +
+        panelsHtml(t0, t1, t2) +
+        "</div>"
+      );
+    }
+
+    function wireTabs() {
+      var root = document.getElementById("tbRoot");
+      if (!root) return;
+      var list = root.querySelector('[role="tablist"]');
+      if (!list) return;
+      var orient = root.getAttribute("data-orientation") === "vertical";
+
+      function tabs() {
+        return [].slice.call(list.querySelectorAll('[role="tab"]'));
+      }
+
+      function enabled(tbs) {
+        return tbs.filter(function (t) {
+          return !t.disabled && t.getAttribute("aria-disabled") !== "true";
+        });
+      }
+
+      function panelFor(tab) {
+        var id = tab.getAttribute("aria-controls");
+        return id ? document.getElementById(id) : null;
+      }
+
+      function activate(selTab) {
+        var all = tabs();
+        if (enabled(all).indexOf(selTab) === -1) return;
+        all.forEach(function (t) {
+          var on = t === selTab;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.setAttribute("tabindex", on ? "0" : "-1");
+          var p = panelFor(t);
+          if (p) {
+            if (on) p.removeAttribute("hidden");
+            else p.setAttribute("hidden", "hidden");
+          }
+        });
+      }
+
+      list.addEventListener("keydown", function (e) {
+        var key = e.key;
+        var cur = document.activeElement;
+        var all = tabs();
+        if (all.indexOf(cur) === -1) return;
+        var en = enabled(all);
+        var ix = en.indexOf(cur);
+        if (ix === -1) return;
+        var next = null;
+        if (!orient && (key === "ArrowRight" || key === "ArrowLeft")) {
+          var delta = key === "ArrowRight" ? 1 : -1;
+          next = en[(ix + delta + en.length) % en.length];
+          e.preventDefault();
+        } else if (orient && (key === "ArrowDown" || key === "ArrowUp")) {
+          var d2 = key === "ArrowDown" ? 1 : -1;
+          next = en[(ix + d2 + en.length) % en.length];
+          e.preventDefault();
+        } else if (key === "Home") {
+          next = en[0];
+          e.preventDefault();
+        } else if (key === "End") {
+          next = en[en.length - 1];
+          e.preventDefault();
+        }
+        if (next && next !== cur) {
+          next.focus();
+          activate(next);
+        }
+      });
+
+      tabs().forEach(function (t) {
+        t.addEventListener("click", function () {
+          activate(t);
+        });
+      });
+
+      root.addEventListener("click", function (e) {
+        var c = e.target.closest(".ds-tabs-close");
+        if (!c || !root.contains(c)) return;
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    }
+
+    function paintMatrix() {
+      var k = kind();
+      var sz = sizeAttr();
+      var udat = uSize(sz);
+      var bdd = bSize(sz);
+      var orient = k === "vertical" ? ' data-orientation="vertical"' : "";
+      var extra = "";
+      if (k === "underline") extra = ' data-size="' + udat + '"';
+      else if (k === "border") extra = ' data-border-size="' + bdd + '"';
+
+      matrixShell(tbMx, function (_lbl, i) {
+        var cls = "ds-tabs-tab";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-sel";
+        if (i === 3) cls += " is-dis";
+        if (i === 4) cls += " is-foc";
+        var dis = i === 3 ? " disabled" : "";
+        var sel = i === 2 ? "true" : "false";
+        var tabi = i === 2 ? "0" : "-1";
+        return (
+          '<div class="ds-tabs ds-tabs--' +
+          k +
+          " ds-tabs--matrix" +
+          '"' +
+          orient +
+          extra +
+          '><div role="tablist" class="ds-tabs-list" aria-label="Tabs matrix">' +
+          '<button type="button" role="tab" class="' +
+          cls +
+          '" aria-selected="' +
+          sel +
+          '" aria-controls="tbMxP' +
+          i +
+          '" tabindex="' +
+          tabi +
+          '"' +
+          dis +
+          ">Sample</button></div></div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = liveHtml();
+      wireTabs();
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
   function mountPageHeader() {
     var phLabels = ["Default", "Breadcrumb", "Actions", "Controls", "No description"];
 
@@ -3722,6 +3995,7 @@
       pageheader: mountPageHeader,
       steps: mountSteps,
       upload: mountUpload,
+      tabs: mountTabs,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

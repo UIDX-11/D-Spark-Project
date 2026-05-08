@@ -9,6 +9,43 @@ Molecular
 - segmented navigation (when simplified)
 - sub-page switcher
 
+## References
+
+- Arco Vue（API / 行为真源）: [https://arco.design/vue/component/tabs](https://arco.design/vue/component/tabs)
+- Arco 源码: `arco-design-vue/packages/web-vue/components/tabs/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Tabs** 画板，将本行替换为带 `node-id=` 的深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- **Underline**：水平间距与下划线厚度见 `tabs.underline.*`（`px` / `pyLg` / `pyMd` / `indicatorThickness` 等）。
+- **Border**：四档高度对应 `tabs.border.pyS` … `pyXL` 与 `radiusSm` / `radiusMd` / `radiusLg`。
+- **分段、可滚动、纵向**：分别见 `tabs.segmented.*`、`tabs.scrollable.*`、`tabs.vertical.*`。
+
+## Arco API 对齐（摘要）
+
+
+| Arco `prop` | 说明 | 本 demo |
+| ----------- | ---- | ------- |
+| `type` / 形态 | `line` / `card` / `rounded` 等 | 侧栏 **Kind** → **`underline`** / **`pill`** / **`segmented`** / **`border`** / **`vertical`** / **`scrollable`**（槽位+关闭） |
+| `direction` | `horizontal` / `vertical` | **vertical** → **`data-orientation="vertical"`** + 纵向键盘 |
+| `editable` / `show-add-button` | 可编辑标签、添加 | Live 未接 **+** 与重命名；见文档 **Add tab (+)** |
+| `destroy-on-hide` 等 | 面板销毁策略 | Live 仅用 **`hidden`** 切换显隐 |
+
+## Arco DOM（与 demo 对齐）
+
+- **根**：`**div#tbRoot.ds-tabs**` + 形态类 **`ds-tabs--underline`** 等；**vertical** 时 **`data-orientation="vertical"`**；**underline** 使用 **`data-size="lg"` / `"md"`**；**border** 使用 **`data-border-size="xl"|"lg"|"md"|"sm"`**。
+- **Tab 条**：`**div.ds-tabs-bar` → `div[role="tablist"].ds-tabs-list`**。
+- **Tab**：默认 **`<button type="button" role="tab" class="ds-tabs-tab">`**；**scrollable** 为 **`div[role="tab"].ds-tabs-tab`**，内 **`button.ds-tabs-close`**（`tabindex="-1"`）避免嵌套可聚焦按钮。
+- **面板区**：`**div.ds-tabs-panels`** 内 **`section.ds-tabs-panel`**，**`role="tabpanel"`**，**`aria-labelledby`** 指向对应 tab **`id`**。
+- **类名前缀**：`ds-tabs-*`；不要求与 Arco 运行时 DOM 字符串一致。
+
+## 推断（Figma 未单独画出的状态）
+
+- **矩阵 Focus 行**：**`is-foc`** + **`box-shadow: 0 0 0 2px var(--semantic-focus-ring)`**，与键盘 **`focus-visible`** 同向。
+- **矩阵 Hover / Selected**：**`is-hov`**、**`is-sel`** 静态类，便于无指针截图；与 **`aria-selected`** 态并存时以矩阵行为准。
+- **分段容器外圆角**：demo 使用 **`--component-tabs-border-radius-md`** 作为分段条外轮廓（Figma 若单独标注可再拆 token）。
+
 ## Best practices
 
 - **Use for**: switching between related views at the same hierarchy level.
@@ -280,4 +317,33 @@ Molecular
 | `tokens.tabs.border.radiusSm` | `--component-tabs-border-radius-sm` |
 | `tokens.tabs.border.radiusMd` | `--component-tabs-border-radius-md` |
 | `tokens.tabs.border.radiusLg` | `--component-tabs-border-radius-lg` |
+| `tokens.tabs.segmented.containerBg` | `--component-tabs-segmented-container-bg` |
+| `tokens.tabs.segmented.divider` | `--component-tabs-segmented-divider` |
+| `tokens.tabs.segmented.h` | `--component-tabs-segmented-h` |
+| `tokens.tabs.segmented.px` | `--component-tabs-segmented-px` |
+| `tokens.tabs.segmented.itemBg` | `--component-tabs-segmented-item-bg` |
+| `tokens.tabs.segmented.itemBgHover` | `--component-tabs-segmented-item-bg-hover` |
+| `tokens.tabs.segmented.itemBgSelected` | `--component-tabs-segmented-item-bg-selected` |
+| `tokens.tabs.segmented.itemBgDisabled` | `--component-tabs-segmented-item-bg-disabled` |
+| `tokens.tabs.segmented.textDefault` | `--component-tabs-segmented-text-default` |
+| `tokens.tabs.segmented.textSelected` | `--component-tabs-segmented-text-selected` |
+| `tokens.tabs.segmented.textDisabled` | `--component-tabs-segmented-text-disabled` |
+| `tokens.tabs.line.border` | `--component-tabs-line-border` |
+| `tokens.tabs.line.bg` | `--component-tabs-line-bg` |
+| `tokens.tabs.line.textDefault` | `--component-tabs-line-text-default` |
+| `tokens.tabs.line.textSelected` | `--component-tabs-line-text-selected` |
+| `tokens.tabs.line.px` | `--component-tabs-line-px` |
+| `tokens.tabs.line.py` | `--component-tabs-line-py` |
+| `tokens.tabs.pill.radius` | `--component-tabs-pill-radius` |
+| `tokens.tabs.pill.minWidth` | `--component-tabs-pill-min-width` |
+| `tokens.tabs.pill.px` | `--component-tabs-pill-px` |
+| `tokens.tabs.pill.py` | `--component-tabs-pill-py` |
+| `tokens.tabs.scrollable.radiusTop` | `--component-tabs-scrollable-radius-top` |
+| `tokens.tabs.scrollable.px` / `py` / `gap` | `--component-tabs-scrollable-px` 等 |
+| `tokens.tabs.scrollable.item.closeIcon` | `--component-tabs-scrollable-item-close-icon` |
+| `tokens.tabs.scrollable.closeP` / `closeRadius` / `closeIconSize` | `--component-tabs-scrollable-close-p` 等 |
+| `tokens.tabs.vertical.itemGap` / `itemPx` / `outerPx` / `width` / `radius` | `--component-tabs-vertical-item-gap` 等 |
+| `tokens.tabs.vertical.indicatorThickness` | `--component-tabs-vertical-indicator-thickness` |
+| `tokens.tabs.underline.iconSize` | `--component-tabs-underline-icon-size` |
+| `tokens.tabs.underline.pbSelectedLg` / `pbSelectedMd` | `--component-tabs-underline-pb-selected-lg` 等 |
 

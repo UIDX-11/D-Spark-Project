@@ -3542,6 +3542,478 @@
   max-width: 100%;
 }
 
+/* ---- Tabs (--component-tabs-*) ---- */
+.ds-tabs {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.ds-tabs-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.ds-tabs-list {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: calc(var(--component-tabs-underline-gap) * 1px);
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.ds-tabs[data-orientation="vertical"] {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: calc(var(--component-tabs-vertical-outer-px) * 1px);
+}
+
+.ds-tabs[data-orientation="vertical"] .ds-tabs-bar {
+  flex: 0 0 auto;
+}
+
+.ds-tabs[data-orientation="vertical"] .ds-tabs-list {
+  flex-direction: column;
+  align-items: stretch;
+  width: calc(var(--component-tabs-vertical-width) * 1px);
+  gap: calc(var(--component-tabs-vertical-item-gap) * 1px);
+  border-bottom: none;
+  border-right: none;
+}
+
+.ds-tabs[data-orientation="vertical"] .ds-tabs-panels {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-tabs-panel {
+  box-sizing: border-box;
+  margin: 0;
+  padding: calc(var(--component-tabs-vertical-outer-px) * 1px);
+  border-radius: calc(var(--component-tabs-vertical-radius) * 1px);
+  background: var(--semantic-bg-surface);
+  border: 1px solid var(--semantic-border-subtle);
+  font-size: calc(var(--component-tabs-underline-icon-size) * 1px);
+  line-height: calc(var(--component-tabs-underline-h-md) * 1px);
+  color: var(--semantic-text-primary);
+}
+
+.ds-tabs--underline .ds-tabs-list {
+  border-bottom: 1px solid var(--semantic-border-subtle);
+}
+
+.ds-tabs--underline .ds-tabs-tab {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: default;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: calc(var(--component-tabs-underline-icon-size) * 1px);
+  line-height: calc(var(--component-tabs-underline-h-md) * 1px);
+  color: var(--component-tabs-underline-text-default);
+}
+
+.ds-tabs--underline[data-size="lg"] .ds-tabs-tab {
+  padding: calc(var(--component-tabs-underline-py-lg) * 1px) calc(var(--component-tabs-underline-px) * 1px);
+}
+
+.ds-tabs--underline[data-size="md"] .ds-tabs-tab {
+  min-height: calc(var(--component-tabs-underline-h-md) * 1px);
+  padding: calc(var(--component-tabs-underline-py-md) * 1px) calc(var(--component-tabs-underline-px) * 1px);
+}
+
+.ds-tabs--underline .ds-tabs-tab:hover:not(:disabled):not(.is-dis) {
+  color: var(--component-tabs-underline-text-hover);
+}
+
+.ds-tabs--underline .ds-tabs-tab.is-hov:not(:disabled) {
+  color: var(--component-tabs-underline-text-hover);
+}
+
+.ds-tabs--underline .ds-tabs-tab[aria-selected="true"] {
+  color: var(--component-tabs-underline-text-selected);
+}
+
+.ds-tabs--underline .ds-tabs-tab:disabled,
+.ds-tabs--underline .ds-tabs-tab.is-dis {
+  color: var(--component-tabs-underline-text-disabled);
+}
+
+.ds-tabs--underline .ds-tabs-tab:focus {
+  outline: none;
+}
+
+.ds-tabs--underline .ds-tabs-tab:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs--underline .ds-tabs-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--component-tabs-underline-indicator-thickness) * 1px);
+  background: var(--component-tabs-underline-indicator-selected);
+}
+
+.ds-tabs--pill .ds-tabs-list {
+  border-bottom: none;
+  align-items: center;
+}
+
+.ds-tabs--pill .ds-tabs-tab {
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  cursor: default;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: calc(var(--component-tabs-underline-icon-size) * 1px);
+  line-height: calc(var(--component-tabs-underline-h-md) * 1px);
+  min-width: calc(var(--component-tabs-pill-min-width) * 1px);
+  padding: calc(var(--component-tabs-pill-py) * 1px) calc(var(--component-tabs-pill-px) * 1px);
+  border-radius: calc(var(--component-tabs-pill-radius) * 1px);
+  background: var(--component-tabs-pill-bg-default);
+  color: var(--component-tabs-pill-text-default);
+}
+
+.ds-tabs--pill .ds-tabs-tab:hover:not(:disabled):not(.is-dis) {
+  background: var(--component-tabs-pill-bg-hover);
+  color: var(--component-tabs-pill-text-hover);
+}
+
+.ds-tabs--pill .ds-tabs-tab[aria-selected="true"] {
+  background: var(--component-tabs-pill-bg-selected);
+  color: var(--component-tabs-pill-text-selected);
+}
+
+.ds-tabs--pill .ds-tabs-tab:disabled,
+.ds-tabs--pill .ds-tabs-tab.is-dis {
+  background: var(--component-tabs-pill-bg-disabled);
+  color: var(--component-tabs-pill-text-disabled);
+}
+
+.ds-tabs--pill .ds-tabs-tab:focus {
+  outline: none;
+}
+
+.ds-tabs--pill .ds-tabs-tab:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs--segmented .ds-tabs-list {
+  align-items: stretch;
+  border: 1px solid var(--semantic-border-subtle);
+  border-radius: calc(var(--component-tabs-border-radius-md) * 1px);
+  background: var(--component-tabs-segmented-container-bg);
+  padding: 0;
+  gap: 0;
+  flex-wrap: nowrap;
+  min-height: calc(var(--component-tabs-segmented-h) * 1px);
+}
+
+.ds-tabs--segmented .ds-tabs-tab {
+  flex: 1 1 auto;
+  margin: 0;
+  border: none;
+  border-right: 1px solid var(--component-tabs-segmented-divider);
+  border-radius: 0;
+  background: var(--component-tabs-segmented-item-bg);
+  color: var(--component-tabs-segmented-text-default);
+  font-family: inherit;
+  font-weight: 500;
+  font-size: calc(var(--component-tabs-underline-icon-size) * 1px);
+  line-height: calc(var(--component-tabs-segmented-h) * 1px);
+  padding: 0 calc(var(--component-tabs-segmented-px) * 1px);
+  cursor: default;
+}
+
+.ds-tabs--segmented .ds-tabs-tab:last-child {
+  border-right: none;
+}
+
+.ds-tabs--segmented .ds-tabs-tab:hover:not(:disabled):not(.is-dis) {
+  background: var(--component-tabs-segmented-item-bg-hover);
+}
+
+.ds-tabs--segmented .ds-tabs-tab[aria-selected="true"] {
+  background: var(--component-tabs-segmented-item-bg-selected);
+  color: var(--component-tabs-segmented-text-selected);
+}
+
+.ds-tabs--segmented .ds-tabs-tab:disabled,
+.ds-tabs--segmented .ds-tabs-tab.is-dis {
+  color: var(--component-tabs-segmented-text-disabled);
+  background: var(--component-tabs-segmented-item-bg-disabled);
+}
+
+.ds-tabs--segmented .ds-tabs-tab:focus {
+  outline: none;
+}
+
+.ds-tabs--segmented .ds-tabs-tab:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs--border .ds-tabs-list {
+  border-bottom: none;
+  align-items: flex-end;
+  gap: calc(var(--component-tabs-underline-gap) * 1px);
+}
+
+.ds-tabs--border[data-border-size="sm"] .ds-tabs-tab {
+  border-radius: calc(var(--component-tabs-border-radius-sm) * 1px);
+  padding: calc(var(--component-tabs-border-py-s) * 1px) calc(var(--component-tabs-border-px) * 1px);
+}
+
+.ds-tabs--border[data-border-size="md"] .ds-tabs-tab {
+  border-radius: calc(var(--component-tabs-border-radius-md) * 1px);
+  padding: calc(var(--component-tabs-border-py-m) * 1px) calc(var(--component-tabs-border-px) * 1px);
+}
+
+.ds-tabs--border[data-border-size="lg"] .ds-tabs-tab {
+  border-radius: calc(var(--component-tabs-border-radius-lg) * 1px);
+  padding: calc(var(--component-tabs-border-py-l) * 1px) calc(var(--component-tabs-border-px) * 1px);
+}
+
+.ds-tabs--border[data-border-size="xl"] .ds-tabs-tab {
+  border-radius: calc(var(--component-tabs-border-radius-lg) * 1px);
+  padding: calc(var(--component-tabs-border-py-xl) * 1px) calc(var(--component-tabs-border-px) * 1px);
+}
+
+.ds-tabs--border .ds-tabs-tab {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: calc(var(--component-tabs-border-min-width) * 1px);
+  border: 1px solid var(--component-tabs-border-border-default);
+  background: transparent;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: calc(var(--component-tabs-underline-icon-size) * 1px);
+  line-height: calc(var(--component-tabs-underline-h-md) * 1px);
+  color: var(--component-tabs-border-text-default);
+  cursor: default;
+}
+
+.ds-tabs--border .ds-tabs-tab:hover:not(:disabled):not(.is-dis) {
+  color: var(--component-tabs-border-text-selected);
+}
+
+.ds-tabs--border .ds-tabs-tab[aria-selected="true"] {
+  border-color: var(--component-tabs-border-border-selected);
+  color: var(--component-tabs-border-text-selected);
+}
+
+.ds-tabs--border .ds-tabs-tab:focus {
+  outline: none;
+}
+
+.ds-tabs--border .ds-tabs-tab:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs--vertical .ds-tabs-tab {
+  box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-radius: calc(var(--component-tabs-vertical-radius) * 1px);
+  padding: calc(var(--component-tabs-vertical-item-px) * 1px);
+  background: var(--component-tabs-vertical-wrapper-bg-default);
+  color: var(--component-tabs-vertical-text-default);
+  font-family: inherit;
+  font-weight: 500;
+  font-size: calc(var(--component-tabs-vertical-icon-size) * 1px);
+  line-height: calc(var(--component-tabs-underline-h-md) * 1px);
+  cursor: default;
+  position: relative;
+}
+
+.ds-tabs--vertical .ds-tabs-tab:hover:not(:disabled):not(.is-dis) {
+  background: var(--component-tabs-vertical-wrapper-bg-hover);
+}
+
+.ds-tabs--vertical .ds-tabs-tab[aria-selected="true"] {
+  color: var(--component-tabs-vertical-text-selected);
+}
+
+.ds-tabs--vertical .ds-tabs-tab:disabled,
+.ds-tabs--vertical .ds-tabs-tab.is-dis {
+  color: var(--component-tabs-vertical-text-disabled);
+}
+
+.ds-tabs--vertical .ds-tabs-tab:focus {
+  outline: none;
+}
+
+.ds-tabs--vertical .ds-tabs-tab:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs--vertical .ds-tabs-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(var(--component-tabs-vertical-indicator-thickness) * 1px);
+  background: var(--component-tabs-vertical-indicator-selected);
+}
+
+.ds-tabs--scrollable .ds-tabs-list {
+  align-items: center;
+  flex-wrap: nowrap;
+  border: 1px solid var(--component-tabs-scrollable-rail-border);
+  border-bottom: none;
+  border-top-left-radius: calc(var(--component-tabs-scrollable-radius-top) * 1px);
+  border-top-right-radius: calc(var(--component-tabs-scrollable-radius-top) * 1px);
+  padding: calc(var(--component-tabs-scrollable-py) * 1px) calc(var(--component-tabs-scrollable-px) * 1px);
+  gap: calc(var(--component-tabs-scrollable-gap) * 1px);
+  background: var(--semantic-bg-surface);
+}
+
+.ds-tabs--scrollable .ds-tabs-tab {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-tabs-scrollable-gap) * 0.5 * 1px);
+  margin: 0;
+  padding: calc(var(--component-tabs-scrollable-py) * 0.5 * 1px) calc(var(--component-tabs-scrollable-px) * 0.5 * 1px);
+  border: 1px solid var(--component-tabs-scrollable-item-border);
+  border-radius: calc(var(--component-tabs-scrollable-radius-top) * 0.5 * 1px);
+  background: var(--component-tabs-scrollable-item-bg-default);
+  color: var(--component-tabs-scrollable-item-text-default);
+  font-family: inherit;
+  font-weight: 500;
+  font-size: calc(var(--component-tabs-underline-icon-size) * 1px);
+  line-height: calc(var(--component-tabs-underline-h-md) * 1px);
+  cursor: default;
+}
+
+.ds-tabs--scrollable .ds-tabs-tab[aria-selected="true"] {
+  background: var(--component-tabs-scrollable-item-bg-selected);
+  color: var(--component-tabs-scrollable-item-text-selected);
+}
+
+.ds-tabs--scrollable .ds-tabs-tab:focus {
+  outline: none;
+}
+
+.ds-tabs--scrollable .ds-tabs-tab:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs-tab-lbl {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-tabs-close {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: calc(var(--component-tabs-scrollable-close-p) * 1px);
+  border: none;
+  border-radius: calc(var(--component-tabs-scrollable-close-radius) * 1px);
+  background: transparent;
+  color: var(--component-tabs-scrollable-item-close-icon);
+  font-size: calc(var(--component-tabs-scrollable-close-icon-size) * 1px);
+  line-height: 1;
+  cursor: default;
+  font-family: inherit;
+  min-width: calc(var(--component-tabs-direction-button-icon-size) * 2 * 1px);
+  min-height: calc(var(--component-tabs-direction-button-icon-size) * 2 * 1px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ds-tabs-close:focus {
+  outline: none;
+}
+
+.ds-tabs-close:focus-visible {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs--underline .ds-tabs-tab.is-sel {
+  color: var(--component-tabs-underline-text-selected);
+}
+
+.ds-tabs--underline .ds-tabs-tab.is-sel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--component-tabs-underline-indicator-thickness) * 1px);
+  background: var(--component-tabs-underline-indicator-selected);
+}
+
+.ds-tabs--pill .ds-tabs-tab.is-sel {
+  background: var(--component-tabs-pill-bg-selected);
+  color: var(--component-tabs-pill-text-selected);
+}
+
+.ds-tabs--segmented .ds-tabs-tab.is-sel {
+  background: var(--component-tabs-segmented-item-bg-selected);
+  color: var(--component-tabs-segmented-text-selected);
+}
+
+.ds-tabs--border .ds-tabs-tab.is-sel {
+  border-color: var(--component-tabs-border-border-selected);
+  color: var(--component-tabs-border-text-selected);
+}
+
+.ds-tabs--vertical .ds-tabs-tab.is-sel {
+  color: var(--component-tabs-vertical-text-selected);
+}
+
+.ds-tabs--vertical .ds-tabs-tab.is-sel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(var(--component-tabs-vertical-indicator-thickness) * 1px);
+  background: var(--component-tabs-vertical-indicator-selected);
+}
+
+.ds-tabs--scrollable .ds-tabs-tab.is-sel {
+  background: var(--component-tabs-scrollable-item-bg-selected);
+  color: var(--component-tabs-scrollable-item-text-selected);
+}
+
+.ds-tabs-tab.is-foc {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.ds-tabs-panels {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.ds-tabs--matrix .ds-tabs-list {
+  width: auto;
+}
+
 /* ---- PageHeader (--component-page-header-*) ---- */
 .ds-ph {
   box-sizing: border-box;
@@ -7241,6 +7713,279 @@
     window.__dsRefresh();
   }
 
+  function mountTabs() {
+    var tbMx = ["Default", "Hover", "Selected", "Disabled", "Focus"];
+
+    function kind() {
+      return (pgVariant && pgVariant.value) || "underline";
+    }
+
+    function sizeAttr() {
+      return (pgSize && pgSize.value) || "lg";
+    }
+
+    function uSize(sz) {
+      return sz === "md" || sz === "sm" ? "md" : "lg";
+    }
+
+    function bSize(sz) {
+      if (sz === "xl") return "xl";
+      if (sz === "sm") return "sm";
+      if (sz === "md") return "md";
+      return "lg";
+    }
+
+    function panel(id, labelledby, hidden, inner) {
+      var h = hidden ? " hidden" : "";
+      return (
+        '<section id="' +
+        id +
+        '" class="ds-tabs-panel" role="tabpanel"' +
+        h +
+        ' aria-labelledby="' +
+        labelledby +
+        '">' +
+        inner +
+        "</section>"
+      );
+    }
+
+    function tabBtn(id, panelId, selected, label, disabled) {
+      var dis = disabled ? " disabled" : "";
+      var sel = selected ? "true" : "false";
+      var tabi = selected ? "0" : "-1";
+      return (
+        '<button type="button" role="tab" id="' +
+        id +
+        '" class="ds-tabs-tab" aria-selected="' +
+        sel +
+        '" aria-controls="' +
+        panelId +
+        '" tabindex="' +
+        tabi +
+        '"' +
+        dis +
+        ">" +
+        label +
+        "</button>"
+      );
+    }
+
+    function tabSlot(id, panelId, selected, label, disabled) {
+      var sel = selected ? "true" : "false";
+      var tabi = selected ? "0" : "-1";
+      var ad = disabled ? ' aria-disabled="true"' : "";
+      return (
+        '<div role="tab" id="' +
+        id +
+        '" class="ds-tabs-tab" tabindex="' +
+        tabi +
+        '" aria-selected="' +
+        sel +
+        '" aria-controls="' +
+        panelId +
+        '"' +
+        ad +
+        ">" +
+        '<span class="ds-tabs-tab-lbl">' +
+        label +
+        "</span>" +
+        '<button type="button" class="ds-tabs-close" tabindex="-1" aria-label="Close ' +
+        label +
+        '">\u00d7</button></div>'
+      );
+    }
+
+    function panelsHtml(t0, t1, t2) {
+      return (
+        '<div class="ds-tabs-panels">' +
+        panel("tbP0", t0, false, "<p>First tab panel.</p>") +
+        panel("tbP1", t1, true, "<p>Second tab panel.</p>") +
+        panel("tbP2", t2, true, "<p>Third tab panel.</p>") +
+        "</div>"
+      );
+    }
+
+    function liveHtml() {
+      var k = kind();
+      var sz = sizeAttr();
+      var udat = uSize(sz);
+      var bdd = bSize(sz);
+      var orient = k === "vertical" ? ' data-orientation="vertical"' : "";
+      var cls = "ds-tabs ds-tabs--" + k;
+      var extra = "";
+      if (k === "underline") extra = ' data-size="' + udat + '"';
+      else if (k === "border") extra = ' data-border-size="' + bdd + '"';
+      else if (k === "vertical") extra = ' data-size="' + udat + '"';
+
+      var t0 = "tbT0";
+      var t1 = "tbT1";
+      var t2 = "tbT2";
+      var listInner =
+        k === "scrollable"
+          ? tabSlot(t0, "tbP0", true, "Draft", false) +
+            tabSlot(t1, "tbP1", false, "Published", false) +
+            tabSlot(t2, "tbP2", false, "Archive", true)
+          : tabBtn(t0, "tbP0", true, "Overview", false) +
+            tabBtn(t1, "tbP1", false, "Details", false) +
+            tabBtn(t2, "tbP2", false, "Disabled", true);
+
+      return (
+        '<div id="tbRoot" class="' +
+        cls +
+        '"' +
+        orient +
+        extra +
+        ">" +
+        '<div class="ds-tabs-bar">' +
+        '<div role="tablist" class="ds-tabs-list" aria-label="Demo tabs">' +
+        listInner +
+        "</div></div>" +
+        panelsHtml(t0, t1, t2) +
+        "</div>"
+      );
+    }
+
+    function wireTabs() {
+      var root = document.getElementById("tbRoot");
+      if (!root) return;
+      var list = root.querySelector('[role="tablist"]');
+      if (!list) return;
+      var orient = root.getAttribute("data-orientation") === "vertical";
+
+      function tabs() {
+        return [].slice.call(list.querySelectorAll('[role="tab"]'));
+      }
+
+      function enabled(tbs) {
+        return tbs.filter(function (t) {
+          return !t.disabled && t.getAttribute("aria-disabled") !== "true";
+        });
+      }
+
+      function panelFor(tab) {
+        var id = tab.getAttribute("aria-controls");
+        return id ? document.getElementById(id) : null;
+      }
+
+      function activate(selTab) {
+        var all = tabs();
+        if (enabled(all).indexOf(selTab) === -1) return;
+        all.forEach(function (t) {
+          var on = t === selTab;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.setAttribute("tabindex", on ? "0" : "-1");
+          var p = panelFor(t);
+          if (p) {
+            if (on) p.removeAttribute("hidden");
+            else p.setAttribute("hidden", "hidden");
+          }
+        });
+      }
+
+      list.addEventListener("keydown", function (e) {
+        var key = e.key;
+        var cur = document.activeElement;
+        var all = tabs();
+        if (all.indexOf(cur) === -1) return;
+        var en = enabled(all);
+        var ix = en.indexOf(cur);
+        if (ix === -1) return;
+        var next = null;
+        if (!orient && (key === "ArrowRight" || key === "ArrowLeft")) {
+          var delta = key === "ArrowRight" ? 1 : -1;
+          next = en[(ix + delta + en.length) % en.length];
+          e.preventDefault();
+        } else if (orient && (key === "ArrowDown" || key === "ArrowUp")) {
+          var d2 = key === "ArrowDown" ? 1 : -1;
+          next = en[(ix + d2 + en.length) % en.length];
+          e.preventDefault();
+        } else if (key === "Home") {
+          next = en[0];
+          e.preventDefault();
+        } else if (key === "End") {
+          next = en[en.length - 1];
+          e.preventDefault();
+        }
+        if (next && next !== cur) {
+          next.focus();
+          activate(next);
+        }
+      });
+
+      tabs().forEach(function (t) {
+        t.addEventListener("click", function () {
+          activate(t);
+        });
+      });
+
+      root.addEventListener("click", function (e) {
+        var c = e.target.closest(".ds-tabs-close");
+        if (!c || !root.contains(c)) return;
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    }
+
+    function paintMatrix() {
+      var k = kind();
+      var sz = sizeAttr();
+      var udat = uSize(sz);
+      var bdd = bSize(sz);
+      var orient = k === "vertical" ? ' data-orientation="vertical"' : "";
+      var extra = "";
+      if (k === "underline") extra = ' data-size="' + udat + '"';
+      else if (k === "border") extra = ' data-border-size="' + bdd + '"';
+
+      matrixShell(tbMx, function (_lbl, i) {
+        var cls = "ds-tabs-tab";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-sel";
+        if (i === 3) cls += " is-dis";
+        if (i === 4) cls += " is-foc";
+        var dis = i === 3 ? " disabled" : "";
+        var sel = i === 2 ? "true" : "false";
+        var tabi = i === 2 ? "0" : "-1";
+        return (
+          '<div class="ds-tabs ds-tabs--' +
+          k +
+          " ds-tabs--matrix" +
+          '"' +
+          orient +
+          extra +
+          '><div role="tablist" class="ds-tabs-list" aria-label="Tabs matrix">' +
+          '<button type="button" role="tab" class="' +
+          cls +
+          '" aria-selected="' +
+          sel +
+          '" aria-controls="tbMxP' +
+          i +
+          '" tabindex="' +
+          tabi +
+          '"' +
+          dis +
+          ">Sample</button></div></div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = liveHtml();
+      wireTabs();
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
   function mountPageHeader() {
     var phLabels = ["Default", "Breadcrumb", "Actions", "Controls", "No description"];
 
@@ -8488,6 +9233,7 @@
       pageheader: mountPageHeader,
       steps: mountSteps,
       upload: mountUpload,
+      tabs: mountTabs,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

@@ -75,6 +75,9 @@ const cascaderDemo = pathToFileURL(
 const uploadDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/upload.html")
 ).href;
+const tabsDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/tabs.html")
+).href;
 
 test.describe("Design-spec HTML demos (smoke)", () => {
   test("alert: live region mounts with role=alert", async ({ page }) => {
@@ -490,5 +493,26 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await expect(page.getByLabel("Upload demo kind")).toBeFocused();
     await page.getByLabel("Upload demo size").focus();
     await expect(page.getByLabel("Upload demo size")).toBeFocused();
+  });
+
+  test("tabs: live mounts tablist and root", async ({ page }) => {
+    await page.goto(tabsDemo);
+    await page.waitForFunction(
+      () =>
+        !!document.querySelector("#liveRoot #tbRoot.ds-tabs") &&
+        !!document.querySelector('#liveRoot [role="tablist"]'),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #tbRoot.ds-tabs").first()).toBeVisible();
+    await expect(page.locator('#liveRoot [role="tablist"]').first()).toBeVisible();
+  });
+
+  test("tabs: kind and size selects are keyboard-reachable", async ({ page }) => {
+    await page.goto(tabsDemo);
+    await page.getByLabel("Tabs demo kind").focus();
+    await expect(page.getByLabel("Tabs demo kind")).toBeFocused();
+    await page.getByLabel("Tabs demo size").focus();
+    await expect(page.getByLabel("Tabs demo size")).toBeFocused();
   });
 });
