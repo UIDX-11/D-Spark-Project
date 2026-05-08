@@ -197,32 +197,6 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
     Static Figma dimension hints, bound by slug. Emitted only by the generator — no hand-edited HTML.
     """
     chip = "border:1px dashed var(--semantic-text-muted,#999); background:var(--semantic-border-subtle,#e8e8e8);"
-    if slug == "button":
-        return f"""
-    <div class="card" style="border-radius:10px;">
-      <div style="padding:12px 12px 0 12px;">
-        <div class="muted" style="font-size:12px; font-weight:600;">Figma 尺寸示意（自动生成）</div>
-        <div class="muted" style="margin-top:6px; font-size:12px;">
-          标准高度（Large / Medium / Small）：<strong>56px</strong> / <strong>40px</strong> / <strong>32px</strong>
-        </div>
-      </div>
-      <div style="padding:12px; display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap;">
-        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-          <div style="font-size:11px; font-weight:600; color:var(--semantic-text-secondary,#666);">56px</div>
-          <div style="height:56px; width:36px; border-radius:8px; {chip}" title="高度 56px" aria-hidden="true"></div>
-        </div>
-        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-          <div style="font-size:11px; font-weight:600; color:var(--semantic-text-secondary,#666);">40px</div>
-          <div style="height:40px; width:36px; border-radius:8px; {chip}" title="高度 40px" aria-hidden="true"></div>
-        </div>
-        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-          <div style="font-size:11px; font-weight:600; color:var(--semantic-text-secondary,#666);">32px</div>
-          <div style="height:32px; width:36px; border-radius:6px; {chip}" title="高度 32px" aria-hidden="true"></div>
-        </div>
-      </div>
-    </div>
-    """
-
     if slug in ("modal", "dialog"):
         return """
     <div class="card" style="border-radius:10px;">
@@ -342,12 +316,10 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            Aligns with <code>docs/components/alert.md</code> and Arco Alert props:
-            <code>type</code>, <code>show-icon</code>, <code>closable</code>, <code>title</code>,
-            <code>banner</code>, <code>center</code>, plus action slot behavior.
+            对齐 <code>docs/components/alert.md</code> 与 Arco Vue <code>Alert</code>（<code>type</code> / <code>show-icon</code> / <code>closable</code> / <code>title</code> / <code>banner</code> / <code>center</code> / <code>#action</code> 等）；尺寸与色走 <code>alert.layout.*</code> 与 <code>alert.tone.*</code> token。
           </p>
           <label class="pg-field">
-            <span>Type</span>
+            <span>Type（Arco type）</span>
             <select id="pgVariant" aria-label="Alert type">
               <option value="info" selected>info</option>
               <option value="success">success</option>
@@ -357,11 +329,11 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
             </select>
           </label>
           <label class="pg-field">
-            <span>Size</span>
+            <span>Size（Figma LG / MD / AUTO）</span>
             <select id="pgSize" aria-label="Alert size">
-              <option value="lg" selected>LG (36)</option>
-              <option value="md">MD (32)</option>
-              <option value="auto">AUTO (multiline/title)</option>
+              <option value="lg" selected>LG · 默认 padding（见 token）</option>
+              <option value="md">MD · min-height + 对称 padding</option>
+              <option value="auto">AUTO · 多行/标题用上下 padding</option>
             </select>
           </label>
           <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alShowIcon" checked /><span>show-icon</span></label>
@@ -372,11 +344,219 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
           <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alBanner" /><span>banner</span></label>
           <label class="pg-field" style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="alCenter" /><span>center</span></label>
         </aside>"""
+    elif spec.slug == "breadcrumb":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/breadcrumb.md</code> 与 Arco Vue <code>Breadcrumb</code>（<code>routes</code> / <code>separator</code> / 末级 <code>aria-current</code> 等）；样式仅引用 <code>--component-breadcrumb-*</code> 与 <code>--core-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Depth（演示路径深度）</span>
+            <select id="pgSize" aria-label="Breadcrumb demo depth">
+              <option value="2">2-level</option>
+              <option value="3" selected>3-level</option>
+              <option value="4">4-level</option>
+              <option value="truncate">长标签截断</option>
+              <option value="collapse">4+ 省略号</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Separator（Figma kind）</span>
+            <select id="pgVariant" aria-label="Breadcrumb demo separator">
+              <option value="slash" selected>slash</option>
+              <option value="chevron">chevron</option>
+              <option value="chevron-right">chevron-right</option>
+              <option value="chevron-down">chevron-down</option>
+              <option value="chevron-up">chevron-up</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "badge":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/badge.md</code> 与 Arco Vue <code>Badge</code>（<code>count</code> / <code>dot</code> / <code>status</code> 等）；样式仅引用 <code>--component-badge-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Kind（形态）</span>
+            <select id="pgVariant" aria-label="Badge demo kind">
+              <option value="count" selected>count</option>
+              <option value="dot">dot</option>
+              <option value="status">status</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>State / tone（状态或语义色）</span>
+            <select id="pgSize" aria-label="Badge demo state or tone">
+              <option value="default" selected>default</option>
+              <option value="disabled">disabled（count / dot）</option>
+              <option value="single">count · 单数字宽</option>
+              <option value="multi">count · 99+</option>
+              <option value="processing">status · processing</option>
+              <option value="success">status · success</option>
+              <option value="warning">status · warning</option>
+              <option value="error">status · error</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "checkbox":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/checkbox.md</code> 与 Arco Vue <code>Checkbox</code>（<code>model-value</code> / <code>disabled</code> / <code>indeterminate</code>）；样式仅引用 <code>--component-checkbox-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Value（值）</span>
+            <select id="pgVariant" aria-label="Checkbox demo value">
+              <option value="unchecked" selected>unchecked</option>
+              <option value="checked">checked</option>
+              <option value="indeterminate">indeterminate</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>State（状态）</span>
+            <select id="pgSize" aria-label="Checkbox demo state">
+              <option value="default" selected>default</option>
+              <option value="disabled">disabled</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "radio":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/radio.md</code> 与 Arco Vue <code>Radio</code> / <code>RadioGroup</code>（互斥单选、<code>disabled</code> 等）；样式引用 <code>--component-radio-*</code> 与 <code>--component-radio-button-*</code>（胶囊）。
+          </p>
+          <label class="pg-field">
+            <span>Style（形态）</span>
+            <select id="pgVariant" aria-label="Radio demo style">
+              <option value="circle" selected>circle（经典圆点）</option>
+              <option value="capsule">capsule（Radio Button）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Content / state（内容或状态）</span>
+            <select id="pgSize" aria-label="Radio demo content or state">
+              <option value="default" selected>default</option>
+              <option value="with-helper">with-helper（仅 circle：首项辅助文案）</option>
+              <option value="disabled">disabled（整组）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Capsule size（仅 capsule）</span>
+            <select id="pgCapsuleSize" aria-label="Radio demo capsule size">
+              <option value="lg">L（large）</option>
+              <option value="md" selected>M（medium）</option>
+              <option value="sm">S（small）</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "tag":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/tag.md</code> 与 Arco Vue <code>Tag</code>（<code>color</code> / <code>size</code> / <code>closable</code> 等）；样式仅引用 <code>--component-tag-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Kind（类型）</span>
+            <select id="pgVariant" aria-label="Tag demo kind">
+              <option value="status" selected>status</option>
+              <option value="selector">selector</option>
+              <option value="group">group</option>
+              <option value="add">add-button</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Tone / state（语义或状态）</span>
+            <select id="pgSize" aria-label="Tag demo tone or state">
+              <option value="offline">offline</option>
+              <option value="danger">danger</option>
+              <option value="success">success</option>
+              <option value="warning">warning</option>
+              <option value="info">info</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（status / add-button）</span>
+            <select id="pgTagSize" aria-label="Tag demo size">
+              <option value="lg">lg</option>
+              <option value="md" selected>md</option>
+              <option value="sm">sm</option>
+              <option value="xs">xs</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "switch":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/switch.md</code> 与 Arco Vue <code>Switch</code>（<code>model-value</code> / <code>disabled</code> / <code>type</code> 等）；样式仅引用 <code>--component-switch-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Variant（形态）</span>
+            <select id="pgVariant" aria-label="Switch demo variant">
+              <option value="round" selected>round</option>
+              <option value="linear">linear</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（尺寸）</span>
+            <select id="pgSize" aria-label="Switch demo size">
+              <option value="md" selected>md</option>
+              <option value="lg">lg</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>State（状态）</span>
+            <select id="pgSwitchState" aria-label="Switch demo state">
+              <option value="default" selected>default</option>
+              <option value="disabled">disabled</option>
+            </select>
+          </label>
+        </aside>"""
+    elif spec.slug == "slider":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/slider.md</code> 与 Arco Vue <code>Slider</code>（<code>range</code> / <code>marks</code> / <code>disabled</code> 等）；样式仅引用 <code>--component-slider-*</code>（见 <code>studio_runtime.css</code>）。
+          </p>
+          <label class="pg-field">
+            <span>Variant（单 / 范围）</span>
+            <select id="pgVariant" aria-label="Slider demo variant">
+              <option value="single" selected>single</option>
+              <option value="range">range</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Marks（刻度与标注）</span>
+            <select id="pgSize" aria-label="Slider demo marks">
+              <option value="marks-off" selected>off</option>
+              <option value="marks-on">on</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>State（状态）</span>
+            <select id="pgSliderState" aria-label="Slider demo state">
+              <option value="default" selected>default</option>
+              <option value="disabled">disabled</option>
+            </select>
+          </label>
+        </aside>"""
     elif spec.slug == "input":
         aside_block = """
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
-          <label class="ds-in-tab-row">
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/input.md</code> 与 Arco Vue <code>Input</code>（<code>size</code>、<code>password</code>、<code>Search</code>、前后缀等）；尺寸与圆角走 <code>--component-input-layout-*</code>，色与环走 <code>--component-input-*</code>。
+          </p>
+          <label class="pg-field ds-in-tab-row">
             <span>Demo variant</span>
             <select id="inVariantTab" aria-label="Input demo variant">
               <option value="base" selected>Base input</option>
@@ -387,21 +567,17 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
             </select>
           </label>
           <div id="inVariantPropsHost"></div>
-          <div class="ds-sr-only" aria-hidden="true">
-            <label><span>Size</span>
-            <select id="pgSize" aria-label="Preview size">
-              <option value="sm">Small</option>
-              <option value="md" selected>Medium</option>
-              <option value="lg">Large</option>
-            </select></label>
-            <label><span>Variant</span>
-            <select id="pgVariant" aria-label="Preview variant">
-              <option value="primary" selected>Primary</option>
-              <option value="neutral">Neutral</option>
-              <option value="danger">Danger</option>
-              <option value="ghost">Ghost</option>
-            </select></label>
-          </div>
+          <label class="pg-field">
+            <span>Size（稿面 S / L / XL）</span>
+            <select id="pgSize" aria-label="Input demo size">
+              <option value="sm">S · 28px</option>
+              <option value="md" selected>L · 32px</option>
+              <option value="lg">XL · 36px</option>
+            </select>
+          </label>
+          <select id="pgVariant" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="primary" selected>primary</option>
+          </select>
         </aside>"""
     elif spec.slug == "input-number":
         aside_block = """
@@ -441,6 +617,108 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
             <span>readOnly</span>
           </label>
         </aside>"""
+    elif spec.slug == "input-ip":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/input-ip.md</code>；视觉与边框走 <code>--component-input-*</code>（与 Input 共用 token 前缀 <code>input</code>）。
+          </p>
+          <label class="pg-field">
+            <span>Size（S / L / XL）</span>
+            <select id="pgSize" aria-label="Input IP demo size">
+              <option value="sm">S</option>
+              <option value="md" selected>L</option>
+              <option value="lg">XL</option>
+            </select>
+          </label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="pgIpErr" />
+            <span>Shell error（整框示意）</span>
+          </label>
+          <select id="pgVariant" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="primary" selected>primary</option>
+          </select>
+        </aside>"""
+    elif spec.slug == "input-range":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/input-range.md</code> 双字段范围模式；样式仅 <code>--component-input-*</code> 与 <code>--component-form-error-text</code>。
+          </p>
+          <label class="pg-field">
+            <span>Layout</span>
+            <select id="pgVariant" aria-label="Input range demo layout">
+              <option value="plain" selected>Plain（双框 + em dash）</option>
+              <option value="unit">With suffix unit（统一外壳）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（S / L / XL）</span>
+            <select id="pgSize" aria-label="Input range demo size">
+              <option value="sm">S</option>
+              <option value="md" selected>L</option>
+              <option value="lg">XL</option>
+            </select>
+          </label>
+          <label class="pg-field" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="rangeErr" />
+            <span>Error message</span>
+          </label>
+        </aside>"""
+    elif spec.slug == "input-adornment":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/input-adornment.md</code> 与 Arco Vue <code>Input</code> 的 <code>#prepend</code> / <code>#append</code> 组合；样式走 <code>--component-input-*</code>。
+          </p>
+          <label class="pg-field ds-in-tab-row">
+            <span>Demo variant</span>
+            <select id="adVariantTab" aria-label="Input adornment demo variant">
+              <option value="prefix">Prefix addon</option>
+              <option value="suffix" selected>Suffix append</option>
+              <option value="both">Prefix + suffix</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（S / L / XL）</span>
+            <select id="pgSize" aria-label="Input adornment demo size">
+              <option value="sm">S</option>
+              <option value="md" selected>L</option>
+              <option value="lg">XL</option>
+            </select>
+          </label>
+          <select id="pgVariant" class="ds-sr-only" aria-hidden="true" tabindex="-1">
+            <option value="primary" selected>primary</option>
+          </select>
+        </aside>"""
+    elif spec.slug == "button":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/button.md</code> 与 Arco Vue <code>Button</code>（<code>type</code>/<code>size</code>/<code>disabled</code> 等）；视觉尺寸走 <code>button.layout.*</code> token。
+          </p>
+          <label class="pg-field">
+            <span>Size（Arco size）</span>
+            <select id="pgSize" aria-label="Button demo size">
+              <option value="sm">small（sm）</option>
+              <option value="md" selected>medium（md）</option>
+              <option value="lg">large（lg）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Variant（映射 Arco type）</span>
+            <select id="pgVariant" aria-label="Button demo variant">
+              <option value="primary" selected>primary</option>
+              <option value="neutral">secondary（demo: neutral）</option>
+              <option value="danger">danger</option>
+              <option value="ghost">outline（demo: ghost）</option>
+            </select>
+          </label>
+        </aside>"""
     else:
         aside_block = """
         <aside class="studio-aside card">
@@ -465,26 +743,134 @@ def _component_demo_body(spec: ComponentSpec, index_href: str, *, tokens_css_tex
         </aside>"""
     if spec.slug == "alert":
         live_intro_sub = (
-            "Behavior matches Arco Alert API and Figma variants: "
-            "<code>type=info|success|warning|error|normal</code>, "
-            "<code>show-icon</code>, <code>closable</code>, <code>title</code>, "
-            "<code>banner</code>, <code>center</code>, and action slot."
+            "Live 对齐 Arco Vue <code>alert.vue</code> DOM 与 <code>role=\"alert\"</code>；样式仅引用 "
+            "<code>--component-alert-*</code> 与 <code>--semantic-*</code>（见 <code>docs/components/alert.md</code>）。"
         )
         matrix_rows_help = (
-            "Rows represent variant set from docs/Figma: Default · Multiline · With title · "
-            "Closable + action · Banner + center."
+            "五行：Default · Multiline · With title · Closable + action · Banner + center；"
+            "部分行使用 <code>auto</code> 尺寸以展示多行/标题 padding。"
+        )
+    elif spec.slug == "breadcrumb":
+        live_intro_sub = (
+            "Live 为 <code>nav[aria-label=\"Breadcrumb\"] &gt; ol &gt; li</code> 结构，分隔符 <code>aria-hidden</code>；"
+            "样式见 <code>docs/components/breadcrumb.md</code> 与 <code>--component-breadcrumb-*</code>。"
+        )
+        matrix_rows_help = (
+            "五行：Depth 2 · Depth 3 · 长标签截断 · 4+ 省略号 · Depth 4（静态示意，分隔符各行不同）。"
+        )
+    elif spec.slug == "badge":
+        live_intro_sub = (
+            "Live 为 <code>span.ds-badge</code> 与 Arco 常见结构一致（count / dot / status）；"
+            "读屏文案见 <code>aria-label</code> / <code>role=\"status\"</code>（见 <code>docs/components/badge.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：Count default · Count disabled · Dot · Status processing · Count 99+（静态示意）。"
+        )
+    elif spec.slug == "checkbox":
+        live_intro_sub = (
+            "Live 为 <code>label.ds-cb</code> + 隐藏 <code>input[type=checkbox]</code> + 自定义 <code>.ds-cb-box</code>；"
+            "焦点环 <code>--component-checkbox-focus-ring</code>；见 <code>docs/components/checkbox.md</code>。"
+        )
+        matrix_rows_help = (
+            "五行：Unchecked · Hover（示意）· Checked · Indeterminate（脚本设 <code>indeterminate</code>）· Checked disabled。"
+        )
+    elif spec.slug == "radio":
+        live_intro_sub = (
+            "Live 为 <code>role=\"radiogroup\"</code> + <code>aria-label</code>；"
+            "circle：<code>label.ds-rb</code> + 隐藏 <code>input[type=radio]</code> + <code>.ds-rb-outer</code> / <code>.ds-rb-dot</code>；"
+            "capsule：<code>.ds-rg-capsule[data-capsule-size]</code> + <code>label.ds-rbc</code> + <code>.ds-rbc-pill</code>（L/M/S 走 <code>--component-radio-button-*</code>）；"
+            "焦点环 <code>--component-radio-focus-ring</code>（见 <code>docs/components/radio.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：Unchecked · Hover（示意）· Selected · Focus（示意环）· Selected disabled；"
+            "随侧栏 Style 在 circle / capsule 矩阵间切换；capsule 时 **Capsule size** 同步矩阵与 Live。"
+        )
+    elif spec.slug == "tag":
+        live_intro_sub = (
+            "Live 为 <code>span.ds-tag.ds-tag--status</code>（<code>data-tone</code> / <code>data-size</code>）、"
+            "<code>button.ds-tag--selector</code>、<code>span.ds-tag--group</code> + <code>button.ds-tag__close</code>、"
+            "<code>button.ds-tag--add</code>；焦点环 <code>--component-tag-focus-ring</code>；见 <code>docs/components/tag.md</code>。"
+        )
+        matrix_rows_help = (
+            "五行静态示意：Status·xs · Status·md · Selector·selected · Group·close · Add·sm。"
+        )
+    elif spec.slug == "switch":
+        live_intro_sub = (
+            "Live 为 <code>button.ds-switch</code>，<code>role=\"switch\"</code> + <code>aria-checked</code> + <code>aria-disabled</code>；"
+            "<code>Space</code>/<code>Enter</code> 切换；<code>data-variant</code>（round / linear）与 <code>data-size</code>（md / lg）；"
+            "焦点环 <code>--component-switch-focus-ring</code>（见 <code>docs/components/switch.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：Off · Hover（轨道 filter 示意）· On · On + Focus（示意环）· Disabled off；"
+            "与侧栏 Variant / Size 同步。"
+        )
+    elif spec.slug == "slider":
+        live_intro_sub = (
+            "Live 为 <code>.ds-sl</code>：轨道 <code>.ds-sl-track</code>、激活段 <code>.ds-sl-fill</code>、"
+            "<code>button.ds-sl-thumb</code> 且 <code>role=\"slider\"</code> + <code>aria-valuemin/max/now</code> + <code>aria-orientation=\"horizontal\"</code>；"
+            "键盘 Arrow / PageUp·PageDown / Home·End；轨道点击与拖拽更新值；"
+            "样式仅 <code>--component-slider-*</code>（见 <code>docs/components/slider.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：Default · Hover（thumb 示意）· Active（thumb 示意）· Focus（thumb 示意）· Disabled；"
+            "静态单滑块示意，与侧栏 Marks 无关。"
+        )
+    elif spec.slug == "input":
+        live_intro_sub = (
+            "Live 为 <code>#inLive.ds-input</code>，外层 <code>.ds-in-row[data-size=s|l|xl]</code>；"
+            "变体含 password（<code>#inPwBtn</code> 切换显隐）、search、suffix、group（<code>role=\"group\"</code>）；"
+            "焦点环 <code>--component-input-ring-focus</code>；见 <code>docs/components/input.md</code>。"
+        )
+        matrix_rows_help = (
+            "五行：Default · Hover · Active（示意）· Focus（示意环）· Disabled；"
+            "尺寸与侧栏 Size 同步（<code>data-size</code>）。"
         )
     elif spec.slug == "input-number":
         live_intro_sub = (
-            "Visuals follow <code>tokens.css</code>. Live preview follows "
-            "<code>docs/components/input-number.md</code> Executable rules (Arco React): "
-            '<code>type="text"</code> + <code>inputmode="decimal"</code>, ArrowUp/Down step, '
-            "blur clamp to [0, 100], long-press 1000ms then 200ms, fullwidth period to ASCII, "
-            "and an <code>onChange</code> reason log."
+            "Live 为 <code>.ds-num</code>（<code>embed</code> / <code>button</code> / <code>plain</code>）+ "
+            "<code>input.ds-num-inp</code>，<code>role=\"spinbutton\"</code> + <code>aria-valuemin/max/now</code>；"
+            "加减按钮 <code>aria-label</code>；<code>ArrowUp</code>/<code>ArrowDown</code> 步进、失焦夹取 <code>[0,100]</code>、长按步进；"
+            "样式 <code>--component-input-number-*</code>（见 <code>docs/components/input-number.md</code>）。"
         )
         matrix_rows_help = (
-            "Five rows (label left · preview right): Default · Hover · Focus · Error · Disabled "
-            "(static previews at L·32px)."
+            "五行：Default · Hover · Active（本行静态为 <code>mat-num-err</code> 示意）· Focus · Disabled；"
+            "尺寸随侧栏 Size 的 <code>data-size</code>（s / l / xl）。"
+        )
+    elif spec.slug == "input-ip":
+        live_intro_sub = (
+            "Live 为 <code>div.ds-input-ip</code>，<code>role=\"group\"</code> + <code>aria-label=\"IP address\"</code>；"
+            "四段 <code>input.ds-input-ip-seg</code>（<code>maxlength=\"3\"</code>、<code>inputmode=\"numeric\"</code>）与 <code>aria-hidden</code> 的 <code>.</code> 分隔符；"
+            "键盘 <code>ArrowLeft</code>/<code>ArrowRight</code> 切换段、空段 <code>Backspace</code> 回退；"
+            "样式仅 <code>--component-input-*</code>（见 <code>docs/components/input-ip.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态示意：Default · Hover · 第三行壳 <code>is-error</code> 且末段 <code>is-ip-err</code>（999）· Focus · Disabled（<code>data-disabled</code>）。"
+        )
+    elif spec.slug == "input-range":
+        live_intro_sub = (
+            "Live：<strong>Plain</strong> 为双 <code>.ds-in-row</code> + <code>input.ds-input</code> 与 em dash；"
+            "<strong>With unit</strong> 为 <code>.ds-ir-unit</code> 统一底 + 双值 + 竖线 + <code>%</code> 后缀；"
+            "错误文案色 <code>--component-form-error-text</code>；见 <code>docs/components/input-range.md</code>。"
+        )
+        matrix_rows_help = (
+            "五行静态示意：统一外壳 + 双值 + <code>%</code>；第四行为 <code>is-error</code> 外壳。"
+        )
+    elif spec.slug == "input-adornment":
+        live_intro_sub = (
+            "Live 复用 <code>.ds-in-row</code> / <code>.ds-in-addon</code> / <code>.ds-in-affix</code> / <code>.ds-in-sfx</code>；"
+            "双缀行使用 <code>.ds-in-joined</code> + <code>.ds-in-addon-tail</code>；"
+            "样式 <code>--component-input-*</code>（见 <code>docs/components/input-adornment.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：与 Input 相同的 <code>mat-inp-*</code> 静态矩阵（单行 <code>.ds-input</code>）。"
+        )
+    elif spec.slug == "button":
+        live_intro_sub = (
+            "Live 对齐 Arco Vue <code>button.vue</code>：无 <code>href</code>、无 <code>loading</code>/<code>#icon</code> 时不渲染图标容器；"
+            "样式仅引用 <code>--component-button-*</code> 与 <code>--semantic-*</code>（见 <code>docs/components/button.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行：Default · Hover · Active · Focus · Disabled；尺寸随侧栏 Size token（matrix 使用 <code>layout.matrix*</code>）。"
         )
     else:
         live_intro_sub = (
@@ -787,32 +1173,32 @@ def _component_preview_block(slug: str) -> str:
             shared
             + """
         <style>
-          .b-row { display:flex; gap: 12px; flex-wrap: wrap; align-items:center; }
+          .b-row { display:flex; gap: calc(var(--semantic-layout-button-group-gap) * 1px); flex-wrap: wrap; align-items:center; }
           .btn {
-            height: 36px;
-            padding: 0 14px;
-            border-radius: calc(var(--component-button-primary-radius, 6) * 1px);
+            height: calc(var(--component-button-layout-static-height-md) * 1px);
+            padding: 0 calc(var(--component-button-layout-static-padding-xmedium) * 1px);
+            border-radius: calc(var(--component-button-primary-radius) * 1px);
             border: 1px solid transparent;
-            font-size: 14px;
-            line-height: 20px;
+            font-size: calc(var(--component-button-layout-static-font-md) * 1px);
+            line-height: calc(var(--component-button-layout-static-line-md) * 1px);
             font-weight: 500;
             display:inline-flex;
             align-items:center;
             justify-content:center;
-            gap: 8px;
+            gap: calc(var(--component-button-layout-static-inner-gap) * 1px);
           }
-          .btn.primary { background: var(--component-button-primary-bg-default,#222); color: var(--component-button-primary-text-default,#fff); }
-          .btn.primary.hover { background: var(--component-button-primary-bg-hover,#4e4e4e); }
-          .btn.primary.active { background: var(--component-button-primary-bg-active,#1b1b1b); }
-          .btn.primary.disabled { background: var(--component-button-primary-bg-disabled,#a7a7a7); color: var(--component-button-primary-text-disabled,#ccc); }
+          .btn.primary { background: var(--component-button-primary-bg-default); color: var(--component-button-primary-text-default); }
+          .btn.primary.hover { background: var(--component-button-primary-bg-hover); }
+          .btn.primary.active { background: var(--component-button-primary-bg-active); }
+          .btn.primary.disabled { background: var(--component-button-primary-bg-disabled); color: var(--component-button-primary-text-disabled); }
 
-          .btn.neutral { background: var(--component-button-neutral-bg-default,#fff); color: var(--component-button-neutral-text-default,#222); border-color: var(--component-button-neutral-border-default,#ccc); }
-          .btn.neutral.hover { background: var(--component-button-neutral-bg-hover,#f7f7f7); }
-          .btn.neutral.active { background: var(--component-button-neutral-bg-active,#f7f7f7); }
-          .btn.neutral.disabled { background: var(--component-button-neutral-bg-disabled,#f7f7f7); color: var(--component-button-neutral-text-disabled,#a7a7a7); border-color: var(--component-button-neutral-border-disabled,#ccc); }
+          .btn.neutral { background: var(--component-button-neutral-bg-default); color: var(--component-button-neutral-text-default); border-color: var(--component-button-neutral-border-default); }
+          .btn.neutral.hover { background: var(--component-button-neutral-bg-hover); }
+          .btn.neutral.active { background: var(--component-button-neutral-bg-active); }
+          .btn.neutral.disabled { background: var(--component-button-neutral-bg-disabled); color: var(--component-button-neutral-text-disabled); border-color: var(--component-button-neutral-border-disabled); }
 
-          .btn.danger { background: var(--component-button-danger-bg-default,#f14846); color: var(--component-button-danger-text-default,#fff); }
-          .btn.link { background: transparent; color: var(--component-button-link-text-default,#506daf); padding: 0 6px; height: auto; }
+          .btn.danger { background: var(--component-button-danger-bg-default); color: var(--component-button-danger-text-default); }
+          .btn.link { background: transparent; color: var(--component-button-link-text-default); padding: 0 calc(var(--semantic-layout-button-group-gap) * 1px); height: auto; }
         </style>
         <div class="b-row" aria-label="button preview">
           <div class="b-col" style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;"><button class="btn primary" data-ds-annotate-target="1">Primary</button></div>
@@ -959,73 +1345,6 @@ def _component_preview_block(slug: str) -> str:
             <div class="sel-item" data-ds-annotate-target="1">Default</div>
             <div class="sel-item hover" data-ds-annotate-target="1">Hover</div>
             <div class="sel-item selected" data-ds-annotate-target="1">Selected</div>
-          </div>
-        </div>
-        """
-            + end
-        )
-
-    if slug == "slider":
-        return (
-            shared
-            + """
-        <style>
-          .sl-wrap { width: 360px; }
-          .sl-track {
-            height: calc(var(--component-slider-track-h, 4) * 1px);
-            border-radius: calc(var(--component-slider-track-radius, 10) * 1px);
-            background: var(--component-slider-track-bg,#e8e8e8);
-            position: relative;
-          }
-          .sl-active {
-            position:absolute; left:0; top:0; bottom:0;
-            width: 55%;
-            border-radius: inherit;
-            background: var(--component-slider-track-bg-active,#222);
-          }
-          .sl-thumb {
-            position:absolute;
-            top: 50%;
-            left: 55%;
-            transform: translate(-50%,-50%);
-            width: calc(var(--component-slider-thumb-size, 16) * 1px);
-            height: calc(var(--component-slider-thumb-size, 16) * 1px);
-            border-radius: 999px;
-            background: var(--component-slider-thumb-bg-default,#fff);
-            border: 2px solid var(--component-slider-thumb-border-default,#222);
-            box-shadow: 0 0 0 0 transparent;
-          }
-          .sl-thumb.hover { border-color: var(--component-slider-thumb-border-hover,#222); background: var(--component-slider-thumb-bg-hover,#fff); }
-          .sl-thumb.active { border-color: var(--component-slider-thumb-border-active,#222); background: var(--component-slider-thumb-bg-active,#fff); box-shadow: 0 0 0 2px var(--component-slider-thumb-ring-active,#6985bf); }
-          .sl-thumb.disabled { border-color: var(--component-slider-thumb-border-disabled,#ccc); background: var(--component-slider-thumb-bg-disabled,#fff); }
-          .sl-marks { display:flex; justify-content: space-between; margin-top: 10px; color: var(--component-slider-mark-text,#999); font-size: 12px; }
-          .sl-ticks { display:flex; justify-content: space-between; margin-top: 6px; }
-          .sl-tick { width: 6px; height: 6px; border-radius: 99px; background: var(--component-slider-tick-inactive,#e8e8e8); }
-          .sl-tick.active { background: var(--component-slider-tick-active,#222); }
-        </style>
-        <div class="sl-wrap" aria-label="slider preview">
-          <div class="sl-track" data-ds-annotate-target="1">
-            <div class="sl-active"></div>
-            <div class="sl-thumb" title="default"></div>
-          </div>
-          <div class="sl-ticks" aria-hidden="true">
-            <span class="sl-tick active"></span><span class="sl-tick active"></span><span class="sl-tick active"></span><span class="sl-tick"></span><span class="sl-tick"></span>
-          </div>
-          <div class="sl-marks"><span>0</span><span>50</span><span>100</span></div>
-          <div style="height:12px;"></div>
-          <div class="sl-track" data-ds-annotate-target="1">
-            <div class="sl-active"></div>
-            <div class="sl-thumb hover" title="hover"></div>
-          </div>
-          <div style="height:12px;"></div>
-          <div class="sl-track" data-ds-annotate-target="1">
-            <div class="sl-active"></div>
-            <div class="sl-thumb active" title="active"></div>
-          </div>
-          <div style="height:12px;"></div>
-          <div class="sl-track" data-ds-annotate-target="1">
-            <div class="sl-active" style="background: var(--component-slider-track-bg,#e8e8e8);"></div>
-            <div class="sl-thumb disabled" title="disabled"></div>
           </div>
         </div>
         """

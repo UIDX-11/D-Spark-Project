@@ -10,6 +10,34 @@ Molecular
 - numeric input
 - stepper
 
+## References
+
+- Arco **React** `InputNumber`（交互细则真源，与 Vue 差异见各版本文档）: [https://arco.design/react/components/input-number](https://arco.design/react/components/input-number)
+- Arco Vue 数值场景常组合 **Input** + 校验；Vue 侧参考: [https://arco.design/vue/component/input](https://arco.design/vue/component/input)
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- 行高、边框、加减控件与焦点环以 **`--component-input-number-*`** 为准，并与 Input 四档高度表（文档 **Sizes**）对齐 demo 的 **`data-size`**（s / l / xl）。
+
+## Arco API 对齐（摘要）
+
+| 能力 | 本 demo |
+| --- | --- |
+| `mode`：`embed` / `button` / `plain` | 侧栏 **Mode** |
+| `hideControl` | **hideControl** 勾选隐藏步进按钮 |
+| `error` | **error** 勾选为外壳/中区加 `is-error` |
+| `readOnly` | **readOnly** 勾选 |
+| `role="spinbutton"` + `aria-valuemin/max/now` | Live 输入框 |
+
+## Arco DOM（与 demo 对齐）
+
+- Live 使用 **`div.ds-num--embed|button|plain`** 包裹 **`input.ds-input.in-num.ds-num-inp`** 与 **`button.ds-num-btn`**；不要求与 `arco-input-number` 类名一致。
+
+## 推断
+
+- **长按步进**：demo 为 **1000ms** 后每 **200ms** 重复（与常见 Arco React 描述同量级；精确间隔以产品测试为准）。
+
 ## Best practices
 
 - **Use for**: numeric values with validation, precision, min/max, and step.

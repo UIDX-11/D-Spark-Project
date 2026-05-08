@@ -10,6 +10,12 @@ Molecular
 - segmented IP field
 - IP 输入框
 
+## References
+
+- Arco Vue：IPv4 常以 **多个 Input** 或业务组件组合实现，无独立 `InputIP` 根导出；行为对齐 **[Input](https://arco.design/vue/component/input)** 与表单校验模式。
+- Arco 源码: `arco-design-vue/packages/web-vue/components/input/`
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
 ## Figma
 
 [D.S-Web-Com · input IP（288620:2128）](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=288620-2128)

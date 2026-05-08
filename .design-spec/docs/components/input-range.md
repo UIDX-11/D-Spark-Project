@@ -10,6 +10,32 @@ Molecular
 - min–max input
 - dual-field range
 
+## References
+
+- Arco Vue（组合真源）: [https://arco.design/vue/component/input](https://arco.design/vue/component/input)（双字段由两个 `Input` 或 `InputNumber` 与布局组成）
+- Arco 源码: `arco-design-vue/packages/web-vue/components/input/`
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- **Plain**：两框间距与 em dash 样式以稿面为准；本 demo 间距使用 **`--semantic-layout-button-group-gap`**。
+- **With suffix unit**：统一外壳、中段 8px 横线、竖线 + 右侧 **`%`** 与 Figma [RangeInput 带单位](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=297108-6113) 对齐意图；token 仍用 **`--component-input-*`**。
+
+## Arco API 对齐（摘要）
+
+| 模式 | 说明 | 本 demo |
+| --- | --- | --- |
+| 双 `Input` | `min` / `max` 文案与校验 | **Plain**：两 `input.ds-input` + `aria-label` |
+| 统一视觉行 + 单位 | 单容器内双值 | **With suffix unit**：`.ds-ir-unit` + `%` 后缀 |
+
+## Arco DOM（与 demo 对齐）
+
+- 无强制单一 DOM；demo 使用 **`div.ds-ir-plain`** 或 **`div.ds-ir-unit`**，输入为 **`input.ds-input`**（或 **`ds-ir-unit-inp`** 去框化置于统一底上）。
+
+## 推断
+
+- **错误文案**：使用 **`--component-form-error-text`** 与 Input 错误环 **`--component-input-ring-error`**，与 Form 错误语义一致。
+
 ## Best practices
 
 - **Use for**: numeric or text **minimum and maximum** on one row (filters, settings), not date pickers (use **DatePicker** / **RangePicker** for dates).
