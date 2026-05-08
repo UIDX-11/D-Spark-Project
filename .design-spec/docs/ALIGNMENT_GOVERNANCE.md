@@ -61,7 +61,7 @@
 
 - **每个组件单独 commit / PR**（你已约定）。
 - **截图 diff（PR gate）**：见 `.design-spec/e2e/README.md`（固定视口、Light、`deviceScaleFactor: 1`）。基线 PNG 须在与 **GitHub Actions 相同 OS（`ubuntu-latest`）** 下生成，避免本机字体/渲染差：`npm run test:update`，并提交 `tests/**/*-snapshots/**`。
-- **启用视觉 gate 的开关**：仓库内 **尚未提交** Playwright 截图基线时，CI 仅跑 **烟雾测试**（`npm test` = `tests/smoke.spec.ts`）。基线合并后，将 `.github/workflows/design-spec-e2e.yml` 中测试命令改为同时执行 `npm run test:visual`（或合并为 `playwright test` 全量）。
+- **启用视觉 gate 的开关**：仓库内 **尚未提交** Playwright 截图基线时，CI 仅跑 **烟雾测试**（`npm test` = `tests/smoke.spec.ts`）。基线合并后，将 workflow 中测试命令改为 `npm run test:all`（或追加 `npm run test:visual`）。GitHub Actions 示例见 **`e2e/github-workflow-design-spec-e2e.yml.example`**（复制到 `.github/workflows/`，推送需 **workflow** 权限的 token）。
 - **最小自动化测试**：同目录 Playwright 中包含 **烟雾 + 最小键盘/可见性**；随组件对齐逐步加厚。
 
 ---

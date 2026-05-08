@@ -7,7 +7,12 @@
 
 ### 启用截图 gate 前
 
-仓库需先包含在 **`ubuntu-latest`**（与 CI 一致）上生成的 **`tests/**/*-snapshots/**` PNG**。在此之前 CI 只执行烟雾，避免无基线即失败。基线就绪后，把根目录 `.github/workflows/design-spec-e2e.yml` 里的测试改为 `npm run test:all`（或追加 `npm run test:visual`）。详见 `docs/ALIGNMENT_GOVERNANCE.md` §4。
+仓库需先包含在 **`ubuntu-latest`**（与 CI 一致）上生成的 **`tests/**/*-snapshots/**` PNG**。在此之前 CI 只执行烟雾，避免无基线即失败。基线就绪后，把 workflow 里的测试改为 `npm run test:all`（或追加 `npm run test:visual`）。详见 `docs/ALIGNMENT_GOVERNANCE.md` §4。
+
+### GitHub Actions
+
+- 示例 workflow：**`github-workflow-design-spec-e2e.yml.example`** → 复制为仓库根目录 **`.github/workflows/design-spec-e2e.yml`**。
+- 若推送时提示 **PAT 缺少 `workflow` scope**：在浏览器里新建该文件，或换用带 **workflow** 权限的 token 再推送。
 
 ## 运行
 
