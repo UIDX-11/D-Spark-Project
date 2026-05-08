@@ -23,6 +23,9 @@ triggers:
   - master detail
   - tree detail
   - 树详情
+  - figma 装配
+  - figma mcp
+  - design-spec-figma-agent
 routes:
   skeleton:
     choose_one:
@@ -54,6 +57,20 @@ routes:
       # - priority: P0 (highest) > P1 > P2 > P3 (lowest)
       exclusive_groups: [web-stack, platform]
 
+      - id: workflow-figma-agent
+        group: workflow
+        priority: P0
+        when_includes_any:
+          - figma 装配
+          - figma mcp
+          - design-spec-figma-agent
+          - 仅 figma
+          - figma only
+          - 设计师 figma
+        read:
+          - .design-spec/skills/design-spec-figma-agent/SKILL.md
+          - .design-spec/skills/design-spec-figma-agent/commands.md
+          - .design-spec/docs/figma-agent/MASTER.md
       - id: overlay-saas-b2b
         group: overlay
         priority: P2
@@ -151,10 +168,11 @@ This file defines a **3-layer routing strategy** so an agent can read only what 
 - **Skeleton layer (choose exactly one)**: page-type specific rules
 - **Common layer (always)**: must-read rules & tokens
 - **Overlay layer (optional)**: only for specific contexts (mobile, case studies, product lines…)
+- **Figma agent workflow (conditional)**: when the user asks for **Figma-only** assembly (triggers like `figma 装配`, `figma mcp`, `design-spec-figma-agent`), load `workflow-figma-agent` and **do not** treat `docs/components/*.md` as the primary RAG source for visuals.
 
 ## How to use
 
 1. Detect triggers from the user request.
-2. Pick 1 skeleton route if the request implies a page type.
-3. Always read the common set.
+2. Pick 1 skeleton route if the request implies a page type (skip if the task is Figma-only assembly).
+3. Always read the common set (unless the request is strictly Figma-only and you are following `workflow-figma-agent` minimal context only).
 4. Add overlays only when explicitly relevant.

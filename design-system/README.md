@@ -21,6 +21,7 @@ All authoritative, AI-retrievable specifications live in:
 - **Intent index**: `.design-spec/docs/components/intent-index.md`
 - **Generator contract**: `.design-spec/generator/schema-ui-contract.md`
 - **Tokens (CSS dist)**: `.design-spec/tokens/dist/tokens.css`
+- **Designer Figma agent (starter MD + skill)**: `.design-spec/docs/figma-agent/` · `skills/design-spec-figma-agent/` · `templates/figma-agent/`
 
 ## Routing (3-layer router)
 

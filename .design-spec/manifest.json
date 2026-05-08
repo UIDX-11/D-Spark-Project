@@ -38,6 +38,13 @@
     "adapters": {
       "web": "./adapters/web",
       "flutter": "./adapters/flutter"
+    },
+    "figma_agent": {
+      "skill": "./skills/design-spec-figma-agent/SKILL.md",
+      "commands": "./skills/design-spec-figma-agent/commands.md",
+      "validation": "./skills/design-spec-figma-agent/reference-checks.md",
+      "templates": "./templates/figma-agent",
+      "starter_docs": "./docs/figma-agent"
     }
   }
 }

@@ -14,6 +14,12 @@
 - [ ] Disabled state is defined (no hover/press affordance)
 - [ ] Accessibility essentials cover role/name/keyboard
 
+## Figma agent (`design-spec-figma-agent`)
+
+- [ ] Sequence C in `.design-spec/skills/design-spec-figma-agent/reference-checks.md` was run after Figma → MD sync or RAG → Figma build
+- [ ] Production surfaces use only approved Figma variable collections (see `docs/figma-agent/MASTER.md`)
+- [ ] Instances come from the published team library named in master; variant property names match the library
+
 ## Repo hygiene
 
 - [ ] No unrelated files were modified
