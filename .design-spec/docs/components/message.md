@@ -10,6 +10,36 @@ Molecular
 - toast message
 - inline toast
 
+## References
+
+- Arco Vue（API / 行为真源）: https://arco.design/vue/component/message
+- Arco 源码: `arco-design-vue/packages/web-vue/components/message/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Message** 画板，将本行替换为带 `node-id=` 的深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- 当前稿面为 **单一 MD 尺寸**：`px` / `py` / `radius` / 图标与正文见 **Sizes**；与 `tokens/src/component.json` 中 `message.*` 一致。
+
+## Arco API 对齐（摘要）
+
+| Arco `prop` | 说明 | 本 demo |
+| --- | --- | --- |
+| `type` / `content` | tone 与文案 | 侧栏 **Type** → `data-tone` + 固定英文短句 |
+| `closable` | 是否显示关闭 | **closable** 复选框控制是否渲染关闭按钮 |
+| `duration` / 全局队列 | 自动消失与堆叠 | Live 仅单条示意；堆叠见矩阵下方 **静态 stack** 与文档规则 |
+
+## Arco DOM（与 demo 对齐）
+
+- **单条**：**`div.ds-msg`** + **`span.ds-msg-ic`**（`aria-hidden="true"`）+ **`span.ds-msg-txt`**；关闭为 **`button.ds-msg-close`**。
+- **读屏**：非 error 为 **`role="status"`**，**`error`** 为 **`role="alert"`**（与文档 a11y 表一致）。
+- 类名前缀 **`ds-msg-*`**，不要求与 Arco 运行时 DOM 字符串一致。
+
+## 推断（Figma 未单独画出的状态）
+
+- **关闭按钮焦点**：**`:focus-visible`** + **`--semantic-focus-ring`**。
+- **图标槽**：演示用字符占位；生产环境应对齐 Arco 图标组件与 **tone icon** token。
+
 ## Best practices
 
 - **Use for**: lightweight global feedback after an action (non-blocking).
@@ -59,7 +89,7 @@ Molecular
 
 ## Sizes
 
-> Figma shows a single size with `px=16`, `py=8`, `radius=8`, icon=16, text=14/20. If more sizes appear later, extend this table.
+> 数值与 CSS 变量：`message.px` / `py` / `radius` / `gap` / `iconSize` / `fontSize` / `lineHeight` → `--component-message-*`。若 Figma 增加多档尺寸，先扩展 **token** 再更新本表与 demo。
 
 | **Size** | **Padding X** | **Padding Y** | **Radius** | **Icon** | **Text** |
 | --- | ---:| ---:| ---:| ---:| --- |
@@ -113,3 +143,6 @@ Molecular
 | `tokens.message.px` | `--component-message-px` |
 | `tokens.message.py` | `--component-message-py` |
 | `tokens.message.gap` | `--component-message-gap` |
+| `tokens.message.iconSize` | `--component-message-icon-size` |
+| `tokens.message.fontSize` | `--component-message-font-size` |
+| `tokens.message.lineHeight` | `--component-message-line-height` |

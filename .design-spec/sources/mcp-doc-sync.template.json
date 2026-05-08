@@ -1,0 +1,36 @@
+{
+  "name": "d-spark-doc-sync-template",
+  "behaviorSource": "arco-vue",
+  "purpose": "Use MCP tools to improve component markdown accuracy and update speed.",
+  "requiredCapabilities": [
+    "get_component_api",
+    "get_component_changelog",
+    "get_component_source_path",
+    "compare_doc_with_source"
+  ],
+  "dataContract": {
+    "component": "kebab-case component name, e.g. input-number",
+    "source": "arco-vue",
+    "version": "npm semver or git tag",
+    "result": {
+      "props": "array",
+      "events": "array",
+      "slots": "array",
+      "defaults": "object",
+      "breakingChanges": "array",
+      "mismatches": "array"
+    }
+  },
+  "suggestedPipeline": [
+    "Resolve component target",
+    "Fetch Arco Vue API metadata",
+    "Compare with markdown section: Arco API 对齐（摘要）",
+    "Emit mismatch report",
+    "Apply markdown patch",
+    "Run local guards"
+  ],
+  "localGuards": [
+    "python3 .design-spec/checks/ensure_vue_truth_source.py",
+    "python3 .design-spec/checks/doc_accuracy_guard.py"
+  ]
+}

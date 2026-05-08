@@ -9,6 +9,32 @@ Molecular
 - single-select toggle
 - option group
 
+## References
+
+- Arco Vue（API / 行为真源）: https://arco.design/vue/component/radio
+- Arco 源码: `arco-design-vue/packages/web-vue/components/radio/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Radio** 画板，将本行替换为带 `node-id=` 的深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- 外圈与内点尺寸、与标签间距、字阶/行高、描边与填充以 **Figma Light** 为准；与 Arco 冲突时以 Figma 为准。
+- **Sizes** 与 `tokens/src/component.json` 中 `radio.outerSize`、`radio.dotSize`、`radio.gap`、`radio.layout.*`、`radio.focusRing`，以及胶囊 `radioButton.*` 对齐。
+
+## Arco API 对齐（摘要）
+
+| Arco `prop` | 说明 | 本 demo |
+| ------------- | ---- | ------- |
+| `model-value` / `v-model`（`RadioGroup`） | 受控选中值 | Live 固定两项，首项默认选中；整组 `disabled` 由侧栏 **Content / state** 切换 |
+| `disabled` | 不可交互 | 侧栏 **disabled** 时组内 `input` 均 `disabled` |
+| `type="button"`（`Radio`） | 胶囊形态 | 侧栏 **Style**：`capsule` 使用 `radioButton.*` token 的 pill 结构 |
+
+## Arco DOM（与 demo 对齐）
+
+- **经典圆点**：**`label`** 包裹 **`input[type=radio]`**（视觉隐藏）+ **`span.ds-rb-outer`**（外圈）+ **`span.ds-rb-dot`**（内点）+ **`span.ds-rb-col`**（标签/辅助文案）；`for` / `id` 关联。
+- **胶囊**：**`label.ds-rbc`** + **`input`** + **`span.ds-rbc-pill`**；组容器可加 **`div.ds-rg.ds-rg-capsule`** 控制横向间距。
+- 类名前缀 **`ds-rb*`** / **`ds-rbc`**，不要求与 `arco-radio*` 字符串一致。
+
 ## Best practices
 
 - **Use for**: mutually exclusive choices (exactly one option in a group).
@@ -68,7 +94,7 @@ From the provided nodes:
 
 | Size | Outer size | Dot size | Gap to label | Label typography | Helper typography |
 |---|---:|---:|---:|---|---|
-| M (default) | `var(--component-radio-outer-size)` | `var(--component-radio-dot-size)` | `var(--component-radio-gap)` | 14 / Medium, line-height 20 | 12 / Medium, line-height 16 |
+| M (default) | `var(--component-radio-outer-size)` | `var(--component-radio-dot-size)` | `var(--component-radio-gap)` | `var(--component-radio-layout-label-font-size)` / line-height `var(--component-radio-layout-label-line-height)` | `var(--component-radio-layout-helper-font-size)` / line-height `var(--component-radio-layout-helper-line-height)` |
 
 ### Radio Button (capsule)
 
@@ -77,6 +103,8 @@ From the provided nodes:
 | L | auto | `var(--component-radio-button-px-lg)` | `var(--component-radio-button-py-lg)` | `var(--component-radio-button-radius-lg)` |
 | M | auto | `var(--component-radio-button-px-md)` | `var(--component-radio-button-py-md)` | `var(--component-radio-button-radius-md)` |
 | S | `var(--component-radio-button-h-sm)` | `var(--component-radio-button-px-sm)` | (centered) | `var(--component-radio-button-radius-sm)` |
+
+Demo：侧栏 **Capsule size** 切换 `data-capsule-size="lg|md|sm"`，矩阵与 Live 同步。
 
 ## States
 
@@ -112,6 +140,11 @@ All values below must come from component tokens (`.design-spec/tokens/src/compo
 | `--component-radio-checked-dot-default` | `tokens.radio.checkedDotDefault` |
 | `--component-radio-checked-outer-disabled` | `tokens.radio.checkedOuterDisabled` |
 | `--component-radio-checked-dot-disabled` | `tokens.radio.checkedDotDisabled` |
+| `--component-radio-focus-ring` | `tokens.radio.focusRing` |
+| `--component-radio-layout-label-font-size` | `tokens.radio.layout.labelFontSize` |
+| `--component-radio-layout-label-line-height` | `tokens.radio.layout.labelLineHeight` |
+| `--component-radio-layout-helper-font-size` | `tokens.radio.layout.helperFontSize` |
+| `--component-radio-layout-helper-line-height` | `tokens.radio.layout.helperLineHeight` |
 
 ### Radio Button (capsule)
 
@@ -143,6 +176,11 @@ All values below must come from component tokens (`.design-spec/tokens/src/compo
 
 - Using Radio for multiple selection (use `Checkbox`).
 - Groups without a clear label/context.
+
+## 推断（Figma 未单独画出的状态）
+
+- **键盘焦点环**：稿侧未必逐态标注；与 Arco Web 一致保留 **`input:focus-visible`** 外显环，token 为 **`--component-radio-focus-ring`**（`tokens.radio.focusRing` → semantic `focus.ring`）。
+- **矩阵「Focus」行**：静态示意，使用 **`is-demo-focus`** 类模拟与 `:focus-visible` 相同的 `box-shadow`，便于并排对比。
 
 ## Accessibility essentials
 

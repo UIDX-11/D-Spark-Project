@@ -1,0 +1,10 @@
+{
+  "behaviorSource": "arco-vue",
+  "docsScope": ".design-spec/docs/components",
+  "forbiddenPatterns": [
+    "arco.design/react/components/",
+    "Arco React",
+    "Arco **React**",
+    "React/Vue"
+  ]
+}

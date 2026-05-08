@@ -9,6 +9,39 @@ Molecular
 - toggle
 - on/off
 
+## References
+
+- Arco Vue（API / 行为真源）: https://arco.design/vue/component/switch
+- Arco 源码: `arco-design-vue/packages/web-vue/components/switch/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Switch** 画板，将本行替换为带 `node-id=` 的深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- 轨道 on/off 色、禁用轨道、滑块与阴影、md/lg 宽高与滑块直径以 **Figma Light** 为准；与 Arco 冲突时以 Figma 为准。
+- **round / linear** 与 `tokens/src/component.json` 中 `switch.size.*`、`switch.linear.*`、`switch.knobInset`、`switch.focusRing` 对齐。
+
+## Arco API 对齐（摘要）
+
+| Arco `prop` | 说明 | 本 demo |
+| ------------- | ---- | ------- |
+| `model-value` / `v-model` | 受控开/关 | Live 点击切换 `aria-checked`（非受控示意） |
+| `disabled` | 不可交互 | 侧栏 **State**：default / disabled |
+| `size` | sm / default（md）/ lg | 侧栏 **Size**：md / lg（demo 无 sm） |
+| `type` | `line`（线性）/ 默认圆轨 | 侧栏 **Variant**：round / linear（`data-variant`） |
+
+## Arco DOM（与 demo 对齐）
+
+- 推荐：**`button[type=button]`** 根节点（demo：`button.ds-switch`），内层 **`span.ds-switch-track`** + **`span.ds-switch-knob`**；**`role="switch"`**、**`aria-checked`**、禁用 **`disabled`** + **`aria-disabled`**。
+- 可见名称：demo 使用 **`aria-label`**；表单场景应用 **`aria-labelledby`** 关联文案。
+- 类名前缀 **`ds-switch*`**，不要求与 `arco-switch` 字符串一致。
+
+## 推断（Figma 未单独画出的状态）
+
+- **键盘焦点环**：与 Arco 一致保留 **`focus-visible`** 外显环，token **`--component-switch-focus-ring`**（`tokens.switch.focusRing`）。
+- **矩阵「Focus」行**：静态 **`is-demo-focus`** 与真焦点环同款 `box-shadow`，便于并排对比。
+- **线性轨道高度**：Figma 若未拆 md/lg，demo 使用 **`tokens.switch.linear.md.trackHeight` / `lg.trackHeight`** 推断细轨厚度。
+
 ## Best practices
 
 - **Use for**: 即时开关某个布尔设置（on/off）。
@@ -123,6 +156,20 @@ knob          ○
 
 
 ## Component token bindings (required)
+
+### Shared（焦点与布局）
+
+| **Token path** | **CSS var** |
+| --- | --- |
+| `tokens.switch.focusRing` | `--component-switch-focus-ring` |
+| `tokens.switch.knobInset` | `--component-switch-knob-inset` |
+
+### Linear（细轨高度，与 `data-variant="linear"` 配套）
+
+| **Token path** | **CSS var** |
+| --- | --- |
+| `tokens.switch.linear.md.trackHeight` | `--component-switch-linear-md-track-height` |
+| `tokens.switch.linear.lg.trackHeight` | `--component-switch-linear-lg-track-height` |
 
 ### Colors
 

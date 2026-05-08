@@ -10,6 +10,40 @@ Molecular
 - chip
 - status badge
 
+## References
+
+- Arco Vue（API / 行为真源）: https://arco.design/vue/component/tag
+- Arco 源码: `arco-design-vue/packages/web-vue/components/tag/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Tag** 画板，将本行替换为带 `node-id=` 的深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- Status / selector / group / add-button 的圆角、间距、字阶与色以 **Figma Light** 为准；与 Arco 冲突时以 Figma 为准。
+- **Sizes** 与 `tokens/src/component.json` 中 `tag.status.*`、`tag.selector.*`、`tag.group.*`、`tag.addButton.*` 及 `tag.focusRing` 对齐。
+
+## Arco API 对齐（摘要）
+
+| Arco `prop` / 行为 | 说明 | 本 demo |
+| ------------------ | ---- | ------- |
+| `color` / 语义色（status） | offline / red / orangered / … | 侧栏 **Tone**：offline / danger / success / warning / info（映射设计 token） |
+| `size`（status / 部分形态） | 尺寸档 | 侧栏 **Size**：lg / md / sm / xs（**selector** / **group** 档位置灰，尺寸走各自 token） |
+| `closable` / 关闭 | 可移除标签 | **group** 行内 **`button.ds-tag__close`** + `aria-label` |
+| `checkable` / 选中（selector） | 筛选态 | **selector** 侧栏 **state**：selected 等 |
+
+## Arco DOM（与 demo 对齐）
+
+- **Status**：**`span.ds-tag.ds-tag--status`**，`data-tone` / **`data-size`** 驱动 token；读屏用 **`role="status"`** 与可见文案。
+- **Selector**：**`button[type=button].ds-tag.ds-tag--selector`**（可获焦）；选中态 **`is-selected`**；hover/disabled 用 **`is-demo-hover`** / **`is-disabled`** + **`disabled`** 示意。
+- **Group**：**`span.ds-tag.ds-tag--group`** + 文案 + **`button.ds-tag__close`**（`aria-label` 移除）。
+- **Add-button**：**`button.ds-tag.ds-tag--add`** + **`data-size`** + 前缀 **`+`**（`aria-hidden` 于装饰图标容器）。
+- 类名前缀 **`ds-tag*`**，不要求与 `arco-tag` 字符串一致。
+
+## 推断（Figma 未单独画出的状态）
+
+- **键盘焦点环**：与 Arco 一致保留 **`focus-visible`** 外显环，token **`--component-tag-focus-ring`**（`tokens.tag.focusRing` → semantic `focus.ring`）。
+- **Selector hover**：矩阵与部分 Live 态用 **`is-demo-hover`** 类模拟 hover 底色（静态并排对比）。
+
 ## Best practices
 
 - **Use for**: small, scannable metadata (status, category, attribute).
@@ -133,6 +167,12 @@ Molecular
 | Close hover | (keep bg) | (keep text) | (keep icon) | `var(--component-tag-group-close-bg-hover)` |
 
 ## Component token bindings (required)
+
+### Shared（焦点）
+
+| **Token path** | **CSS var** |
+| --- | --- |
+| `tokens.tag.focusRing` | `--component-tag-focus-ring` |
 
 ### Status tag
 

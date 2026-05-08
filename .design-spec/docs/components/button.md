@@ -10,6 +10,46 @@ Molecular
 - CTA
 - primary action / secondary action
 
+## References
+
+- Arco Vue（API / 行为真源）: [https://arco.design/vue/component/button](https://arco.design/vue/component/button)
+- Arco 源码: `arco-design-vue/packages/web-vue/components/button/button.vue`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Button** 画板，将本行替换为带 `node-id=` 的深链接。
+
+## Figma
+
+- 像素、间距、圆角、字号、色、阴影以 **Figma Light** 为准；与 Arco 冲突时以 Figma 为准（见 `docs/ALIGNMENT_GOVERNANCE.md`）。
+- 下方 **Sizes** 与 `tokens/src/component.json` 中 `button.layout.`* 对齐；Figma 变更时先改 token，再更新本文与生成 HTML。
+
+## Arco API 对齐（摘要）
+
+
+| Arco `prop`                     | 取值 / 默认                                                                 | 设计稿 / demo 说明                                                                                                                   |
+| ------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                          | `primary` | `secondary` | `dashed` | `outline` | `text`（默认 `secondary`） | demo 侧栏 **Variant** 映射：`primary`→Primary，`neutral`→Secondary 面、`ghost`→Outline、`danger`→警示；`dashed` / `text` 待与 Figma 对齐后补充矩阵行。 |
+| `status`                        | `normal` | `warning` | `success` | `danger`                             | 当前 token 集以 **normal** 为主；`warning/success` 待 Figma 与 token 扩展。                                                                 |
+| `size`                          | `mini` | `small` | `medium` | `large`（默认 `medium`）                      | Live **Size**：`sm`→small、`md`→medium、`lg`→large（与 Figma XL/L/M 命名对照见 Sizes）。                                                    |
+| `long`                          | `boolean`                                                               | 未在静态矩阵展示；需时由 token 控制宽度。                                                                                                        |
+| `loading` / `loadingFixedWidth` | `boolean`                                                               | **推断**：与 Arco 一致——`loading` 时首子节点为图标区（见 DOM）；`loadingFixedWidth` 保持宽度；demo 后续可加重开关。                                             |
+| `disabled`                      | `boolean`                                                               | 矩阵第 5 行。                                                                                                                        |
+| `htmlType`                      | `button` | `submit` | `reset`                                           | Live 使用 `type="button"`。                                                                                                        |
+| `autofocus`                     | `boolean`                                                               | 默认 false；demo 不开启。                                                                                                              |
+| `href`                          | `string`                                                                | 有 `href` 时 Arco 渲染 `<a>`；本页 Live 为 `<button>` 形态。                                                                               |
+
+
+## Arco DOM（与 demo 对齐）
+
+Arco `button.vue`（无 `href`）结构为：
+
+```html
+<button type="button" class="arco-btn …" :disabled="…" @click="…">
+  <span v-if="loading || $slots.icon" class="arco-btn-icon">…</span>
+  <slot />
+</button>
+```
+
+本仓库 **Live** 在仅有文案、无 `loading` / `#icon` 时 **不渲染** 图标容器，与 Arco `v-if` 行为一致。类名前缀使用 `**ds-btn`**，子节点顺序与 Arco 相同。
+
 ## Best practices
 
 - **Use for**: committing an action (submit, save, confirm, navigate to next step).
@@ -39,32 +79,30 @@ From component spec properties:
 ### Variants
 
 
-|          |             |                                                 |                                                           |                                                    |                   |                                                     |
-| -------- | ----------- | ----------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------- | ----------------- | --------------------------------------------------- |
-| **Name** | **Variant** | **Background**                                  | **Font**                                                  | **Border**                                         | **Use Case**      | **Intended use**                                    |
-| 默认按钮     | Default     | `var(--component-button-primary-bg-default)`  | `var(--component-button-primary-text-default)` | none                                           | Primary actions   | The default recommended action in a region          |
-| 次要按钮     | Secondary   | `var(--component-button-neutral-bg-default)`  | `var(--component-button-neutral-text-default)` | `var(--component-button-neutral-border-default)` | Secondary actions | Alternative actions alongside primary               |
-| 辅助按钮     | Tertiary    | `var(--component-button-neutral-bg-default)`  | `var(--component-button-neutral-text-default)` | none                                           | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       |
-| 幽灵按钮     | Outline     | transparent                                   | `var(--component-button-neutral-text-default)` | `var(--component-button-outline-border-default)` | Subtle actions    | “Add item / add section” patterns                   |
-| 链接       | Link        | transparent                                   | `var(--component-button-link-text-default)`    | none                                           | Inline actions    | Compact actions in toolbars, tables, dense surfaces |
-| 警示/告警按钮  | Destructive | `var(--component-button-danger-bg-default)`   | `var(--component-button-danger-text-default)`  | none                                           | Dangerous action  | Delete/disable/irreversible actions                 |
+|          |             |                                              |                                                |                                                  |                   |                                                     |
+| -------- | ----------- | -------------------------------------------- | ---------------------------------------------- | ------------------------------------------------ | ----------------- | --------------------------------------------------- |
+| **Name** | **Variant** | **Background**                               | **Font**                                       | **Border**                                       | **Use Case**      | **Intended use**                                    |
+| 默认按钮     | Default     | `var(--component-button-primary-bg-default)` | `var(--component-button-primary-text-default)` | none                                             | Primary actions   | The default recommended action in a region          |
+| 次要按钮     | Secondary   | `var(--component-button-neutral-bg-default)` | `var(--component-button-neutral-text-default)` | `var(--component-button-neutral-border-default)` | Secondary actions | Alternative actions alongside primary               |
+| 辅助按钮     | Tertiary    | `var(--component-button-neutral-bg-default)` | `var(--component-button-neutral-text-default)` | none                                             | Tertiary actions  | Low-emphasis actions, often in toolbars/cards       |
+| 幽灵按钮     | Outline     | transparent                                  | `var(--component-button-neutral-text-default)` | `var(--component-button-outline-border-default)` | Subtle actions    | “Add item / add section” patterns                   |
+| 链接       | Link        | transparent                                  | `var(--component-button-link-text-default)`    | none                                             | Inline actions    | Compact actions in toolbars, tables, dense surfaces |
+| 警示/告警按钮  | Destructive | `var(--component-button-danger-bg-default)`  | `var(--component-button-danger-text-default)`  | none                                             | Dangerous action  | Delete/disable/irreversible actions                 |
 
 
 ## Sizes
 
-Sizes are defined by height tokens and paired typography/icon sizes.
+Live 预览三档高度与 **Arco `size`**、`**button.layout.live***` token 对应如下（Light）。
 
 
-|          |            |               |               |                 |               |                   |
-| -------- | ---------- | ------------- | ------------- | --------------- | ------------- | ----------------- |
-| **Size** | **Height** | **Padding X** | **Padding Y** | **Font Size**   | **Icon Size** | **Corner radius** |
-| XL       | 36px       | 16px          | 8px           | 14px / Semibold | 16px          | 6px               |
-| L        | 32px       | 16px          | 6px           | 14px / Semibold | 16px          | 6px               |
-| S        | 28px       | 12px          | 6px           | 12px / Semibold | 12px          | 4px               |
-| M        | 24px       | 12px          | 4px           | 12px / Medium   | 12px          | 4px               |
+| Demo `pgSize` | Arco `size` | 高度 token                                   | 水平内边距 token                                      | 字号 / 行高 token                                                                            |
+| ------------- | ----------- | ------------------------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| `lg`          | `large`     | `--component-button-layout-live-height-lg` | `--component-button-layout-live-padding-xlarge`  | `--component-button-layout-live-font-size-lg` / `--component-button-layout-live-line-lg` |
+| `md`          | `medium`    | `--component-button-layout-live-height-md` | `--component-button-layout-live-padding-xmedium` | `--component-button-layout-live-font-size-md` / `--component-button-layout-live-line-md` |
+| `sm`          | `small`     | `--component-button-layout-live-height-sm` | `--component-button-layout-live-padding-xsmall`  | `--component-button-layout-live-font-size-sm` / `--component-button-layout-live-line-sm` |
 
 
-## States
+> 文档表格中的 XL/L/S/M 命名与 Figma 控件命名对齐时，请在 **Figma Variables** 与上表 token 间维护一行对照（见 `ALIGNMENT_GOVERNANCE` §2）。
 
 ## Component token bindings (required)
 
@@ -73,8 +111,8 @@ All values below must come from component tokens (`.design-spec/tokens/src/compo
 ### Primary (Style: Primary) — states
 
 
-| State            | Background                                  | Text                                     |
-| ---------------- | ------------------------------------------- | ---------------------------------------- |
+| State            | Background                                    | Text                                            |
+| ---------------- | --------------------------------------------- | ----------------------------------------------- |
 | Default          | `var(--component-button-primary-bg-default)`  | `var(--component-button-primary-text-default)`  |
 | Hover            | `var(--component-button-primary-bg-hover)`    | `var(--component-button-primary-text-hover)`    |
 | Active / Pressed | `var(--component-button-primary-bg-active)`   | `var(--component-button-primary-text-active)`   |
@@ -84,15 +122,34 @@ All values below must come from component tokens (`.design-spec/tokens/src/compo
 ### Neutral surfaces (Style: Secondary / Tertiary) — states
 
 
-| State            | Background                                   | Text                                     | Border                                      |
-| ---------------- | -------------------------------------------- | ---------------------------------------- | ------------------------------------------- |
+| State            | Background                                    | Text                                            | Border                                            |
+| ---------------- | --------------------------------------------- | ----------------------------------------------- | ------------------------------------------------- |
 | Default          | `var(--component-button-neutral-bg-default)`  | `var(--component-button-neutral-text-default)`  | `var(--component-button-neutral-border-default)`  |
 | Hover            | `var(--component-button-neutral-bg-hover)`    | `var(--component-button-neutral-text-hover)`    | `var(--component-button-neutral-border-hover)`    |
 | Active / Pressed | `var(--component-button-neutral-bg-active)`   | `var(--component-button-neutral-text-active)`   | `var(--component-button-neutral-border-active)`   |
 | Disabled         | `var(--component-button-neutral-bg-disabled)` | `var(--component-button-neutral-text-disabled)` | `var(--component-button-neutral-border-disabled)` |
 
 
-## States
+### Layout & focus（`button.layout` / `button.focusRing`）
+
+
+| Token path                      | CSS variable                                                     |
+| ------------------------------- | ---------------------------------------------------------------- |
+| `tokens.button.layout.live.`*   | `--component-button-layout-live-*`（Live 三档尺寸）                    |
+| `tokens.button.layout.matrix.*` | `--component-button-layout-matrix-*`（状态矩阵静态按钮）                   |
+| `tokens.button.layout.static.*` | `--component-button-layout-static-*`（文档区静态预览 `.btn`）             |
+| `tokens.button.focusRing`       | `--component-button-focus-ring`（`:focus-visible`，对齐 Arco 可见焦点行为） |
+
+
+### Group spacing（semantic）
+
+
+| Token path                     | CSS variable                                      |
+| ------------------------------ | ------------------------------------------------- |
+| `tokens.layout.buttonGroupGap` | `--semantic-layout-button-group-gap`（按钮组水平 `gap`） |
+
+
+## Interaction & cursor
 
 
 |                  |                |              |             |             |                                 |                                                                 |
@@ -123,12 +180,12 @@ Button groups are used when multiple actions are presented together (toolbars, f
 ### Group layout rules
 
 
-| Rule               | Recommendation                                                                                    | Rationale                                                                                                                  |
-| ------------------ | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Group spacing      | **12px gap** between buttons (tokenized)                                                          | Keeps groups readable and avoids “toggle-like” confusion.                                                                   |
-| Internal alignment | Align button baselines/heights within a group; do not mix sizes in the same group                 | Prevents jitter and improves scanability.                                                                                  |
-| Grouping           | Keep related actions adjacent; separate unrelated action clusters with a larger gap (use `Space`) | Reduces cognitive load in dense B-end toolbars.                                                                            |
-| Overflow           | When actions exceed available width, collapse **least-used** actions first into an overflow menu  | Preserves the primary path and avoids layout breakage.                                                                     |
+| Rule               | Recommendation                                                                                    | Rationale                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Group spacing      | `gap: calc(var(--semantic-layout-button-group-gap) * 1px)` between buttons                        | Keeps groups readable and avoids “toggle-like” confusion. |
+| Internal alignment | Align button baselines/heights within a group; do not mix sizes in the same group                 | Prevents jitter and improves scanability.                 |
+| Grouping           | Keep related actions adjacent; separate unrelated action clusters with a larger gap (use `Space`) | Reduces cognitive load in dense B-end toolbars.           |
+| Overflow           | When actions exceed available width, collapse **least-used** actions first into an overflow menu  | Preserves the primary path and avoids layout breakage.    |
 
 
 ### Ordering rules (primary/secondary/destructive)
@@ -147,7 +204,7 @@ Button groups are used when multiple actions are presented together (toolbars, f
 | Anti-pattern                                       | Why it’s bad                                               | Preferred alternative                                       |
 | -------------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------- |
 | Multiple Primary buttons in one group              | Competing emphasis, unclear recommendation                 | Choose 1 primary; demote others to secondary/tertiary.      |
-| Zero spacing (buttons touching)                    | Reads as toggle/segmented control; increases misclick risk | Use 12px gap (token).                                       |
+| Zero spacing (buttons touching)                    | Reads as toggle/segmented control; increases misclick risk | Use `semantic.layout.buttonGroupGap`（见上表）。                  |
 | Mixed sizes in one group                           | Visual noise; inconsistent hit targets                     | Use a single size per group.                                |
 | Destructive placed as primary without confirmation | Increases accidental destructive actions                   | Use destructive styling + confirm for irreversible actions. |
 

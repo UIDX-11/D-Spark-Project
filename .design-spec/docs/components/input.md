@@ -9,6 +9,38 @@ Molecular
 - text field
 - textbox
 
+## References
+
+- Arco Vue（API / 行为真源）: https://arco.design/vue/component/input
+- Arco 源码: `arco-design-vue/packages/web-vue/components/input/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Input** 画板，将本行替换为带 `node-id=` 的深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+- 各尺寸高度、水平/垂直 padding、圆角、占位与正文色、边框与 **focus ring** 以 **Figma Light** 为准；与 Arco 冲突时以 Figma 为准。
+- **S / L / XL** 与 `tokens/src/component.json` 中 `input.layout.s` / `l` / `xl` 及 `input.maxWidth`、`input.textValue` 对齐。
+
+## Arco API 对齐（摘要）
+
+| Arco `prop` | 说明 | 本 demo |
+| ------------- | ---- | ------- |
+| `size` | `mini` / `small` / `medium` / `large` 等 | 侧栏 **Size**：`sm`→S、`md`→L、`lg`→XL（`data-size=s|l|xl`） |
+| `type` / `password` | 密码显隐 | **Password** 变体 + `aria-pressed` / `aria-label` |
+| `Search` | 搜索框 | **Search** 变体，`type="search"`，`role="search"` |
+| `add-after` / `add-before` | 前后缀 | **Suffix** / **group** 组合示意 |
+
+## Arco DOM（与 demo 对齐）
+
+- **单框**：原生 **`input.ds-input`**，`data-size` 驱动 layout token；占位色 **`--component-input-text-default`**，输入正文 **`--component-input-text-value`**。
+- **组合**：**`.ds-in-row`** 包裹；**group** 使用 **`span.ds-in-addon`** + **`input`**，`role="group"` 与 **`aria-label`**；**search** 使用 **`role="search"`** 容器 + 左侧装饰 **`aria-hidden`**。
+- 类名前缀 **`ds-input*` / `ds-in-*`**，不要求与 `arco-input` 字符串一致。
+
+## 推断（Figma 未单独画出的状态）
+
+- **键盘焦点**：使用 **`:focus-visible`** 展示 **`--component-input-ring-focus`**，避免鼠标点击出现双环。
+- **矩阵 Active / Focus 行**：静态 **`mat-inp-*`** 类，与 Arco 态色一致，便于并排对比。
+
 ## Best practices
 
 - **Use for**: short text entry (names, titles, IDs, search).
@@ -110,6 +142,60 @@ From the provided nodes, Input includes:
 
 - Placeholder-only labeling.
 - Silent input masks/formatting changes without explaining expected format.
+
+## Component token bindings (required)
+
+### Shared
+
+| Token (CSS) | JSON path |
+| --- | --- |
+| `--component-input-max-width` | `tokens.input.maxWidth` |
+| `--component-input-text-value` | `tokens.input.textValue` |
+
+### Layout（`data-size` = `s` \| `l` \| `xl`）
+
+| Token (CSS) | JSON path |
+| --- | --- |
+| `--component-input-layout-s-height` | `tokens.input.layout.s.height` |
+| `--component-input-layout-s-padding-x` | `tokens.input.layout.s.paddingX` |
+| `--component-input-layout-s-padding-y` | `tokens.input.layout.s.paddingY` |
+| `--component-input-layout-s-font-size` | `tokens.input.layout.s.fontSize` |
+| `--component-input-layout-s-line-height` | `tokens.input.layout.s.lineHeight` |
+| `--component-input-layout-s-radius` | `tokens.input.layout.s.radius` |
+| `--component-input-layout-l-height` | `tokens.input.layout.l.height` |
+| `--component-input-layout-l-padding-x` | `tokens.input.layout.l.paddingX` |
+| `--component-input-layout-l-padding-y` | `tokens.input.layout.l.paddingY` |
+| `--component-input-layout-l-font-size` | `tokens.input.layout.l.fontSize` |
+| `--component-input-layout-l-line-height` | `tokens.input.layout.l.lineHeight` |
+| `--component-input-layout-l-radius` | `tokens.input.layout.l.radius` |
+| `--component-input-layout-xl-height` | `tokens.input.layout.xl.height` |
+| `--component-input-layout-xl-padding-x` | `tokens.input.layout.xl.paddingX` |
+| `--component-input-layout-xl-padding-y` | `tokens.input.layout.xl.paddingY` |
+| `--component-input-layout-xl-font-size` | `tokens.input.layout.xl.fontSize` |
+| `--component-input-layout-xl-line-height` | `tokens.input.layout.xl.lineHeight` |
+| `--component-input-layout-xl-radius` | `tokens.input.layout.xl.radius` |
+
+### Surfaces（背景 / 边框 / 环 / 占位与禁用字色）
+
+| Token (CSS) | JSON path |
+| --- | --- |
+| `--component-input-bg-default` | `tokens.input.bgDefault` |
+| `--component-input-bg-hover` | `tokens.input.bgHover` |
+| `--component-input-bg-focus` | `tokens.input.bgFocus` |
+| `--component-input-bg-typing` | `tokens.input.bgTyping` |
+| `--component-input-bg-completed` | `tokens.input.bgCompleted` |
+| `--component-input-bg-error` | `tokens.input.bgError` |
+| `--component-input-bg-disabled` | `tokens.input.bgDisabled` |
+| `--component-input-text-default` | `tokens.input.textDefault` |
+| `--component-input-text-focus` | `tokens.input.textFocus` |
+| `--component-input-text-disabled` | `tokens.input.textDisabled` |
+| `--component-input-border-default` | `tokens.input.borderDefault` |
+| `--component-input-border-hover` | `tokens.input.borderHover` |
+| `--component-input-border-focus` | `tokens.input.borderFocus` |
+| `--component-input-border-error` | `tokens.input.borderError` |
+| `--component-input-border-disabled` | `tokens.input.borderDisabled` |
+| `--component-input-ring-focus` | `tokens.input.ringFocus` |
+| `--component-input-ring-error` | `tokens.input.ringError` |
 
 ## Accessibility essentials
 

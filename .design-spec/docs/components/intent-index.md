@@ -40,4 +40,3 @@ Use this index when the request is described as an **intent** instead of a compo
   - Left-tree + right-content master/detail
 - **Components**
   - Tabs, Tree, Layout, Card
-

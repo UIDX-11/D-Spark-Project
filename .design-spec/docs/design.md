@@ -5,7 +5,7 @@ This document defines the **global UI generation rules** for D-Spark.
 ## Goals
 
 - Make AI-generated UI behave like it is built with a real design system.
-- Make outputs consistent across **Web (React/Vue)** and **Flutter**.
+- Make outputs consistent across **Web (Vue)** and **Flutter**.
 - Ensure accessibility and internationalization are considered by default.
 
 ## Non-negotiable rules
