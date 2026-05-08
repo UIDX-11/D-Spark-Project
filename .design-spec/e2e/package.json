@@ -1,0 +1,16 @@
+{
+  "name": "@d-spark/design-spec-e2e",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Playwright smoke + screenshot baselines for .design-spec HTML demos",
+  "scripts": {
+    "test": "playwright test tests/smoke.spec.ts",
+    "test:all": "playwright test",
+    "test:visual": "playwright test tests/visual.spec.ts",
+    "test:update": "playwright test --update-snapshots",
+    "test:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}
