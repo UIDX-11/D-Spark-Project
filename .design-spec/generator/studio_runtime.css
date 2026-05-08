@@ -3102,6 +3102,190 @@
   max-width: 100%;
 }
 
+/* ---- Tree (--component-tree-*) ---- */
+.ds-tree {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid var(--semantic-border-subtle);
+  border-radius: 12px;
+  background: var(--semantic-bg-surface);
+  padding: 12px;
+}
+
+.ds-tree-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-tree-list .ds-tree-list {
+  padding-inline-start: calc(var(--component-tree-layout-indent) * 1px);
+}
+
+.ds-tree-node[role="treeitem"]:focus {
+  outline: none;
+}
+
+.ds-tree-node[role="treeitem"]:focus-visible > .ds-tree-row {
+  box-shadow: 0 0 0 2px var(--component-tree-focus-ring);
+}
+
+.ds-tree-row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--component-tree-layout-row-gap) * 1px);
+  min-height: calc(var(--component-tree-layout-row-min-h) * 1px);
+  padding: 2px 8px;
+  border-radius: calc(var(--component-tree-row-radius) * 1px);
+  background: var(--component-tree-row-bg-default);
+  color: var(--component-tree-row-text);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: default;
+}
+
+.ds-tree[data-size="sm"] .ds-tree-row {
+  min-height: calc(var(--component-tree-layout-row-min-sm) * 1px);
+}
+
+.ds-tree-row:hover {
+  background: var(--component-tree-row-bg-hover);
+}
+
+.ds-tree-node[aria-selected="true"] > .ds-tree-row {
+  background: var(--component-tree-row-bg-selected);
+  font-weight: 500;
+}
+
+.ds-tree-node[aria-selected="true"] > .ds-tree-row:hover {
+  background: var(--component-tree-row-bg-selected);
+}
+
+.ds-tree-node[aria-disabled="true"] > .ds-tree-row,
+.ds-tree-row.is-dis {
+  color: var(--component-tree-row-text-disabled);
+  cursor: default;
+}
+
+.ds-tree-node[aria-disabled="true"] .ds-tree-toggle:not(.ds-tree-toggle--leaf),
+.ds-tree-row.is-dis .ds-tree-toggle:not(.ds-tree-toggle--leaf) {
+  color: var(--component-tree-toggle-color-disabled);
+}
+
+.ds-tree-row.is-hov {
+  background: var(--component-tree-row-bg-hover);
+}
+
+.ds-tree-row.is-sel {
+  background: var(--component-tree-row-bg-selected);
+  font-weight: 500;
+}
+
+.ds-tree-row.is-foc {
+  box-shadow: 0 0 0 2px var(--component-tree-focus-ring);
+}
+
+.ds-tree-toggle {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: calc(var(--component-tree-toggle-size) * 1px);
+  height: calc(var(--component-tree-toggle-size) * 1px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--component-tree-toggle-color);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.ds-tree-toggle--leaf {
+  pointer-events: none;
+  cursor: default;
+  visibility: hidden;
+}
+
+.ds-tree-toggle-ic {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.ds-tree-toggle:hover:not(:disabled) {
+  background: var(--component-tree-row-bg-hover);
+}
+
+.ds-tree-toggle:focus {
+  outline: none;
+}
+
+.ds-tree-toggle:focus-visible {
+  box-shadow: 0 0 0 2px var(--component-tree-focus-ring);
+}
+
+.ds-tree-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-tree-cb {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: calc(var(--component-checkbox-box-size) * 1px);
+  height: calc(var(--component-checkbox-box-size) * 1px);
+  margin-right: calc(var(--component-tree-layout-cb-gap) * 0.5 * 1px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ds-tree-cb-box {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--component-checkbox-box-radius) * 1px);
+  border: 1px solid var(--semantic-border-default);
+  background: var(--component-checkbox-unchecked-bg-default);
+}
+
+.ds-tree[data-variant="checkbox"] .ds-tree-node[aria-selected="true"] .ds-tree-cb-box {
+  background: var(--component-checkbox-checked-bg-default);
+  border-color: var(--component-checkbox-checked-bg-default);
+}
+
+.ds-tree[data-variant="checkbox"] .ds-tree-node[aria-selected="true"] .ds-tree-cb-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: calc(var(--component-checkbox-layout-mark-width) * 1px);
+  height: calc(var(--component-checkbox-layout-mark-height) * 1px);
+  border-left: calc(var(--component-checkbox-layout-mark-border) * 1px) solid var(--component-checkbox-checked-mark-default);
+  border-bottom: calc(var(--component-checkbox-layout-mark-border) * 1px) solid var(--component-checkbox-checked-mark-default);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-sizing: border-box;
+}
+
+.ds-tree--matrix {
+  max-width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.ds-tree--fig {
+  max-width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
 /* ---- Upload (--component-upload-*) ---- */
 .ds-upl {
   box-sizing: border-box;

@@ -1405,6 +1405,31 @@
         "rowHeightMode": "fixed"
       }
     },
+    "tree": {
+      "row": {
+        "bgDefault": "transparent",
+        "bgHover": "{bg.page}",
+        "bgSelected": "{bg.page}",
+        "text": "{text.primary}",
+        "textDisabled": "{text.muted}",
+        "radius": 8
+      },
+      "toggle": {
+        "size": 16,
+        "color": "{text.secondary}",
+        "colorDisabled": "{text.muted}"
+      },
+      "layout": {
+        "indent": 16,
+        "rowMinH": 32,
+        "rowMinSm": 28,
+        "rowGap": 8,
+        "cbGap": 8
+      },
+      "focus": {
+        "ring": "{focus.ring}"
+      }
+    },
     "form": {
       "rowGap": 20,
       "colGap": 16,

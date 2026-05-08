@@ -3202,6 +3202,190 @@
   max-width: 100%;
 }
 
+/* ---- Tree (--component-tree-*) ---- */
+.ds-tree {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid var(--semantic-border-subtle);
+  border-radius: 12px;
+  background: var(--semantic-bg-surface);
+  padding: 12px;
+}
+
+.ds-tree-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-tree-list .ds-tree-list {
+  padding-inline-start: calc(var(--component-tree-layout-indent) * 1px);
+}
+
+.ds-tree-node[role="treeitem"]:focus {
+  outline: none;
+}
+
+.ds-tree-node[role="treeitem"]:focus-visible > .ds-tree-row {
+  box-shadow: 0 0 0 2px var(--component-tree-focus-ring);
+}
+
+.ds-tree-row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--component-tree-layout-row-gap) * 1px);
+  min-height: calc(var(--component-tree-layout-row-min-h) * 1px);
+  padding: 2px 8px;
+  border-radius: calc(var(--component-tree-row-radius) * 1px);
+  background: var(--component-tree-row-bg-default);
+  color: var(--component-tree-row-text);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: default;
+}
+
+.ds-tree[data-size="sm"] .ds-tree-row {
+  min-height: calc(var(--component-tree-layout-row-min-sm) * 1px);
+}
+
+.ds-tree-row:hover {
+  background: var(--component-tree-row-bg-hover);
+}
+
+.ds-tree-node[aria-selected="true"] > .ds-tree-row {
+  background: var(--component-tree-row-bg-selected);
+  font-weight: 500;
+}
+
+.ds-tree-node[aria-selected="true"] > .ds-tree-row:hover {
+  background: var(--component-tree-row-bg-selected);
+}
+
+.ds-tree-node[aria-disabled="true"] > .ds-tree-row,
+.ds-tree-row.is-dis {
+  color: var(--component-tree-row-text-disabled);
+  cursor: default;
+}
+
+.ds-tree-node[aria-disabled="true"] .ds-tree-toggle:not(.ds-tree-toggle--leaf),
+.ds-tree-row.is-dis .ds-tree-toggle:not(.ds-tree-toggle--leaf) {
+  color: var(--component-tree-toggle-color-disabled);
+}
+
+.ds-tree-row.is-hov {
+  background: var(--component-tree-row-bg-hover);
+}
+
+.ds-tree-row.is-sel {
+  background: var(--component-tree-row-bg-selected);
+  font-weight: 500;
+}
+
+.ds-tree-row.is-foc {
+  box-shadow: 0 0 0 2px var(--component-tree-focus-ring);
+}
+
+.ds-tree-toggle {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: calc(var(--component-tree-toggle-size) * 1px);
+  height: calc(var(--component-tree-toggle-size) * 1px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--component-tree-toggle-color);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.ds-tree-toggle--leaf {
+  pointer-events: none;
+  cursor: default;
+  visibility: hidden;
+}
+
+.ds-tree-toggle-ic {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.ds-tree-toggle:hover:not(:disabled) {
+  background: var(--component-tree-row-bg-hover);
+}
+
+.ds-tree-toggle:focus {
+  outline: none;
+}
+
+.ds-tree-toggle:focus-visible {
+  box-shadow: 0 0 0 2px var(--component-tree-focus-ring);
+}
+
+.ds-tree-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-tree-cb {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: calc(var(--component-checkbox-box-size) * 1px);
+  height: calc(var(--component-checkbox-box-size) * 1px);
+  margin-right: calc(var(--component-tree-layout-cb-gap) * 0.5 * 1px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ds-tree-cb-box {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--component-checkbox-box-radius) * 1px);
+  border: 1px solid var(--semantic-border-default);
+  background: var(--component-checkbox-unchecked-bg-default);
+}
+
+.ds-tree[data-variant="checkbox"] .ds-tree-node[aria-selected="true"] .ds-tree-cb-box {
+  background: var(--component-checkbox-checked-bg-default);
+  border-color: var(--component-checkbox-checked-bg-default);
+}
+
+.ds-tree[data-variant="checkbox"] .ds-tree-node[aria-selected="true"] .ds-tree-cb-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: calc(var(--component-checkbox-layout-mark-width) * 1px);
+  height: calc(var(--component-checkbox-layout-mark-height) * 1px);
+  border-left: calc(var(--component-checkbox-layout-mark-border) * 1px) solid var(--component-checkbox-checked-mark-default);
+  border-bottom: calc(var(--component-checkbox-layout-mark-border) * 1px) solid var(--component-checkbox-checked-mark-default);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-sizing: border-box;
+}
+
+.ds-tree--matrix {
+  max-width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.ds-tree--fig {
+  max-width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
 /* ---- Upload (--component-upload-*) ---- */
 .ds-upl {
   box-sizing: border-box;
@@ -7722,6 +7906,293 @@
     window.__dsRefresh();
   }
 
+  function mountTree() {
+    var trMx = ["Default", "Hover", "Selected", "Disabled", "Focus"];
+
+    function variant() {
+      return (pgVariant && pgVariant.value) === "checkbox" ? "checkbox" : "simple";
+    }
+
+    function sizeKey() {
+      return (pgSize && pgSize.value) === "sm" ? "sm" : "md";
+    }
+
+    function cbBlock() {
+      if (variant() !== "checkbox") return "";
+      return '<span class="ds-tree-cb" aria-hidden="true"><span class="ds-tree-cb-box"></span></span>';
+    }
+
+    function rowInner(toggleHtml, label) {
+      return toggleHtml + cbBlock() + '<span class="ds-tree-label">' + label + "</span>";
+    }
+
+    function toggleBtn(expanded, label, leaf) {
+      if (leaf) {
+        return '<span class="ds-tree-toggle ds-tree-toggle--leaf" aria-hidden="true"><span class="ds-tree-toggle-ic"></span></span>';
+      }
+      var ex = expanded ? "true" : "false";
+      var chev = expanded ? "\u25bc" : "\u25b6";
+      return (
+        '<button type="button" class="ds-tree-toggle" aria-expanded="' +
+        ex +
+        '" aria-label="' +
+        (expanded ? "Collapse " : "Expand ") +
+        label +
+        '"><span class="ds-tree-toggle-ic" aria-hidden="true">' +
+        chev +
+        "</span></button>"
+      );
+    }
+
+    function liveHtml() {
+      var sk = sizeKey();
+      var v = variant();
+      return (
+        '<div id="trRoot" class="ds-tree" data-size="' +
+        sk +
+        '" data-variant="' +
+        v +
+        '" role="tree" aria-label="Demo tree">' +
+        '<ul class="ds-tree-list" role="group">' +
+        '<li class="ds-tree-node" id="trN0" role="treeitem" aria-expanded="true" aria-selected="true" aria-level="1" tabindex="0">' +
+        '<div class="ds-tree-row">' +
+        rowInner(toggleBtn(true, "Project", false), "Project") +
+        "</div>" +
+        '<ul class="ds-tree-list" role="group" id="trG0">' +
+        '<li class="ds-tree-node" id="trN1" role="treeitem" aria-selected="false" aria-level="2" tabindex="-1">' +
+        '<div class="ds-tree-row">' +
+        rowInner(toggleBtn(false, "src", true), "src") +
+        "</div></li>" +
+        '<li class="ds-tree-node" id="trN2" role="treeitem" aria-expanded="true" aria-selected="false" aria-level="2" tabindex="-1">' +
+        '<div class="ds-tree-row">' +
+        rowInner(toggleBtn(true, "packages", false), "packages") +
+        "</div>" +
+        '<ul class="ds-tree-list" role="group" id="trG2">' +
+        '<li class="ds-tree-node" id="trN3" role="treeitem" aria-selected="false" aria-level="3" tabindex="-1">' +
+        '<div class="ds-tree-row">' +
+        rowInner(toggleBtn(false, "core", true), "core") +
+        "</div></li>" +
+        '<li class="ds-tree-node" id="trN4" role="treeitem" aria-disabled="true" aria-selected="false" aria-level="3" tabindex="-1">' +
+        '<div class="ds-tree-row ds-tree-row--dis">' +
+        rowInner(toggleBtn(false, "legacy", true), "legacy (disabled)") +
+        "</div></li>" +
+        "</ul></li></ul></li></ul></div>"
+      );
+    }
+
+    function visibleOrder(root) {
+      var out = [];
+      function walk(ul) {
+        if (!ul || ul.hasAttribute("hidden")) return;
+        var lis = [].slice.call(ul.children).filter(function (n) {
+          return n.tagName === "LI" && n.getAttribute("role") === "treeitem";
+        });
+        lis.forEach(function (li) {
+          out.push(li);
+          var exp = li.getAttribute("aria-expanded");
+          var nested = li.querySelector(":scope > ul.ds-tree-list");
+          if (nested && exp !== "false") walk(nested);
+        });
+      }
+      var top = root.querySelector(":scope > ul.ds-tree-list");
+      walk(top);
+      return out.filter(function (li) {
+        return !li.closest("[hidden]");
+      });
+    }
+
+    function enabledItems(order) {
+      return order.filter(function (li) {
+        return li.getAttribute("aria-disabled") !== "true";
+      });
+    }
+
+    function wireTree() {
+      var root = document.getElementById("trRoot");
+      if (!root) return;
+
+      function setExpanded(li, on) {
+        var nested = li.querySelector(":scope > ul.ds-tree-list");
+        var btn = li.querySelector(":scope > .ds-tree-row > button.ds-tree-toggle");
+        if (!nested || !btn) return;
+        li.setAttribute("aria-expanded", on ? "true" : "false");
+        btn.setAttribute("aria-expanded", on ? "true" : "false");
+        var ic = btn.querySelector(".ds-tree-toggle-ic");
+        if (ic) ic.textContent = on ? "\u25bc" : "\u25b6";
+        if (on) nested.removeAttribute("hidden");
+        else nested.setAttribute("hidden", "hidden");
+      }
+
+      root.addEventListener("click", function (e) {
+        var tgl = e.target.closest(".ds-tree-toggle");
+        if (tgl && root.contains(tgl) && tgl.getAttribute("aria-hidden") !== "true") {
+          e.preventDefault();
+          var li = tgl.closest('[role="treeitem"]');
+          if (!li || !root.contains(li)) return;
+          var nested = li.querySelector(":scope > ul.ds-tree-list");
+          if (!nested) return;
+          var cur = li.getAttribute("aria-expanded") === "true";
+          setExpanded(li, !cur);
+          return;
+        }
+        var row = e.target.closest(".ds-tree-row");
+        if (!row || !root.contains(row)) return;
+        var li = row.closest('[role="treeitem"]');
+        if (!li || li.getAttribute("aria-disabled") === "true") return;
+        var all = visibleOrder(root);
+        all.forEach(function (n) {
+          n.setAttribute("aria-selected", n === li ? "true" : "false");
+          n.setAttribute("tabindex", n === li ? "0" : "-1");
+        });
+      });
+
+      root.addEventListener("keydown", function (e) {
+        var key = e.key;
+        if (
+          key !== "ArrowDown" &&
+          key !== "ArrowUp" &&
+          key !== "ArrowRight" &&
+          key !== "ArrowLeft" &&
+          key !== "Home" &&
+          key !== "End"
+        )
+          return;
+        var order = visibleOrder(root);
+        var en = enabledItems(order);
+        var active = document.activeElement;
+        var cur = active && active.getAttribute && active.getAttribute("role") === "treeitem" ? active : order[0];
+        if (!cur || !root.contains(cur)) cur = en[0];
+        var i = en.indexOf(cur);
+        if (i < 0) i = 0;
+
+        if (key === "ArrowDown") {
+          e.preventDefault();
+          var ni = Math.min(en.length - 1, i + 1);
+          if (en[ni]) {
+            en[ni].focus();
+            en.forEach(function (n) {
+              n.setAttribute("tabindex", n === en[ni] ? "0" : "-1");
+            });
+          }
+          return;
+        }
+        if (key === "ArrowUp") {
+          e.preventDefault();
+          var pi = Math.max(0, i - 1);
+          if (en[pi]) {
+            en[pi].focus();
+            en.forEach(function (n) {
+              n.setAttribute("tabindex", n === en[pi] ? "0" : "-1");
+            });
+          }
+          return;
+        }
+        if (key === "Home") {
+          e.preventDefault();
+          if (en[0]) {
+            en[0].focus();
+            en.forEach(function (n) {
+              n.setAttribute("tabindex", n === en[0] ? "0" : "-1");
+            });
+          }
+          return;
+        }
+        if (key === "End") {
+          e.preventDefault();
+          var last = en[en.length - 1];
+          if (last) {
+            last.focus();
+            en.forEach(function (n) {
+              n.setAttribute("tabindex", n === last ? "0" : "-1");
+            });
+          }
+          return;
+        }
+        if (key === "ArrowRight") {
+          e.preventDefault();
+          var nested = cur.querySelector(":scope > ul.ds-tree-list");
+          if (nested && cur.getAttribute("aria-expanded") === "false") {
+            setExpanded(cur, true);
+            var kids = nested.querySelectorAll(':scope > li[role="treeitem"]');
+            var first = null;
+            for (var j = 0; j < kids.length; j++) {
+              if (kids[j].getAttribute("aria-disabled") !== "true") {
+                first = kids[j];
+                break;
+              }
+            }
+            if (first && root.contains(first)) {
+              first.focus();
+              visibleOrder(root).forEach(function (n) {
+                n.setAttribute("tabindex", n === first ? "0" : "-1");
+              });
+            }
+          }
+          return;
+        }
+        if (key === "ArrowLeft") {
+          e.preventDefault();
+          if (cur.getAttribute("aria-expanded") === "true") {
+            var nest2 = cur.querySelector(":scope > ul.ds-tree-list");
+            if (nest2) {
+              setExpanded(cur, false);
+              return;
+            }
+          }
+          var par = cur.parentElement && cur.parentElement.closest('[role="treeitem"]');
+          if (par && root.contains(par)) {
+            par.focus();
+            en.forEach(function (n) {
+              n.setAttribute("tabindex", n === par ? "0" : "-1");
+            });
+          }
+        }
+      });
+    }
+
+    function paintMatrix() {
+      var sk = sizeKey();
+      matrixShell(trMx, function (_lbl, i) {
+        var cls = "ds-tree-row";
+        if (i === 1) cls += " is-hov";
+        if (i === 2) cls += " is-sel";
+        if (i === 3) cls += " is-dis";
+        if (i === 4) cls += " is-foc";
+        var dis = i === 3 ? ' aria-disabled="true"' : "";
+        return (
+          '<div class="ds-tree ds-tree--matrix" data-size="' +
+          sk +
+          '" data-variant="simple" role="presentation">' +
+          '<div class="' +
+          cls +
+          '"' +
+          dis +
+          ' role="row">' +
+          '<span class="ds-tree-toggle ds-tree-toggle--leaf" aria-hidden="true"><span class="ds-tree-toggle-ic"></span></span>' +
+          '<span class="ds-tree-label">' +
+          trMx[i] +
+          "</span></div></div>"
+        );
+      });
+    }
+
+    function renderLive() {
+      liveRoot.innerHTML = liveHtml();
+      wireTree();
+    }
+
+    window.__dsRefresh = function () {
+      renderLive();
+      paintMatrix();
+    };
+
+    pgVariant.disabled = false;
+    pgSize.disabled = false;
+    pgVariant.addEventListener("change", window.__dsRefresh);
+    pgSize.addEventListener("change", window.__dsRefresh);
+    window.__dsRefresh();
+  }
+
   function mountTabs() {
     var tbMx = ["Default", "Hover", "Selected", "Disabled", "Focus"];
 
@@ -9243,6 +9714,7 @@
       steps: mountSteps,
       upload: mountUpload,
       tabs: mountTabs,
+      tree: mountTree,
     };
     (mountMap[SLUG] || mountGeneric)();
   }

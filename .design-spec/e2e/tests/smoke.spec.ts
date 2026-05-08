@@ -78,6 +78,9 @@ const uploadDemo = pathToFileURL(
 const tabsDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/tabs.html")
 ).href;
+const treeDemo = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/components/tree.html")
+).href;
 
 test.describe("Design-spec HTML demos (smoke)", () => {
   test("alert: live region mounts with role=alert", async ({ page }) => {
@@ -514,5 +517,27 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await expect(page.getByLabel("Tabs demo kind")).toBeFocused();
     await page.getByLabel("Tabs demo size").focus();
     await expect(page.getByLabel("Tabs demo size")).toBeFocused();
+  });
+
+  test("tree: live mounts tree and treeitems", async ({ page }) => {
+    await page.goto(treeDemo);
+    await page.waitForFunction(
+      () =>
+        !!document.querySelector("#liveRoot #trRoot.ds-tree") &&
+        !!document.querySelector('#liveRoot [role="tree"]') &&
+        !!document.querySelector('#liveRoot [role="treeitem"]'),
+      null,
+      { timeout: 15_000 }
+    );
+    await expect(page.locator("#liveRoot #trRoot.ds-tree").first()).toBeVisible();
+    await expect(page.locator('#liveRoot [role="treeitem"]').first()).toBeVisible();
+  });
+
+  test("tree: mode and size selects are keyboard-reachable", async ({ page }) => {
+    await page.goto(treeDemo);
+    await page.getByLabel("Tree demo mode").focus();
+    await expect(page.getByLabel("Tree demo mode")).toBeFocused();
+    await page.getByLabel("Tree demo size").focus();
+    await expect(page.getByLabel("Tree demo size")).toBeFocused();
   });
 });

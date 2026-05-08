@@ -539,6 +539,42 @@ def _component_size_guide_block(slug: str, md_path: Path) -> str:
     </div>
     """
         return size_hint_card + static_tb
+    if slug == "tree":
+        static_tr = """
+    <div class="card" style="border-radius:10px; margin-top:8px;">
+      <div style="padding:12px 12px 0 12px;">
+        <div class="muted" style="font-size:12px; font-weight:600;">Figma 对比（token 静态）</div>
+        <div class="muted" style="margin-top:6px; font-size:12px;">两级缩进 + 选中行；类名 <code>ds-tree-*</code>（见 <code>studio_runtime.css</code>）。</div>
+      </div>
+      <div style="padding:12px;">
+        <div class="ds-tree ds-tree--fig" data-size="md" data-variant="simple" aria-label="tree static compare" data-ds-annotate-target="1">
+          <ul class="ds-tree-list" role="presentation">
+            <li class="ds-tree-node" role="presentation">
+              <div class="ds-tree-row" role="presentation">
+                <button type="button" class="ds-tree-toggle" tabindex="-1" aria-hidden="true"><span class="ds-tree-toggle-ic" aria-hidden="true">\u25bc</span></button>
+                <span class="ds-tree-label">Project</span>
+              </div>
+              <ul class="ds-tree-list" role="presentation">
+                <li class="ds-tree-node" role="presentation">
+                  <div class="ds-tree-row is-hov" role="presentation" data-ds-annotate-target="1">
+                    <span class="ds-tree-toggle ds-tree-toggle--leaf" aria-hidden="true"><span class="ds-tree-toggle-ic"></span></span>
+                    <span class="ds-tree-label">Hover child</span>
+                  </div>
+                </li>
+                <li class="ds-tree-node" role="presentation">
+                  <div class="ds-tree-row is-sel" role="presentation" data-ds-annotate-target="1">
+                    <span class="ds-tree-toggle ds-tree-toggle--leaf" aria-hidden="true"><span class="ds-tree-toggle-ic"></span></span>
+                    <span class="ds-tree-label">Selected child</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    """
+        return size_hint_card + static_tr
     if slug == "cascader":
         static_cs = """
     <div class="card" style="border-radius:10px; margin-top:8px;">
@@ -1071,6 +1107,28 @@ def _component_demo_body(
             </select>
           </label>
         </aside>"""
+    elif spec.slug == "tree":
+        aside_block = """
+        <aside class="studio-aside card">
+          <h3>Preview controls</h3>
+          <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
+            对齐 <code>docs/components/tree.md</code> 与 Arco Vue <code>Tree</code>（展开/收起、选中、多选勾选等）；行与开关走 <code>--component-tree-row-*</code>、<code>--component-tree-toggle-*</code>，缩进与行高走 <code>--component-tree-layout-*</code>；勾选外观复用 <code>--component-checkbox-*</code>。表格内嵌树仍使用 <code>--component-table-tree-*</code>。
+          </p>
+          <label class="pg-field">
+            <span>Mode（演示）</span>
+            <select id="pgVariant" aria-label="Tree demo mode">
+              <option value="simple" selected>simple（仅文本行）</option>
+              <option value="checkbox">checkbox（行前勾选示意）</option>
+            </select>
+          </label>
+          <label class="pg-field">
+            <span>Size（MD / SM）</span>
+            <select id="pgSize" aria-label="Tree demo size">
+              <option value="md" selected>MD · 默认行高</option>
+              <option value="sm">SM · 紧凑行高</option>
+            </select>
+          </label>
+        </aside>"""
     elif spec.slug == "upload":
         aside_block = """
         <aside class="studio-aside card">
@@ -1531,6 +1589,16 @@ def _component_demo_body(
         )
         matrix_rows_help = (
             "五行静态：Default · Hover（<code>is-hov</code>）· Selected（<code>is-act</code>）· Disabled · Checked（<code>ds-casc-cb.is-on</code>）；尺寸随侧栏 Size 的 <code>data-size</code>。"
+        )
+    elif spec.slug == "tree":
+        live_intro_sub = (
+            "Live：<code>#trRoot.ds-tree</code> 为 <code>role=\"tree\"</code>；顶层 <code>ul.ds-tree-list</code>（<code>role=\"group\"</code>）内 <code>li.ds-tree-node[role=\"treeitem\"]</code>；"
+            "行容器 <code>.ds-tree-row</code>；可展开节点为 <code>button.ds-tree-toggle</code>（<code>aria-expanded</code>）+ 子 <code>ul</code>（收起时 <code>hidden</code>）；叶节点用占位 <code>span.ds-tree-toggle--leaf</code>；"
+            "<strong>checkbox</strong> 模式下行前 <code>span.ds-tree-cb</code> + <code>.ds-tree-cb-box</code>；键盘 <code>ArrowUp</code>/<code>ArrowDown</code>/<code>Home</code>/<code>End</code>、<code>ArrowRight</code> 展开、<code>ArrowLeft</code> 收起或回父级；"
+            "样式 <code>--component-tree-*</code>（见 <code>docs/components/tree.md</code>）。"
+        )
+        matrix_rows_help = (
+            "五行静态：Default · Hover（<code>is-hov</code>）· Selected（<code>is-sel</code>）· Disabled（<code>is-dis</code> + <code>aria-disabled</code>）· Focus（<code>is-foc</code>）；叶占位开关，尺寸随 <code>data-size</code>。"
         )
     elif spec.slug == "upload":
         live_intro_sub = (
@@ -2171,22 +2239,35 @@ def _component_preview_block(slug: str) -> str:
         return (
             shared
             + """
-        <style>
-          .tr { width: 520px; border: 1px solid var(--semantic-border-subtle,#e8e8e8); border-radius: 12px; background: var(--semantic-bg-surface,#fff); padding: 12px; }
-          .tr-row { display:flex; align-items:center; gap: 8px; padding: 8px 10px; border-radius: calc(var(--component-tree-row-radius,8) * 1px); color: var(--component-tree-row-text,#222); font-size: 14px; line-height: 20px; background: var(--component-tree-row-bg-default, transparent); }
-          .tr-row.hover { background: var(--component-tree-row-bg-hover,#f7f7f7); }
-          .tr-row.selected { background: var(--component-tree-row-bg-selected,#f7f7f7); font-weight: 500; }
-          .tri { width: 10px; height: 10px; border-right: 2px solid var(--component-tree-toggle-color,#666); border-bottom: 2px solid var(--component-tree-toggle-color,#666); transform: rotate(-45deg); }
-          .tr-indent { width: calc(var(--component-tree-indent,16) * 1px); }
-          .tr-disabled { color: var(--component-tree-row-text-disabled,#ccc); }
-          .tr-disabled .tri { border-color: var(--component-tree-toggle-color-disabled,#ccc); }
-        </style>
-        <div class="tr" aria-label="tree preview">
-          <div class="tr-row" data-ds-annotate-target="1"><span class="tri" aria-hidden="true"></span><span>Default</span></div>
-          <div class="tr-row hover" data-ds-annotate-target="1"><span class="tr-indent"></span><span class="tri" aria-hidden="true" style="transform: rotate(45deg);"></span><span>Hover</span></div>
-          <div class="tr-row" data-ds-annotate-target="1"><span class="tr-indent"></span><span style="width:10px;"></span><span>Default</span></div>
-          <div class="tr-row selected" data-ds-annotate-target="1"><span class="tri" aria-hidden="true" style="transform: rotate(45deg);"></span><span>Selected</span></div>
-          <div class="tr-row tr-disabled" data-ds-annotate-target="1"><span class="tri" aria-hidden="true"></span><span>Disabled</span></div>
+        <div class="ds-tree" data-size="md" data-variant="simple" aria-label="tree preview">
+          <ul class="ds-tree-list" role="presentation">
+            <li class="ds-tree-node" role="presentation">
+              <div class="ds-tree-row" role="presentation" data-ds-annotate-target="1">
+                <button type="button" class="ds-tree-toggle" tabindex="-1" aria-hidden="true"><span class="ds-tree-toggle-ic" aria-hidden="true">&#9660;</span></button>
+                <span class="ds-tree-label">Default</span>
+              </div>
+              <ul class="ds-tree-list" role="presentation">
+                <li class="ds-tree-node" role="presentation">
+                  <div class="ds-tree-row is-hov" role="presentation" data-ds-annotate-target="1">
+                    <span class="ds-tree-toggle ds-tree-toggle--leaf" aria-hidden="true"><span class="ds-tree-toggle-ic"></span></span>
+                    <span class="ds-tree-label">Hover</span>
+                  </div>
+                </li>
+                <li class="ds-tree-node" role="presentation">
+                  <div class="ds-tree-row is-sel" role="presentation" data-ds-annotate-target="1">
+                    <span class="ds-tree-toggle ds-tree-toggle--leaf" aria-hidden="true"><span class="ds-tree-toggle-ic"></span></span>
+                    <span class="ds-tree-label">Selected</span>
+                  </div>
+                </li>
+                <li class="ds-tree-node" role="presentation">
+                  <div class="ds-tree-row is-dis" role="presentation" aria-disabled="true" data-ds-annotate-target="1">
+                    <span class="ds-tree-toggle ds-tree-toggle--leaf" aria-hidden="true"><span class="ds-tree-toggle-ic"></span></span>
+                    <span class="ds-tree-label">Disabled</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
         """
             + end
