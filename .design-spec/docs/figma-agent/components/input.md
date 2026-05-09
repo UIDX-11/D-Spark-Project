@@ -1,27 +1,34 @@
 # Component / 组件：Input（输入框）
 
-> **Figma component key**: `Input` (replace with exact key from Figma)  
-> **RAG chunk id**: `ds-figma-agent/input`
+> **Figma component key**: *(audit — paste from library)*  
+> **RAG chunk id**: `ds-figma-agent/input`  
+> **Dev reference (Vue/HTML 勿作主 RAG)**: `.design-spec/docs/components/input.md`
 
 ---
 
 ## 1. Intent / 意图（必须与 Figma 描述一致）
 
-**中文（占位 — Sequence A 后与 Figma 对齐）**  
-用于单行文本输入与展示；支持默认、禁用、错误等状态。须与 Figma Input 描述一致。
+**中文**  
+用于短文本输入与展示（姓名、标题、搜索等）。须支持默认、悬停、聚焦、禁用、只读、报错等状态；占位符不可替代标签。
 
-**English (placeholder — align with Figma after Sequence A)**  
-Single-line text entry and display; supports default, disabled, error, and other states per the library.
+**English**  
+Short text entry and display (names, titles, search). Supports default, hover, focus, disabled, readonly, error; placeholder is not a substitute for labels.
+
+> **Sequence A**: Align ZH/EN with **Figma component documentation** verbatim.
 
 ---
 
 ## 2. Variant table / 变体表
 
-> Replace with **exact** Figma variant property names and values.
+> **Audit** Figma variant property names. Below follows `.design-spec/docs/components/input.md` axes.
 
-| Variant property (Figma) | Allowed values | Notes ZH | Notes EN |
-|--------------------------|----------------|----------|----------|
-| `TBD` | `TBD` | 从 Figma 同步 | Sync from Figma |
+| Variant property (Figma) — placeholder | Allowed values | Notes |
+|----------------------------------------|----------------|-------|
+| `Style` | Standard, Range, Search, Textarea, Password, IP, … | Pick variants actually published in library. |
+| `Size` | S, L, XL, M *(names **must match Figma**)* | Maps to `data-size` / layout tokens `s` \| `l` \| `xl`. |
+| `Affixes` | none, prefix, suffix, group, … | Composite controls keep shared height/radius. |
+| `Filled` | empty, filled | Value vs placeholder styling. |
+| `State` | default, hover, focus, typing, completed, error, disabled | Error pairs with message below field in layouts. |
 
 ---
 
@@ -29,28 +36,40 @@ Single-line text entry and display; supports default, disabled, error, and other
 
 ### Do / 推荐
 
-- ZH: 为错误与占位文案预留足够宽度；与标签对齐关系按库规范。
-- EN: Reserve width for error and placeholder copy; align with labels per library.
+- ZH: 错误态同时有边框/环与文案；聚焦环可见（键盘 `focus-visible`）。
+- EN: Error state shows border/ring + message; visible focus ring for keyboard users.
 
 ### Don’t / 禁止
 
-- ZH: 勿用硬编码色表示错误边框；须用变量。
-- EN: No ad-hoc hex for error borders; use variables.
+- ZH: 禁止硬编码 hex 表示错误边框。
+- EN: No ad-hoc hex for error borders—bind variables only.
 
 ---
 
 ## 4. Token mapping / Token 映射
 
-| Figma variable (full path or name) | Semantic token role | Usage ZH | Usage EN |
-|-----------------------------------|---------------------|----------|----------|
-| `TBD` | `semantic.border.default` | 默认边框 | Default border |
-| `TBD` | `semantic.text.placeholder` | 占位符 | Placeholder |
+| Figma variable *(audit)* | Repo role | CSS reference *(examples)* |
+|----------------------------|-----------|------------------------------|
+| *(surface/input/bg-default)* | `tokens.input.bgDefault` → component | `--component-input-bg-default` |
+| *(border/input/default)* | `tokens.input.borderDefault` | `--component-input-border-default` |
+| *(text/placeholder)* | `semantic.text.placeholder` | `--semantic-text-placeholder` |
+| *(text/primary value)* | component `input.textValue` | `--component-input-text-value` |
+| *(focus ring)* | `tokens.input.ringFocus` | `--component-input-ring-focus` |
 
 ---
 
 ## 5. Figma “code examples” / Figma 侧约定
 
-- **Auto Layout**: vertical stack for label + field + helper/error line when present; horizontal for prefix/suffix slots if defined in Figma.
+### Instance naming
+
+```
+Input / {style}-{size}-{state}
+```
+
+### Auto Layout
+
+- **Vertical stack**: label (optional) → field row → helper / error line.
+- **Horizontal**: prefix slot + field + suffix slot inside **Auto Layout** row; gap from spacing variables.
 
 ---
 
@@ -58,10 +77,10 @@ Single-line text entry and display; supports default, disabled, error, and other
 
 ### Empty / 空态
 
-- ZH: 空值即无内容；不展示伪造占位数据。
-- EN: Empty means no value; do not show fake data.
+- ZH: 「空」= 无输入值；占位符仅作提示。
+- EN: Empty means no value; placeholder is hint only.
 
 ### Error / 错误态
 
-- ZH: 错误文案简短、可行动；与 `error` 变体或附加层一致（以 Figma 为准）。
-- EN: Short, actionable error text; match `error` variant or attachment per Figma.
+- ZH: 文案简短、可行动；与 `error` 视觉状态一致。
+- EN: Short, actionable copy; matches error visual state.

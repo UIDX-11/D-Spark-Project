@@ -23,6 +23,13 @@ All authoritative, AI-retrievable specifications live in:
 - **Tokens (CSS dist)**: `.design-spec/tokens/dist/tokens.css`
 - **Designer Figma agent (starter MD + skill)**: `.design-spec/docs/figma-agent/` · `skills/design-spec-figma-agent/` · `templates/figma-agent/`
 
+## Dual RAG（双轨检索 / 勿混用）
+
+| Goal | Primary docs | Notes |
+|------|----------------|-------|
+| **Vue / HTML / Arco 行为与 demo** | `.design-spec/docs/components/*.md` + generator | Implementation truth per `ALIGNMENT_GOVERNANCE.md`. |
+| **Figma 装配（变量、变体、Auto Layout）** | `.design-spec/docs/figma-agent/` + `design-spec-figma-agent` Skill | Designer/agent builds screens in Figma; **do not** treat component `Arco API` tables as Figma variant names without Sequence A sync. |
+
 ## Routing (3-layer router)
 
 - **Router**: `design-system/SKILL.md`

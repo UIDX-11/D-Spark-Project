@@ -84,6 +84,13 @@ Normative blocks are **ZH + EN**. **Intent** must match Figma description / docu
 | Per-component | `.design-spec/docs/figma-agent/components/*.md` |
 | Scenarios | `.design-spec/docs/figma-agent/scenarios/*.md` |
 
+### Scenarios / 场景（starter）
+
+| Scenario | MD |
+|----------|-----|
+| Form page | [scenarios/page-form.md](scenarios/page-form.md) |
+| List page (CRUD) | [scenarios/page-list.md](scenarios/page-list.md) |
+
 ---
 
 ## 7. Intent index / 意图索引
@@ -93,3 +100,12 @@ Normative blocks are **ZH + EN**. **Intent** must match Figma description / docu
 | Button | [components/button.md](components/button.md) |
 | Input | [components/input.md](components/input.md) |
 | Table | [components/table.md](components/table.md) |
+
+---
+
+## 8. Scenario index / 场景索引
+
+| Page pattern | Layout reference | Figma agent scenario |
+|--------------|------------------|------------------------|
+| Form | `.design-spec/docs/layouts/page-form.md` | [scenarios/page-form.md](scenarios/page-form.md) |
+| List (CRUD) | `.design-spec/docs/layouts/page-list.md` | [scenarios/page-list.md](scenarios/page-list.md) |

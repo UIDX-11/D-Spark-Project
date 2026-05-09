@@ -1,27 +1,35 @@
 # Component / 组件：Button（按钮）
 
-> **Figma component key**: `Button` (replace with exact key from Figma)  
-> **RAG chunk id**: `ds-figma-agent/button`
+> **Figma component key**: *(audit — paste exact component key from library)*  
+> **RAG chunk id**: `ds-figma-agent/button`  
+> **Dev reference (Vue/HTML 勿作主 RAG / not primary RAG for Figma-only tasks)**: `.design-spec/docs/components/button.md`
 
 ---
 
 ## 1. Intent / 意图（必须与 Figma 描述一致）
 
-**中文（与 Figma 组件描述/文档字符串一致；以下为占位，执行 Sequence A 后替换）**  
-用于在界面中发起主要或次要操作（提交、保存、取消等）。须与 Figma 中 Button 组件说明逐字对齐。
+**中文**  
+用于触发操作（提交、保存、取消、导航下一步等）。同一区域内主操作应有清晰层级；破坏性操作须使用警示样式并有确认。
 
-**English (placeholder — replace after Sequence A sync with Figma documentation)**  
-Used to trigger primary or secondary actions (submit, save, cancel, etc.). Must match the Figma Button component description verbatim.
+**English**  
+Commits actions (submit, save, cancel, next step). Maintain clear hierarchy—typically one primary per region; destructive actions use danger styling and confirmation when irreversible.
+
+> **Sequence A**: Replace the above with **verbatim** text from the Figma component **description / documentation** (ZH + EN), keeping naming aligned.
 
 ---
 
 ## 2. Variant table / 变体表
 
-> **Replace** property names and values with the **exact** strings from the published Figma component.
+> **Audit**: Replace property names and values with **exact** strings from the published Figma component (case-sensitive). Below mirrors **design axes** from `.design-spec/docs/components/button.md` until audited.
 
-| Variant property (Figma) | Allowed values | Notes ZH | Notes EN |
-|--------------------------|----------------|----------|----------|
-| `TBD` | `TBD` | 从 Figma 同步 | Sync from Figma |
+| Variant property (Figma) — placeholder | Allowed values (示例，须与 Figma 一致) | Notes |
+|------------------------------------------|------------------------------------------|-------|
+| `Style` *(或稿侧命名)* | Primary, Secondary, Tertiary, Outline, Link | Maps to token families `primary` / `neutral` / `outline` / `link` / `danger`. |
+| `Kind` | Standard, Danger | Danger = destructive / irreversible. |
+| `Size` | XL, L, M, S *(或 md/sm/lg —**以 Figma 为准**)* | Align with `--component-button-layout-live-*` sizes in token sheet. |
+| `Leading icon` | true / false | Icon slot optional. |
+| `Type` | Default, Icon-only | Icon-only hit target still meets minimum size. |
+| `State` *(实例状态)* | default, hover, active, focus-visible, disabled, loading | Loading keeps stable width where specified. |
 
 ---
 
@@ -29,24 +37,28 @@ Used to trigger primary or secondary actions (submit, save, cancel, etc.). Must 
 
 ### Do / 推荐
 
-- ZH: 同一视觉区域内主操作按钮数量克制；加载态保留可识别性。
-- EN: Limit primary buttons per region; keep loading state recognizable.
+- ZH: 区域内尽量只有 **一个主按钮**；按钮组水平间距使用变量（仓库语义：`semantic.layout.buttonGroupGap` → `--semantic-layout-button-group-gap`）。
+- EN: Prefer **one primary** per region; horizontal spacing in groups uses tokens (`semantic.layout.buttonGroupGap`).
 
 ### Don’t / 禁止
 
-- ZH: 不要用透明度模拟禁用；不要用非库内组件冒充 Button。
-- EN: Do not fake disabled state with opacity only; do not use non-library substitutes.
+- ZH: 不要用透明度伪装禁用态；不要用非库内组件冒充按钮。
+- EN: Do not fake disabled with opacity alone; no non-library substitutes.
 
 ---
 
-## 4. Token mapping / Token 映射（Figma Variables ↔ semantic）
+## 4. Token mapping / Token 映射（Figma Variables ↔ semantic / component）
 
-**Rule / 规则**: Use only collections listed in [MASTER.md](../MASTER.md).
+**Rule**: Left column = **Figma variable path/name** (fill after Inspect). Right column = repo role (`semantic.*` JSON path under `.design-spec/tokens/src/semantic.json` or `component.*` under `component.json`). See `docs/ALIGNMENT_GOVERNANCE.md` §2.
 
-| Figma variable (full path or name) | Semantic token role | Usage ZH | Usage EN |
-|-----------------------------------|---------------------|----------|----------|
-| `TBD` | `semantic.action.primary.bg` | 主按钮背景 | Primary fill |
-| `TBD` | `semantic.text.primary` | 主按钮文案 | Primary label |
+| Figma variable *(audit)* | Repo role | CSS reference *(generated)* |
+|---------------------------|-----------|-------------------------------|
+| *(e.g. color/primary/bg-default)* | `semantic.action.primary.bg` | `--semantic-action-primary-bg` |
+| *(e.g. color/text/on-primary)* | `semantic.action.primary.text` | `--semantic-action-primary-text` |
+| *(e.g. spacing/button-group-gap)* | `semantic.layout.buttonGroupGap` | `--semantic-layout-button-group-gap` |
+| *(component fills)* | `tokens.button.primary.bgDefault` → component | `--component-button-primary-bg-default` |
+
+_Add one row per binding used on reference instances; remove rows that do not exist in Figma._
 
 ---
 
@@ -55,14 +67,15 @@ Used to trigger primary or secondary actions (submit, save, cancel, etc.). Must 
 ### Instance naming / 实例命名
 
 ```
-Button / {variant}-{state}
+Button / {style}-{kind}-{size}
+Example: Button / Primary-Standard-L
 ```
 
 ### Auto Layout / 自动布局
 
-- **Direction / 方向**: Horizontal for label + optional icon.
-- **Padding / 内边距**: Bind horizontal/vertical padding to spacing variables after audit.
-- **Gap / 间距**: Icon–label gap from library convention.
+- **Direction**: horizontal for label + optional icons.
+- **Padding**: map horizontal/vertical padding to spacing variables from library (match **Sizes** in dev doc).
+- **Min width**: respect library min-width for text buttons; icon-only uses square frame per size.
 
 ---
 
@@ -70,10 +83,10 @@ Button / {variant}-{state}
 
 ### Empty / 空态
 
-- ZH: 按钮本身无空态；若置于空工具栏，遵循场景模板。
-- EN: No empty state on the control itself; follow scenario MD if inside an empty toolbar.
+- ZH: 控件本身无「空」态；置于空工具栏时遵循场景模板。
+- EN: No empty state on control; follow scenario MD when inside empty toolbar.
 
 ### Error / 错误态
 
-- ZH: 错误由表单/页面反馈承载；按钮可用 `danger` 变体表达破坏性操作（以 Figma 为准）。
-- EN: Errors live in form/page patterns; use destructive variant per Figma when applicable.
+- ZH: 表单级错误在字段/页面反馈；按钮不承担长错误文案。
+- EN: Field/page handles validation errors; button stays concise.
