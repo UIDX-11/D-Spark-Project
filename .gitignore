@@ -1,2 +1,3 @@
 # Local / agent artifacts
 test-results/
+.design-spec/checks/reports/
