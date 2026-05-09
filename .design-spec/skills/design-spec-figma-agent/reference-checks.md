@@ -50,5 +50,6 @@ Use after **Sequence A** (MD sync) or **Sequence B** (Figma build). Split into *
 
 ## Automation notes / 自动化说明
 
+- **Repo script**: `python3 .design-spec/checks/validate_figma_agent_docs.py` — verifies MASTER anchors and required headings under `docs/figma-agent/` (subset of **B6**). Wire into CI next to `doc_accuracy_guard.py`.
 - **Full automation** depends on your Figma setup (REST API, plugins, or MCP scripts). Until wired, treat **B1–B3** as **semi‑auto** via structured MCP inspection + checklist.
 - **Regression**: When adding automation, store allowlists: collection IDs, library file keys, component keys.

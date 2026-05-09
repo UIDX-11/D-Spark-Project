@@ -85,3 +85,18 @@ In **Arco Design Vue**, range rows are often composed from two `a-input` (or sim
 ## HTML preview
 
 Static demo: `[input-range.html](../../demos/components/input-range.html)` — **size**, **layout** (`Plain` vs **With suffix unit**), optional **suffix unit** text, plus a **status matrix** (plain rows + with-unit + with-unit error).
+
+## Layout patterns
+
+- **Filters / settings**: place min–max on one horizontal row; align with Input height tokens.
+- **Forms**: pair under a single `FormItem` when both values share one label (“Range”).
+
+## Anti-patterns
+
+- Using this pattern for **date** ranges (use **DatePicker** / range picker instead).
+- Unequal field widths without design intent (hurts scanability).
+
+## Accessibility essentials
+
+- Provide visible labels or `aria-label` for min and max fields; associate inline errors with `aria-describedby`.
+- Decorative separators between fields remain `aria-hidden` where they carry no meaning.

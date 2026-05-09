@@ -11,6 +11,13 @@ Molecular
 - range picker
 - calendar picker
 
+## References
+
+- Arco Vue（API / 行为真源）: [DatePicker](https://arco.design/vue/component/date-picker)
+- Arco 源码: `arco-design-vue/packages/web-vue/components/date-picker/`
+- Figma（Light，视觉真源）: 见本文 **「Figma 参考」** 各节点链接；文件总入口 [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026)。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
 ## Best practices
 
 - **Use for**: selecting a date, date range, and optionally time.

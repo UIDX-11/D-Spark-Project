@@ -10,6 +10,13 @@ Molecular (composition container)
 - shell
 - container / region
 
+## References
+
+- Arco Vue（API / 行为真源）: [Layout](https://arco.design/vue/component/layout)
+- Arco 源码: `arco-design-vue/packages/web-vue/components/layout/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 Layout / 页面框架画板并补充 `node-id=` 深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
 ## Best practices
 
 - **Use for**: structuring a page into predictable regions (header/sidebar/content/footer).

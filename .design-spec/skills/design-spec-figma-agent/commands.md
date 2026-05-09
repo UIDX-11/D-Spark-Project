@@ -41,6 +41,12 @@ Run in an **AI agent session** (Cursor, Claude Code, etc.) with the **design-spe
 
 Execute checks in [reference-checks.md](reference-checks.md).
 
+**Structured MD checks (repo)**:
+
+```bash
+python3 .design-spec/checks/validate_figma_agent_docs.py
+```
+
 **Pass criteria**: all **Blocking** items clear, or explicitly waived in writing with owner + reason.
 
 **On failure**: return to Sequence A (if MD drift) or Sequence B (if build drift), then re-run C.

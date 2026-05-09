@@ -9,6 +9,13 @@ Molecular
 - pager
 - page navigator
 
+## References
+
+- Arco Vue（API / 行为真源）: [Pagination](https://arco.design/vue/component/pagination)
+- Arco 源码: `arco-design-vue/packages/web-vue/components/pagination/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 Pagination 画板并补充 `node-id=` 深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
 ## Best practices
 
 - **Use for**: large lists/tables; keep pagination near the content it controls (usually bottom-right).

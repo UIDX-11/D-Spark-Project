@@ -11,6 +11,13 @@ Molecular
 - statistic
 - number badge (when compact)
 
+## References
+
+- Arco Vue（API / 行为真源）: [Statistic](https://arco.design/vue/component/statistic)（数值展示优先对齐 Statistic；复杂 KPI 组合按治理文档约束）
+- Arco 源码: `arco-design-vue/packages/web-vue/components/statistic/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 Data display / number 相关画板并补充带 `node-id=` 的深链接。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
 ## Best practices
 
 - **Use for**: displaying key numeric values (counts, amounts, percentages).

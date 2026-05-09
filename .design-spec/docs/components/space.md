@@ -10,6 +10,13 @@ Molecular (spacing/composition helper)
 - stack
 - inline spacing
 
+## References
+
+- Arco Vue（API / 行为真源）: [Space](https://arco.design/vue/component/space)
+- Arco 源码: `arco-design-vue/packages/web-vue/components/space/`
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 间距与组件留白以稿为准。
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
 ## Best practices
 
 - **Use for**: consistent spacing between elements in a row/column.

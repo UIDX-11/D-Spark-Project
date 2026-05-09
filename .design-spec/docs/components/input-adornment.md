@@ -53,3 +53,13 @@ Molecular
 
 - **Name**: primary name on **`input`**; adornment icons/buttons need their own **`aria-label`**.
 - **Keyboard**: suffix buttons must be focusable and activatable with **Enter** / **Space** (demo 仅展示结构，可逐步加厚交互测试)。
+
+## Layout patterns
+
+- **Filter / form rows**: prefix/suffix aligned to Input **S/L/XL** heights; use `Space` or grid for multi-field rows.
+- **Toolbars**: compact suffix actions (search, send) share one baseline with the field.
+
+## Anti-patterns
+
+- Using adornments as the **only** accessible name (always expose label or `aria-label` on the input).
+- Different vertical alignment between addon and field without token-driven correction.

@@ -148,6 +148,8 @@ All values below must come from component tokens (`.design-spec/tokens/src/compo
 | ------------------------------ | ------------------------------------------------- |
 | `tokens.layout.buttonGroupGap` | `--semantic-layout-button-group-gap`（按钮组水平 `gap`） |
 
+定义来源：`semantic.json` → `layout.buttonGroupGap`；生成 `tokens/dist/tokens.css`。**落地**：`generator/studio_runtime.css` 与生成 HTML demo 中按钮行（`.b-row`）使用 `gap: calc(var(--semantic-layout-button-group-gap) * 1px)`。
+
 
 ## Interaction & cursor
 

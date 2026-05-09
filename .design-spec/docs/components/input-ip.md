@@ -58,6 +58,22 @@ Align with **Input** studio sizes: `mini` / `small` / `medium` / `large` (Figma 
 
 `[input-ip.html](../../demos/components/input-ip.html)`
 
+## Layout patterns
+
+- **Forms**: full-width or fixed max-width; IP row sits in the same vertical rhythm as single **Input** fields.
+- **Filters**: only when the product truly filters by IPv4; otherwise use plain **Input** with validation.
+
+## Anti-patterns
+
+- Using this control for **hostnames** or **IPv6** (use a single text field with appropriate validation).
+- Highlighting the **entire** row red for a single-octet error (Figma: only the bad segment is red).
+
+## Accessibility essentials
+
+- **Group label**: the outer control has one visible or `aria-label` name (e.g. “IP address”).
+- **Octets**: each segment has a distinct `aria-label` (“First octet” … “Fourth octet”); link helper/error text with `aria-describedby` when present.
+- **Keyboard**: document Tab order between segments; `Backspace` on empty moves focus per product rules.
+
 ## Relationship to Input
 
 Documented separately from the multi-variant `[input.html](../../demos/components/input.html)` page; shares the same component token prefix `**input**` in generated token snapshots.
