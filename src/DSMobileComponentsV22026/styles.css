@@ -1,0 +1,1836 @@
+:root {
+  --灰色-dust\/light\/10: #FFF;
+  --灰色-dust\/light\/20: #FAFAFA;
+  --灰色-dust\/light\/30: #F7F7F7;
+  --灰色-dust\/light\/40: #EDEDED;
+  --灰色-dust\/light\/50: #E8E8E8;
+  --灰色-dust\/light\/60: #D9D9D9;
+  --灰色-dust\/light\/70: #CCC;
+  --灰色-dust\/light\/80: #BFBFBF;
+  --灰色-dust\/light\/90: #A3A3A3;
+  --灰色-dust\/light\/100: #999;
+  --灰色-dust\/light\/110: #666;
+  --灰色-dust\/light\/120: #222;
+  --灰色-dust\/light\/130: #000;
+  --灰色-dust\/dark\/10: #111;
+  --灰色-dust\/dark\/20: #1F1F1F;
+  --灰色-dust\/dark\/30: #2E2E2E;
+  --灰色-dust\/dark\/40: #333;
+  --灰色-dust\/dark\/50: #383838;
+  --灰色-dust\/dark\/60: #262626;
+  --灰色-dust\/dark\/70: #2B2B2B;
+  --灰色-dust\/dark\/80: #3D3D3D;
+  --灰色-dust\/dark\/90: #4C4C4C;
+  --灰色-dust\/dark\/100: #5F5F5F;
+  --灰色-dust\/dark\/110: #696969;
+  --灰色-dust\/dark\/120: #858585;
+  --灰色-dust\/dark\/130: #A0A0A0;
+  --灰色-dust\/dark\/140: #EEE;
+  --灰色-dust\/dark\/150: #FFF;
+  --深灰\/light\/10: #F0F0F0;
+  --深灰\/light\/20: #D1D1D1;
+  --深灰\/light\/30: #B2B2B2;
+  --深灰\/light\/40: #858585;
+  --深灰\/light\/50: #666;
+  --深灰\/light\/60: #525252;
+  --深灰\/dark\/10: #404040;
+  --深灰\/dark\/20: #575757;
+  --深灰\/dark\/30: #676767;
+  --深灰\/dark\/40: #737373;
+  --深灰\/dark\/50: #A0A0A0;
+  --深灰\/dark\/60: #8C8C8C;
+  --橙色-vibrant-orange\/light\/10: #FFF2E5;
+  --橘色-orange\/light\/10: #FFF2E5;
+  --橘色-orange\/light\/20: #FFD9B2;
+  --橘色-orange\/light\/30: #FFC080;
+  --橘色-orange\/light\/40: #FF9A33;
+  --橘色-orange\/light\/50: #FF8100;
+  --橘色-orange\/light\/60: #EB7700;
+  --橘色-orange\/dark\/10: #3E2C1A;
+  --橘色-orange\/dark\/20: #5B330B;
+  --橘色-orange\/dark\/30: #63370A;
+  --橘色-orange\/dark\/40: #8C4A07;
+  --橘色-orange\/dark\/50: #DE7000;
+  --橘色-orange\/dark\/60: #C96600;
+  --橙色-vibrant-orange\/light\/20: #FFE6CC;
+  --橙色-vibrant-orange\/light\/30: #FFCD99;
+  --橙色-vibrant-orange\/light\/40: #FFC080;
+  --橙色-vibrant-orange\/light\/50: #FF8100;
+  --橙色-vibrant-orange\/light\/60: #E57400;
+  --橙色-vibrant-orange\/dark\/10: #3E2C1A;
+  --橙色-vibrant-orange\/dark\/20: #5B330B;
+  --橙色-vibrant-orange\/dark\/30: #63370A;
+  --橙色-vibrant-orange\/dark\/40: #8C4A07;
+  --橙色-vibrant-orange\/dark\/50: #DE7000;
+  --橙色-vibrant-orange\/dark\/60: #C96600;
+  --黄色-yellow\/light\/10: #FFF7E7;
+  --黄色-yellow\/light\/20: #FFE6B8;
+  --黄色-yellow\/light\/30: #FFD689;
+  --黄色-yellow\/light\/40: #FFBD43;
+  --黄色-yellow\/light\/50: #FFAD14;
+  --黄色-yellow\/light\/60: #EB9F12;
+  --黄色-yellow\/dark\/10: #4A3F29;
+  --黄色-yellow\/dark\/20: #6E5424;
+  --黄色-yellow\/dark\/30: #866220;
+  --黄色-yellow\/dark\/40: #986D1D;
+  --黄色-yellow\/dark\/50: #DE9711;
+  --黄色-yellow\/dark\/60: #C98910;
+  --柠檬黄lemon-yellow\/light\/10: #F9F7E5;
+  --柠檬黄lemon-yellow\/light\/20: #EDE7B2;
+  --柠檬黄lemon-yellow\/light\/30: #E0D780;
+  --柠檬黄lemon-yellow\/light\/40: #CEBF33;
+  --柠檬黄lemon-yellow\/light\/50: #C2AE00;
+  --柠檬黄lemon-yellow\/light\/60: #AD9C00;
+  --柠檬黄lemon-yellow\/dark\/10: #403E27;
+  --柠檬黄lemon-yellow\/dark\/20: #57511D;
+  --柠檬黄lemon-yellow\/dark\/30: #675F17;
+  --柠檬黄lemon-yellow\/dark\/40: #736912;
+  --柠檬黄lemon-yellow\/dark\/50: #A19100;
+  --柠檬黄lemon-yellow\/dark\/60: #8C7E00;
+  --绿色-green\/light\/10: #E6F6EF;
+  --草绿-grass-green\/light\/10: #F2F9E5;
+  --草绿-grass-green\/light\/20: #D7EDB2;
+  --草绿-grass-green\/light\/30: #BDE080;
+  --草绿-grass-green\/light\/40: #95CE33;
+  --草绿-grass-green\/light\/50: #7BC200;
+  --草绿-grass-green\/light\/60: #6EAD00;
+  --草绿-grass-green\/dark\/10: #374027;
+  --草绿-grass-green\/dark\/20: #42571D;
+  --草绿-grass-green\/dark\/30: #4A6717;
+  --草绿-grass-green\/dark\/40: #4F7312;
+  --草绿-grass-green\/dark\/50: #66A100;
+  --草绿-grass-green\/dark\/60: #598C00;
+  --绿色-green\/light\/20: #B5E5CE;
+  --绿色-green\/light\/30: #84D5AD;
+  --绿色-green\/light\/40: #3ABB7D;
+  --绿色-green\/light\/50: #09AA5C;
+  --绿色-green\/light\/60: #08914F;
+  --红色-red\/light\/10: #FEEDEC;
+  --珊瑚红-coral-red\/light\/10: #FDEFF0;
+  --珊瑚红-coral-red\/light\/20: #FAD0D1;
+  --珊瑚红-coral-red\/light\/30: #F7B0B2;
+  --珊瑚红-coral-red\/light\/40: #F38084;
+  --珊瑚红-coral-red\/light\/50: #F06165;
+  --珊瑚红-coral-red\/light\/60: #DB595D;
+  --珊瑚红-coral-red\/dark-暂时未改\/10-\#3b2424: #BD3837;
+  --珊瑚红-coral-red\/dark-暂时未改\/20-\#562121: #D13E3D;
+  --珊瑚红-coral-red\/dark-暂时未改\/30-\#5e2323: #DA6564;
+  --珊瑚红-coral-red\/dark-暂时未改\/40-\#842c2b: #E89F9E;
+  --珊瑚红-coral-red\/dark-暂时未改\/50-\#d13e3d: #F1C5C5;
+  --珊瑚红-coral-red\/dark-暂时未改\/60-\#bd3837: #FAECEC;
+  --红色-red\/light\/20: #FBC8C7;
+  --红色-red\/light\/30: #F8A3A2;
+  --红色-red\/light\/40: #F46D6B;
+  --红色-red\/light\/50: #F14846;
+  --红色-red\/light\/60: #DE4240;
+  --青色-cyan\/light\/10: #E9F7FA;
+  --青色-cyan\/light\/20: #BCE7F0;
+  --青色-cyan\/light\/30: #90D7E7;
+  --青色-cyan\/light\/40: #4DBFD8;
+  --青色-cyan\/light\/50: #21AFCF;
+  --青色-cyan\/light\/60: #1E9DBA;
+  --青色-cyan\/dark\/10: #2B3E42;
+  --青色-cyan\/dark\/20: #27525C;
+  --青色-cyan\/dark\/30: #25606E;
+  --青色-cyan\/dark\/40: #236A7A;
+  --青色-cyan\/dark\/50: #1C93AD;
+  --青色-cyan\/dark\/60: #188199;
+  --蓝色-blue\/light\/10: #EDF1FF;
+  --蓝色-blue\/light\/20: #C8D6FF;
+  --深蓝色-dark-blue\/light\/10: #E5EFFD;
+  --蓝色-blue\/light\/30: #A3BAFF;
+  --深蓝色-dark-blue\/light\/20: #D2E5FF;
+  --蓝色-blue\/light\/40: #6C91FF;
+  --蓝色-blue\/light\/50: #4776FF;
+  --蓝色-blue\/light\/60: #426CEB;
+  --深蓝色-dark-blue\/light\/30: #ECF1FC;
+  --深蓝色-dark-blue\/light\/40: #C5D6F7;
+  --深蓝色-dark-blue\/light\/50: #9FBBF1;
+  --深蓝色-dark-blue\/light\/60: #6593E9;
+  --深蓝色-dark-blue\/light\/70: #3F78E4;
+  --深蓝色-dark-blue\/light\/80: #396DCF;
+  --湖蓝-lake-blue\/light\/10: #B9C5DF;
+  --粉色-pink\/light\/10: #FFF0F8;
+  --紫色-purple\/light\/10: #F1EFFC;
+  --棕色-brown\/light\/10: #F5F2EF;
+  --棕色-brown\/light\/20: #E0D9D0;
+  --棕色-brown\/light\/30: #CCC0B0;
+  --棕色-brown\/light\/40: #AD9A81;
+  --棕色-brown\/light\/50: #988061;
+  --棕色-brown\/light\/60: #857055;
+  --棕色-brown\/dark-暂时未改\/10: #857055;
+  --棕色-brown\/dark-暂时未改\/20: #988061;
+  --棕色-brown\/dark-暂时未改\/30: #938470;
+  --棕色-brown\/dark-暂时未改\/40: #BBB2A6;
+  --棕色-brown\/dark-暂时未改\/50: #D6D1C9;
+  --棕色-brown\/dark-暂时未改\/60: #F1F0ED;
+  --紫色-purple\/light\/20: #D4CEF7;
+  --紫色-purple\/light\/30: #B7AEF2;
+  --紫色-purple\/light\/40: #8B7DEA;
+  --紫色-purple\/light\/50: #6E5CE5;
+  --紫色-purple\/light\/60: #6554D1;
+  --紫色-purple\/dark\/10: #363346;
+  --紫色-purple\/dark\/20: #3F3A64;
+  --紫色-purple\/dark\/30: #463E79;
+  --紫色-purple\/dark\/40: #4B4288;
+  --紫色-purple\/dark\/50: #5F4FC4;
+  --紫色-purple\/dark\/60: #5547B0;
+  --粉色-pink\/light\/20: #FED2EA;
+  --粉色-pink\/light\/30: #FDB4DC;
+  --粉色-pink\/light\/40: #FD87C7;
+  --粉色-pink\/light\/50: #FC69B9;
+  --粉色-pink\/light\/60: #E861AA;
+  --粉色-pink\/dark\/10: #4A3540;
+  --粉色-pink\/dark\/20: #6C3E57;
+  --粉色-pink\/dark\/30: #854567;
+  --粉色-pink\/dark\/40: #964973;
+  --粉色-pink\/dark\/50: #DB5BA1;
+  --粉色-pink\/dark\/60: #C75392;
+  --湖蓝-lake-blue\/light\/20: #506DAF;
+  --湖蓝-lake-blue\/light\/30: #48629D;
+  --遮罩颜色-specialcolor\/light\/10-\#000000-30\%: #0000004D;
+  --遮罩颜色-specialcolor\/light\/30-\#000000-80\%: #000C;
+  --遮罩颜色-specialcolor\/dark\/10-\#000000-60\%: #0009;
+  --遮罩颜色-specialcolor\/dark\/20-\#ffffff-80\%: #FFFC;
+  --阴影-projection\/light\/通用阴影: #00000014;
+  --绿色-green\/dark\/10: #283D33;
+  --绿色-green\/dark\/20: #204F38;
+  --绿色-green\/dark\/30: #1B5C3C;
+  --绿色-green\/dark\/40: #17653F;
+  --绿色-green\/dark\/50: #078A4B;
+  --绿色-green\/dark\/60: #06753F;
+  --红色-red\/dark\/10: #483130;
+  --红色-red\/dark\/20: #693433;
+  --红色-red\/dark\/30: #803635;
+  --红色-red\/dark\/40: #903837;
+  --红色-red\/dark\/50: #D13E3D;
+  --红色-red\/dark\/60: #BD3837;
+  --深蓝色-dark-blue\/dark\/10: #1A2538;
+  --深蓝色-dark-blue\/dark\/20: #212F47;
+  --深蓝色-dark-blue\/dark\/30: #2F3746;
+  --深蓝色-dark-blue\/dark\/40: #314263;
+  --深蓝色-dark-blue\/dark\/50: #324A78;
+  --深蓝色-dark-blue\/dark\/60: #335087;
+  --深蓝色-dark-blue\/dark\/70: #3666C2;
+  --深蓝色-dark-blue\/dark\/80: #305BAD;
+  --湖蓝-lake-blue\/dark\/10: #293550;
+  --湖蓝-lake-blue\/dark\/20: #41598F;
+  --湖蓝-lake-blue\/dark\/30: #384C7A;
+  --主色-primary\/global-light\/10: var(--中性色-neutral\/global-light\/120);
+  --主色-primary\/global-light\/20: var(--橙色-vibrant-orange\/light\/10);
+  --主色-primary\/global-light\/30: var(--橙色-vibrant-orange\/light\/20);
+  --主色-primary\/global-light\/40: var(--橙色-vibrant-orange\/light\/30);
+  --主色-primary\/global-light\/50: var(--橙色-vibrant-orange\/light\/40);
+  --主色-primary\/global-light\/60: var(--橙色-vibrant-orange\/light\/50);
+  --主色-primary\/global-dark\/10: var(--灰色-dust\/dark\/140);
+  --主色-primary\/global-dark\/20: var(--橙色-vibrant-orange\/dark\/10);
+  --主色-primary\/eu-light\/0: var(--white\/100);
+  --主色-primary\/global-dark\/30: var(--橙色-vibrant-orange\/dark\/20);
+  --主色-primary\/global-dark\/40: var(--橙色-vibrant-orange\/dark\/30);
+  --主色-primary\/global-dark\/50: var(--橙色-vibrant-orange\/dark\/40);
+  --主色-primary\/global-dark\/60: var(--橙色-vibrant-orange\/dark\/50);
+  --主色-primary\/eu-light\/10: var(--violet\/10);
+  --主色-primary\/eu-light\/25: var(--violet\/25);
+  --主色-primary\/eu-light\/50: var(--violet\/50);
+  --主色-primary\/eu-light\/100: var(--violet\/100);
+  --主色-primary\/eu-light\/100-0: var(--violet\/100-0);
+  --主色-primary\/eu-light\/150: var(--violet\/150);
+  --主色-primary\/eu-light\/200: var(--violet\/200);
+  --主色-primary\/eu-light\/300: var(--violet\/300);
+  --主色-primary\/eu-light\/400: var(--violet\/400);
+  --主色-primary\/eu-light\/500: var(--violet\/500);
+  --主色-primary\/eu-light\/600: var(--violet\/600);
+  --主色-primary\/eu-light\/700: var(--violet\/700);
+  --主色-primary\/eu-light\/800: var(--violet\/800);
+  --主色-primary\/eu-light\/850: var(--violet\/850);
+  --主色-primary\/eu-light\/900: var(--violet\/900);
+  --主色-primary\/eu-light\/950: var(--violet\/950);
+  --主色-primary\/eu-dark\/0: var(--white\/100);
+  --主色-primary\/eu-dark\/10: var(--violet\/10);
+  --主色-primary\/eu-dark\/25: var(--violet\/25);
+  --主色-primary\/eu-dark\/50: var(--violet\/50);
+  --主色-primary\/eu-dark\/100: var(--violet\/100);
+  --主色-primary\/eu-dark\/150: var(--violet\/150);
+  --主色-primary\/eu-dark\/200: var(--violet\/200);
+  --主色-primary\/eu-dark\/300: var(--violet\/300);
+  --主色-primary\/eu-dark\/400: var(--violet\/400);
+  --主色-primary\/eu-dark\/400-0: var(--violet\/400-0);
+  --主色-primary\/eu-dark\/500: var(--violet\/500);
+  --主色-primary\/eu-dark\/600: var(--violet\/600);
+  --主色-primary\/eu-dark\/700: var(--violet\/700);
+  --主色-primary\/eu-dark\/800: var(--violet\/800);
+  --主色-primary\/eu-dark\/850: var(--violet\/850);
+  --主色-primary\/eu-dark\/900: var(--violet\/900);
+  --主色-primary\/eu-dark\/950: var(--violet\/950);
+  --中性色-neutral\/global-light\/10: var(--灰色-dust\/light\/10);
+  --中性色-neutral\/global-light\/20: var(--灰色-dust\/light\/20);
+  --中性色-neutral\/global-light\/30: var(--灰色-dust\/light\/30);
+  --中性色-neutral\/global-light\/40: var(--灰色-dust\/light\/40);
+  --中性色-neutral\/global-light\/50: var(--灰色-dust\/light\/50);
+  --中性色-neutral\/global-light\/60: var(--灰色-dust\/light\/60);
+  --中性色-neutral\/global-light\/70: var(--灰色-dust\/light\/70);
+  --中性色-neutral\/global-light\/80: var(--灰色-dust\/light\/80);
+  --中性色-neutral\/global-light\/90: var(--灰色-dust\/light\/90);
+  --中性色-neutral\/global-light\/100: var(--灰色-dust\/light\/100);
+  --中性色-neutral\/global-light\/110: var(--灰色-dust\/light\/110);
+  --中性色-neutral\/global-light\/120: var(--灰色-dust\/light\/120);
+  --品牌色-brand\/global-light\/10: var(--橙色-vibrant-orange\/light\/10);
+  --品牌色-brand\/global-light\/20: var(--橙色-vibrant-orange\/light\/20);
+  --品牌色-brand\/global-light\/30: var(--橙色-vibrant-orange\/light\/40);
+  --品牌色-brand\/global-light\/40: var(--橙色-vibrant-orange\/light\/50);
+  --品牌色-brand\/global-light\/50: var(--橙色-vibrant-orange\/light\/60);
+  --链接-link\/global-light\/10: var(--湖蓝-lake-blue\/light\/10);
+  --链接-link\/global-light\/20: var(--湖蓝-lake-blue\/light\/20);
+  --链接-link\/global-light\/30: var(--湖蓝-lake-blue\/light\/30);
+  --成功-success\/global-light\/10: var(--绿色-green\/light\/10);
+  --成功-success\/global-light\/20: var(--绿色-green\/light\/20);
+  --成功-success\/global-light\/30: var(--绿色-green\/light\/30);
+  --成功-success\/global-light\/40: var(--绿色-green\/light\/40);
+  --成功-success\/global-light\/50: var(--绿色-green\/light\/50);
+  --成功-success\/global-light\/60: var(--绿色-green\/light\/60);
+  --告警-warning\/global-light\/10: var(--黄色-yellow\/light\/10);
+  --告警-warning\/global-light\/20: var(--黄色-yellow\/light\/20);
+  --告警-warning\/global-light\/30: var(--黄色-yellow\/light\/30);
+  --告警-warning\/global-light\/40: var(--黄色-yellow\/light\/40);  /* 标签线性边框等 Label linear border, etc */
+  --告警-warning\/global-light\/50: var(--黄色-yellow\/light\/50);  /* 标签文本等 Label text, etc. */
+  --告警-warning\/global-light\/60: var(--黄色-yellow\/light\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --危险-danger\/global-light\/10: var(--红色-red\/light\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --危险-danger\/global-light\/20: var(--红色-red\/light\/20);  /* 标签线性禁用状态 Label linear disabled state */
+  --危险-danger\/global-light\/30: var(--红色-red\/light\/30);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --危险-danger\/global-light\/40: var(--红色-red\/light\/40);  /* 标签线性边框等 Label linear border, etc */
+  --危险-danger\/global-light\/50: var(--红色-red\/light\/50);  /* 标签文本等 Label text, etc. */
+  --危险-danger\/global-light\/60: var(--红色-red\/light\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --提示\&接入-commissioning\/global-light\/10: var(--深蓝色-dark-blue\/light\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --提示\&接入-commissioning\/global-light\/20: var(--深蓝色-dark-blue\/light\/20);  /* 通知栏第1层和第3层背景 */
+  --提示\&接入-commissioning\/global-light\/30: var(--深蓝色-dark-blue\/light\/30);  /* 通知栏第 2 层背景 */
+  --提示\&接入-commissioning\/global-light\/40: var(--深蓝色-dark-blue\/light\/40);  /* 标签线性禁用状态 Label linear disabled state */
+  --提示\&接入-commissioning\/global-light\/50: var(--深蓝色-dark-blue\/light\/50);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --提示\&接入-commissioning\/global-light\/60: var(--深蓝色-dark-blue\/light\/60);  /* 标签线性边框等 Label linear border, etc */
+  --提示\&接入-commissioning\/global-light\/70: var(--深蓝色-dark-blue\/light\/70);  /* 标签文本等 Label text, etc. */
+  --提示\&接入-commissioning\/global-light\/80: var(--深蓝色-dark-blue\/light\/80);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --离线-offline\/global-light\/10: var(--深灰\/light\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --图表色-chart\/01-图例\/global-light\/10: var(--蓝色-blue\/light\/10);
+  --图表色-chart\/01-图例\/global-light\/20: var(--蓝色-blue\/light\/20);
+  --图表色-chart\/01-图例\/global-light\/30: var(--蓝色-blue\/light\/30);
+  --图表色-chart\/01-图例\/global-light\/40: var(--蓝色-blue\/light\/40);
+  --图表色-chart\/01-图例\/global-light\/50: var(--蓝色-blue\/light\/50);
+  --图表色-chart\/01-图例\/global-light\/60: var(--蓝色-blue\/light\/60);
+  --高亮星-star\/global-light\/10: var(--黄色-yellow\/light\/10);
+  --高亮星-star\/global-light\/20: var(--黄色-yellow\/light\/20);
+  --高亮星-star\/global-light\/30: var(--黄色-yellow\/light\/30);
+  --高亮星-star\/global-light\/40: var(--黄色-yellow\/light\/40);  /* 标签线性边框等 Label linear border, etc */
+  --高亮星-star\/global-light\/50: var(--黄色-yellow\/light\/50);  /* 标签文本等 Label text, etc. */
+  --高亮星-star\/global-light\/60: var(--黄色-yellow\/light\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --高亮星-star\/global-dark\/10: var(--黄色-yellow\/dark\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --高亮星-star\/global-dark\/20: var(--黄色-yellow\/dark\/20);  /* 标签线性禁用状态 Label linear disabled state */
+  --高亮星-star\/global-dark\/30: var(--黄色-yellow\/dark\/30);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --高亮星-star\/global-dark\/40: var(--黄色-yellow\/dark\/40);  /* 标签线性边框等 Label linear border, etc */
+  --高亮星-star\/global-dark\/50: var(--黄色-yellow\/dark\/50);  /* 标签文本等 Label text, etc. */
+  --高亮星-star\/global-dark\/60: var(--黄色-yellow\/dark\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --高亮星-star\/eu-light\/200: var(--yellow\/light\/200);
+  --高亮星-star\/eu-light\/300: var(--yellow\/light\/300);
+  --高亮星-star\/eu-light\/400: var(--yellow\/light\/400);
+  --高亮星-star\/eu-light\/500: var(--yellow\/light\/500);
+  --高亮星-star\/eu-light\/600: var(--yellow\/light\/600);
+  --高亮星-star\/eu-light\/700: var(--yellow\/light\/700);
+  --高亮星-star\/eu-dark\/200: var(--yellow\/dark\/200);
+  --高亮星-star\/eu-dark\/300: var(--yellow\/dark\/300);
+  --高亮星-star\/eu-dark\/400: var(--yellow\/dark\/400);
+  --高亮星-star\/eu-dark\/500: var(--yellow\/dark\/500);
+  --高亮星-star\/eu-dark\/600: var(--yellow\/dark\/600);
+  --高亮星-star\/eu-dark\/700: var(--yellow\/dark\/700);
+  --玻璃-glass\/100: var(--white\/100);
+  --玻璃-glass\/90: var(--white\/90);
+  --玻璃-glass\/80: var(--white\/80);
+  --玻璃-glass\/70: var(--white\/70);
+  --玻璃-glass\/60: var(--white\/60);
+  --玻璃-glass\/50: var(--white\/50);
+  --玻璃-glass\/40: var(--white\/40);
+  --玻璃-glass\/30: var(--white\/30);
+  --玻璃-glass\/20: var(--white\/20);
+  --玻璃-glass\/10: var(--white\/10);
+  --玻璃-glass\/5: var(--white\/5);
+  --玻璃-glass\/0: var(--white\/0);
+  --蒙层-mask\/global-light\/10: var(--遮罩颜色-specialcolor\/light\/10-\#000000-30\%);
+  --阴影-shadow\/global-light\/100: var(--阴影-projection\/light\/通用阴影);
+  --阴影-shadow\/global-dark\/100: var(--阴影-projection\/dark\/通用阴影);
+  --阴影-shadow\/eu-light\/100: var(--阴影-projection\/light\/通用阴影);
+  --阴影-shadow\/eu-dark\/10: var(--阴影-projection\/dark\/通用阴影);
+  --蒙层-mask\/global-light\/20: var(--遮罩颜色-specialcolor\/light\/30-\#000000-80\%);
+  --离线-offline\/global-light\/20: var(--深灰\/light\/20);  /* 标签线性禁用状态 Label linear disabled state */
+  --离线-offline\/global-light\/30: var(--深灰\/light\/30);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --离线-offline\/global-light\/40: var(--深灰\/light\/40);  /* 标签线性边框等 Label linear border, etc */
+  --离线-offline\/global-light\/50: var(--深灰\/light\/50);  /* 标签文本等 Label text, etc. */
+  --离线-offline\/global-light\/60: var(--深灰\/light\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --字号-size\/数字-最大-number-xxl: var(--66);
+  --字号-size\/运营标题-超大-xl-heading-operational-xl: var(--48);
+  --字号-size\/运营标题-大-l-heading-operational-l: var(--44);
+  --字号-size\/运营标题-中-m-heading-operational-m: var(--40);
+  --字号-size\/运营标题-小-s-heading-operational-s: var(--36);
+  --字号-size\/标题-大-l-heading-l: var(--34);
+  --字号-size\/标题-大-m-heading-m: var(--32);
+  --字号-size\/标题_大-s-heading-s: var(--30);
+  --字号-size\/正文-body-default: var(--28);
+  --字号-size\/次要信息-body-secondary: var(--24);
+  --字号-size\/辅助信息-body-tertiary: var(--22);
+  --字号-size\/标签-label: var(--20);
+  --字号-size\/特殊-special: var(--16);
+  --行高-line-height\/数字-最大66-number-xxl: var(--70);
+  --行高-line-height\/运营标题-48-heading-operational-xl: var(--64);
+  --行高-line-height\/运营标题-44-heading-operational-l: var(--60);
+  --行高-line-height\/运营标题-40-heading-operational-m: var(--56);
+  --行高-line-height\/运营标题-36-heading-operational-s: var(--52);
+  --行高-line-height\/标题-大-34-heading-l: var(--50);
+  --行高-line-height\/标题-中-32-heading-m: var(--48);
+  --行高-line-height\/标题-小-30-heading-s: var(--46);
+  --行高-line-height\/正文-28-body-default: var(--42);
+  --行高-line-height\/次要信息-24-body-secondary: var(--36);
+  --行高-line-height\/辅助信息-22-body-tertiary: var(--30);
+  --行高-line-height\/标签-20-label: var(--28);
+  --行高-line-height\/特殊-16-special: var(--20);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/强调-primary: var(--中性色-neutral\/global-light\/120);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/反强调-primary-reverse: var(--中性色-neutral\/global-light\/10);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/品牌色-brand: var(--品牌色-brand\/global-light\/40);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/选中-selected: var(--中性色-neutral\/global-light\/120);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/次要-secondary: var(--中性色-neutral\/global-light\/110);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/辅助_100-territory-100: var(--中性色-neutral\/global-light\/100);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/辅助_200-territory-200: var(--中性色-neutral\/global-light\/80);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/始终白-alwayswhite: var(--中性色-neutral\/global-light\/10);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/禁用-disabled: var(--中性色-neutral\/global-light\/70);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/危险\&报错\&必填-error: var(--危险-danger\/global-light\/50);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/危险_禁用_100-error-disabled-100: var(--危险-danger\/global-light\/10);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/危险_禁用_200-error-disabled-200: var(--危险-danger\/global-light\/30);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/告警-warning: var(--告警-warning\/global-light\/50);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/成功-success: var(--成功-success\/global-light\/50);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/信息\&提示\&接入-info: var(--提示\&接入-commissioning\/global-light\/70);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/离线-offline: var(--离线-offline\/global-light\/50);
+  --文字\&图标-text\&icon\/无组件绑定-unbound\/链接-link: var(--链接-link\/global-light\/20);
+  --文字\&图标-text\&icon\/组件绑定-bound\/非主按钮-not-primary\/默认-default: var(--中性色-neutral\/global-light\/120);
+  --填充-fill\/无组件绑定-unbound\/页面背景_100-page-100: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/页面背景_200-page-200: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/无组件绑定-unbound\/卡片背景_100-card-100: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/卡片背景_200-card-200: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/无组件绑定-unbound\/控件背景_100_a-control-100-a: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/控件背景_100_b-control-100-b: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/控件背景_200_a-control-200-a: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/无组件绑定-unbound\/控件背景_200_b-control-200-b: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/无组件绑定-unbound\/控件背景_300-control-300: var(--中性色-neutral\/global-light\/40);  /* tabs背景等 */
+  --填充-fill\/无组件绑定-unbound\/控件背景_400-control-400: var(--中性色-neutral\/global-light\/50);  /* 开关禁用色&头像底色&加载底色 */
+  --填充-fill\/无组件绑定-unbound\/控件背景_500-control-500: var(--主色-primary\/global-light\/20);
+  --填充-fill\/无组件绑定-unbound\/禁用_100-disabled-100: var(--中性色-neutral\/global-light\/20);
+  --填充-fill\/无组件绑定-unbound\/禁用_200-disabled-200: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/无组件绑定-unbound\/危险背景-error: var(--危险-danger\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/告警背景-warning: var(--告警-warning\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/成功背景-success: var(--成功-success\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/提示背景-info: var(--提示\&接入-commissioning\/global-light\/10);
+  --填充-fill\/无组件绑定-unbound\/离线背景-offline: var(--离线-offline\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/按钮-button\/主按钮-primary\/默认-default: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/按钮-button\/主按钮-primary\/禁用-disabled: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/组件绑定-bound\/按钮-button\/三级按钮-tertiary\/默认-default: var(--中性色-neutral\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/按钮-button\/三级按钮-tertiary\/禁用-disabled: var(--中性色-neutral\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/按钮-button\/危险按钮-danger\/主默认-primary-default: var(--危险-danger\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/按钮-button\/危险按钮-danger\/主禁用-primary-disabled: var(--危险-danger\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/按钮-button\/危险按钮-danger\/次默认-secondary-default: var(--危险-danger\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/按钮-button\/危险按钮-danger\/次禁用-secondary-disabled: var(--危险-danger\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/按钮-button\/验证按钮-verify\/激活-default: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/按钮-button\/验证按钮-verify\/禁用-disabled: var(--中性色-neutral\/global-light\/10);  /* 用于输入框内获取验证码按钮等 */
+  --填充-fill\/组件绑定-bound\/按钮-button\/筛选按钮-small-filter\/默认-default: var(--中性色-neutral\/global-light\/120);
+  --填充-fill\/组件绑定-bound\/按钮-button\/筛选按钮-small-filter\/选中-selected: var(--品牌色-brand\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/级联选择-cascader\/高亮-highlight: var(--品牌色-brand\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/徽标-badge\/红色-default: var(--危险-danger\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/徽标-badge\/选中-selected: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/复选框-checkbox\/未选-unselected: var(--中性色-neutral\/eu-light\/0);
+  --填充-fill\/组件绑定-bound\/复选框-checkbox\/选中-selected: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/复选框-checkbox\/未选_禁用-unselected-disabled: var(--灰色-dust\/light\/40);
+  --填充-fill\/组件绑定-bound\/复选框-checkbox\/选中_禁用-selected-disabled: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/组件绑定-bound\/复选框-checkbox\/半选-indeterminate: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/复选框-checkbox\/半选_禁用-indeterminate-disabled: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/组件绑定-bound\/单选框-radio\/未选-unselected: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/单选框-radio\/选中-selected: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/单选框-radio\/未选_禁用-unselected-disabled: var(--灰色-dust\/light\/40);
+  --填充-fill\/组件绑定-bound\/单选框-radio\/选中_禁用-selected-disabled: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/组件绑定-bound\/日历-calendar\/默认-default: var(--中性色-neutral\/global-light\/120);
+  --填充-fill\/组件绑定-bound\/日历-calendar\/禁用-disable: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/组件绑定-bound\/日历-calendar\/今日-today: var(--中性色-neutral\/global-light\/120);
+  --填充-fill\/组件绑定-bound\/日历-calendar\/选中_天-selected-today: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/日历-calendar\/选中_周-selected-week: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/日期\&时间选择-date\&time\/日期选中-date-selected: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/日期\&时间选择-date\&time\/轮播选中-carousel-selected: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/空状态-empty-state\/中性_100-neutral-100: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/空状态-empty-state\/中性_200-neutral-200: var(--中性色-neutral\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/空状态-empty-state\/中性_300-neutral-300: var(--中性色-neutral\/global-light\/80);
+  --填充-fill\/组件绑定-bound\/空状态-empty-state\/中性_400-neutral-400: var(--中性色-neutral\/global-light\/100);
+  --填充-fill\/组件绑定-bound\/空状态-empty-state\/中性_500-neutral-500: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/空状态-empty-state\/彩色_100-brand-100: var(--主色-primary\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/空状态-empty-state\/彩色_200-brand-200: var(--品牌色-brand\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/表单-form\/默认-default: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/表单-form\/禁用-disabled: var(--中性色-neutral\/global-light\/20);
+  --填充-fill\/组件绑定-bound\/表单-form\/回显_禁用-readonly-disabled: var(--中性色-neutral\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/筛选器-filter\/默认-default: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/筛选器-filter\/选中-selected: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/评分-rate\/默认-default: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/组件绑定-bound\/评分-rate\/选中-selected: var(--高亮星-star\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/条形进度条-linear\/成功-success: var(--成功-success\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/条形进度条-linear\/失败-error: var(--危险-danger\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/条形进度条-linear\/底色-track: var(--中性色-neutral\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/时间环形进度条-circular\/底色-track: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/时间环形进度条-circular\/进度色-progress: var(--主色-primary\/global-light\/60);
+  --填充-fill\/组件绑定-bound\/按钮进度条-button\/底色-track: var(--主色-primary\/global-light\/20);
+  --填充-fill\/组件绑定-bound\/按钮进度条-button\/进度色-progress: var(--主色-primary\/global-light\/60);
+  --填充-fill\/组件绑定-bound\/滑动条-slider\/底色-track: var(--灰色-dust\/light\/50);
+  --填充-fill\/组件绑定-bound\/滑动条-slider\/滑动色-thumb: var(--主色-primary\/global-light\/60);
+  --填充-fill\/组件绑定-bound\/开关-switch\/开启_默认-on-default: var(--品牌色-brand\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/开关-switch\/开启_禁用-on-disabled: var(--品牌色-brand\/global-light\/20);
+  --填充-fill\/组件绑定-bound\/开关-switch\/关闭_默认-off-default: var(--中性色-neutral\/global-light\/70);
+  --填充-fill\/组件绑定-bound\/开关-switch\/关闭_禁用-off-disabled: var(--中性色-neutral\/global-light\/50);
+  --填充-fill\/组件绑定-bound\/开关-switch\/滑块-thumb-default: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/开关-switch\/滑块_禁用-thumb-disabled: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/单条消息-single\/告警背景-warning: var(--告警-warning\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/单条消息-single\/提示背景-info: var(--提示\&接入-commissioning\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/单条消息-single\/成功背景-success: var(--成功-success\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/单条消息-single\/错误背景-error: var(--危险-danger\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/组合消息-multi\/第一层-1st: var(--提示\&接入-commissioning\/global-light\/20);
+  --填充-fill\/组件绑定-bound\/组合消息-multi\/第二层-2nd: var(--提示\&接入-commissioning\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/组合消息-multi\/第三层-3rd: var(--提示\&接入-commissioning\/global-light\/20);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/胶囊选项卡-pill\/默认-default: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/胶囊选项卡-pill\/选中-selected: var(--中性色-neutral\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/下划线选项卡-underline\/默认-default: var(--灰色-dust\/light\/110);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/下划线选项卡-underline\/选中-selected: var(--主色-primary\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/边框选项卡-bordered\/默认-default: var(--中性色-neutral\/eu-light\/0);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/滑块选项卡-slider\/背景_100-default-100: var(--中性色-neutral\/global-light\/30);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/滑块选项卡-slider\/背景_100_选中-selected-100: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/滑块选项卡-slider\/背景_200-default-200: var(--中性色-neutral\/global-light\/40);
+  --填充-fill\/组件绑定-bound\/选项卡-tabs\/滑块选项卡-slider\/背景_200_选中-selected-200: var(--中性色-neutral\/global-light\/10);
+  --填充-fill\/组件绑定-bound\/索引-bladeview\/选中: var(--主色-primary\/global-light\/10);
+  --阴影-projection\/dark\/通用阴影: #0006;
+  --边框-border\/无组件绑定-unbound\/分割线_100-divider-100: var(--中性色-neutral\/global-light\/50);  /* 表单或图表分割线等 */
+  --边框-border\/组件绑定-bound\/按钮-button\/次按钮-secondary\/默认-default: var(--中性色-neutral\/global-light\/120);
+  --边框-border\/组件绑定-bound\/按钮-button\/次按钮-secondary\/禁用-disabled: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/按钮-button\/危险按钮-danger\/默认-default: var(--危险-danger\/global-light\/50);
+  --边框-border\/组件绑定-bound\/按钮-button\/危险按钮-danger\/禁用-disabled: var(--危险-danger\/global-light\/20);
+  --边框-border\/组件绑定-bound\/复选框-checkbox\/默认边框-default: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/复选框-checkbox\/禁用-disabled: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/复选框-checkbox\/半选-indeterminate: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/复选框-checkbox\/半选_禁用-indeterminate-disabled: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/单选框-radio\/默认-default: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/单选框-radio\/选中-selected: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/单选框-radio\/禁用-disabled: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/日期\&时间选择-date\&time\/默认-default: var(--中性色-neutral\/global-light\/70);
+  --边框-border\/组件绑定-bound\/日期\&时间选择-date\&time\/选中-selected: var(--中性色-neutral\/global-light\/90);
+  --边框-border\/组件绑定-bound\/筛选器-filter\/选中-selected: var(--中性色-neutral\/global-light\/90);
+  --边框-border\/组件绑定-bound\/表单-form\/报错-error: var(--危险-danger\/global-light\/50);
+  --边框-border\/组件绑定-bound\/标签-tag\/成功-success: var(--成功-success\/global-light\/40);
+  --边框-border\/组件绑定-bound\/标签-tag\/告警-warning: var(--告警-warning\/global-light\/40);
+  --边框-border\/组件绑定-bound\/标签-tag\/危险-error: var(--危险-danger\/global-light\/40);
+  --边框-border\/组件绑定-bound\/标签-tag\/离线-offline: var(--离线-offline\/global-dark\/40);
+  --边框-border\/组件绑定-bound\/标签-tag\/接入-commissioning: var(--提示\&接入-commissioning\/global-light\/60);
+  --边框-border\/组件绑定-bound\/选项卡-tabs\/胶囊选项卡-pill\/选中-selected: var(--中性色-neutral\/global-light\/90);
+  --边框-border\/组件绑定-bound\/选项卡-tabs\/边框选项卡-bordered\/默认-default: var(--中性色-neutral\/global-light\/50);
+  --边框-border\/组件绑定-bound\/选项卡-tabs\/边框选项卡-bordered\/选中-selected: var(--中性色-neutral\/global-light\/120);
+  --边框-border\/无组件绑定-unbound\/分割线_200-divider-200: var(--中性色-neutral\/global-light\/60);  /* 时间带分割线等 */
+  --边框-border\/无组件绑定-unbound\/描边_常规-default: var(--中性色-neutral\/global-light\/90);  /* 线框按钮或步进器描边 */
+  --边框-border\/无组件绑定-unbound\/描边_禁用-disabled: var(--中性色-neutral\/global-light\/70);  /* 禁用按钮描边等 */
+  --violet\/10: #FBFAFD;
+  --violet\/25: #F7F6FB;
+  --violet\/50: #EFEDF6;
+  --violet\/100: #DEDBED;
+  --violet\/100-0: #DEDBED00;
+  --violet\/150: #CECAE3;
+  --violet\/200: #BDB8DA;
+  --violet\/300: #9D94C8;
+  --violet\/400: #7C71B5;
+  --violet\/400-0: #7C71B500;
+  --dust\/10: #FCFCFC;
+  --violet\/500: #5B4DA3;
+  --violet\/600: #493E82;
+  --violet\/700: #372E62;
+  --violet\/800: #241F41;
+  --violet\/850: #1B1731;
+  --violet\/900: #120F21;
+  --violet\/950: #090810;
+  --dust\/25: #F8F8F8;
+  --white\/100: #FFF;
+  --white\/90: #FFFFFFE5;
+  --white\/80: #FFFC;
+  --white\/70: #FFFFFFB2;
+  --green\/light\/50: #EDF7F3;
+  --white\/60: #FFF9;
+  --white\/50: #FFFFFF80;
+  --green\/light\/100: #DBEFE6;
+  --white\/40: #FFF6;
+  --white\/30: #FFFFFF4D;
+  --white\/20: #FFF3;
+  --white\/10: #FFFFFF1A;
+  --white\/5: #FFFFFF0D;
+  --white\/0: #FFF0;
+  --green\/light\/150: #C9E7DA;
+  --green\/light\/200: #B7DFCE;
+  --red\/light\/50: #FDEDED;
+  --red\/light\/100: #FCDADA;
+  --red\/light\/150: #FBC8C8;
+  --red\/light\/200: #F9B5B5;
+  --red\/light\/300: #F69191;
+  --red\/light\/400: #F36C6C;
+  --red\/light\/500: #F04747;
+  --red\/light\/600: #C33939;
+  --green\/light\/300: #94CFB5;
+  --green\/light\/400: #70BF9D;
+  --green\/light\/500: #4CAF84;
+  --green\/light\/600: #3D8C6A;
+  --green\/light\/700: #2E694F;
+  --dust\/50: #F1F0F2;
+  --dust\/75: #EAEAEC;
+  --dust\/100: #E4E2E6;
+  --dust\/150: #D6D3D9;
+  --dust\/200: #C9C5CD;
+  --dust\/300: #ADA8B3;
+  --dust\/400: #928B9A;
+  --dust\/500: #776E81;
+  --dust\/600: #5F5867;
+  --dust\/700: #47424D;
+  --dust\/750: #3A343E;
+  --dust\/800: #302C34;
+  --dust\/800-30\%: #302C344D;
+  --dust\/800-60\%: #302C3499;
+  --dust\/800-80\%: #302C34CC;
+  --dust\/850: #242127;
+  --dust\/900: #18161A;
+  --dust\/950: #0C0B0D;
+  --dust\/1000: #000;
+  --dust\/1000-20\%: #0003;
+  --green\/dark\/50: #EFF6F2;
+  --green\/dark\/100: #DEEEE5;
+  --green\/dark\/150: #CEE5D7;
+  --green\/dark\/200: #BDDDCA;
+  --green\/dark\/300: #9DCBB0;
+  --green\/dark\/400: #7CBA95;
+  --green\/dark\/500: #5BA97B;
+  --green\/dark\/600: #498762;
+  --green\/dark\/700: #37654A;
+  --green\/dark\/800: #244431;
+  --green\/dark\/850: #1B3325;
+  --green\/dark\/900: #122219;
+  --green\/dark\/950: #09110C;
+  --red\/dark\/50: #FFEEEF;
+  --red\/light\/700: #962B2B;
+  --red\/dark\/100: #FFDEDF;
+  --red\/dark\/150: #FFCECF;
+  --red\/dark\/200: #FFBDBF;
+  --red\/dark\/300: #FF9C9F;
+  --red\/dark\/400: #FF7B7F;
+  --red\/dark\/500: #FF5A5F;
+  --red\/dark\/600: #D6484C;
+  --redorange\/light\/50: #FEF3EC;
+  --red\/dark\/700: #AD3639;
+  --red\/dark\/750: #97302E;
+  --redorange\/dark\/50: #FEF2EA;
+  --redorange\/dark\/100: #FDE5D5;
+  --redorange\/dark\/150: #FDD8C0;
+  --redorange\/dark\/200: #FCCBAB;
+  --redorange\/dark\/300: #FAB180;
+  --redorange\/dark\/400: #F99756;
+  --redorange\/dark\/500: #F77D2C;
+  --redorange\/dark\/600: #C66423;
+  --redorange\/dark\/700: #944B1A;
+  --redorange\/dark\/800: #633212;
+  --redorange\/dark\/850: #4A260D;
+  --redorange\/dark\/900: #311909;
+  --redorange\/dark\/950: #190D04;
+  --redorange\/light\/100: #FDE8D8;
+  --redorange\/light\/150: #FCDCC5;
+  --redorange\/light\/200: #FBD0B2;
+  --red\/dark\/800: #832427;
+  --red\/dark\/850: #6F1B1D;
+  --red\/dark\/900: #5A1214;
+  --red\/dark\/950: #46090A;
+  --redorange\/light\/300: #F8B98B;
+  --redorange\/light\/400: #F6A165;
+  --redorange\/light\/500: #F48A3E;
+  --redorange\/light\/600: #C56F32;
+  --redorange\/light\/700: #965426;
+  --blue\/light\/50: #EDF0F8;
+  --blue\/light\/100: #DCE2F1;
+  --gray\/light\/50: #EFF1F3;
+  --blue\/dark\/50: #EFF6FE;
+  --blue\/light\/200: #B9C5E3;
+  --blue\/dark\/100: #DFEDFE;
+  --blue\/light\/300: #95A7D4;
+  --blue\/light\/400: #728AC6;
+  --blue\/light\/500: #4F6DB8;
+  --blue\/light\/600: #3F5793;
+  --blue\/light\/700: #2F416E;
+  --blue\/light\/800: #202C4A;
+  --blue\/light\/850: #182137;
+  --blue\/dark\/200: #BFDBFD;
+  --gray\/light\/100: #E0E3E8;
+  --blue\/dark\/300: #A0C9FC;
+  --blue\/dark\/400: #80B7FB;
+  --blue\/dark\/500: #60A5FA;
+  --blue\/dark\/600: #4D89D2;
+  --blue\/dark\/700: #3A6CAA;
+  --blue\/dark\/800: #285081;
+  --blue\/dark\/850: #1E426D;
+  --blue\/dark\/900: #153359;
+  --blue\/dark\/950: #0B2545;
+  --gray\/dark\/50: #F6F7F9;
+  --gray\/light\/200: #C1C7D1;
+  --gray\/light\/300: #A2ACB9;
+  --gray\/dark\/100: #ECEFF4;
+  --gray\/light\/400: #8390A2;
+  --gray\/light\/500: #64748B;
+  --gray\/light\/600: #505D6F;
+  --gray\/light\/700: #3C4653;
+  --gray\/light\/800: #282E38;
+  --gray\/light\/850: #1E232A;
+  --orange\/light\/200: #FFD799;
+  --gray\/dark\/200: #D9DFE8;
+  --orange\/light\/300: #FFC266;
+  --orange\/light\/400: #FFAE33;
+  --orange\/light\/500: #FF9A00;
+  --orange\/light\/600: #CC7B00;
+  --orange\/light\/700: #995C00;
+  --gray\/dark\/300: #C7CEDD;
+  --orange\/dark\/200: #FFDDA7;
+  --yellow\/light\/200: #FCE799;
+  --gray\/dark\/400: #B4BED1;
+  --orange\/dark\/300: #FFCC7A;
+  --yellow\/light\/300: #FADB66;
+  --yellow\/light\/400: #F9CF33;
+  --yellow\/light\/500: #F7C300;
+  --yellow\/light\/600: #C69C00;
+  --yellow\/light\/700: #947500;
+  --gray\/dark\/500: #A1AEC6;
+  --yellow\/dark\/200: #FEF1B8;
+  --yellow\/dark\/300: #FDEA94;
+  --gray\/dark\/600: #8691A6;
+  --gray\/dark\/700: #6A7486;
+  --yellow\/dark\/400: #FDE371;
+  --yellow\/dark\/500: #FCDC4D;
+  --yellow\/dark\/600: #D0B53E;
+  --yellow\/dark\/700: #A48F2F;
+  --orange\/dark\/400: #FFBB4E;
+  --orange\/dark\/500: #FA2;
+  --orange\/dark\/600: #CC881B;
+  --orange\/dark\/700: #996614;
+  --gray\/dark\/800: #4F5767;
+  --gray\/dark\/850: #414957;
+  --gray\/dark\/900: #333A47;
+  --gray\/dark\/950: #262C37;
+  --中性色-neutral\/global-dark\/10: var(--灰色-dust\/dark\/20);
+  --中性色-neutral\/global-dark\/20: var(--灰色-dust\/dark\/150);
+  --中性色-neutral\/global-dark\/30: var(--灰色-dust\/dark\/10);
+  --中性色-neutral\/global-dark\/40: var(--灰色-dust\/dark\/30);
+  --中性色-neutral\/global-dark\/50: var(--灰色-dust\/dark\/60);
+  --中性色-neutral\/global-dark\/60: var(--灰色-dust\/dark\/70);
+  --中性色-neutral\/global-dark\/70: var(--灰色-dust\/dark\/80);
+  --中性色-neutral\/global-dark\/80: var(--灰色-dust\/dark\/50);
+  --中性色-neutral\/global-dark\/90: var(--灰色-dust\/dark\/40);
+  --中性色-neutral\/global-dark\/100: var(--灰色-dust\/dark\/120);
+  --中性色-neutral\/global-dark\/110: var(--灰色-dust\/dark\/100);
+  --中性色-neutral\/global-dark\/120: var(--灰色-dust\/dark\/90);
+  --中性色-neutral\/global-dark\/130: var(--灰色-dust\/dark\/140);
+  --蒙层-mask\/背景-background: var(--蒙层-mask\/global-light\/10);
+  --蒙层-mask\/通知-toast: var(--蒙层-mask\/global-light\/20);
+  --中性色-neutral\/eu-light\/0: var(--white\/100);
+  --中性色-neutral\/eu-light\/10: var(--dust\/10);
+  --中性色-neutral\/eu-light\/25: var(--dust\/25);
+  --中性色-neutral\/eu-light\/50: var(--dust\/50);
+  --中性色-neutral\/eu-light\/100: var(--dust\/100);
+  --中性色-neutral\/eu-light\/150: var(--dust\/150);
+  --中性色-neutral\/eu-light\/200: var(--dust\/200);
+  --中性色-neutral\/eu-light\/300: var(--dust\/300);
+  --中性色-neutral\/eu-light\/400: var(--dust\/400);
+  --中性色-neutral\/eu-light\/500: var(--dust\/500);
+  --中性色-neutral\/eu-light\/600: var(--dust\/600);
+  --中性色-neutral\/eu-light\/700: var(--dust\/700);
+  --中性色-neutral\/eu-light\/750: var(--dust\/750);
+  --中性色-neutral\/eu-light\/800: var(--dust\/800);
+  --中性色-neutral\/eu-light\/850: var(--dust\/850);
+  --中性色-neutral\/eu-light\/900: var(--dust\/900);
+  --中性色-neutral\/eu-light\/950: var(--dust\/950);
+  --中性色-neutral\/eu-light\/1000: var(--dust\/1000);
+  --中性色-neutral\/eu-light\/1000-20\%: var(--dust\/1000-20\%);
+  --阴影-shadow\/常规-default: var(--阴影-shadow\/global-light\/100);  /* 表单或图表分割线等 */
+  --中性色-neutral\/eu-dark\/0: var(--white\/100);
+  --状态-status-shade\/成功-success\/10: var(--成功-success\/global-light\/10);
+  --中性色-neutral\/eu-dark\/10: var(--dust\/10);
+  --状态-status-shade\/成功-success\/20: var(--成功-success\/global-light\/20);
+  --中性色-neutral\/eu-dark\/25: var(--dust\/25);
+  --状态-status-shade\/成功-success\/30: var(--成功-success\/global-light\/30);
+  --状态-status-shade\/成功-success\/40: var(--成功-success\/global-light\/40);
+  --中性色-neutral\/eu-dark\/50: var(--dust\/50);
+  --状态-status-shade\/成功-success\/50: var(--成功-success\/global-light\/50);
+  --中性色-neutral\/eu-dark\/100: var(--dust\/100);
+  --状态-status-shade\/成功-success\/60: var(--成功-success\/global-light\/60);
+  --中性色-neutral\/eu-dark\/150: var(--dust\/150);
+  --中性色-neutral\/eu-dark\/200: var(--dust\/200);
+  --中性色-neutral\/eu-dark\/300: var(--dust\/300);
+  --中性色-neutral\/eu-dark\/400: var(--dust\/400);
+  --中性色-neutral\/eu-dark\/500: var(--dust\/500);
+  --中性色-neutral\/eu-dark\/600: var(--dust\/600);
+  --中性色-neutral\/eu-dark\/700: var(--dust\/700);
+  --中性色-neutral\/eu-dark\/750: var(--dust\/750);
+  --中性色-neutral\/eu-dark\/800: var(--dust\/800);
+  --中性色-neutral\/eu-dark\/850: var(--dust\/850);
+  --中性色-neutral\/eu-dark\/900: var(--dust\/900);
+  --中性色-neutral\/eu-dark\/950: var(--dust\/950);
+  --中性色-neutral\/eu-dark\/1000: var(--dust\/1000);
+  --品牌色-brand\/global-dark\/10: var(--橙色-vibrant-orange\/dark\/10);
+  --品牌色-brand\/global-dark\/20: var(--橙色-vibrant-orange\/dark\/20);
+  --品牌色-brand\/global-dark\/30: var(--橙色-vibrant-orange\/dark\/40);
+  --品牌色-brand\/global-dark\/40: var(--橙色-vibrant-orange\/dark\/50);
+  --品牌色-brand\/global-dark\/50: var(--橙色-vibrant-orange\/dark\/60);
+  --品牌色-brand\/eu-light\/0: var(--white\/100);
+  --品牌色-brand\/eu-light\/10: var(--violet\/10);
+  --品牌色-brand\/eu-light\/25: var(--violet\/25);
+  --品牌色-brand\/eu-light\/50: var(--violet\/50);
+  --品牌色-brand\/eu-light\/100: var(--violet\/100);
+  --品牌色-brand\/eu-light\/150: var(--violet\/150);
+  --品牌色-brand\/eu-light\/200: var(--violet\/200);
+  --品牌色-brand\/eu-light\/300: var(--violet\/300);
+  --品牌色-brand\/eu-light\/400: var(--violet\/400);
+  --品牌色-brand\/eu-light\/500: var(--violet\/500);
+  --品牌色-brand\/eu-light\/600: var(--violet\/600);
+  --品牌色-brand\/eu-light\/700: var(--violet\/700);
+  --品牌色-brand\/eu-light\/800: var(--violet\/800);
+  --品牌色-brand\/eu-light\/850: var(--violet\/850);
+  --品牌色-brand\/eu-light\/900: var(--violet\/900);
+  --品牌色-brand\/eu-light\/950: var(--violet\/950);
+  --品牌色-brand\/eu-dark\/0: var(--white\/100);
+  --品牌色-brand\/eu-dark\/10: var(--violet\/10);
+  --品牌色-brand\/eu-dark\/25: var(--violet\/25);
+  --品牌色-brand\/eu-dark\/50: var(--violet\/50);
+  --品牌色-brand\/eu-dark\/100: var(--violet\/100);
+  --品牌色-brand\/eu-dark\/150: var(--violet\/150);
+  --品牌色-brand\/eu-dark\/200: var(--violet\/200);
+  --品牌色-brand\/eu-dark\/300: var(--violet\/300);
+  --品牌色-brand\/eu-dark\/400: var(--violet\/400);
+  --品牌色-brand\/eu-dark\/500: var(--violet\/500);
+  --品牌色-brand\/eu-dark\/600: var(--violet\/600);
+  --品牌色-brand\/eu-dark\/700: var(--violet\/700);
+  --品牌色-brand\/eu-dark\/800: var(--violet\/800);
+  --品牌色-brand\/eu-dark\/850: var(--violet\/850);
+  --品牌色-brand\/eu-dark\/900: var(--violet\/900);
+  --品牌色-brand\/eu-dark\/950: var(--violet\/950);
+  --链接-link\/global-dark\/10: var(--湖蓝-lake-blue\/dark\/10);
+  --链接-link\/global-dark\/20: var(--湖蓝-lake-blue\/dark\/20);
+  --链接-link\/global-dark\/30: var(--湖蓝-lake-blue\/dark\/30);
+  --链接-link\/eu-light\/200: var(--blue\/light\/200);
+  --链接-link\/eu-light\/500: var(--blue\/light\/500);
+  --链接-link\/eu-light\/600: var(--blue\/light\/600);
+  --链接-link\/eu-dark\/800: var(--blue\/dark\/800);
+  --链接-link\/eu-dark\/500: var(--blue\/dark\/500);
+  --链接-link\/eu-dark\/400: var(--blue\/dark\/400);
+  --成功-success\/global-dark\/10: var(--绿色-green\/dark\/10);
+  --成功-success\/global-dark\/20: var(--绿色-green\/dark\/20);
+  --成功-success\/global-dark\/30: var(--绿色-green\/dark\/30);
+  --成功-success\/global-dark\/40: var(--绿色-green\/dark\/40);
+  --成功-success\/global-dark\/50: var(--绿色-green\/dark\/50);
+  --成功-success\/global-dark\/60: var(--绿色-green\/dark\/60);
+  --成功-success\/eu-light\/50: var(--green\/light\/50);
+  --成功-success\/eu-light\/200: var(--green\/light\/200);
+  --成功-success\/eu-light\/300: var(--green\/light\/300);
+  --成功-success\/eu-light\/400: var(--green\/light\/400);
+  --成功-success\/eu-light\/500: var(--green\/light\/500);
+  --成功-success\/eu-light\/600: var(--green\/light\/600);
+  --成功-success\/eu-dark\/500: var(--green\/dark\/500);
+  --成功-success\/eu-dark\/600: var(--green\/dark\/600);
+  --告警-warning\/global-dark\/10: var(--黄色-yellow\/dark\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --成功-success\/eu-dark\/700: var(--green\/dark\/700);
+  --告警-warning\/global-dark\/20: var(--黄色-yellow\/dark\/20);  /* 标签线性禁用状态 Label linear disabled state */
+  --成功-success\/eu-dark\/800: var(--green\/dark\/800);
+  --成功-success\/eu-dark\/850: var(--green\/dark\/850);
+  --告警-warning\/global-dark\/30: var(--黄色-yellow\/dark\/30);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --成功-success\/eu-dark\/900: var(--green\/dark\/900);
+  --告警-warning\/global-dark\/40: var(--黄色-yellow\/dark\/40);  /* 标签线性边框等 Label linear border, etc */
+  --告警-warning\/global-dark\/50: var(--黄色-yellow\/dark\/50);  /* 标签文本等 Label text, etc. */
+  --告警-warning\/global-dark\/60: var(--黄色-yellow\/dark\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --告警-warning\/eu-light\/50: var(--redorange\/light\/50);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --告警-warning\/eu-light\/200: var(--redorange\/light\/200);  /* 标签线性禁用状态 Label linear disabled state */
+  --告警-warning\/eu-light\/300: var(--redorange\/light\/300);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --告警-warning\/eu-light\/400: var(--redorange\/light\/400);  /* 标签线性边框等 Label linear border, etc */
+  --告警-warning\/eu-light\/500: var(--redorange\/light\/500);  /* 标签文本等 Label text, etc. */
+  --告警-warning\/eu-dark\/500: var(--redorange\/dark\/500);  /* 标签文本等 Label text, etc. */
+  --告警-warning\/eu-light\/600: var(--redorange\/light\/600);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --告警-warning\/eu-dark\/600: var(--redorange\/dark\/600);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --告警-warning\/eu-dark\/700: var(--redorange\/dark\/700);  /* 标签线性边框等 Label linear border, etc */
+  --告警-warning\/eu-dark\/800: var(--redorange\/dark\/800);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --告警-warning\/eu-dark\/850: var(--redorange\/dark\/850);  /* 标签线性禁用状态 Label linear disabled state */
+  --告警-warning\/eu-dark\/900: var(--redorange\/dark\/900);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --危险-danger\/global-dark\/10: var(--红色-red\/dark\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --危险-danger\/global-dark\/20: var(--红色-red\/dark\/20);  /* 标签线性禁用状态 Label linear disabled state */
+  --危险-danger\/global-dark\/30: var(--红色-red\/dark\/30);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --危险-danger\/global-dark\/40: var(--红色-red\/dark\/40);  /* 标签线性边框等 Label linear border, etc */
+  --危险-danger\/global-dark\/50: var(--红色-red\/dark\/50);  /* 标签文本等 Label text, etc. */
+  --危险-danger\/global-dark\/60: var(--红色-red\/dark\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --危险-danger\/eu-light\/50: var(--red\/light\/50);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --危险-danger\/eu-light\/200: var(--red\/light\/200);  /* 标签线性禁用状态 Label linear disabled state */
+  --危险-danger\/eu-light\/300: var(--red\/light\/300);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --危险-danger\/eu-light\/400: var(--red\/light\/400);  /* 标签线性边框等 Label linear border, etc */
+  --危险-danger\/eu-light\/500: var(--red\/light\/500);  /* 标签文本等 Label text, etc. */
+  --危险-danger\/eu-light\/600: var(--red\/light\/600);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --危险-danger\/eu-dark\/400: var(--red\/dark\/400);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --危险-danger\/eu-dark\/500: var(--red\/dark\/500);  /* 标签文本等 Label text, etc. */
+  --危险-danger\/eu-dark\/600: var(--red\/dark\/600);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --危险-danger\/eu-dark\/700: var(--red\/dark\/700);  /* 标签线性边框等 Label linear border, etc */
+  --危险-danger\/eu-dark\/750: var(--red\/dark\/750);  /* 标签线性边框等 Label linear border, etc */
+  --危险-danger\/eu-dark\/800: var(--red\/dark\/800);  /* 标签线性禁用状态 Label linear disabled state */
+  --危险-danger\/eu-dark\/850: var(--red\/dark\/850);  /* 标签线性禁用状态 Label linear disabled state */
+  --危险-danger\/eu-dark\/900: var(--red\/dark\/900);  /* 标签线性禁用状态 Label linear disabled state */
+  --提示\&接入-commissioning\/global-dark\/10: var(--深蓝色-dark-blue\/dark\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --危险-danger\/eu-dark\/950: var(--red\/dark\/950);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --提示\&接入-commissioning\/global-dark\/20: var(--深蓝色-dark-blue\/dark\/20);  /* 通知栏第1层和第3层背景 */
+  --提示\&接入-commissioning\/global-dark\/30: var(--深蓝色-dark-blue\/dark\/30);  /* 通知栏第 2 层背景 */
+  --提示\&接入-commissioning\/global-dark\/40: var(--深蓝色-dark-blue\/dark\/40);  /* 标签线性禁用状态 Label linear disabled state */
+  --提示\&接入-commissioning\/global-dark\/50: var(--深蓝色-dark-blue\/dark\/50);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --提示\&接入-commissioning\/global-dark\/60: var(--深蓝色-dark-blue\/dark\/60);  /* 标签线性边框等 Label linear border, etc */
+  --提示\&接入-commissioning\/global-dark\/70: var(--深蓝色-dark-blue\/dark\/70);  /* 标签文本等 Label text, etc. */
+  --提示\&接入-commissioning\/global-dark\/80: var(--深蓝色-dark-blue\/dark\/80);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --提示\&接入-commissioning\/eu-light\/50: var(--blue\/light\/50);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --提示\&接入-commissioning\/eu-light\/100: var(--blue\/light\/100);  /* 通知栏第1层和第3层背景 */
+  --提示\&接入-commissioning\/eu-light\/200: var(--blue\/light\/200);  /* 通知栏第 2 层背景 */
+  --提示\&接入-commissioning\/eu-light\/300: var(--blue\/light\/300);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --提示\&接入-commissioning\/eu-light\/400: var(--blue\/light\/400);  /* 标签线性边框等 Label linear border, etc */
+  --提示\&接入-commissioning\/eu-light\/500: var(--blue\/light\/500);  /* 标签文本等 Label text, etc. */
+  --提示\&接入-commissioning\/eu-light\/600: var(--blue\/light\/600);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --提示\&接入-commissioning\/eu-dark\/950: var(--blue\/dark\/950);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --提示\&接入-commissioning\/eu-dark\/900: var(--blue\/dark\/900);  /* 通知栏第1层和第3层背景 */
+  --提示\&接入-commissioning\/eu-dark\/850: var(--blue\/dark\/850);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --提示\&接入-commissioning\/eu-dark\/800: var(--blue\/dark\/800);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --提示\&接入-commissioning\/eu-dark\/700: var(--blue\/dark\/700);  /* 标签线性边框等 Label linear border, etc */
+  --提示\&接入-commissioning\/eu-dark\/600: var(--blue\/dark\/600);  /* 标签线性边框等 Label linear border, etc */
+  --提示\&接入-commissioning\/eu-dark\/500: var(--blue\/dark\/500);  /* 标签文本等 Label text, etc. */
+  --提示\&接入-commissioning\/eu-dark\/400: var(--blue\/dark\/400);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --离线-offline\/global-dark\/10: var(--深灰\/dark\/10);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --离线-offline\/global-dark\/20: var(--深灰\/dark\/20);  /* 标签线性禁用状态 Label linear disabled state */
+  --离线-offline\/global-dark\/30: var(--深灰\/dark\/30);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --离线-offline\/global-dark\/40: var(--深灰\/dark\/40);  /* 标签线性边框等 Label linear border, etc */
+  --离线-offline\/global-dark\/50: var(--深灰\/dark\/50);  /* 标签文本等 Label text, etc. */
+  --离线-offline\/global-dark\/60: var(--深灰\/dark\/60);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --离线-offline\/eu-light\/50: var(--gray\/light\/50);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --离线-offline\/eu-light\/200: var(--gray\/light\/200);  /* 标签线性禁用状态 Label linear disabled state */
+  --离线-offline\/eu-light\/300: var(--gray\/light\/300);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --离线-offline\/eu-light\/400: var(--gray\/light\/400);  /* 标签线性边框等 Label linear border, etc */
+  --离线-offline\/eu-light\/500: var(--gray\/light\/500);  /* 标签文本等 Label text, etc. */
+  --离线-offline\/eu-dark\/400: var(--gray\/dark\/400);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --离线-offline\/eu-light\/600: var(--gray\/light\/600);  /* 用于反馈点击效果等 Used for feedback on click effects, etc */
+  --离线-offline\/eu-dark\/500: var(--gray\/dark\/500);  /* 标签文本等 Label text, etc. */
+  --离线-offline\/eu-dark\/600: var(--gray\/dark\/600);  /* 标签文本等 Label text, etc. */
+  --离线-offline\/eu-dark\/700: var(--gray\/dark\/700);  /* 标签线性边框等 Label linear border, etc */
+  --离线-offline\/eu-dark\/800: var(--gray\/dark\/800);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --离线-offline\/eu-dark\/850: var(--gray\/dark\/850);  /* 面性标签禁用状态 "Surface label disabled state" */
+  --离线-offline\/eu-dark\/900: var(--gray\/dark\/900);  /* 标签线性禁用状态 Label linear disabled state */
+  --离线-offline\/eu-dark\/950: var(--gray\/dark\/950);  /* 标签或通知栏状态底色标签或通知栏状态底色Label or notification bar status background color */
+  --蒙层-mask\/global-dark\/10: var(--遮罩颜色-specialcolor\/dark\/10-\#000000-60\%);
+  --蒙层-mask\/global-dark\/20: var(--遮罩颜色-specialcolor\/dark\/20-\#ffffff-80\%);
+  --蒙层-mask\/eu-light\/10: var(--dust\/800-30\%);
+  --蒙层-mask\/eu-light\/20: var(--dust\/800-80\%);
+  --蒙层-mask\/eu-dark\/10: var(--dust\/800-60\%);
+  --蒙层-mask\/eu-dark\/20: var(--遮罩颜色-specialcolor\/dark\/20-\#ffffff-80\%);
+  --0: 0;
+  --4: 4;
+  --8: 8;
+  --12: 12;
+  --16: 16;
+  --20: 20;
+  --22: 22;
+  --24: 24;
+  --28: 28;
+  --30: 30;
+  --32: 32;
+  --34: 34;
+  --36: 36;
+  --40: 40;
+  --42: 42;
+  --44: 44;
+  --46: 46;
+  --48: 48;
+  --50: 50;
+  --52: 52;
+  --56: 56;
+  --60: 60;
+  --64: 64;
+  --66: 66;
+  --70: 70;
+  --100: 100;
+  --超大号_200-xxl–200: var(--100);  /* 按钮等 */
+  --超大号_100-xxl–100: var(--100);  /* 徽标等 */
+  --加大号-xl: var(--56);  /* 徽标等 */
+  --大号-l: var(--32);  /* 表单卡片、动作面板等 */
+  --中号-m: var(--24);  /* 对话框、加载卡片背景、滑动操作等 */
+  --小号-s: var(--16);  /* 消息提示、输入框等圆角 */
+  --超小号-xs: var(--12);  /* 小号卡片等 */
+  --迷你-xxs: var(--8);  /* 常规标签等 */
+  --超迷你-xxxs: var(--4);  /* 小号标签等 */
+  --零-0: var(--0);
+  --text\&icon\/unbound\/primary: var(--中性色-neutral\/global-light\/120);
+  --text\&icon\/unbound\/primary-reverse: var(--中性色-neutral\/global-light\/10);
+  --text\&icon\/unbound\/brand: var(--品牌色-brand\/global-light\/40);
+  --text\&icon\/unbound\/selected: var(--中性色-neutral\/global-light\/120);
+  --text\&icon\/unbound\/secondary: var(--中性色-neutral\/global-light\/110);
+  --text\&icon\/unbound\/territory-100: var(--中性色-neutral\/global-light\/100);
+  --text\&icon\/unbound\/territory-200: var(--中性色-neutral\/global-light\/80);
+  --text\&icon\/unbound\/alwayswhite: var(--中性色-neutral\/global-light\/10);
+  --text\&icon\/unbound\/disabled: var(--中性色-neutral\/global-light\/70);
+  --text\&icon\/unbound\/error: var(--危险-danger\/global-light\/50);
+  --text\&icon\/unbound\/error-disabled-100: var(--危险-danger\/global-light\/10);
+  --text\&icon\/unbound\/error-disabled-200: var(--危险-danger\/global-light\/30);
+  --text\&icon\/unbound\/warning: var(--告警-warning\/global-light\/50);
+  --text\&icon\/unbound\/success: var(--成功-success\/global-light\/50);
+  --text\&icon\/unbound\/info: var(--提示\&接入-commissioning\/global-light\/70);
+  --text\&icon\/unbound\/offline: var(--离线-offline\/global-light\/50);
+  --text\&icon\/unbound\/link: var(--链接-link\/global-light\/20);
+  --text\&icon\/bound\/not-primary\/default: var(--中性色-neutral\/global-light\/120);
+  --fill\/unbound\/page-100: var(--中性色-neutral\/global-light\/10);
+  --fill\/unbound\/page-200: var(--中性色-neutral\/global-light\/30);
+  --fill\/unbound\/card-100: var(--中性色-neutral\/global-light\/10);
+  --fill\/unbound\/card-200: var(--中性色-neutral\/global-light\/30);
+  --fill\/unbound\/control-100-a: var(--中性色-neutral\/global-light\/10);
+  --fill\/unbound\/control-100-b: var(--中性色-neutral\/global-light\/10);
+  --fill\/unbound\/control-200-a: var(--中性色-neutral\/global-light\/30);
+  --fill\/unbound\/control-200-b: var(--中性色-neutral\/global-light\/30);
+  --fill\/unbound\/control-300: var(--中性色-neutral\/global-light\/40);  /* tabs背景等 */
+  --fill\/unbound\/control-400: var(--中性色-neutral\/global-light\/50);  /* 开关禁用色&头像底色&加载底色 */
+  --fill\/unbound\/control-500: var(--主色-primary\/global-light\/20);
+  --fill\/unbound\/disabled-100: var(--中性色-neutral\/global-light\/20);
+  --fill\/unbound\/disabled-200: var(--中性色-neutral\/global-light\/70);
+  --fill\/unbound\/error: var(--危险-danger\/global-light\/10);
+  --fill\/unbound\/warning: var(--告警-warning\/global-light\/10);
+  --fill\/unbound\/success: var(--成功-success\/global-light\/10);
+  --fill\/unbound\/info: var(--提示\&接入-commissioning\/global-light\/10);
+  --fill\/unbound\/offline: var(--离线-offline\/global-light\/10);
+  --fill\/bound\/button\/primary\/default: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/button\/primary\/disabled: var(--中性色-neutral\/global-light\/70);
+  --fill\/bound\/button\/tertiary\/default: var(--中性色-neutral\/global-light\/40);
+  --fill\/bound\/button\/tertiary\/disabled: var(--中性色-neutral\/global-light\/40);
+  --fill\/bound\/button\/danger\/primary-default: var(--危险-danger\/global-light\/50);
+  --fill\/bound\/button\/danger\/primary-disabled: var(--危险-danger\/global-light\/30);
+  --fill\/bound\/button\/danger\/secondary-default: var(--危险-danger\/global-light\/10);
+  --fill\/bound\/button\/danger\/secondary-disabled: var(--危险-danger\/global-light\/10);
+  --fill\/bound\/button\/verify\/default: var(--中性色-neutral\/global-light\/10);
+  --fill\/bound\/button\/verify\/disabled: var(--中性色-neutral\/global-light\/10);  /* 用于输入框内获取验证码按钮等 */
+  --fill\/bound\/button\/small-filter\/default: var(--中性色-neutral\/global-light\/120);
+  --fill\/bound\/button\/small-filter\/selected: var(--品牌色-brand\/global-light\/40);
+  --fill\/bound\/cascader\/highlight: var(--品牌色-brand\/global-light\/40);
+  --fill\/bound\/badge\/default: var(--危险-danger\/global-light\/50);
+  --fill\/bound\/badge\/selected: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/checkbox\/unselected: var(--中性色-neutral\/eu-light\/0);
+  --fill\/bound\/checkbox\/selected: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/checkbox\/unselected-disabled: var(--灰色-dust\/light\/40);
+  --fill\/bound\/checkbox\/selected-disabled: var(--中性色-neutral\/global-light\/70);
+  --fill\/bound\/checkbox\/indeterminate: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/checkbox\/indeterminate-disabled: var(--中性色-neutral\/global-light\/70);
+  --fill\/bound\/radio\/unselected: var(--中性色-neutral\/eu-light\/0);
+  --fill\/bound\/radio\/selected: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/radio\/unselected-disabled: var(--灰色-dust\/light\/40);
+  --fill\/bound\/radio\/selected-disabled: var(--中性色-neutral\/global-light\/70);
+  --fill\/bound\/calendar\/default: var(--中性色-neutral\/global-light\/120);
+  --fill\/bound\/calendar\/disable: var(--中性色-neutral\/global-light\/70);
+  --fill\/bound\/calendar\/today: var(--中性色-neutral\/global-light\/120);
+  --fill\/bound\/calendar\/selected-today: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/calendar\/selected-week: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/date\&time\/date-selected: var(--主色-primary\/global-light\/20);
+  --fill\/bound\/date\&time\/carousel-selected: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/empty-state\/neutral-100: var(--中性色-neutral\/global-light\/10);
+  --fill\/bound\/empty-state\/neutral-200: var(--中性色-neutral\/global-light\/50);
+  --fill\/bound\/empty-state\/neutral-300: var(--中性色-neutral\/global-light\/80);
+  --fill\/bound\/empty-state\/neutral-400: var(--中性色-neutral\/global-light\/100);
+  --fill\/bound\/empty-state\/neutral-500: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/empty-state\/brand-100: var(--主色-primary\/global-light\/40);
+  --fill\/bound\/empty-state\/brand-200: var(--品牌色-brand\/global-light\/40);
+  --fill\/bound\/form\/default: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/form\/disabled: var(--中性色-neutral\/global-light\/20);
+  --fill\/bound\/form\/readonly-disabled: var(--中性色-neutral\/global-light\/40);
+  --fill\/bound\/filter\/default: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/filter\/selected: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/rate\/default: var(--中性色-neutral\/global-light\/70);
+  --fill\/bound\/rate\/selected: var(--高亮星-star\/global-light\/50);
+  --fill\/bound\/progress\/linear\/success: var(--成功-success\/global-light\/50);
+  --fill\/bound\/progress\/linear\/error: var(--危险-danger\/global-light\/50);
+  --fill\/bound\/progress\/linear\/track: var(--中性色-neutral\/global-light\/50);
+  --fill\/bound\/progress\/circular\/track: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/progress\/circular\/progress: var(--主色-primary\/global-light\/60);
+  --fill\/bound\/progress\/button\/track: var(--主色-primary\/global-light\/20);
+  --fill\/bound\/progress\/button\/progress: var(--主色-primary\/global-light\/60);
+  --fill\/bound\/slider\/track: var(--灰色-dust\/light\/50);
+  --fill\/bound\/slider\/thumb: var(--主色-primary\/global-light\/60);
+  --fill\/bound\/switch\/on-default: var(--提示\&接入-commissioning\/global-light\/70);
+  --fill\/bound\/switch\/on-disabled: var(--提示\&接入-commissioning\/global-light\/50);
+  --fill\/bound\/switch\/off-default: var(--中性色-neutral\/global-light\/70);
+  --fill\/bound\/switch\/off-disabled: var(--中性色-neutral\/global-light\/50);
+  --fill\/bound\/switch\/thumb-default: var(--中性色-neutral\/global-light\/10);
+  --fill\/bound\/switch\/thumb-disabled: var(--中性色-neutral\/global-light\/10);
+  --fill\/bound\/noticebar\/single\/warning: var(--告警-warning\/global-light\/10);
+  --fill\/bound\/noticebar\/single\/info: var(--提示\&接入-commissioning\/global-light\/10);
+  --fill\/bound\/noticebar\/single\/success: var(--成功-success\/global-light\/10);
+  --fill\/bound\/noticebar\/single\/error: var(--危险-danger\/global-light\/10);
+  --fill\/bound\/noticebar\/multi\/1st: var(--提示\&接入-commissioning\/global-light\/20);
+  --fill\/bound\/noticebar\/multi\/2nd: var(--提示\&接入-commissioning\/global-light\/30);
+  --fill\/bound\/noticebar\/multi\/3rd: var(--提示\&接入-commissioning\/global-light\/20);
+  --fill\/bound\/tabs\/bordered\/default: var(--中性色-neutral\/eu-light\/0);
+  --fill\/bound\/tabs\/underline\/default: var(--灰色-dust\/light\/110);
+  --fill\/bound\/tabs\/underline\/selected: var(--主色-primary\/global-light\/10);
+  --fill\/bound\/tabs\/pill\/default: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/tabs\/pill\/selected: var(--中性色-neutral\/global-light\/40);
+  --fill\/bound\/tabs\/slider\/default-100: var(--中性色-neutral\/global-light\/30);
+  --fill\/bound\/tabs\/slider\/selected-100: var(--中性色-neutral\/global-light\/10);
+  --fill\/bound\/tabs\/slider\/default-200: var(--中性色-neutral\/global-light\/40);
+  --fill\/bound\/tabs\/slider\/selected-200: var(--中性色-neutral\/global-light\/10);
+  --border\/unbound\/divider-100: var(--中性色-neutral\/global-light\/50);  /* 表单或图表分割线等 */
+  --border\/unbound\/divider-200: var(--中性色-neutral\/global-light\/60);  /* 时间带分割线等 */
+  --border\/unbound\/default: var(--中性色-neutral\/global-light\/90);  /* 线框按钮或步进器描边 */
+  --border\/unbound\/disabled: var(--中性色-neutral\/global-light\/70);  /* 禁用按钮描边等 */
+  --border\/bound\/button\/secondary\/default: var(--中性色-neutral\/global-light\/120);
+  --border\/bound\/button\/secondary\/disabled: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/button\/danger\/default: var(--危险-danger\/global-light\/50);
+  --border\/bound\/button\/danger\/disabled: var(--危险-danger\/global-light\/20);
+  --border\/bound\/checkbox\/default: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/checkbox\/disabled: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/checkbox\/indeterminate: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/checkbox\/indeterminate-disabled: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/radio\/default: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/radio\/disabled: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/date\&time\/default: var(--中性色-neutral\/global-light\/70);
+  --border\/bound\/date\&time\/selected: var(--品牌色-brand\/global-light\/30);
+  --border\/bound\/filter\/selected: var(--中性色-neutral\/global-light\/90);
+  --border\/bound\/form\/error: var(--危险-danger\/global-light\/50);
+  --border\/bound\/tag\/success: var(--成功-success\/global-light\/40);
+  --border\/bound\/tag\/warning: var(--告警-warning\/global-light\/40);
+  --border\/bound\/tag\/error: var(--危险-danger\/global-light\/40);
+  --border\/bound\/tag\/offline: var(--离线-offline\/global-dark\/40);
+  --border\/bound\/tag\/commissioning: var(--提示\&接入-commissioning\/global-light\/60);
+  --border\/bound\/tabs\/pill\/selected: var(--中性色-neutral\/global-light\/90);
+  --border\/bound\/tabs\/bordered\/default: var(--中性色-neutral\/global-light\/50);
+  --border\/bound\/tabs\/bordered\/selected: var(--中性色-neutral\/global-light\/120);
+  --mask\/background: var(--蒙层-mask\/global-light\/10);
+  --status\/success\/10: var(--成功-success\/global-light\/10);
+  --status\/success\/20: var(--成功-success\/global-light\/20);
+  --status\/success\/30: var(--成功-success\/global-light\/30);
+  --status\/success\/40: var(--成功-success\/global-light\/40);
+  --status\/success\/50: var(--成功-success\/global-light\/50);
+  --status\/success\/60: var(--成功-success\/global-light\/60);
+  --status\/warning\/10: var(--告警-warning\/global-light\/10);
+  --status\/warning\/20: var(--告警-warning\/global-light\/20);
+  --status\/warning\/30: var(--告警-warning\/global-light\/30);
+  --status\/warning\/40: var(--告警-warning\/global-light\/30);
+  --status\/warning\/50: var(--告警-warning\/global-light\/50);
+  --status\/warning\/60: var(--告警-warning\/global-light\/60);
+  --status\/error\/10: var(--危险-danger\/global-light\/10);
+  --status\/error\/20: var(--危险-danger\/global-light\/20);
+  --status\/error\/30: var(--危险-danger\/global-light\/30);
+  --status\/error\/40: var(--危险-danger\/global-light\/40);
+  --status\/error\/50: var(--危险-danger\/global-light\/50);
+  --status\/error\/60: var(--危险-danger\/global-light\/60);
+  --status\/info\/10: var(--提示\&接入-commissioning\/global-light\/30);
+  --status\/info\/20: var(--提示\&接入-commissioning\/global-light\/40);
+  --status\/info\/30: var(--提示\&接入-commissioning\/global-light\/50);
+  --status\/info\/40: var(--提示\&接入-commissioning\/global-light\/60);
+  --status\/info\/50: var(--提示\&接入-commissioning\/global-light\/70);
+  --status\/info\/60: var(--提示\&接入-commissioning\/global-light\/80);
+  --status\/offline\/10: var(--离线-offline\/global-light\/10);
+  --status\/offline\/20: var(--离线-offline\/global-light\/20);
+  --status\/offline\/30: var(--离线-offline\/global-light\/30);
+  --status\/offline\/40: var(--离线-offline\/global-light\/40);
+  --status\/offline\/50: var(--离线-offline\/global-light\/50);
+  --status\/offline\/60: var(--离线-offline\/global-light\/60);
+  --mask\/toast: var(--蒙层-mask\/global-light\/20);
+  --shadow\/default: var(--阴影-shadow\/global-light\/100);  /* 表单或图表分割线等 */
+  --蓝色-blue\/dark\/10: #31374A;
+  --蓝色-blue\/dark\/20: #34426E;
+  --蓝色-blue\/dark\/30: #364A86;
+  --蓝色-blue\/dark\/40: #385098;
+  --蓝色-blue\/dark\/50: #3E66DE;
+  --蓝色-blue\/dark\/60: #385DC9;
+  --图表-chart\/蓝色-图例\/10: var(--图表色-chart\/01-图例\/global-light\/10);
+  --图表-chart\/蓝色-图例\/20: var(--图表色-chart\/01-图例\/global-light\/20);
+  --图表-chart\/蓝色-图例\/30: var(--图表色-chart\/01-图例\/global-light\/30);
+  --图表-chart\/蓝色-图例\/40: var(--图表色-chart\/01-图例\/global-light\/40);
+  --图表-chart\/蓝色-图例\/50: var(--图表色-chart\/01-图例\/global-light\/50);
+  --图表-chart\/蓝色-图例\/60: var(--图表色-chart\/01-图例\/global-light\/60);
+  --图表色-chart\/01-图例\/global-dark\/10: var(--蓝色-blue\/dark\/10);
+  --图表色-chart\/01-图例\/global-dark\/20: var(--蓝色-blue\/dark\/20);
+  --图表色-chart\/01-图例\/global-dark\/30: var(--蓝色-blue\/dark\/30);
+  --图表色-chart\/01-图例\/global-dark\/40: var(--蓝色-blue\/dark\/40);
+  --图表色-chart\/01-图例\/global-dark\/50: var(--蓝色-blue\/dark\/50);
+  --图表色-chart\/01-图例\/global-dark\/60: var(--蓝色-blue\/dark\/60);
+  --图表色-chart\/02-图例\/global-light\/10: var(--橘色-orange\/light\/10);
+  --图表色-chart\/02-图例\/global-light\/20: var(--橘色-orange\/light\/20);
+  --图表色-chart\/02-图例\/global-light\/30: var(--橘色-orange\/light\/30);
+  --图表色-chart\/02-图例\/global-light\/40: var(--橘色-orange\/light\/40);
+  --图表色-chart\/02-图例\/global-light\/50: var(--橘色-orange\/light\/50);
+  --图表色-chart\/02-图例\/global-light\/60: var(--橘色-orange\/light\/60);
+  --图表色-chart\/02-图例\/global-dark\/10: var(--橘色-orange\/dark\/10);
+  --图表色-chart\/02-图例\/global-dark\/20: var(--橘色-orange\/dark\/20);
+  --图表色-chart\/02-图例\/global-dark\/30: var(--橘色-orange\/dark\/30);
+  --图表色-chart\/02-图例\/global-dark\/40: var(--橘色-orange\/light\/40);
+  --图表色-chart\/02-图例\/global-dark\/50: var(--橘色-orange\/light\/50);
+  --图表色-chart\/02-图例\/global-dark\/60: var(--橘色-orange\/light\/60);
+  --图表色-chart\/03-图例\/global-light\/10: var(--绿色-green\/light\/10);
+  --图表色-chart\/03-图例\/global-light\/20: var(--绿色-green\/light\/20);
+  --图表色-chart\/03-图例\/global-light\/30: var(--绿色-green\/light\/30);
+  --图表色-chart\/03-图例\/global-light\/40: var(--绿色-green\/light\/40);
+  --图表色-chart\/03-图例\/global-light\/50: var(--绿色-green\/light\/50);
+  --图表色-chart\/03-图例\/global-light\/60: var(--绿色-green\/light\/60);
+  --图表色-chart\/03-图例\/global-dark\/10: var(--绿色-green\/dark\/10);
+  --图表色-chart\/03-图例\/global-dark\/20: var(--绿色-green\/dark\/20);
+  --图表色-chart\/03-图例\/global-dark\/30: var(--绿色-green\/dark\/30);
+  --图表色-chart\/03-图例\/global-dark\/40: var(--绿色-green\/dark\/40);
+  --图表色-chart\/03-图例\/global-dark\/50: var(--绿色-green\/dark\/50);
+  --图表色-chart\/03-图例\/global-dark\/60: var(--绿色-green\/dark\/60);
+  --图表色-chart\/04-图例\/global-light\/10: var(--青色-cyan\/light\/10);
+  --图表色-chart\/04-图例\/global-light\/20: var(--青色-cyan\/light\/20);
+  --图表色-chart\/04-图例\/global-light\/30: var(--青色-cyan\/light\/30);
+  --图表色-chart\/04-图例\/global-light\/40: var(--青色-cyan\/light\/40);
+  --图表色-chart\/04-图例\/global-light\/50: var(--青色-cyan\/light\/50);
+  --图表色-chart\/04-图例\/global-light\/60: var(--青色-cyan\/light\/60);
+  --图表色-chart\/04-图例\/global-dark\/10: var(--青色-cyan\/dark\/10);
+  --图表色-chart\/04-图例\/global-dark\/20: var(--青色-cyan\/dark\/20);
+  --图表色-chart\/04-图例\/global-dark\/30: var(--青色-cyan\/dark\/30);
+  --图表色-chart\/04-图例\/global-dark\/40: var(--青色-cyan\/dark\/40);
+  --图表色-chart\/04-图例\/global-dark\/50: var(--青色-cyan\/dark\/50);
+  --图表色-chart\/04-图例\/global-dark\/60: var(--青色-cyan\/dark\/60);
+  --图表色-chart\/05-图例\/global-light\/10: var(--粉色-pink\/light\/10);
+  --图表色-chart\/05-图例\/global-light\/20: var(--粉色-pink\/light\/20);
+  --图表色-chart\/05-图例\/global-light\/30: var(--粉色-pink\/light\/30);
+  --图表色-chart\/05-图例\/global-light\/40: var(--粉色-pink\/light\/40);
+  --图表色-chart\/05-图例\/global-light\/50: var(--粉色-pink\/light\/50);
+  --图表色-chart\/05-图例\/global-light\/60: var(--粉色-pink\/light\/60);
+  --图表色-chart\/05-图例\/global-dark\/10: var(--粉色-pink\/dark\/10);
+  --图表色-chart\/05-图例\/global-dark\/20: var(--粉色-pink\/dark\/20);
+  --图表色-chart\/05-图例\/global-dark\/30: var(--粉色-pink\/dark\/30);
+  --图表色-chart\/05-图例\/global-dark\/40: var(--粉色-pink\/dark\/40);
+  --图表色-chart\/05-图例\/global-dark\/50: var(--粉色-pink\/dark\/50);
+  --图表色-chart\/05-图例\/global-dark\/60: var(--粉色-pink\/dark\/60);
+  --图表色-chart\/06-图例\/global-light\/10: var(--柠檬黄lemon-yellow\/light\/10);
+  --图表色-chart\/06-图例\/global-light\/20: var(--柠檬黄lemon-yellow\/light\/20);
+  --图表色-chart\/06-图例\/global-light\/30: var(--柠檬黄lemon-yellow\/light\/30);
+  --图表色-chart\/06-图例\/global-light\/40: var(--柠檬黄lemon-yellow\/light\/40);
+  --图表色-chart\/06-图例\/global-light\/50: var(--柠檬黄lemon-yellow\/light\/50);
+  --图表色-chart\/06-图例\/global-light\/60: var(--柠檬黄lemon-yellow\/light\/60);
+  --图表色-chart\/06-图例\/global-dark\/10: var(--柠檬黄lemon-yellow\/dark\/10);
+  --图表色-chart\/06-图例\/global-dark\/20: var(--柠檬黄lemon-yellow\/dark\/20);
+  --图表色-chart\/06-图例\/global-dark\/30: var(--柠檬黄lemon-yellow\/dark\/30);
+  --图表色-chart\/06-图例\/global-dark\/40: var(--柠檬黄lemon-yellow\/dark\/40);
+  --图表色-chart\/06-图例\/global-dark\/50: var(--柠檬黄lemon-yellow\/dark\/50);
+  --图表色-chart\/06-图例\/global-dark\/60: var(--柠檬黄lemon-yellow\/dark\/60);
+  --图表色-chart\/07-图例\/global-light\/10: var(--紫色-purple\/light\/10);
+  --图表色-chart\/07-图例\/global-light\/20: var(--紫色-purple\/light\/20);
+  --图表色-chart\/07-图例\/global-light\/30: var(--紫色-purple\/light\/30);
+  --图表色-chart\/07-图例\/global-light\/40: var(--紫色-purple\/light\/40);
+  --图表色-chart\/07-图例\/global-light\/50: var(--紫色-purple\/light\/50);
+  --图表色-chart\/07-图例\/global-light\/60: var(--紫色-purple\/light\/60);
+  --图表色-chart\/07-图例\/global-dark\/10: var(--紫色-purple\/dark\/10);
+  --图表色-chart\/07-图例\/global-dark\/20: var(--紫色-purple\/dark\/20);
+  --图表色-chart\/07-图例\/global-dark\/30: var(--紫色-purple\/dark\/30);
+  --图表色-chart\/07-图例\/global-dark\/40: var(--紫色-purple\/dark\/40);
+  --图表色-chart\/07-图例\/global-dark\/50: var(--紫色-purple\/dark\/50);
+  --图表色-chart\/07-图例\/global-dark\/60: var(--紫色-purple\/dark\/60);
+  --图表色-chart\/08-图例\/global-light\/10: var(--草绿-grass-green\/light\/10);
+  --图表色-chart\/08-图例\/global-light\/20: var(--草绿-grass-green\/light\/20);
+  --图表色-chart\/08-图例\/global-light\/30: var(--草绿-grass-green\/light\/30);
+  --图表色-chart\/08-图例\/global-light\/40: var(--草绿-grass-green\/light\/40);
+  --图表色-chart\/08-图例\/global-light\/50: var(--草绿-grass-green\/light\/50);
+  --图表色-chart\/08-图例\/global-light\/60: var(--草绿-grass-green\/light\/60);
+  --图表色-chart\/08-图例\/global-dark\/10: var(--草绿-grass-green\/dark\/10);
+  --图表色-chart\/08-图例\/global-dark\/20: var(--草绿-grass-green\/dark\/20);
+  --图表色-chart\/08-图例\/global-dark\/30: var(--草绿-grass-green\/dark\/30);
+  --图表色-chart\/08-图例\/global-dark\/40: var(--草绿-grass-green\/dark\/40);
+  --图表色-chart\/08-图例\/global-dark\/50: var(--草绿-grass-green\/dark\/50);
+  --图表色-chart\/08-图例\/global-dark\/60: var(--草绿-grass-green\/dark\/60);
+  --图表色-chart\/09-图例\/global-light\/10: var(--珊瑚红-coral-red\/light\/10);
+  --图表色-chart\/09-图例\/global-light\/20: var(--珊瑚红-coral-red\/light\/20);
+  --图表色-chart\/09-图例\/global-light\/30: var(--珊瑚红-coral-red\/light\/30);
+  --图表色-chart\/09-图例\/global-light\/40: var(--珊瑚红-coral-red\/light\/40);
+  --图表色-chart\/09-图例\/global-light\/50: var(--珊瑚红-coral-red\/light\/50);
+  --图表色-chart\/09-图例\/global-light\/60: var(--珊瑚红-coral-red\/light\/60);
+  --图表色-chart\/09-图例\/global-dark\/10: var(--珊瑚红-coral-red\/dark-暂时未改\/10-\#3b2424);
+  --图表色-chart\/09-图例\/global-dark\/20: var(--珊瑚红-coral-red\/dark-暂时未改\/20-\#562121);
+  --图表色-chart\/09-图例\/global-dark\/30: var(--珊瑚红-coral-red\/dark-暂时未改\/30-\#5e2323);
+  --图表色-chart\/09-图例\/global-dark\/40: var(--珊瑚红-coral-red\/dark-暂时未改\/40-\#842c2b);
+  --图表色-chart\/09-图例\/global-dark\/50: var(--珊瑚红-coral-red\/dark-暂时未改\/50-\#d13e3d);
+  --图表色-chart\/09-图例\/global-dark\/60: var(--珊瑚红-coral-red\/dark-暂时未改\/60-\#bd3837);
+  --图表色-chart\/10-图例\/global-light\/10: var(--棕色-brown\/light\/10);
+  --图表色-chart\/10-图例\/global-light\/20: var(--棕色-brown\/light\/20);
+  --图表色-chart\/10-图例\/global-light\/30: var(--棕色-brown\/light\/30);
+  --图表色-chart\/10-图例\/global-light\/40: var(--棕色-brown\/light\/40);
+  --图表色-chart\/10-图例\/global-light\/50: var(--棕色-brown\/light\/50);
+  --图表色-chart\/10-图例\/global-light\/60: var(--棕色-brown\/light\/60);
+  --图表色-chart\/10-图例\/global-dark\/10: var(--棕色-brown\/dark-暂时未改\/10);
+  --图表色-chart\/10-图例\/global-dark\/20: var(--棕色-brown\/dark-暂时未改\/20);
+  --图表色-chart\/10-图例\/global-dark\/30: var(--棕色-brown\/dark-暂时未改\/30);
+  --图表色-chart\/10-图例\/global-dark\/40: var(--棕色-brown\/dark-暂时未改\/40);
+  --图表色-chart\/10-图例\/global-dark\/50: var(--棕色-brown\/dark-暂时未改\/50);
+  --图表色-chart\/10-图例\/global-dark\/60: var(--棕色-brown\/dark-暂时未改\/60);
+  --图表-chart\/橘色-图例\/10: var(--图表色-chart\/02-图例\/global-light\/10);
+  --图表-chart\/橘色-图例\/20: var(--图表色-chart\/02-图例\/global-light\/20);
+  --图表-chart\/橘色-图例\/30: var(--图表色-chart\/02-图例\/global-light\/30);
+  --图表-chart\/橘色-图例\/40: var(--图表色-chart\/02-图例\/global-light\/40);
+  --图表-chart\/橘色-图例\/50: var(--图表色-chart\/02-图例\/global-light\/50);
+  --图表-chart\/橘色-图例\/60: var(--图表色-chart\/02-图例\/global-light\/60);
+  --图表-chart\/绿色-图例\/10: var(--图表色-chart\/03-图例\/global-light\/10);
+  --图表-chart\/绿色-图例\/20: var(--图表色-chart\/03-图例\/global-light\/20);
+  --图表-chart\/绿色-图例\/30: var(--图表色-chart\/03-图例\/global-light\/30);
+  --图表-chart\/绿色-图例\/40: var(--图表色-chart\/03-图例\/global-light\/40);
+  --图表-chart\/绿色-图例\/50: var(--图表色-chart\/03-图例\/global-light\/50);
+  --图表-chart\/绿色-图例\/60: var(--图表色-chart\/03-图例\/global-light\/60);
+  --图表-chart\/青色-图例\/10: var(--图表色-chart\/04-图例\/global-light\/10);
+  --图表-chart\/青色-图例\/20: var(--图表色-chart\/04-图例\/global-light\/20);
+  --图表-chart\/青色-图例\/30: var(--图表色-chart\/04-图例\/global-light\/30);
+  --图表-chart\/青色-图例\/40: var(--图表色-chart\/04-图例\/global-light\/40);
+  --图表-chart\/青色-图例\/50: var(--图表色-chart\/04-图例\/global-light\/50);
+  --图表-chart\/青色-图例\/60: var(--图表色-chart\/04-图例\/global-light\/60);
+  --图表-chart\/粉色-图例\/10: var(--图表色-chart\/05-图例\/global-light\/10);
+  --图表-chart\/粉色-图例\/20: var(--图表色-chart\/05-图例\/global-light\/20);
+  --图表-chart\/粉色-图例\/30: var(--图表色-chart\/05-图例\/global-light\/30);
+  --图表-chart\/粉色-图例\/40: var(--图表色-chart\/05-图例\/global-light\/40);
+  --图表-chart\/粉色-图例\/50: var(--图表色-chart\/05-图例\/global-light\/50);
+  --图表-chart\/粉色-图例\/60: var(--图表色-chart\/05-图例\/global-light\/60);
+  --图表-chart\/黄色-图例\/10: var(--图表色-chart\/06-图例\/global-light\/10);
+  --图表-chart\/黄色-图例\/20: var(--图表色-chart\/06-图例\/global-light\/20);
+  --图表-chart\/黄色-图例\/30: var(--图表色-chart\/06-图例\/global-light\/30);
+  --图表-chart\/黄色-图例\/40: var(--图表色-chart\/06-图例\/global-light\/40);
+  --图表-chart\/黄色-图例\/50: var(--图表色-chart\/06-图例\/global-light\/50);
+  --图表-chart\/黄色-图例\/60: var(--图表色-chart\/06-图例\/global-light\/60);
+  --图表-chart\/紫色-图例\/10: var(--图表色-chart\/07-图例\/global-light\/10);
+  --图表-chart\/紫色-图例\/20: var(--图表色-chart\/07-图例\/global-light\/20);
+  --图表-chart\/紫色-图例\/30: var(--图表色-chart\/07-图例\/global-light\/30);
+  --图表-chart\/紫色-图例\/40: var(--图表色-chart\/07-图例\/global-light\/40);
+  --图表-chart\/紫色-图例\/50: var(--图表色-chart\/07-图例\/global-light\/50);
+  --图表-chart\/紫色-图例\/60: var(--图表色-chart\/07-图例\/global-light\/60);
+  --图表-chart\/草绿-图例\/10: var(--图表色-chart\/08-图例\/global-light\/10);
+  --图表-chart\/草绿-图例\/20: var(--图表色-chart\/08-图例\/global-light\/20);
+  --图表-chart\/草绿-图例\/30: var(--图表色-chart\/08-图例\/global-light\/30);
+  --图表-chart\/草绿-图例\/40: var(--图表色-chart\/08-图例\/global-light\/40);
+  --图表-chart\/草绿-图例\/50: var(--图表色-chart\/08-图例\/global-dark\/50);
+  --图表-chart\/草绿-图例\/60: var(--图表色-chart\/08-图例\/global-light\/60);
+  --图表-chart\/红色-图例\/10: var(--图表色-chart\/09-图例\/global-light\/10);
+  --图表-chart\/红色-图例\/20: var(--图表色-chart\/09-图例\/global-light\/20);
+  --图表-chart\/红色-图例\/30: var(--图表色-chart\/09-图例\/global-light\/30);
+  --图表-chart\/红色-图例\/40: var(--图表色-chart\/09-图例\/global-light\/40);
+  --图表-chart\/红色-图例\/50: var(--图表色-chart\/09-图例\/global-light\/50);
+  --图表-chart\/红色-图例\/60: var(--图表色-chart\/09-图例\/global-light\/60);
+  --图表-chart\/棕色-图例\/10: var(--图表色-chart\/10-图例\/global-light\/10);
+  --图表-chart\/棕色-图例\/20: var(--图表色-chart\/10-图例\/global-light\/20);
+  --图表-chart\/棕色-图例\/30: var(--图表色-chart\/10-图例\/global-light\/30);
+  --图表-chart\/棕色-图例\/40: var(--图表色-chart\/10-图例\/global-light\/40);
+  --图表-chart\/棕色-图例\/50: var(--图表色-chart\/10-图例\/global-light\/50);
+  --图表-chart\/棕色-图例\/60: var(--图表色-chart\/10-图例\/global-light\/60);
+  --状态-status-shade\/告警-warning\/10: var(--告警-warning\/global-light\/10);
+  --状态-status-shade\/告警-warning\/20: var(--告警-warning\/global-light\/20);
+  --状态-status-shade\/告警-warning\/30: var(--告警-warning\/global-light\/30);
+  --状态-status-shade\/告警-warning\/40: var(--告警-warning\/global-light\/40);
+  --状态-status-shade\/告警-warning\/50: var(--告警-warning\/global-light\/50);
+  --状态-status-shade\/告警-warning\/60: var(--告警-warning\/global-light\/60);
+  --状态-status-shade\/危险-error\/10: var(--危险-danger\/global-light\/10);
+  --状态-status-shade\/危险-error\/20: var(--危险-danger\/global-light\/20);
+  --状态-status-shade\/危险-error\/30: var(--危险-danger\/global-light\/30);
+  --状态-status-shade\/危险-error\/40: var(--危险-danger\/global-light\/40);
+  --状态-status-shade\/危险-error\/50: var(--危险-danger\/global-light\/50);
+  --状态-status-shade\/危险-error\/60: var(--危险-danger\/global-light\/60);
+  --状态-status-shade\/提示\&接入-info\/10: var(--提示\&接入-commissioning\/global-light\/30);
+  --状态-status-shade\/提示\&接入-info\/20: var(--提示\&接入-commissioning\/global-light\/40);
+  --状态-status-shade\/提示\&接入-info\/30: var(--提示\&接入-commissioning\/global-light\/50);
+  --状态-status-shade\/提示\&接入-info\/40: var(--提示\&接入-commissioning\/global-light\/60);
+  --状态-status-shade\/提示\&接入-info\/50: var(--提示\&接入-commissioning\/global-light\/70);
+  --状态-status-shade\/提示\&接入-info\/60: var(--提示\&接入-commissioning\/global-light\/80);
+  --状态-status-shade\/离线-offline\/10: var(--离线-offline\/global-light\/10);
+  --状态-status-shade\/离线-offline\/20: var(--离线-offline\/global-light\/20);
+  --状态-status-shade\/离线-offline\/30: var(--离线-offline\/global-light\/30);
+  --状态-status-shade\/离线-offline\/40: var(--离线-offline\/global-light\/40);
+  --状态-status-shade\/离线-offline\/50: var(--离线-offline\/global-light\/50);
+  --状态-status-shade\/离线-offline\/60: var(--离线-offline\/global-light\/60);
+  --xxl–200: var(--100);  /* 按钮等 */
+  --xxl–100: var(--100);  /* 徽标等 */
+  --xl: var(--56);  /* 徽标等 */
+  --l: var(--32);  /* 表单卡片、动作面板等 */
+  --m: var(--24);  /* 对话框、加载卡片背景、滑动操作等 */
+  --s: var(--16);  /* 消息提示、输入框等圆角 */
+  --xs: var(--12);  /* 小号卡片等 */
+  --xxs: var(--8);  /* 常规标签等 */
+  --xxxs: var(--4);  /* 小号标签等 */
+  --0-2: var(--0);
+  --size\/number-xxl: var(--66);
+  --size\/heading-operational-xl: var(--48);
+  --size\/heading-operational-l: var(--44);
+  --size\/heading-operational-m: var(--40);
+  --size\/heading-operational-s: var(--36);
+  --size\/heading-l: var(--34);
+  --size\/heading-m: var(--32);
+  --size\/heading-s: var(--30);
+  --size\/body-default: var(--28);
+  --size\/body-secondary: var(--24);
+  --size\/body-tertiary: var(--22);
+  --size\/label: var(--20);
+  --size\/special: var(--16);
+  --line-height\/number-xxl: var(--70);
+  --line-height\/heading-operational-xl: var(--64);
+  --line-height\/heading-operational-l: var(--60);
+  --line-height\/heading-operational-m: var(--56);
+  --line-height\/heading-operational-s: var(--52);
+  --line-height\/heading-l: var(--50);
+  --line-height\/heading-m: var(--48);
+  --line-height\/heading-s: var(--46);
+  --line-height\/body-default: var(--42);
+  --line-height\/body-secondary: var(--36);
+  --line-height\/body-tertiary: var(--30);
+  --line-height\/label: var(--28);
+  --line-height\/special: var(--20);
+}
+
+/* About 66-cn-regular: 数字-最大 */
+.66-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Medium";
+  font-size: 66px;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: 0px;
+}
+
+/* About 66-cn-semibold: 数字-最大 */
+.66-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 66px;
+  font-weight: 600;
+  line-height: 70px;
+  letter-spacing: 0px;
+}
+
+/* About 66-en-medium: 数字-最大 */
+.66-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 66px;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: 0px;
+}
+
+/* About 66-en-semibold: 数字-最大 */
+.66-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 66px;
+  font-weight: 600;
+  line-height: 70px;
+  letter-spacing: 0px;
+}
+
+.48-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 64px;
+  letter-spacing: 0px;
+}
+
+.48-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 64px;
+  letter-spacing: 0px;
+}
+
+/* About 44-cn-regular: 运营标题-大 */
+.44-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Medium";
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 60px;
+  letter-spacing: 0px;
+}
+
+/* About 44-cn-semibold: 运营标题-大 */
+.44-cn-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 60px;
+  letter-spacing: 0px;
+}
+
+/* About 44-en-medium: 运营标题-大 */
+.44-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 60px;
+  letter-spacing: 0px;
+}
+
+/* About 44-en-semibold: 运营标题-大 */
+.44-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 60px;
+  letter-spacing: 0px;
+}
+
+/* About 40-cn-regular: 运营标题-中，数字常规字号 */
+.40-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 56px;
+  letter-spacing: 0px;
+}
+
+/* About 40-cn-semibold: 运营标题-中，数字常规字号 */
+.40-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 56px;
+  letter-spacing: 0px;
+}
+
+/* About 40-en-medium: 运营标题-中，数字常规字号 */
+.40-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 56px;
+  letter-spacing: 0px;
+}
+
+/* About 40-en-semibold: 运营标题-中，数字常规字号 */
+.40-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 56px;
+  letter-spacing: 0px;
+}
+
+/* About 36-cn-regular: 运营标题-小 */
+.36-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: 0px;
+}
+
+/* About 34-cn-regular: 标题-大 */
+.34-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: 0px;
+}
+
+/* About 34-cn-semibold: 标题-大 */
+.34-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 50px;
+  letter-spacing: 0px;
+}
+
+/* About 34-en-medium: 标题-大 */
+.34-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 50px;
+  letter-spacing: 0px;
+}
+
+/* About 34-en-semibold: 标题-大 */
+.34-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 50px;
+  letter-spacing: 0px;
+}
+
+/* About 32-cn-regular: 标题-中 */
+.32-cn-regular {
+  font-family: "Montserrat";
+  font-style: "Regular";
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: 0px;
+}
+
+/* About 30-cn-regular: 标题-小 */
+.30-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 46px;
+  letter-spacing: 0px;
+}
+
+/* About 28-cn-regular: 正文 */
+.28-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 42px;
+  letter-spacing: 0px;
+}
+
+/* About 24-cn-regular: 辅助信息 */
+.24-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0px;
+}
+
+/* About 22-cn-regular: 标签、辅助信息 */
+.22-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+}
+
+/* About 20-cn-regular: 标签、Tabbar */
+.20-cn-regular {
+  font-family: "PingFang SC";
+  font-style: "Regular";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+}
+
+/* About 36-cn-semibold: 运营标题-小 */
+.36-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 52px;
+  letter-spacing: 0px;
+}
+
+/* About 36-en-medium: 运营标题-小 */
+.36-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 52px;
+  letter-spacing: 0px;
+}
+
+/* About 36-en-semibold: 运营标题-小 */
+.36-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 52px;
+  letter-spacing: 0px;
+}
+
+/* About 32-cn-semibold: 标题-中 */
+.32-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 0px;
+}
+
+/* About 32-en-medium: 标题-中 */
+.32-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 48px;
+  letter-spacing: 0px;
+}
+
+/* About 32-en-semibold: 标题-中 */
+.32-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 0px;
+}
+
+/* About 30-cn-semibold: 标题-小 */
+.30-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 46px;
+  letter-spacing: 0px;
+}
+
+/* About 30-en-medium: 标题-小 */
+.30-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 46px;
+  letter-spacing: 0px;
+}
+
+/* About 30-en-semibold: 标题小 */
+.30-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 46px;
+  letter-spacing: 0px;
+}
+
+/* About 28-cn-semibold: 正文 */
+.28-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 42px;
+  letter-spacing: 0px;
+}
+
+/* About 28-en-medium: 正文 */
+.28-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 42px;
+  letter-spacing: 0px;
+}
+
+/* About 28-en-semibold: 正文 */
+.28-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 42px;
+  letter-spacing: 0px;
+}
+
+/* About 24-cn-semibold: 辅助信息 */
+.24-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0px;
+}
+
+/* About 24-en-medium: 辅助信息 */
+.24-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 0px;
+}
+
+/* About 24-en-semibold: 辅助信息 */
+.24-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0px;
+}
+
+/* About 20-cn-semibold: 标签、Tabbar */
+.20-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0px;
+}
+
+/* About 20-en-medium: 标签、Tabbar */
+.20-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0px;
+}
+
+.20-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0px;
+}
+
+/* About 22-cn-semibold: 标签、辅助信息 */
+.22-cn-semibold {
+  font-family: "PingFang SC";
+  font-style: "Semibold";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: 0px;
+}
+
+/* About 22-en-medium: 标签、辅助信息 */
+.22-en-medium {
+  font-family: "Montserrat";
+  font-style: "Medium";
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30px;
+  letter-spacing: 0px;
+}
+
+/* About 22-en-semibold: 标签、辅助信息 */
+.22-en-semibold {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: 0px;
+}
+

@@ -1,0 +1,381 @@
+# Enterprise Component Library - Cursor Rules
+
+## Project Overview
+This is an enterprise-grade React + TypeScript component library built with Tailwind CSS v4.
+All code must follow strict standards for accessibility, type safety, and design token usage.
+
+## Core Principles
+
+1. **TypeScript First**: All components must be fully typed
+2. **Design Tokens Only**: Never hardcode colors, spacing, or other design values
+3. **Accessibility**: WCAG 2.1 AA compliance minimum
+4. **Component Patterns**: Consistent structure across all components
+
+## Component Development Rules
+
+### File Structure
+Every component must have this structure:
+```
+ComponentName/
+├── index.tsx              # Component implementation
+├── ComponentName.types.ts # TypeScript type definitions
+├── README.md              # Usage documentation
+└── ComponentName.test.tsx # Unit tests (when applicable)
+```
+
+### Component Template
+Always use this pattern:
+
+```tsx
+import { forwardRef } from 'react';
+import type { HTMLAttributes } from 'react';
+import { cn } from '@/utils/cn';
+
+interface ComponentNameProps extends HTMLAttributes<HTMLElement> {
+  variant?: 'default' | 'primary';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+export const ComponentName = forwardRef<HTMLElement, ComponentNameProps>(
+  ({ className, variant = 'default', size = 'md', ...props }, ref) => {
+    return (
+      <element
+        ref={ref}
+        className={cn(
+          'base-styles',
+          variantStyles[variant],
+          sizeStyles[size],
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+
+ComponentName.displayName = 'ComponentName';
+```
+
+### Required Patterns
+
+1. **Always use forwardRef** for all UI components
+2. **Always set displayName** for debugging
+3. **Always extend appropriate HTML element props** (e.g., ButtonHTMLAttributes)
+4. **Always use cn() utility** for className merging
+5. **Always provide default prop values** in destructuring
+6. **Always allow className override** as last parameter to cn()
+
+## Styling Rules
+
+### ✅ REQUIRED: Use Design Tokens
+
+```tsx
+// ✅ CORRECT - Use CSS variables from design system
+<div className="bg-[var(--蓝色-blue/light/50)]" />
+<div className="text-[var(--灰色-dust/light/120)]" />
+<div className="border-[var(--灰色-dust/light/60)]" />
+```
+
+### ❌ FORBIDDEN: Hardcoded Values
+
+```tsx
+// ❌ WRONG - Never hardcode colors
+<div className="bg-blue-500" />
+<div className="text-gray-900" />
+
+// ❌ WRONG - Never use arbitrary values without tokens
+<div className="text-[#4776FF]" />
+<div className="p-[16px]" />
+```
+
+### Style Organization
+
+Separate styles into named objects:
+
+```tsx
+const variantStyles = {
+  primary: 'bg-[var(--蓝色-blue/light/50)] text-white',
+  secondary: 'bg-[var(--灰色-dust/light/40)] text-black',
+};
+
+const sizeStyles = {
+  sm: 'px-2 py-1 text-sm',
+  md: 'px-4 py-2 text-base',
+  lg: 'px-6 py-3 text-lg',
+};
+```
+
+## Import Rules
+
+### Path Aliases (REQUIRED)
+
+```tsx
+// ✅ CORRECT - Use path aliases
+import { Button } from '@/components/ui';
+import { colors } from '@/tokens';
+import { cn } from '@/utils';
+
+// ❌ WRONG - Don't use relative imports
+import { Button } from '../components/ui';
+import { colors } from '../../tokens';
+```
+
+### Import Order
+
+```tsx
+// 1. External dependencies
+import { forwardRef, useState } from 'react';
+
+// 2. Internal absolute imports
+import { cn } from '@/utils/cn';
+import { colors } from '@/tokens';
+
+// 3. Type imports
+import type { ButtonProps } from './Button.types';
+
+// 4. Relative imports (if needed)
+import './styles.css';
+```
+
+## TypeScript Rules
+
+### Type Definitions
+
+```tsx
+// ✅ CORRECT - Separate types file
+// Button.types.ts
+export type ButtonVariant = 'primary' | 'secondary';
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+}
+
+// ❌ WRONG - Don't use 'any'
+interface BadProps {
+  onClick?: any;  // ❌
+  data?: any;     // ❌
+}
+```
+
+### Const Assertions
+
+```tsx
+// ✅ CORRECT - Use 'as const' for literal types
+export const SIZES = ['sm', 'md', 'lg'] as const;
+export type Size = typeof SIZES[number];
+
+// ❌ WRONG - Loses type information
+export const SIZES = ['sm', 'md', 'lg'];
+export type Size = string;
+```
+
+## Accessibility Rules
+
+### Required Practices
+
+1. **Semantic HTML**: Use `<button>` not `<div>` for buttons
+2. **Labels**: All inputs must have visible labels
+3. **ARIA**: Add aria-label, aria-describedby, aria-invalid where needed
+4. **Keyboard**: All interactive elements must be keyboard accessible
+5. **Focus**: Visible focus indicators required
+
+```tsx
+// ✅ CORRECT
+<Input
+  label="Email"
+  aria-describedby="email-help"
+  aria-invalid={hasError}
+/>
+
+// ❌ WRONG
+<input placeholder="Email" />  // No label
+<div onClick={handler}>Click</div>  // Not semantic
+```
+
+## Responsive Design
+
+### Mobile-First Approach
+
+```tsx
+// ✅ CORRECT - Mobile first
+<div className="
+  grid grid-cols-1
+  md:grid-cols-2
+  lg:grid-cols-3
+" />
+
+// ❌ WRONG - Desktop first
+<div className="
+  grid-cols-3
+  md:grid-cols-2
+  sm:grid-cols-1
+" />
+```
+
+## Component Exports
+
+### Central Export File
+
+Always export from `src/components/ui/index.ts`:
+
+```tsx
+export { Button } from './Button';
+export type { ButtonProps, ButtonVariant } from './Button/Button.types';
+
+export { Input } from './Input';
+export type { InputProps } from './Input/Input.types';
+```
+
+## Documentation
+
+### Component README Required
+
+Every component needs a README.md with:
+
+1. Import statement
+2. Basic usage
+3. Props table or examples
+4. Accessibility notes
+5. Do/Don't examples
+
+## State Management
+
+### Controlled vs Uncontrolled
+
+Support both patterns:
+
+```tsx
+interface InputProps {
+  value?: string;         // Controlled
+  defaultValue?: string;  // Uncontrolled
+  onChange?: (value: string) => void;
+}
+```
+
+### useId for Accessibility
+
+```tsx
+import { useId } from 'react';
+
+const generatedId = useId();
+const id = providedId || generatedId;
+
+<label htmlFor={id}>{label}</label>
+<input id={id} />
+```
+
+## Common Pitfalls to Avoid
+
+1. ❌ Don't nest components unnecessarily
+2. ❌ Don't create inline objects/arrays in render
+3. ❌ Don't use vague prop names (variant="type1")
+4. ❌ Don't skip error states
+5. ❌ Don't forget loading states
+6. ❌ Don't ignore disabled states
+7. ❌ Don't mix business logic with UI components
+
+## Code Review Checklist
+
+Before considering code complete, verify:
+
+- [ ] Uses forwardRef and displayName
+- [ ] Extends HTML element props
+- [ ] Uses design tokens exclusively
+- [ ] Has TypeScript types in .types.ts file
+- [ ] Includes accessibility attributes
+- [ ] Supports className override
+- [ ] Has responsive design
+- [ ] Includes README documentation
+- [ ] Exported from index.ts
+- [ ] No console.log statements
+
+## Token Reference
+
+Available design tokens:
+
+**Colors:**
+- `var(--蓝色-blue/light/50)` - Primary blue
+- `var(--绿色-green/light/50)` - Success green
+- `var(--红色-red/light/50)` - Error red
+- `var(--橘色-orange/light/50)` - Warning orange
+- `var(--灰色-dust/light/XX)` - Grays (10-130)
+
+**Import tokens in code:**
+```tsx
+import { colors, spacing, typography } from '@/tokens';
+```
+
+## Example: Complete Component
+
+```tsx
+// Button/Button.types.ts
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+
+export type ButtonVariant = 'primary' | 'secondary' | 'outline';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  loading?: boolean;
+  icon?: ReactNode;
+}
+
+// Button/index.tsx
+import { forwardRef } from 'react';
+import type { ButtonProps } from './Button.types';
+import { cn } from '@/utils/cn';
+
+const variants = {
+  primary: 'bg-[var(--蓝色-blue/light/50)] text-white',
+  secondary: 'bg-[var(--灰色-dust/light/40)] text-black',
+  outline: 'border border-[var(--灰色-dust/light/60)]',
+};
+
+const sizes = {
+  sm: 'px-2 py-1 text-sm',
+  md: 'px-4 py-2 text-base',
+  lg: 'px-6 py-3 text-lg',
+};
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = 'primary', size = 'md', className, loading, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        disabled={loading}
+        className={cn(
+          'rounded-lg transition-all',
+          variants[variant],
+          sizes[size],
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+
+Button.displayName = 'Button';
+```
+
+## When Creating New Components
+
+Ask yourself:
+1. Does this follow the component template?
+2. Are all design values from tokens?
+3. Is it accessible?
+4. Is it fully typed?
+5. Does it support forwardRef?
+6. Can className be overridden?
+7. Is it responsive?
+
+## Resources
+
+- Design System: `guidelines/DESIGN_SYSTEM.md`
+- Component Patterns: `guidelines/COMPONENTS.md`
+- Best Practices: `guidelines/BEST_PRACTICES.md`
+- Setup Guide: `guidelines/SETUP.md`
+
+---
+
+Remember: Consistency is key. Follow these rules for every component, every time.
