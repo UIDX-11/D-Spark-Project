@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Enforce Vue truth source
-        run: python3 .design-spec/checks/ensure_vue_truth_source.py
+        run: python3 .design-spec/checks/ensure_react_truth_source.py
       - name: Component doc accuracy (strict)
         run: python3 .design-spec/checks/doc_accuracy_guard.py --strict
       - name: Validate Figma agent markdown structure
