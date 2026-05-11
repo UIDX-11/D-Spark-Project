@@ -23,14 +23,14 @@
   },
   "suggestedPipeline": [
     "Resolve component target",
-    "Fetch Arco Vue API metadata",
+    "Fetch Arco Design Web React API metadata",
     "Compare with markdown section: Arco API 对齐（摘要）",
     "Emit mismatch report",
     "Apply markdown patch",
     "Run local guards"
   ],
   "localGuards": [
-    "python3 .design-spec/checks/ensure_vue_truth_source.py",
+    "python3 .design-spec/checks/ensure_react_truth_source.py",
     "python3 .design-spec/checks/doc_accuracy_guard.py"
   ]
 }

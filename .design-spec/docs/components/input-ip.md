@@ -12,8 +12,8 @@ Molecular
 
 ## References
 
-- Arco Vue：IPv4 常以 **多个 Input** 或业务组件组合实现，无独立 `InputIP` 根导出；行为对齐 **[Input](https://arco.design/vue/component/input)** 与表单校验模式。
-- Arco 源码: `arco-design-vue/packages/web-vue/components/input/`
+- Arco Design Web React：IPv4 常以 **多个 Input** 或业务组件组合实现，无独立 `InputIP` 根导出；行为对齐 **[Input](https://arco.design/react/components/input)** 与表单校验模式。
+- Arco 源码（React）: [`arco-design/components/Input`](https://github.com/arco-design/arco-design/tree/main/components/Input)
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma

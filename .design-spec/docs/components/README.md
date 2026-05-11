@@ -2,7 +2,7 @@
 
 This folder is the **AI-retrievable component knowledge base**.
 
-长程 **与 Arco Vue + Figma 对齐** 的写法、token 与 PR 验收，见 **`docs/ALIGNMENT_GOVERNANCE.md`**（执行前必读）。
+长程 **与 Arco Design Web React + Figma 对齐** 的写法、token 与 PR 验收，见 **`docs/ALIGNMENT_GOVERNANCE.md`**（执行前必读）。
 
 ## Required sections for each component spec
 

@@ -12,8 +12,8 @@ Molecular
 
 ## References
 
-- Arco Vue（组合真源）: [https://arco.design/vue/component/input](https://arco.design/vue/component/input)（双字段由两个 `Input` 或 `InputNumber` 与布局组成）
-- Arco 源码: `arco-design-vue/packages/web-vue/components/input/`
+- Arco Design Web React（组合真源）: [https://arco.design/react/components/input](https://arco.design/react/components/input)（双字段由两个 `Input` 或 `InputNumber` 与布局组成）
+- Arco 源码（React）: [`arco-design/components/Input`](https://github.com/arco-design/arco-design/tree/main/components/Input)
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma
@@ -80,7 +80,7 @@ Molecular
 
 ## Arco / implementation
 
-In **Arco Design Vue**, range rows are often composed from two `a-input` (or similar) plus layout; there is no separate root export named “InputRange” in the same way as `InputPassword`. Treat **Input-Range** as a **documented pattern + demo** bound to the Input token family.
+In **Arco Design Web React**, range rows are often composed from two `Input` / `InputNumber` plus layout; there is no separate root export named “InputRange” in the same way as `InputPassword`. Treat **Input-Range** as a **documented pattern + demo** bound to the Input token family.
 
 ## HTML preview
 

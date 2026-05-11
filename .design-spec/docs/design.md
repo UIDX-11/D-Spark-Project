@@ -31,6 +31,6 @@ Most “B-end common components” live in **Molecular**.
 - **需求拆解与阶段计划（混合规格 / Skill）**: `docs/REQUIREMENTS_AND_PLAN.md`
 - **Tokens**: `tokens/src/` (source) → `tokens/dist/` (platform outputs)
 - **Generator contract**: `generator/schema-ui-contract.md`
-- **Arco · Figma · Vue 对齐与 PR 规则**: `docs/ALIGNMENT_GOVERNANCE.md`（含真源优先级、样式策略 **B**、token 两层、MD→HTML 流水线、截图与 e2e 验收）
+- **Arco Design Web React · Figma 对齐与 PR 规则**: `docs/ALIGNMENT_GOVERNANCE.md`（含真源优先级、样式策略 **B**、token 两层、MD→HTML 流水线、截图与 e2e 验收）
 - **Designer Figma（AI Agent，不限定单一工具）**: `templates/figma-agent/` and `skills/design-spec-figma-agent/`（在 **Cursor、Claude Code** 等可加载本仓库 Skill、挂载双语 MD 为 RAG、并调用 **Figma MCP** 的 Agent 环境中，在 **Figma** 搭界面；Figma 优先、变量集合强制、可重复命令与校验）
 

@@ -15,7 +15,7 @@
       "id": "example.money-circle",
       "label": "Money circle（示例槽位）",
       "figmaNodeId": "TBD",
-      "relativePath": "money-circle.svg",
+      "relativePath": "out/money-circle.svg",
       "note": "设计导出后替换 figmaNodeId 与文件名；可复制本对象追加真实条目。"
     }
   ]

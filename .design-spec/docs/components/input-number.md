@@ -12,8 +12,8 @@ Molecular
 
 ## References
 
-- Arco **Vue** `InputNumber`（交互细则真源）: [https://arco.design/vue/component/input-number](https://arco.design/vue/component/input-number)
-- Arco Vue `Input`（关联输入形态参考）: [https://arco.design/vue/component/input](https://arco.design/vue/component/input)
+- Arco Design Web React `InputNumber`（交互细则真源）: [https://arco.design/react/components/input-number](https://arco.design/react/components/input-number)
+- Arco Design Web React `Input`（关联输入形态参考）: [https://arco.design/react/components/input](https://arco.design/react/components/input)
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma
@@ -36,7 +36,7 @@ Molecular
 
 ## 推断
 
-- **长按步进**：demo 为 **1000ms** 后每 **200ms** 重复（与 Arco Vue 交互预期同量级；精确间隔以产品测试为准）。
+- **长按步进**：demo 为 **1000ms** 后每 **200ms** 重复（与 Arco Design Web React 交互预期同量级；精确间隔以产品测试为准）。
 
 ## Best practices
 

@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "file_key": "KJfy0GFDs8kLsXTzhTxAjd",
+  "figma_file_name": "D.S-Web-Com_Light_V2_2026",
+  "discussion_file_key_note": "协作讨论稿 fileKey 见计划正文；对稿以本表官方库为准。",
+  "rows": {
+    "alert": {
+      "display_name": "Alert",
+      "figma_node_ids": [
+        "124872-121819"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124872-121819"
+      ]
+    },
+    "badge": {
+      "display_name": "Badge",
+      "figma_node_ids": [
+        "116449-132541",
+        "116449-132801",
+        "116449-133206",
+        "282874-103643"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116449-132541",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116449-132801",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116449-133206",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=282874-103643"
+      ]
+    },
+    "breadcrumb": {
+      "display_name": "Breadcrumb",
+      "figma_node_ids": [
+        "116476-133550",
+        "116476-133367"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116476-133550",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116476-133367"
+      ]
+    },
+    "button": {
+      "display_name": "Button",
+      "figma_node_ids": [
+        "10657-99018",
+        "277087-36652"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=10657-99018",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=277087-36652"
+      ]
+    },
+    "card": {
+      "display_name": "Card",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "cascader": {
+      "display_name": "Cascader",
+      "figma_node_ids": [
+        "286613-3654",
+        "286622-1371",
+        "286640-41658",
+        "275388-6084",
+        "124009-125572"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=286613-3654",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=286622-1371",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=286640-41658",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275388-6084",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124009-125572"
+      ]
+    },
+    "checkbox": {
+      "display_name": "Checkbox",
+      "figma_node_ids": [
+        "116449-133503",
+        "116449-133385"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116449-133503",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116449-133385"
+      ]
+    },
+    "data-display-number": {
+      "display_name": "DataDisplayNumber",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "datepicker": {
+      "display_name": "DatePicker",
+      "figma_node_ids": [
+        "117747-171283",
+        "123612-128253"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=117747-171283",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=123612-128253"
+      ]
+    },
+    "dropdown": {
+      "display_name": "Dropdown",
+      "figma_node_ids": [
+        "116479-133907",
+        "116479-134191",
+        "283153-5274",
+        "286412-25709"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116479-133907",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116479-134191",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=283153-5274",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=286412-25709"
+      ]
+    },
+    "form": {
+      "display_name": "Form",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "input": {
+      "display_name": "Input",
+      "figma_node_ids": [
+        "117269-199903"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=117269-199903"
+      ]
+    },
+    "input-adornment": {
+      "display_name": "InputAdornment",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "input-ip": {
+      "display_name": "InputIP",
+      "figma_node_ids": [
+        "288620-2128"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=288620-2128"
+      ]
+    },
+    "input-number": {
+      "display_name": "InputNumber",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "input-range": {
+      "display_name": "InputRange",
+      "figma_node_ids": [
+        "297108-6113"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=297108-6113"
+      ]
+    },
+    "layout": {
+      "display_name": "Layout",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "list": {
+      "display_name": "List",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "menu": {
+      "display_name": "Menu",
+      "figma_node_ids": [
+        "118262-164627"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118262-164627"
+      ]
+    },
+    "message": {
+      "display_name": "Message",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "modal": {
+      "display_name": "Modal",
+      "figma_node_ids": [
+        "119237-106936",
+        "284016-9485",
+        "284016-9652"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=119237-106936",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=284016-9485",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=284016-9652"
+      ]
+    },
+    "notification": {
+      "display_name": "Notification",
+      "figma_node_ids": [
+        "123397-114318"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=123397-114318"
+      ]
+    },
+    "pageheader": {
+      "display_name": "PageHeader",
+      "figma_node_ids": [
+        "116510-134301"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116510-134301"
+      ]
+    },
+    "pagination": {
+      "display_name": "Pagination",
+      "figma_node_ids": [
+        "118845-144970"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118845-144970"
+      ]
+    },
+    "pincode": {
+      "display_name": "PinCode",
+      "figma_node_ids": [
+        "286976-20982",
+        "289451-2744"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=286976-20982",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=289451-2744"
+      ]
+    },
+    "progress": {
+      "display_name": "Progress",
+      "figma_node_ids": [
+        "124809-124417",
+        "124784-123557",
+        "124809-123629",
+        "291890-1712"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124809-124417",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124784-123557",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124809-123629",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=291890-1712"
+      ]
+    },
+    "radio": {
+      "display_name": "Radio",
+      "figma_node_ids": [
+        "275133-160500",
+        "116455-132100",
+        "116449-134996"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275133-160500",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116455-132100",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116449-134996"
+      ]
+    },
+    "select": {
+      "display_name": "Select",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "slider": {
+      "display_name": "Slider",
+      "figma_node_ids": [
+        "124384-142926",
+        "124384-142709"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124384-142926",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124384-142709"
+      ]
+    },
+    "space": {
+      "display_name": "Space",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "steps": {
+      "display_name": "Steps",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "switch": {
+      "display_name": "Switch",
+      "figma_node_ids": [
+        "116456-132645"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116456-132645"
+      ]
+    },
+    "table": {
+      "display_name": "Table",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "tabs": {
+      "display_name": "Tabs",
+      "figma_node_ids": [
+        "124009-129610",
+        "275170-212614",
+        "124064-145588",
+        "124247-120271",
+        "124247-120978",
+        "124247-122762",
+        "124247-130964",
+        "286582-13024",
+        "116449-135104"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124009-129610",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275170-212614",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124064-145588",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124247-120271",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124247-120978",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124247-122762",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124247-130964",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=286582-13024",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116449-135104"
+      ]
+    },
+    "tag": {
+      "display_name": "Tag",
+      "figma_node_ids": [
+        "275126-37182",
+        "148903-192071",
+        "275128-132007"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275126-37182",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=148903-192071",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275128-132007"
+      ]
+    },
+    "timepicker": {
+      "display_name": "TimePicker",
+      "figma_node_ids": [
+        "284471-9574",
+        "123515-115495",
+        "123515-118309"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=284471-9574",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=123515-115495",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=123515-118309"
+      ]
+    },
+    "tree": {
+      "display_name": "Tree",
+      "figma_node_ids": [
+        "275610-141002",
+        "275610-138273",
+        "275610-132287",
+        "275610-126301"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275610-141002",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275610-138273",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275610-132287",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275610-126301"
+      ]
+    },
+    "treeselect": {
+      "display_name": "TreeSelect",
+      "figma_node_ids": [],
+      "figma_urls": []
+    },
+    "upload": {
+      "display_name": "Upload",
+      "figma_node_ids": [
+        "124872-118703",
+        "124847-119433",
+        "124847-119633",
+        "124847-119755",
+        "124847-121086",
+        "124847-119919"
+      ],
+      "figma_urls": [
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124872-118703",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124847-119433",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124847-119633",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124847-119755",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124847-121086",
+        "https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124847-119919"
+      ]
+    }
+  }
+}

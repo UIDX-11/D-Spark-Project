@@ -1,6 +1,6 @@
 # 页级信息架构（Starter 级 · D.Spark）
 
-本文档约定中后台「典型页面」的**结构层级**（借鉴常见 Starter 的分组方式），**菜单文案与路由 path 可由产品自行替换**。实现真源为 **`apps/dspark-vue-admin`**（Vue 3 + Arco Design Vue + `tokens.css`）；静态 B 线页模版（`demos/pages/*.html`）仅覆盖部分代表页，用于 Figma 对稿。阶段计划与验收对照：[REQUIREMENTS_AND_PLAN.md](../REQUIREMENTS_AND_PLAN.md)。
+本文档约定中后台「典型页面」的**结构层级**（借鉴常见 Starter 的分组方式），**菜单文案与路由 path 可由产品自行替换**。**设计规范（`.design-spec`）组件行为/API 叙述基线为 Arco Design Web React**；示例实现工程 **`apps/dspark-vue-admin`**（Vue 3 + Arco Design Vue + `tokens.css`）仅作 **页壳与路由参考**，与组件 MD 真源分离。静态 B 线页模版（`demos/pages/*.html`）仅覆盖部分代表页，用于 Figma 对稿。阶段计划与验收对照：[REQUIREMENTS_AND_PLAN.md](../REQUIREMENTS_AND_PLAN.md)。
 
 - **Dashboard 混合规格（`page` 块）**：[page-dashboard.md](./page-dashboard.md)（canonical：`demos/pages/dashboard.html`）。
 - **模式级骨架**：[patterns/pro-table.md](./patterns/pro-table.md)、[patterns/search-form.md](./patterns/search-form.md)。
@@ -8,7 +8,7 @@
 ## 与参考工程的关系
 
 - 分组思路可参考 [TDesign Vue Starter](https://github.com/Tencent/tdesign-vue-starter)（仪表盘 / 列表变体 / 表单变体 / 详情 / 结果 / 登录等），**不拷贝其代码与文案**。
-- 技术栈以 **Vue 3 + @arco-design/web-vue** 为准；后续可与 Arco Pro 类 IA 再对齐一次。
+- 技术栈以 **`apps/dspark-vue-admin` 内 Vue 3 + @arco-design/web-vue** 为准（与 design-spec 组件 MD 的 **React 叙述基线**分离）；后续可与 Arco Pro 类 IA 再对齐一次。
 
 ## 路由与菜单分组（默认 path）
 

@@ -12,8 +12,8 @@ Page (layout block)
 
 ## References
 
-- Arco Vue（API / 行为真源）: https://arco.design/vue/component/page-header
-- Arco 源码: `arco-design-vue/packages/web-vue/components/page-header/`
+- Arco Design Web React（API / 行为真源）: https://arco.design/react/components/page-header
+- Arco 源码（React）: [`arco-design/components/PageHeader`](https://github.com/arco-design/arco-design/tree/main/components/PageHeader)
 - Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **PageHeader** 画板，将本行替换为带 `node-id=` 的深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 

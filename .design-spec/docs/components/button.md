@@ -12,8 +12,8 @@ Molecular
 
 ## References
 
-- Arco Vue（API / 行为真源）: [https://arco.design/vue/component/button](https://arco.design/vue/component/button)
-- Arco 源码: `arco-design-vue/packages/web-vue/components/button/button.vue`
+- Arco Design Web React（API / 行为真源）: [https://arco.design/react/components/button](https://arco.design/react/components/button)
+- Arco 源码（React）: [`arco-design/components/Button`](https://github.com/arco-design/arco-design/tree/main/components/Button)
 - Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Button** 画板，将本行替换为带 `node-id=` 的深链接。
 
 ## Figma
@@ -39,16 +39,15 @@ Molecular
 
 ## Arco DOM（与 demo 对齐）
 
-Arco `button.vue`（无 `href`）结构为：
+Arco Design Web React `Button`（无 `href`）典型结构为：`<button>` 内可选 `icon` 子节点 + 文本 `children`；`loading` 时展示加载图标区。
 
-```html
-<button type="button" class="arco-btn …" :disabled="…" @click="…">
-  <span v-if="loading || $slots.icon" class="arco-btn-icon">…</span>
-  <slot />
-</button>
+```tsx
+<Button type="button" loading={…} disabled={…} onClick={…}>
+  {icon}{children}
+</Button>
 ```
 
-本仓库 **Live** 在仅有文案、无 `loading` / `#icon` 时 **不渲染** 图标容器，与 Arco `v-if` 行为一致。类名前缀使用 `**ds-btn`**，子节点顺序与 Arco 相同。
+本仓库 **Live** 在仅有文案、无 `loading` / `icon` 时 **不渲染** 图标容器，与 Arco 行为一致。类名前缀使用 `**ds-btn**`，子节点顺序与 Arco 相同。
 
 ## Best practices
 

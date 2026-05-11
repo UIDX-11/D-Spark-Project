@@ -6,7 +6,7 @@
 
 让 AI 生成文档时：
 
-- 行为真源统一为 **Arco Vue**
+- 行为真源统一为 **Arco Design Web React**
 - 视觉真源统一为 **Figma Light**
 - token 绑定与项目治理规范保持一致
 
@@ -36,16 +36,16 @@
 
 ## Source-truth rules
 
-- 行为相关表述必须使用 **Arco Vue** 术语与链接（`arco.design/vue/component/...`）
-- 禁止写入 React 真源表述（如 `Arco React`、`arco.design/react/components/...`）
-- Figma 与 Arco 冲突时，视觉以 Figma 为准；行为/API 以 Arco Vue 为准
+- 行为相关表述必须使用 **Arco Design Web React** 术语与链接（`https://arco.design/react/components/...`）
+- 禁止写入 **Arco Vue** 真源表述（如 `arco.design/vue/component/...`、`arco-design-vue/`）
+- Figma 与 Arco 冲突时，视觉以 Figma 为准；行为/API 以 Arco Design Web React 为准
 
 ## Writing constraints
 
 - 未确认的行为必须放在 `## 推断` 段并注明依据
 - token 必须写 CSS 变量名，不写硬编码颜色值
 - References 中至少包含：
-  - Arco Vue 组件文档链接
+  - Arco Design Web React 组件文档链接
   - Figma 设计来源
   - 本项目治理规范链接
 
@@ -53,5 +53,5 @@
 
 提交前应通过：
 
-- `python3 .design-spec/checks/ensure_vue_truth_source.py`
+- `python3 .design-spec/checks/ensure_react_truth_source.py`
 - `python3 .design-spec/checks/doc_accuracy_guard.py`

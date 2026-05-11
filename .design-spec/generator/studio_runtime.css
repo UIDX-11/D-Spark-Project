@@ -171,7 +171,7 @@
   }
 }
 
-/* ---- Button（尺寸与焦点环走 token；DOM 顺序对齐 Arco Vue button.vue）---- */
+/* ---- Button（尺寸与焦点环走 token；DOM 顺序对齐 Arco Design Web React Button）---- */
 .ds-play {
   display: flex;
   align-items: center;

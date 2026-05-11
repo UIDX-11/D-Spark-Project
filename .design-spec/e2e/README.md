@@ -21,7 +21,7 @@ cd .design-spec/e2e
 npm install
 npx playwright install chromium
 npm test                 # 烟雾（与 CI 默认一致）
-npm run test:visual      # 仅截图对比（需已提交基线）
+npm run test:visual      # 截图对比：`tests/visual.spec.ts`（alert / button / input #liveRoot；需已提交基线）
 npm run test:all         # 烟雾 + 截图
 ```
 

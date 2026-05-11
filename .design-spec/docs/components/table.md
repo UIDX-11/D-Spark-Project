@@ -11,8 +11,8 @@ Molecular
 
 ## References
 
-- Arco Vue（API / 行为真源）: [Table](https://arco.design/vue/component/table)
-- Arco 源码: `arco-design-vue/packages/web-vue/components/table/`
+- Arco Design Web React（API / 行为真源）: [Table](https://arco.design/react/components/table)
+- Arco 源码（React）: [`arco-design/components/Table`](https://github.com/arco-design/arco-design/tree/main/components/Table)
 - Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 Table 画板并补充 `node-id=` 深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 

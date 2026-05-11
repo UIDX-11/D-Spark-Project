@@ -20,6 +20,8 @@
 | R11 | **可移植 Skill**          | 不限 Cursor，可上 GitHub 给其它 AI 用                                     | `[.cursor/skills/design-spec-hybrid-spec/SKILL.md](../../.cursor/skills/design-spec-hybrid-spec/SKILL.md)` · `[PACKAGING.md](../../.cursor/skills/design-spec-hybrid-spec/PACKAGING.md)`                                                                  |
 | R12 | **Figma Variables 桥接** | 为后续 Vue / 主题留钩子                                                  | `[FIGMA_VARIABLES_TOKEN_BRIDGE.yaml](FIGMA_VARIABLES_TOKEN_BRIDGE.yaml)`（占位，待填）                                                                                                                                                                           |
 | R13 | **仓库卫生**               | `node_modules` / `dist` / `.DS_Store`；dashboard canonical；重复文件待审 | 根目录 `[.gitignore](../../.gitignore)` · `[REDUNDANCY_AUDIT.md](REDUNDANCY_AUDIT.md)` · `[page-dashboard.md](pages/page-dashboard.md)` 固定 canonical demo                                                                                                    |
+| R14 | **Arco Design Web React 叙述基线** | 设计规范、组件 MD、Skill 在描述 **API / 默认行为 / 键盘与交互** 时有统一真源；日常编码可对照 **官网示例** 减少基础件偏差 | [`arco.design/react`](https://arco.design/react/docs/start) + 仓库内 [`demos-react`](../demos-react/package.json)；真源优先级与推断态见 [`ALIGNMENT_GOVERNANCE.md`](ALIGNMENT_GOVERNANCE.md) §1 / §3。`demos-react` 为 **首选沙箱**（与静态 HTML 生成器解耦，仍共用 `tokens.css` + `figma_truth_table.json`）。**交互态 DoD**：在 demos-react 落地的原子件须在 PR/MD 可勾选覆盖 **default、hover、active、focus-visible、disabled、loading、error（若 API 支持）** 中与 **官网对应组件页** 一致的组合；Figma 未画状态按治理 §3 写清依据（文档条款或 [`arco-design` 源码路径](https://github.com/arco-design/arco-design/tree/main/components)）。 |
+| R15 | **Arco 版本钉选**            | 升级 `@arco-design/web-react` 时不默默漂移「与官网一致」的参照面                         | 以 [`demos-react/package.json`](../demos-react/package.json) 声明版本为准；升级须单独 PR，并复核组件 MD **References** 与交互矩阵；与 [`ALIGNMENT_GOVERNANCE.md`](ALIGNMENT_GOVERNANCE.md) §1.3（Arco 版本升级）一致。 |
 
 
 ## 2. 需求计划（阶段 → 交付物 → 状态）
@@ -37,6 +39,7 @@
 | **P1 环境**      | Playwright Chromium 安装成功，跑通 layout 快照                                                                  | **已触发**：清 `~/Library/Caches/ms-playwright/__dirlock` 后于 `.design-spec/checks` 执行 `npx playwright install chromium`（见 `[checks/README.md](../checks/README.md)`）。**以本机命令成功结束为准**（Chrome zip 较大，下载可能较久）；通过后可将此行改为 **已完成** |
 | **P1 填充**      | `icons.manifest.json` 真实条目、`page-dashboard.md` 中 `pageFrameNodeId`、`FIGMA_VARIABLES_TOKEN_BRIDGE` 真实映射 | **部分**：manifest 已含 `libraryName` / `export` / 示例槽位；Figma 画板 node 仍待设计钉定                                                                                                                                                 |
 | **P2 清理**      | 按 `[REDUNDANCY_AUDIT.md](REDUNDANCY_AUDIT.md)` 归档 TDesign 仪表盘变体、统一 `page_templates` 生成路径与导航相对路径        | **已执行**（TDesign 页 → `demos/pages/archive/`；根目录同名 HTML 删除；e2e / 索引 / 文档已更新）                                                                                                                                              |
+| **P1.5 Arco 编码面** | [`demos-react`](../demos-react/)：全局 `arco.css` + `ConfigProvider`；真源表卡片内 **@arco-design/web-react 实例 + 状态子矩阵**；文档 URL 与 [`docs/components/*.md`](components/) **References** 同源（`arco.design/react/components/...`） | **已完成**（见 `demos-react/src/main.tsx`、`App.tsx`、`ComponentStateMatrix.tsx`）；后续按 [intent-index](components/intent-index.md) 加厚各 slug 矩阵即可。 |
 
 
 ## 3. 相关文档互链
@@ -44,6 +47,8 @@
 
 | 文档                                                                     | 用途                                              |
 | ---------------------------------------------------------------------- | ----------------------------------------------- |
+| [ALIGNMENT_GOVERNANCE.md](ALIGNMENT_GOVERNANCE.md)                       | Arco Design Web React · Figma · token · 推断态 · PR 验收（组件长程对齐真源） |
+| [../demos-react/package.json](../demos-react/package.json)               | `@arco-design/web-react` 版本钉选；与 R15、官网对照面一致        |
 | [design.md](design.md)                                                 | 设计体系总览；指向本文 § 需求计划                              |
 | [REDUNDANCY_AUDIT.md](REDUNDANCY_AUDIT.md)                             | 冗余与归档决策表                                        |
 | [pages/information-architecture.md](pages/information-architecture.md) | Starter 级 IA 与静态 B 线覆盖                          |

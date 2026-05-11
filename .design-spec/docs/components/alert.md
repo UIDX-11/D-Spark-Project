@@ -12,8 +12,8 @@ Molecular
 
 ## References
 
-- Arco Vue（API / 行为真源）: [https://arco.design/vue/component/alert](https://arco.design/vue/component/alert)
-- Arco 源码: `arco-design-vue/packages/web-vue/components/alert/alert.vue`
+- Arco Design Web React（API / 行为真源）: [https://arco.design/react/components/alert](https://arco.design/react/components/alert)
+- Arco 源码（React）: [`arco-design/components/Alert`](https://github.com/arco-design/arco-design/tree/main/components/Alert)
 - Figma（Light，视觉真源）: [D.S. Web Com — Alert 节点](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=124872-121819)
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
@@ -25,22 +25,22 @@ Molecular
 ## Arco API 对齐（摘要）
 
 
-| Arco `prop` / slot | 取值 / 默认             | 设计稿 / demo 说明                                                         |
+| Arco `prop` / 子节点 | 取值 / 默认             | 设计稿 / demo 说明                                                         |
 | ------------------ | ------------------- | --------------------------------------------------------------------- |
 | `type`             | `info`              | `success`                                                             |
-| `show-icon`        | `boolean`，默认 `true` | `normal` 且无 `#icon` 时 Arco 默认不显示图标；demo 勾选框对齐。                        |
+| `show-icon`        | `boolean`，默认 `true` | `normal` 且无自定义图标时 Arco 默认不显示图标；demo 勾选框对齐。                        |
 | `closable`         | 默认 `false`          | 勾选后渲染 `div.ds-alert-close-btn`。                                       |
-| `title` / `#title` | 可选                  | 勾选 **title** 时根加 `with-title`，进入标题版式。                                 |
-| `#action`          | 可选                  | 勾选 **action slot** 时渲染 `Detail` 按钮。                                   |
+| `title`            | 可选                  | 勾选 **title** 时根加 `with-title`，进入标题版式。                                 |
+| `action`           | 可选 ReactNode        | 勾选 **action** 时渲染 `Detail` 按钮。                                   |
 | `banner`           | `boolean`           | 勾选后 `is-banner`：去圆角与描边（与 Arco 一致）。                                    |
 | `center`           | `boolean`           | 与 `banner` 等组合；`is-center` + body `flex: initial` 与 Arco 一致。          |
-| `#close-element`   | 可选                  | 勾选 **close-element slot** 时关闭区为文案样式（`is-slot`）。                       |
+| `closeElement`     | 可选                  | 勾选 **自定义关闭元素** 时关闭区为文案样式（`is-slot`）。                       |
 | `size`             | Arco 文档中的档位         | demo 用 **LG / MD / AUTO** 映射见 **Sizes**（对应 `is-md`、`is-auto` 与默认 LG）。 |
 
 
 ## Arco DOM（与 demo 对齐）
 
-Arco `alert.vue` 结构要点：根 `**div[role="alert"]`** → 可选图标区 → `**div` body**（可选 title + content）→ 可选 action 外包层 → 可选关闭区（**非**原生 `<button>` 时为 `div` + `role="button"`）。
+Arco Design Web React `Alert` 结构要点：根 `**div[role="alert"]`** → 可选图标区 → `**div` body**（可选 title + content）→ 可选 action 外包层 → 可选关闭区（**非**原生 `<button>` 时为 `div` + `role="button"`）。
 
 本仓库 Live / 矩阵类名前缀为 `**ds-alert`**，子节点顺序与 Arco 一致；关闭节点为 `**div.ds-alert-close-btn`**，`tabindex="-1"`，`aria-label="Close"`。
 
@@ -63,12 +63,12 @@ Arco `alert.vue` 结构要点：根 `**div[role="alert"]`** → 可选图标区 
 
 当需要在 Alert 内同时传达 **状态文案** 与 **可量化提醒**（未读数、待办条数等）时，使用 **count badge** 与 Alert **组合**，而不是把数字硬塞进一句长文案里。
 
-- **Arco 对齐**：Vue `Alert` **没有** `count` / `badge` 一类独立 prop；数量由 `**Badge`**（`count` / `dot` / `status`）或自定义节点插入 `**#title`**、默认插槽（`.arco-alert-content`） 或 `**#action**` 区域实现，顺序与 DOM 以 Arco `alert.vue` 为准。
+- **Arco 对齐**：React `Alert` **没有** `count` / `badge` 一类独立 prop；数量由 `**Badge`**（`count` / `dot` / `status`）或自定义节点插入 `**title`**、**内容区** 或 `**action**` 区域实现，顺序与 DOM 以 Arco `Alert` 实现为准。
 - **视觉与 token**：数字徽章的尺寸、圆角、上限展示（如 `99+`）、`0` 是否隐藏等，遵循 **[Badge](badge.md)** 与 `tokens/src/component.json` 的 `**badge`** 段；Alert 容器仍只用 `**alert.*`** 色面与内边距，**不在 Alert token 里重复定义徽章色**（治理：先复用 Badge / semantic）。
 - **版式建议**：
-  - **标题行**：`#title` 内「标题文案 + Badge」横向排列，徽章紧贴标题或置于标题尾侧（以 Figma 为准）。
+  - **标题行**：`title` 内「标题文案 + Badge」横向排列，徽章紧贴标题或置于标题尾侧（以 Figma 为准）。
   - **正文行**：单行 Alert 可在主文案**起笔前**或**句末**放小号 count，注意与左侧图标的间距 ≥ `alert.layout.gap` 的语义等价（可用 `gap` / `margin-inline` token 化）。
-  - **操作区**：与 `#action` 内按钮并列时，徽章仅作补充计数，**主操作仍应是可聚焦控件**（按钮/链接）。
+  - **操作区**：与 `action` 内按钮并列时，徽章仅作补充计数，**主操作仍应是可聚焦控件**（按钮/链接）。
 - **无障碍**：由**宿主**提供读屏名称（例如 `aria-label="3 条待处理"` 或在可见文案中写出数量）；勿仅用裸数字徽章作为唯一信息。
 - **命名示例**：`alert/warning/rounded/lg/with-count-badge`（variant 轴上的扩展，实现上 = Alert + Badge 组合）。
 
@@ -82,7 +82,7 @@ Arco `alert.vue` 结构要点：根 `**div[role="alert"]`** → 可选图标区 
 
 ## Accessibility essentials
 
-- **Role**: Arco Vue 源码根节点为 `**role="alert"`**（所有 `type` 一致）。若产品需区分 polite / assertive，可在封装层按类型覆盖为 `status` 等（非 Arco 默认）。
+- **Role**: Arco Design Web React 源码根节点为 `**role="alert"`**（所有 `type` 一致）。若产品需区分 polite / assertive，可在封装层按类型覆盖为 `status` 等（非 Arco 默认）。
 - **Close**: 与 Arco 一致为 `**div.ds-alert-close-btn`**，`tabindex="-1"`，`role="button"`，`aria-label="Close"`（非原生 `<button>`）。
 - **Focus**: do not steal focus on render; if triggered by a user action, optionally move focus to the alert region (product-dependent).
 
@@ -97,7 +97,7 @@ Arco `alert.vue` 结构要点：根 `**div[role="alert"]`** → 可选图标区 
 
 ## Anatomy
 
-- **DOM（对齐 Arco Vue `packages/web-vue/components/alert/alert.vue`）**：根 `**div[role="alert"]`** → 可选 `**div.ds-alert-icon`**（`#icon`）→ `**div.ds-alert-body`**（内为可选 `**div.ds-alert-title**`（`#title`）+ `**div.ds-alert-content**`（默认插槽））→ 可选 `**div.ds-alert-action**`（`#action` 外包层）→ 可选 `**div.ds-alert-close-btn**`（`#close-element` / 默认关闭）。
+- **DOM（对齐 Arco Design Web React `Alert`）**：根 `**div[role="alert"]`** → 可选 `**div.ds-alert-icon`**（`icon`）→ `**div.ds-alert-body`**（内为可选 `**div.ds-alert-title**`（`title`）+ `**div.ds-alert-content**`（`children`））→ 可选 `**div.ds-alert-action**`（`action` 外包层）→ 可选 `**div.ds-alert-close-btn**`（`closeElement` / 默认关闭）。
 - **Vertical alignment**: 有 `title` 时（根带 `with-title`），左侧状态图标与**标题首行**垂直居中对齐；无 `title` 时，图标与 `**.ds-alert-content`** 块垂直居中对齐（含多行时与正文块整体居中）。
 
 ### Default (single line)
@@ -155,7 +155,7 @@ Live 侧栏 **Size** 与 **Figma / token**、demo 类名对应如下（Light）�
 | `auto`        | AUTO / 多行或标题场景：上 14 / 下 12                                             | `--component-alert-layout-auto-padding-top` / `padding-bottom`、`--component-alert-px`、`--component-alert-radius-lg`                   |
 
 
-> Arco Vue `size` 枚举与 Figma **LG/MD/AUTO** 命名若不一致，以上表 **token** 为桥梁；请在 Figma Variables 与 `alert.layout.*` 间维护对照（见 `ALIGNMENT_GOVERNANCE` §2）。
+> Arco Design Web React `size` 枚举与 Figma **LG/MD/AUTO** 命名若不一致，以上表 **token** 为桥梁；请在 Figma Variables 与 `alert.layout.*` 间维护对照（见 `ALIGNMENT_GOVERNANCE` §2）。
 
 ## States
 
@@ -169,7 +169,7 @@ Live 侧栏 **Size** 与 **Figma / token**、demo 类名对应如下（Light）�
 | Action border        | `var(--component-alert-action-border)` |
 
 
-## Arco API 细则（与 Vue 一致）
+## Arco API 细则（与 React 文档一致）
 
 
 | **Prop/slot/event**     | **Rule**                                                                                                                                     |

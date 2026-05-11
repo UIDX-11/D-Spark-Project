@@ -12,8 +12,8 @@ Molecular
 
 ## References
 
-- Arco Vue（API / 行为真源）: [https://arco.design/vue/component/tree](https://arco.design/vue/component/tree)
-- Arco 源码: `arco-design-vue/packages/web-vue/components/tree/`
+- Arco Design Web React（API / 行为真源）: [https://arco.design/react/components/tree](https://arco.design/react/components/tree)
+- Arco 源码（React）: [`arco-design/components/Tree`](https://github.com/arco-design/arco-design/tree/main/components/Tree)
 - Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Tree** 画板，将本行替换为带 `node-id=` 的深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 

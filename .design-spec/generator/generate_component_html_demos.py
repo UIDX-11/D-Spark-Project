@@ -100,15 +100,17 @@ def _token_prefix_for_slug(slug: str) -> str:
     return overrides.get(slug, slug)
 
 
-def _html_page(title: str, body: str, tokens_href: str) -> str:
+def _html_page(title: str, body: str, tokens_href: str, *, head_extra: str = "") -> str:
     safe_title = html.escape(title)
+    extra = head_extra.strip()
+    extra_block = (extra + "\n") if extra else ""
     return f"""<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{safe_title} — D.Spark Design System Demo</title>
-    <link rel="stylesheet" href="{html.escape(tokens_href)}" />
+{extra_block}    <link rel="stylesheet" href="{html.escape(tokens_href)}" />
     <style>
       :root {{
         color-scheme: light;
@@ -193,6 +195,53 @@ def _html_page(title: str, body: str, tokens_href: str) -> str:
 """
 
 
+def _build_icons_fragment(repo_root: Path) -> str:
+    """
+    Inline SVG symbols from `.design-spec/assets/icons/icons.manifest.json`
+    when the referenced file exists (Figma-export pipeline).
+    """
+    manifest_path = repo_root / ".design-spec" / "assets" / "icons" / "icons.manifest.json"
+    if not manifest_path.exists():
+        return ""
+    try:
+        raw = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except Exception:
+        return ""
+    items = raw.get("items") or []
+    root = manifest_path.parent
+    parts: list[str] = []
+    for item in items:
+        rel = item.get("relativePath")
+        iid = item.get("id")
+        if not rel or not iid:
+            continue
+        svg_path = (root / rel).resolve()
+        if not str(svg_path).startswith(str(root.resolve())):
+            continue
+        if not svg_path.exists():
+            continue
+        svg = svg_path.read_text(encoding="utf-8", errors="replace").strip()
+        safe = html.escape(iid.replace(".", "-"))
+        parts.append(f'    <template id="ds-icon-{safe}">{svg}</template>')
+    if not parts:
+        return ""
+    return "    <!-- Figma-export icons (icons.manifest.json) -->\n" + "\n".join(parts) + "\n"
+
+
+def _report_studio_runtime_literals(repo_root: Path) -> None:
+    """Non-blocking notice for tokenization backlog (see studio_runtime_literal_audit.py)."""
+    css_path = repo_root / ".design-spec" / "generator" / "studio_runtime.css"
+    if not css_path.exists():
+        return
+    text = css_path.read_text(encoding="utf-8", errors="replace")
+    px_hits = re.findall(r":\s*-?[\d.]+\s*px\b", text)
+    if px_hits:
+        print(
+            f"NOTICE: studio_runtime.css contains ~{len(px_hits)} px literals "
+            "(audit: python3 .design-spec/scripts/studio_runtime_literal_audit.py)"
+        )
+
+
 def _read_behavior_source(repo_root: Path) -> str:
     cfg = repo_root / ".design-spec" / "sources" / "behavior-source.json"
     if not cfg.exists():
@@ -202,8 +251,8 @@ def _read_behavior_source(repo_root: Path) -> str:
     except Exception:
         return "unknown"
     value = str(raw.get("behaviorSource", "")).strip().lower()
-    if value == "arco-vue":
-        return "Arco Vue"
+    if value in ("arco-react", "arco-vue"):
+        return "Arco Design Web React"
     return value or "unknown"
 
 
@@ -842,7 +891,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/alert.md</code> 与 Arco Vue <code>Alert</code>（<code>type</code> / <code>show-icon</code> / <code>closable</code> / <code>title</code> / <code>banner</code> / <code>center</code> / <code>#action</code> 等）；尺寸与色走 <code>alert.layout.*</code> 与 <code>alert.tone.*</code> token。
+            对齐 <code>docs/components/alert.md</code> 与 Arco Design Web React <code>Alert</code>（<code>type</code> / <code>show-icon</code> / <code>closable</code> / <code>title</code> / <code>banner</code> / <code>center</code> / <code>#action</code> 等）；尺寸与色走 <code>alert.layout.*</code> 与 <code>alert.tone.*</code> token。
           </p>
           <label class="pg-field">
             <span>Type（Arco type）</span>
@@ -875,7 +924,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/breadcrumb.md</code> 与 Arco Vue <code>Breadcrumb</code>（<code>routes</code> / <code>separator</code> / 末级 <code>aria-current</code> 等）；样式仅引用 <code>--component-breadcrumb-*</code> 与 <code>--core-*</code>。
+            对齐 <code>docs/components/breadcrumb.md</code> 与 Arco Design Web React <code>Breadcrumb</code>（<code>routes</code> / <code>separator</code> / 末级 <code>aria-current</code> 等）；样式仅引用 <code>--component-breadcrumb-*</code> 与 <code>--core-*</code>。
           </p>
           <label class="pg-field">
             <span>Depth（演示路径深度）</span>
@@ -903,7 +952,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/badge.md</code> 与 Arco Vue <code>Badge</code>（<code>count</code> / <code>dot</code> / <code>status</code> 等）；样式仅引用 <code>--component-badge-*</code>。
+            对齐 <code>docs/components/badge.md</code> 与 Arco Design Web React <code>Badge</code>（<code>count</code> / <code>dot</code> / <code>status</code> 等）；样式仅引用 <code>--component-badge-*</code>。
           </p>
           <label class="pg-field">
             <span>Kind（形态）</span>
@@ -932,7 +981,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/checkbox.md</code> 与 Arco Vue <code>Checkbox</code>（<code>model-value</code> / <code>disabled</code> / <code>indeterminate</code>）；样式仅引用 <code>--component-checkbox-*</code>。
+            对齐 <code>docs/components/checkbox.md</code> 与 Arco Design Web React <code>Checkbox</code>（<code>checked</code> / <code>disabled</code> / <code>indeterminate</code>）；样式仅引用 <code>--component-checkbox-*</code>。
           </p>
           <label class="pg-field">
             <span>Value（值）</span>
@@ -955,7 +1004,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/radio.md</code> 与 Arco Vue <code>Radio</code> / <code>RadioGroup</code>（互斥单选、<code>disabled</code> 等）；样式引用 <code>--component-radio-*</code> 与 <code>--component-radio-button-*</code>（胶囊）。
+            对齐 <code>docs/components/radio.md</code> 与 Arco Design Web React <code>Radio</code> / <code>RadioGroup</code>（互斥单选、<code>disabled</code> 等）；样式引用 <code>--component-radio-*</code> 与 <code>--component-radio-button-*</code>（胶囊）。
           </p>
           <label class="pg-field">
             <span>Style（形态）</span>
@@ -986,7 +1035,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/tag.md</code> 与 Arco Vue <code>Tag</code>（<code>color</code> / <code>size</code> / <code>closable</code> 等）；样式仅引用 <code>--component-tag-*</code>。
+            对齐 <code>docs/components/tag.md</code> 与 Arco Design Web React <code>Tag</code>（<code>color</code> / <code>size</code> / <code>closable</code> 等）；样式仅引用 <code>--component-tag-*</code>。
           </p>
           <label class="pg-field">
             <span>Kind（类型）</span>
@@ -1022,7 +1071,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/switch.md</code> 与 Arco Vue <code>Switch</code>（<code>model-value</code> / <code>disabled</code> / <code>type</code> 等）；样式仅引用 <code>--component-switch-*</code>。
+            对齐 <code>docs/components/switch.md</code> 与 Arco Design Web React <code>Switch</code>（<code>checked</code> / <code>disabled</code> / <code>type</code> 等）；样式仅引用 <code>--component-switch-*</code>。
           </p>
           <label class="pg-field">
             <span>Variant（形态）</span>
@@ -1051,7 +1100,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/tabs.md</code> 与 Arco Vue <code>Tabs</code>（<code>type</code> / <code>direction</code> / <code>editable</code> / <code>show-add-button</code> 等）；样式仅 <code>--component-tabs-*</code>（见 <code>studio_runtime.css</code> 中 <code>ds-tabs-*</code>）。
+            对齐 <code>docs/components/tabs.md</code> 与 Arco Design Web React <code>Tabs</code>（<code>type</code> / <code>direction</code> / <code>editable</code> / <code>show-add-button</code> 等）；样式仅 <code>--component-tabs-*</code>（见 <code>studio_runtime.css</code> 中 <code>ds-tabs-*</code>）。
           </p>
           <label class="pg-field">
             <span>Kind（形态）</span>
@@ -1079,7 +1128,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/slider.md</code> 与 Arco Vue <code>Slider</code>（<code>range</code> / <code>marks</code> / <code>disabled</code> 等）；样式仅引用 <code>--component-slider-*</code>（见 <code>studio_runtime.css</code>）。
+            对齐 <code>docs/components/slider.md</code> 与 Arco Design Web React <code>Slider</code>（<code>range</code> / <code>marks</code> / <code>disabled</code> 等）；样式仅引用 <code>--component-slider-*</code>（见 <code>studio_runtime.css</code>）。
           </p>
           <label class="pg-field">
             <span>Variant（单 / 范围）</span>
@@ -1108,7 +1157,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/progress.md</code> 与 Arco Vue <code>Progress</code>（<code>type</code> / <code>percent</code> / <code>status</code> 等）；样式仅 <code>--component-progress-*</code>（见 <code>studio_runtime.css</code>）。
+            对齐 <code>docs/components/progress.md</code> 与 Arco Design Web React <code>Progress</code>（<code>type</code> / <code>percent</code> / <code>status</code> 等）；样式仅 <code>--component-progress-*</code>（见 <code>studio_runtime.css</code>）。
           </p>
           <label class="pg-field">
             <span>Kind（形态）</span>
@@ -1143,7 +1192,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/steps.md</code> 与 Arco Vue <code>Steps</code>（<code>direction</code> / <code>current</code> / <code>status</code> 等）；图标与文案走 <code>--component-steps-icon-*</code>、<code>--component-steps-title-*</code>，排版走 <code>--component-steps-layout-*</code>。
+            对齐 <code>docs/components/steps.md</code> 与 Arco Design Web React <code>Steps</code>（<code>direction</code> / <code>current</code> / <code>status</code> 等）；图标与文案走 <code>--component-steps-icon-*</code>、<code>--component-steps-title-*</code>，排版走 <code>--component-steps-layout-*</code>。
           </p>
           <label class="pg-field">
             <span>Layout（演示）</span>
@@ -1167,7 +1216,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/card.md</code> 与 Arco Vue <code>Card</code>（<code>bordered</code> / <code>hoverable</code> / <code>size</code> 等）；面与分隔走 <code>--component-card-panel-*</code>、<code>--component-card-divider-*</code>，排版走 <code>--component-card-layout-*</code>。
+            对齐 <code>docs/components/card.md</code> 与 Arco Design Web React <code>Card</code>（<code>bordered</code> / <code>hoverable</code> / <code>size</code> 等）；面与分隔走 <code>--component-card-panel-*</code>、<code>--component-card-divider-*</code>，排版走 <code>--component-card-layout-*</code>。
           </p>
           <label class="pg-field">
             <span>Kind（演示）</span>
@@ -1192,7 +1241,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/pageheader.md</code> 与 Arco Vue <code>PageHeader</code>（<code>title</code> / <code>subtitle</code> / <code>back</code> / <code>extra</code> 等）；样式仅 <code>--component-page-header-*</code>（见 <code>studio_runtime.css</code> 中 <code>ds-ph-*</code>）。
+            对齐 <code>docs/components/pageheader.md</code> 与 Arco Design Web React <code>PageHeader</code>（<code>title</code> / <code>subtitle</code> / <code>back</code> / <code>extra</code> 等）；样式仅 <code>--component-page-header-*</code>（见 <code>studio_runtime.css</code> 中 <code>ds-ph-*</code>）。
           </p>
           <label class="pg-field">
             <span>Layout（演示）</span>
@@ -1213,7 +1262,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/cascader.md</code> 与 Arco Vue <code>Cascader</code>（<code>multiple</code> / <code>check-strictly</code> / <code>error</code> 等）；触发器走 <code>--component-cascader-trigger-*</code> 与 <code>--component-cascader-layout-*</code>，列与项走 <code>--component-cascader-column-*</code> / <code>--component-cascader-item-*</code>，多选勾选外观复用 <code>--component-checkbox-*</code>。
+            对齐 <code>docs/components/cascader.md</code> 与 Arco Design Web React <code>Cascader</code>（<code>multiple</code> / <code>check-strictly</code> / <code>error</code> 等）；触发器走 <code>--component-cascader-trigger-*</code> 与 <code>--component-cascader-layout-*</code>，列与项走 <code>--component-cascader-column-*</code> / <code>--component-cascader-item-*</code>，多选勾选外观复用 <code>--component-checkbox-*</code>。
           </p>
           <label class="pg-field">
             <span>Mode（演示）</span>
@@ -1236,7 +1285,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/tree.md</code> 与 Arco Vue <code>Tree</code>（展开/收起、选中、多选勾选等）；行与开关走 <code>--component-tree-row-*</code>、<code>--component-tree-toggle-*</code>，缩进与行高走 <code>--component-tree-layout-*</code>；勾选外观复用 <code>--component-checkbox-*</code>。表格内嵌树仍使用 <code>--component-table-tree-*</code>。
+            对齐 <code>docs/components/tree.md</code> 与 Arco Design Web React <code>Tree</code>（展开/收起、选中、多选勾选等）；行与开关走 <code>--component-tree-row-*</code>、<code>--component-tree-toggle-*</code>，缩进与行高走 <code>--component-tree-layout-*</code>；勾选外观复用 <code>--component-checkbox-*</code>。表格内嵌树仍使用 <code>--component-table-tree-*</code>。
           </p>
           <label class="pg-field">
             <span>Mode（演示）</span>
@@ -1258,7 +1307,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/upload.md</code> 与 Arco Vue <code>Upload</code>（<code>list-type</code> / <code>draggable</code> / <code>image-preview</code> / <code>disabled</code> 等）；触发区与列表走 <code>--component-upload-trigger-*</code>、<code>--component-upload-item-*</code>，照片墙走 <code>--component-upload-card-*</code>，排版走 <code>--component-upload-layout-*</code>；进度条示意复用 <code>--component-progress-line-*</code>。
+            对齐 <code>docs/components/upload.md</code> 与 Arco Design Web React <code>Upload</code>（<code>list-type</code> / <code>draggable</code> / <code>image-preview</code> / <code>disabled</code> 等）；触发区与列表走 <code>--component-upload-trigger-*</code>、<code>--component-upload-item-*</code>，照片墙走 <code>--component-upload-card-*</code>，排版走 <code>--component-upload-layout-*</code>；进度条示意复用 <code>--component-progress-line-*</code>。
           </p>
           <label class="pg-field">
             <span>Kind（演示）</span>
@@ -1282,7 +1331,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/input.md</code> 与 Arco Vue <code>Input</code>（<code>size</code>、<code>password</code>、<code>Search</code>、前后缀等）；尺寸与圆角走 <code>--component-input-layout-*</code>，色与环走 <code>--component-input-*</code>。
+            对齐 <code>docs/components/input.md</code> 与 Arco Design Web React <code>Input</code>（<code>size</code>、<code>password</code>、<code>Search</code>、前后缀等）；尺寸与圆角走 <code>--component-input-layout-*</code>，色与环走 <code>--component-input-*</code>。
           </p>
           <label class="pg-field ds-in-tab-row">
             <span>Demo variant</span>
@@ -1400,7 +1449,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/input-adornment.md</code> 与 Arco Vue <code>Input</code> 的 <code>#prepend</code> / <code>#append</code> 组合；样式走 <code>--component-input-*</code>。
+            对齐 <code>docs/components/input-adornment.md</code> 与 Arco Design Web React <code>Input</code> 的 <code>addBefore</code> / <code>addAfter</code> 等组合；样式走 <code>--component-input-*</code>。
           </p>
           <label class="pg-field ds-in-tab-row">
             <span>Demo variant</span>
@@ -1427,7 +1476,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/select.md</code> 与 Arco Vue <code>Select</code>（<code>multiple</code> / <code>allow-search</code> 等）；触发器与下拉项尺寸走 <code>select.layout.*</code>，色面走 <code>select.trigger.*</code> / <code>select.item.*</code>。
+            对齐 <code>docs/components/select.md</code> 与 Arco Design Web React <code>Select</code>（<code>multiple</code> / <code>allow-search</code> 等）；触发器与下拉项尺寸走 <code>select.layout.*</code>，色面走 <code>select.trigger.*</code> / <code>select.item.*</code>。
           </p>
           <label class="pg-field">
             <span>Kind（演示）</span>
@@ -1461,7 +1510,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/menu.md</code> 与 Arco Vue <code>Menu</code>（侧栏 / 折叠 / 子菜单弹出等）；容器与行走 <code>--component-menu-container-*</code>、<code>--component-menu-item-*</code>，弹出层走 <code>--component-menu-pop-*</code>。
+            对齐 <code>docs/components/menu.md</code> 与 Arco Design Web React <code>Menu</code>（侧栏 / 折叠 / 子菜单弹出等）；容器与行走 <code>--component-menu-container-*</code>、<code>--component-menu-item-*</code>，弹出层走 <code>--component-menu-pop-*</code>。
           </p>
           <label class="pg-field">
             <span>View（演示）</span>
@@ -1483,7 +1532,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/dropdown.md</code> 与 Arco Vue <code>Dropdown</code>（<code>trigger</code> / <code>popup-visible</code> / <code>position</code> 等）；面板与菜单项走 <code>dropdown.panel.*</code>、<code>dropdown.item.*</code>。
+            对齐 <code>docs/components/dropdown.md</code> 与 Arco Design Web React <code>Dropdown</code>（<code>trigger</code> / <code>popup-visible</code> / <code>position</code> 等）；面板与菜单项走 <code>dropdown.panel.*</code>、<code>dropdown.item.*</code>。
           </p>
           <label class="pg-field">
             <span>Variant（演示）</span>
@@ -1513,7 +1562,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/pincode.md</code> 与 Arco Vue <code>VerificationCode</code> / <code>PinCode</code>（位数、粘贴、键盘）；单元格尺寸走 <code>pinCode.layout.*</code>，态色走 <code>pinCode.cell.*</code>。
+            对齐 <code>docs/components/pincode.md</code> 与 Arco Design Web React <code>VerificationCode</code> / <code>PinCode</code>（位数、粘贴、键盘）；单元格尺寸走 <code>pinCode.layout.*</code>，态色走 <code>pinCode.cell.*</code>。
           </p>
           <label class="pg-field">
             <span>Length（格数）</span>
@@ -1540,7 +1589,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/message.md</code> 与 Arco Vue <code>Message</code>（<code>type</code> / <code>duration</code> / <code>closable</code> 等）；色面走 <code>message.tone.*</code>，排版走 <code>message.px</code> / <code>message.py</code> / <code>message.gap</code>。
+            对齐 <code>docs/components/message.md</code> 与 Arco Design Web React <code>Message</code>（<code>type</code> / <code>duration</code> / <code>closable</code> 等）；色面走 <code>message.tone.*</code>，排版走 <code>message.px</code> / <code>message.py</code> / <code>message.gap</code>。
           </p>
           <label class="pg-field">
             <span>Type（tone）</span>
@@ -1564,7 +1613,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/notification.md</code> 与 Arco Vue <code>Notification</code>（<code>type</code> / <code>title</code> / <code>content</code> / <code>closable</code> / <code>btn</code> 等）；色面走 <code>notification.tone.*</code>，卡片壳走 <code>notification.panel.*</code> 与 <code>notification.w</code> / <code>notification.p</code>，操作区间距走 <code>notification.actions.*</code>。
+            对齐 <code>docs/components/notification.md</code> 与 Arco Design Web React <code>Notification</code>（<code>type</code> / <code>title</code> / <code>content</code> / <code>closable</code> / <code>btn</code> 等）；色面走 <code>notification.tone.*</code>，卡片壳走 <code>notification.panel.*</code> 与 <code>notification.w</code> / <code>notification.p</code>，操作区间距走 <code>notification.actions.*</code>。
           </p>
           <label class="pg-field">
             <span>Type（tone）</span>
@@ -1593,7 +1642,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/modal.md</code> 与 Arco Vue <code>Modal</code>（<code>width</code> / <code>footer</code> / <code>maskClosable</code> / <code>escToExit</code> 等）；遮罩与面板走 <code>--component-modal-mask</code>、<code>--component-modal-panel-*</code>，内边距与宽度走 <code>--component-modal-p</code>、<code>--component-modal-w</code> / <code>--component-modal-w-with-tip</code>。
+            对齐 <code>docs/components/modal.md</code> 与 Arco Design Web React <code>Modal</code>（<code>width</code> / <code>footer</code> / <code>maskClosable</code> / <code>escToExit</code> 等）；遮罩与面板走 <code>--component-modal-mask</code>、<code>--component-modal-panel-*</code>，内边距与宽度走 <code>--component-modal-p</code>、<code>--component-modal-w</code> / <code>--component-modal-w-with-tip</code>。
           </p>
           <label class="pg-field">
             <span>Layout（演示）</span>
@@ -1617,7 +1666,7 @@ def _component_demo_body(
         <aside class="studio-aside card">
           <h3>Preview controls</h3>
           <p class="muted" style="margin:0 0 10px 0;font-size:12px;line-height:1.45;">
-            对齐 <code>docs/components/button.md</code> 与 Arco Vue <code>Button</code>（<code>type</code>/<code>size</code>/<code>disabled</code> 等）；视觉尺寸走 <code>button.layout.*</code> token。
+            对齐 <code>docs/components/button.md</code> 与 Arco Design Web React <code>Button</code>（<code>type</code>/<code>size</code>/<code>disabled</code> 等）；视觉尺寸走 <code>button.layout.*</code> token。
           </p>
           <label class="pg-field">
             <span>Size（Arco size）</span>
@@ -1661,7 +1710,7 @@ def _component_demo_body(
         </aside>"""
     if spec.slug == "alert":
         live_intro_sub = (
-            "Live 对齐 Arco Vue <code>alert.vue</code> DOM 与 <code>role=\"alert\"</code>；样式仅引用 "
+            "Live 对齐 Arco Design Web React <code>Alert</code> DOM 与 <code>role=\"alert\"</code>；样式仅引用 "
             "<code>--component-alert-*</code> 与 <code>--semantic-*</code>（见 <code>docs/components/alert.md</code>）。"
         )
         matrix_rows_help = (
@@ -1860,7 +1909,7 @@ def _component_demo_body(
         )
     elif spec.slug == "button":
         live_intro_sub = (
-            "Live 对齐 Arco Vue <code>button.vue</code>：无 <code>href</code>、无 <code>loading</code>/<code>#icon</code> 时不渲染图标容器；"
+            "Live 对齐 Arco Design Web React <code>Button</code>：无 <code>href</code>、无 <code>loading</code>/<code>icon</code> 时不渲染图标容器；"
             "样式仅引用 <code>--component-button-*</code> 与 <code>--semantic-*</code>（见 <code>docs/components/button.md</code>）。"
         )
         matrix_rows_help = (
@@ -2213,6 +2262,7 @@ def _write_b_line_gallery_pages(
     out_dir: Path,
     components: list[ComponentSpec],
     tokens_href: str,
+    icons_head: str,
 ) -> None:
     _validate_b_line_coverage(components)
     spec_by_slug = _spec_by_slug(components)
@@ -2224,7 +2274,12 @@ def _write_b_line_gallery_pages(
             spec_by_slug=spec_by_slug,
             index_href="index.html",
         )
-        page = _html_page(title=title, body=body, tokens_href=tokens_href)
+        page = _html_page(
+            title=title,
+            body=body,
+            tokens_href=tokens_href,
+            head_extra=icons_head,
+        )
         (out_dir / filename).write_text(page, encoding="utf-8")
 
 
@@ -2725,6 +2780,7 @@ def main() -> int:
 
     out_components_dir.mkdir(parents=True, exist_ok=True)
     tokens_css_text = tokens_css.read_text(encoding="utf-8", errors="replace")
+    icons_head = _build_icons_fragment(repo_root)
 
     # Relative hrefs
     # - from .design-spec/demos/components/*.html -> .design-spec/tokens/dist/tokens.css
@@ -2740,7 +2796,13 @@ def main() -> int:
             tokens_css_text=tokens_css_text,
             behavior_source=behavior_source,
         )
-        html_text = _html_page(title=c.title, body=body, tokens_href=tokens_href_components)
+        md_name = c.source_path.name
+        head_extra = (
+            icons_head
+            + f'    <meta name="ds:component-slug" content="{html.escape(c.slug)}" />\n'
+            + f'    <meta name="ds:source-md" content="{html.escape("../../docs/components/" + md_name)}" />\n'
+        )
+        html_text = _html_page(title=c.title, body=body, tokens_href=tokens_href_components, head_extra=head_extra)
         (out_components_dir / f"{c.slug}.html").write_text(html_text, encoding="utf-8")
 
     # Write index
@@ -2748,6 +2810,7 @@ def main() -> int:
         title="Component demos",
         body=_index_body(components, tokens_href=tokens_href_index, behavior_source=behavior_source),
         tokens_href=tokens_href_index,
+        head_extra=icons_head + '    <meta name="ds:page" content="component-demos-index" />\n',
     )
     (out_dir / "index.html").write_text(index_html, encoding="utf-8")
 
@@ -2755,6 +2818,7 @@ def main() -> int:
         out_dir=out_dir,
         components=components,
         tokens_href=tokens_href_index,
+        icons_head=icons_head,
     )
 
     _write_page_level_templates(repo_root, behavior_source)
@@ -2768,6 +2832,7 @@ def main() -> int:
     print(
         "Wrote B-line page templates: pages/dashboard.html, pages/list.html, pages/form.html, pages/archive/dashboard-tdesign-starter-base.html"
     )
+    _report_studio_runtime_literals(repo_root)
     return 0
 
 

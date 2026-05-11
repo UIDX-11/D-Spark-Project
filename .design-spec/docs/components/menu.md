@@ -12,9 +12,9 @@ Molecular
 
 ## References
 
-- Arco Vue（API / 行为真源）· Menu: [https://arco.design/vue/component/menu](https://arco.design/vue/component/menu)
-- Arco Vue · Layout（Pro 常见 **`a-layout-sider`** + **`collapsible`** / **`collapsed`** 组合）: [https://arco.design/vue/component/layout](https://arco.design/vue/component/layout)
-- Arco Design Vue **源码（GitHub）**: [packages/web-vue/components/menu](https://github.com/arco-design/arco-design-vue/tree/main/packages/web-vue/components/menu)
+- Arco Design Web React（API / 行为真源）· Menu: [https://arco.design/react/components/menu](https://arco.design/react/components/menu)
+- Arco Design Web React · Layout（侧栏常见 **`Layout.Sider`** + **`collapsed`** / **`onCollapse`** 组合）: [https://arco.design/react/components/layout](https://arco.design/react/components/layout)
+- Arco 源码（React）: [`arco-design/components/Menu`](https://github.com/arco-design/arco-design/tree/main/components/Menu)
 - Figma（Light，视觉真源）深链：
   - 一级竖向菜单项矩阵 **`vertical-menu-item/1st-level`**: [node 118145:152369](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118145-152369)
   - 多列 Mega（二级 + 菜单组列）: [node 118125:152281](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118125-152281)
@@ -23,7 +23,7 @@ Molecular
 
 ## B 线页模版（`page_templates`）与单组件 Menu demo 的边界
 
-- **页级 HTML**（`.design-spec/demos/pages/*.html`）侧栏由 **`.pt-side` / `.pt-nav-item` / `.pt-side-toggle`** 组成，脚本见 [`.design-spec/generator/page_templates.js`](../../generator/page_templates.js)，样式见 [`.design-spec/generator/page_templates.css`](../../generator/page_templates.css)，DOM 由 [`.design-spec/generator/page_templates.py`](../../generator/page_templates.py) 生成；**不挂载** Arco Vue 运行时。
+- **页级 HTML**（`.design-spec/demos/pages/*.html`）侧栏由 **`.pt-side` / `.pt-nav-item` / `.pt-side-toggle`** 组成，脚本见 [`.design-spec/generator/page_templates.js`](../../generator/page_templates.js)，样式见 [`.design-spec/generator/page_templates.css`](../../generator/page_templates.css)，DOM 由 [`.design-spec/generator/page_templates.py`](../../generator/page_templates.py) 生成；**不挂载** Arco Design Web React 运行时。
 - **折叠行为**：在 **视口宽度 ≥ 961px** 时，通过 `.pt-app.pt-side-collapsed` 将侧栏在 **`--component-menu-container-w-expanded`（220）** 与 **`--component-menu-container-w-collapsed`（48）** 间切换；**≤960px** 时不用收起宽度（侧栏栈式全宽）。演示用 **`localStorage`** 键 **`dspark_pt_side_collapsed`**（`1` = 收起）记忆上次状态。
 - **单组件 demo**（`.design-spec/demos/components/menu.html`）仍使用 **`ds-mu-*` Live** 与下表 **Arco DOM** 对齐；与页模版 **类名不同**，但 **共用** `tokens.css` 中 **`--component-menu-*`**。
 

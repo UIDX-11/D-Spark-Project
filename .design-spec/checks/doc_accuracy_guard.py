@@ -30,7 +30,7 @@ class FileIssue:
 
 def load_behavior_config() -> dict:
     if not BEHAVIOR_CONFIG.exists():
-        return {"behaviorSource": "arco-vue", "forbiddenPatterns": []}
+        return {"behaviorSource": "arco-react", "forbiddenPatterns": []}
     return json.loads(BEHAVIOR_CONFIG.read_text(encoding="utf-8"))
 
 
@@ -63,10 +63,8 @@ def check_required_sections(md_file: Path, text: str) -> list[FileIssue]:
 
 def check_source_links(md_file: Path, text: str) -> list[FileIssue]:
     issues: list[FileIssue] = []
-    if "Arco Vue" not in text:
-        issues.append(FileIssue(md_file, "missing 'Arco Vue' reference"))
-    if "arco.design/vue/component/" not in text:
-        issues.append(FileIssue(md_file, "missing Arco Vue component URL"))
+    if "arco.design/react" not in text:
+        issues.append(FileIssue(md_file, "missing Arco Design Web React doc URL (arco.design/react...)"))
     if "Figma" not in text:
         issues.append(FileIssue(md_file, "missing Figma reference"))
     return issues

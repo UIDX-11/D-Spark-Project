@@ -20,7 +20,8 @@ This directory is the **single entrypoint** for D-Spark UI generation rules.
 
 - `manifest.json`
 - `docs/design.md`
-- `docs/ALIGNMENT_GOVERNANCE.md` — **Arco Vue · Figma · token · a11y · PR 验收**（组件长程对齐单一事实来源）
+- `docs/REQUIREMENTS_AND_PLAN.md` — 需求拆解与阶段计划（含 **§R14 Arco Design Web React 叙述基线** 与 `demos-react` 交互态 DoD）
+- `docs/ALIGNMENT_GOVERNANCE.md` — **Arco Design Web React · Figma · token · a11y · PR 验收**（组件长程对齐单一事实来源）
 - `generator/schema-ui-contract.md`
 - `docs/components/intent-index.md`
 - `e2e/README.md` — Playwright 烟雾与截图基线（PR gate）

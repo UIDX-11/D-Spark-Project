@@ -10,17 +10,17 @@
 
 ## Mandatory checks
 
-1. 行为真源是否仍为 Arco Vue
-2. 是否存在 React 真源引用（文案或链接）
+1. 行为真源是否仅为 **Arco Design Web React**（无 Arco Vue / `arco.design/vue` 残留）
+2. References 是否包含 `arco.design/react` 文档链接
 3. 必备 H2 章节是否齐全
-4. References 是否包含 Arco Vue 与 Figma 来源
+4. References 是否包含 Figma 来源
 5. Token 绑定是否使用 CSS 变量（不接受裸色值）
 
 ## Report format
 
 审校输出按严重级别排序：
 
-- `Critical`：行为真源冲突（Vue/React 混用）
+- `Critical`：行为真源冲突（Vue/React 混用或治理禁止的 Vue 链接）
 - `Major`：必备章节缺失、References 缺失
 - `Minor`：术语不一致、示例说明不清
 
@@ -32,5 +32,5 @@
 
 ## Auto checks to run
 
-- `python3 .design-spec/checks/ensure_vue_truth_source.py`
+- `python3 .design-spec/checks/ensure_react_truth_source.py`
 - `python3 .design-spec/checks/doc_accuracy_guard.py`
