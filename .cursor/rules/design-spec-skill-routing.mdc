@@ -1,0 +1,24 @@
+---
+description: >-
+  Routes D-Spark design-spec work to project skills so the agent loads the right
+  SKILL.md from natural language (Chinese/English).
+alwaysApply: true
+---
+
+# D-Spark · 按话题加载项目 Skill
+
+在动手改代码或写长答案前，若用户意图命中下表任一列，请先用 **Read** 打开对应文件（整份 `SKILL.md`），再执行请求。
+
+| 用户说法 / 场景（示例） | 必读 Skill 路径 |
+|-------------------------|-----------------|
+| 组件规格、md 文档、Figma 表、数值比对、对稿、`docs/components` | `.cursor/skills/design-spec-component-docs/SKILL.md` |
+| HTML demo、`studio_runtime`、生成 demos、generator、`demos/components` | `.cursor/skills/design-spec-demos-runtime/SKILL.md` |
+| token、`tokens.css`、`component.json`、`scan_token_violations`、CI 扫描 | `.cursor/skills/design-spec-tokens-ci/SKILL.md` |
+| 在 Figma 里生成/插入、`use_figma`、`fileKey`、`node-id`、datepicker 稿 | `.cursor/skills/design-spec-figma-workflows/SKILL.md` |
+| Playwright、e2e、smoke、`.design-spec/e2e`、design-spec workflow | `.cursor/skills/design-spec-e2e/SKILL.md` |
+| 混合规格、JSON Schema、`page.md`、`pattern`、`layoutProtocol`、`schemaVersion`、可移植 Skill | `.cursor/skills/design-spec-hybrid-spec/SKILL.md` |
+| Arco Vue、真 DatePicker、token 桥、`apps/arco-vue-datepicker` | `.cursor/skills/arco-vue-design-system/SKILL.md` |
+
+**叠加**：Figma 写画布且将调用 **`use_figma`** 时，若工作区存在 **figma-use** 全局 Skill，须**先于**本仓库 `design-spec-figma-workflows` 加载 **figma-use**（官方 MCP 要求）。
+
+**索引**：`.cursor/skills/README.md` 列出全部项目 Skill 名与用途。
