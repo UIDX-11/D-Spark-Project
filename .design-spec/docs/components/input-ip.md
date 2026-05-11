@@ -77,3 +77,13 @@ Align with **Input** studio sizes: `mini` / `small` / `medium` / `large` (Figma 
 ## Relationship to Input
 
 Documented separately from the multi-variant `[input.html](../../demos/components/input.html)` page; shares the same component token prefix `**input**` in generated token snapshots.
+
+## Do
+
+- 遵循本文 **Best practices** / **Variants** 与 Figma、token 表；governed HTML 使用 `tokens.css` 变量（`--semantic-*` / `--component-*`），避免裸 px/hex。
+- 落实 **Accessibility essentials**（键盘、可见焦点、可访问名称）。
+
+## Don't
+
+- 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+

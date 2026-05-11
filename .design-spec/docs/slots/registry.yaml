@@ -1,0 +1,15 @@
+# Slot registry (global)
+
+命名：`slot.<component>.<region>`（例：`slot.table.toolbarActions`）。
+
+```yaml
+schemaVersion: "0.1.0"
+kind: slotRegistry
+slots:
+  - id: slot.table.toolbarActions
+    figmaNodeHint: Table frame / toolbar row
+    defaultElements: [button, space]
+    forbidden: [inline_style_px]
+  - id: slot.page.headerActions
+    defaultElements: [button]
+```

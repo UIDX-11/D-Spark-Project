@@ -1,0 +1,22 @@
+{
+  "version": "0.1.0",
+  "libraryName": "D.Spark Web · Icon set",
+  "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+  "iconsRootNodeId": "276593:77",
+  "export": {
+    "format": "svg",
+    "designGridPx": 48,
+    "displayTokenVar": "--semantic-icon-size-md",
+    "displayPx": 16,
+    "note": "从 Figma 48×48 画板导出 SVG；HTML 侧用 semantic icon size token 控制展示尺寸。"
+  },
+  "items": [
+    {
+      "id": "example.money-circle",
+      "label": "Money circle（示例槽位）",
+      "figmaNodeId": "TBD",
+      "relativePath": "money-circle.svg",
+      "note": "设计导出后替换 figmaNodeId 与文件名；可复制本对象追加真实条目。"
+    }
+  ]
+}

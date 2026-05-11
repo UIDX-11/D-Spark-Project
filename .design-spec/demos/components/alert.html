@@ -112,6 +112,24 @@
   border: 0;
 }
 
+/* Inline icons: Figma artboard often 48px; demos default to semantic md (16px). */
+.ds-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+.ds-icon--md {
+  width: calc(var(--semantic-icon-size-md) * 1px);
+  height: calc(var(--semantic-icon-size-md) * 1px);
+}
+.ds-icon-placeholder {
+  box-sizing: border-box;
+  border: 1px dashed var(--semantic-border-default);
+  background: var(--semantic-bg-muted);
+  border-radius: calc(var(--semantic-radius-sm) * 1px);
+}
+
 .studio {
   display: grid;
   gap: 16px;

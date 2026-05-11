@@ -28,6 +28,7 @@ Most “B-end common components” live in **Molecular**.
 
 - **Components**: `docs/components/`
 - **Foundations**: `docs/foundations/`
+- **需求拆解与阶段计划（混合规格 / Skill）**: `docs/REQUIREMENTS_AND_PLAN.md`
 - **Tokens**: `tokens/src/` (source) → `tokens/dist/` (platform outputs)
 - **Generator contract**: `generator/schema-ui-contract.md`
 - **Arco · Figma · Vue 对齐与 PR 规则**: `docs/ALIGNMENT_GOVERNANCE.md`（含真源优先级、样式策略 **B**、token 两层、MD→HTML 流水线、截图与 e2e 验收）

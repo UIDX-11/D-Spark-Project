@@ -1,0 +1,7 @@
+# Figma Variables → D-Spark tokens bridge (placeholder)
+version: "0.0.0"
+mappings: []
+# Example entry (not authoritative):
+#   - figmaVariable: "Color/Primary/Default"
+#     tokenCss: "--semantic-action-primary-bg"
+#     notes: "Light mode only"

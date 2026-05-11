@@ -12,10 +12,20 @@ Molecular
 
 ## References
 
-- Arco Vue（API / 行为真源）: [https://arco.design/vue/component/menu](https://arco.design/vue/component/menu)
-- Arco 源码: `arco-design-vue/packages/web-vue/components/menu/`
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Menu** 画板，将本行替换为带 `node-id=` 的深链接。
+- Arco Vue（API / 行为真源）· Menu: [https://arco.design/vue/component/menu](https://arco.design/vue/component/menu)
+- Arco Vue · Layout（Pro 常见 **`a-layout-sider`** + **`collapsible`** / **`collapsed`** 组合）: [https://arco.design/vue/component/layout](https://arco.design/vue/component/layout)
+- Arco Design Vue **源码（GitHub）**: [packages/web-vue/components/menu](https://github.com/arco-design/arco-design-vue/tree/main/packages/web-vue/components/menu)
+- Figma（Light，视觉真源）深链：
+  - 一级竖向菜单项矩阵 **`vertical-menu-item/1st-level`**: [node 118145:152369](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118145-152369)
+  - 多列 Mega（二级 + 菜单组列）: [node 118125:152281](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118125-152281)
+  - 弹出子菜单项矩阵 **`pop-menu-item/1st-level`**: [node 118262:158322](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118262-158322)
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## B 线页模版（`page_templates`）与单组件 Menu demo 的边界
+
+- **页级 HTML**（`.design-spec/demos/pages/*.html`）侧栏由 **`.pt-side` / `.pt-nav-item` / `.pt-side-toggle`** 组成，脚本见 [`.design-spec/generator/page_templates.js`](../../generator/page_templates.js)，样式见 [`.design-spec/generator/page_templates.css`](../../generator/page_templates.css)，DOM 由 [`.design-spec/generator/page_templates.py`](../../generator/page_templates.py) 生成；**不挂载** Arco Vue 运行时。
+- **折叠行为**：在 **视口宽度 ≥ 961px** 时，通过 `.pt-app.pt-side-collapsed` 将侧栏在 **`--component-menu-container-w-expanded`（220）** 与 **`--component-menu-container-w-collapsed`（48）** 间切换；**≤960px** 时不用收起宽度（侧栏栈式全宽）。演示用 **`localStorage`** 键 **`dspark_pt_side_collapsed`**（`1` = 收起）记忆上次状态。
+- **单组件 demo**（`.design-spec/demos/components/menu.html`）仍使用 **`ds-mu-*` Live** 与下表 **Arco DOM** 对齐；与页模版 **类名不同**，但 **共用** `tokens.css` 中 **`--component-menu-*`**。
 
 ## Figma
 
@@ -35,7 +45,7 @@ Molecular
 
 | Arco 行为 / 概念 | 说明 | 本 demo |
 | ---------------- | ---- | ------- |
-| 侧栏 / 折叠 | 展开与收起宽度 | 侧栏 **Side width**：**expanded** / **collapsed**（`ds-mu-nav--collapsed`） |
+| 侧栏 / 折叠 | 展开与收起宽度 | **单组件 Live**：**`ds-mu-nav--collapsed`**；**页模版 B 线**：**`.pt-app.pt-side-collapsed`** + **`[data-pt-side-toggle]`**（≥961px 视口） |
 | 子菜单 / 弹出 | 浮层面板 | **View → pop**：**`ds-mu-pop`** + **`ds-mu-pop-item`** |
 | `disabled` | 禁用项 | Live 中禁用 **`menuitem`**；矩阵 **Disabled** 行 |
 | 键盘方向键 | 菜单内导航 | **`ArrowUp` / `ArrowDown`** 在可用 **`menuitem`** 间切换 **`tabindex`** 与焦点 |
@@ -109,3 +119,15 @@ Molecular
 | `tokens.menu.pop.minW` | `--component-menu-pop-min-w` |
 | `tokens.menu.pop.itemPx` | `--component-menu-pop-item-px` |
 | `tokens.menu.pop.itemPy` | `--component-menu-pop-item-py` |
+
+## Do
+
+- 遵循本文 **Best practices** / **Variants** 与 Figma、token 表；governed HTML 使用 `tokens.css` 变量（`--semantic-*` / `--component-*`），避免裸 px/hex。
+- 落实 **Accessibility essentials**（键盘、可见焦点、可访问名称）。
+- **页级 B 线**：在桌面视口实现与规格一致的 **220 / 48** 侧栏宽切换（见 **B 线页模版** 节），折叠按钮具备 **`aria-expanded`** / **`aria-controls`**。
+
+## Don't
+
+- 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+- 假定「已定义 Menu token」即 **自动**具备折叠交互：页模版须 **显式**实现 `.pt-side-toggle` 与脚本（或改用 Arco Layout + Menu 真组件）。
+

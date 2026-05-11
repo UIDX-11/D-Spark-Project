@@ -90,6 +90,23 @@ const tabsDemo = pathToFileURL(
 const treeDemo = pathToFileURL(
   path.join(repoRoot, ".design-spec/demos/components/tree.html")
 ).href;
+const galleryB1 = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/gallery-b1-forms-inputs.html")
+).href;
+const galleryB2 = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/gallery-b2-feedback-data.html")
+).href;
+const galleryB3 = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/gallery-b3-navigation-structure.html")
+).href;
+const pageDashboard = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/pages/dashboard.html")
+).href;
+const pageDashboardTdesign = pathToFileURL(
+  path.join(repoRoot, ".design-spec/demos/pages/archive/dashboard-tdesign-starter-base.html")
+).href;
+const pageList = pathToFileURL(path.join(repoRoot, ".design-spec/demos/pages/list.html")).href;
+const pageForm = pathToFileURL(path.join(repoRoot, ".design-spec/demos/pages/form.html")).href;
 
 test.describe("Design-spec HTML demos (smoke)", () => {
   test("alert: live region mounts with role=alert", async ({ page }) => {
@@ -610,5 +627,75 @@ test.describe("Design-spec HTML demos (smoke)", () => {
     await expect(page.getByLabel("Tree demo mode")).toBeFocused();
     await page.getByLabel("Tree demo size").focus();
     await expect(page.getByLabel("Tree demo size")).toBeFocused();
+  });
+
+  test("B-line gallery B1: forms & inputs hub table", async ({ page }) => {
+    await page.goto(galleryB1);
+    await expect(page.locator("h1")).toContainText("B1");
+    await expect(page.locator("table tbody tr")).toHaveCount(17);
+    await expect(page.getByRole("link", { name: "Back to index" })).toBeVisible();
+  });
+
+  test("B-line gallery B2: feedback & data hub table", async ({ page }) => {
+    await page.goto(galleryB2);
+    await expect(page.locator("h1")).toContainText("B2");
+    await expect(page.locator("table tbody tr")).toHaveCount(12);
+  });
+
+  test("B-line gallery B3: navigation & structure hub table", async ({ page }) => {
+    await page.goto(galleryB3);
+    await expect(page.locator("h1")).toContainText("B3");
+    await expect(page.locator("table tbody tr")).toHaveCount(10);
+  });
+
+  test("B-line page template: dashboard mounts shell", async ({ page }) => {
+    await page.goto(pageDashboard);
+    await expect(page.locator('[data-pt-template="dashboard"]')).toBeVisible();
+    await expect(page.locator(".pt-app")).toBeVisible();
+    await expect(page.locator(".pt-side")).toBeVisible();
+    await expect(page.locator(".pt-side .pt-nav-group")).toHaveCount(3);
+    await expect(page.locator("h1")).toContainText("仪表盘");
+  });
+
+  test("B-line page template: sidebar collapse toggle", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto(pageDashboard);
+    const toggle = page.locator("[data-pt-side-toggle]");
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await toggle.click();
+    await expect(page.locator(".pt-app.pt-side-collapsed")).toHaveCount(1);
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await toggle.click();
+    await expect(page.locator(".pt-app.pt-side-collapsed")).toHaveCount(0);
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  });
+
+  test("B-line TDesign starter dashboard static page", async ({ page }) => {
+    await page.goto(pageDashboardTdesign);
+    await expect(page.locator(".pt-starter-dashboard")).toBeVisible();
+    await expect(page.locator('[data-pt-template="tdesign-starter-dashboard"]')).toBeVisible();
+    await expect(page.locator("#moneyContainer")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "销售订单排名" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "采购订单排名" })).toBeVisible();
+  });
+
+  test("B-line page template: header notify shows toast", async ({ page }) => {
+    await page.goto(pageDashboard);
+    await page.locator("[data-pt-notify]").click();
+    await expect(page.locator("#ptToastHost .pt-toast")).toHaveCount(1);
+  });
+
+  test("B-line page template: list mounts table and pagination", async ({ page }) => {
+    await page.goto(pageList);
+    await expect(page.locator('[data-pt-template="list"]')).toBeVisible();
+    await expect(page.locator("table.pt-table")).toBeVisible();
+    await expect(page.locator(".pt-pagination")).toBeVisible();
+  });
+
+  test("B-line page template: form mounts form rows", async ({ page }) => {
+    await page.goto(pageForm);
+    await expect(page.locator('[data-pt-template="form"]')).toBeVisible();
+    await expect(page.locator(".pt-form-row")).toHaveCount(4);
   });
 });

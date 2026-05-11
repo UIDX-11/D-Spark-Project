@@ -1,3 +1,12 @@
 # Local / agent artifacts
 test-results/
 .design-spec/checks/reports/
+
+# Dependencies & build output (do not commit)
+node_modules/
+**/node_modules/
+apps/**/dist/
+
+# OS
+.DS_Store
+**/.DS_Store

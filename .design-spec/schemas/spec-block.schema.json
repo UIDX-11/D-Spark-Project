@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://d-spark.local/design-spec/spec-block.schema.json",
+  "title": "D-Spark spec block (Markdown-fenced JSON)",
+  "$defs": {
+    "v0_1_0": {
+      "type": "object",
+      "required": ["schemaVersion", "kind"],
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "0.1.0" },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "atomic",
+            "pattern",
+            "page",
+            "layoutProtocol",
+            "slotRegistry",
+            "responsive",
+            "tokenMap"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "oneOf": [
+    {
+      "allOf": [
+        { "$ref": "#/$defs/v0_1_0" },
+        {
+          "type": "object",
+          "required": ["kind", "bindings"],
+          "properties": {
+            "schemaVersion": { "type": "string", "const": "0.1.0" },
+            "kind": { "const": "atomic" },
+            "bindings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["figmaPath", "cssVar"],
+                "properties": {
+                  "figmaPath": { "type": "string" },
+                  "cssVar": { "type": "string" }
+                }
+              }
+            },
+            "metrics": { "type": "array" }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/$defs/v0_1_0" },
+        {
+          "properties": {
+            "kind": { "const": "pattern" },
+            "patternId": { "type": "string" },
+            "composition": { "type": "array" },
+            "dataContracts": { "type": "object" },
+            "behaviors": { "type": "array", "items": { "type": "string" } }
+          },
+          "required": ["patternId", "composition"]
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/$defs/v0_1_0" },
+        {
+          "properties": {
+            "kind": { "const": "page" },
+            "templateId": { "type": "string" },
+            "layoutShell": { "type": "string" },
+            "regions": { "type": "array" },
+            "demoPath": { "type": "string" },
+            "figma": { "type": "object" },
+            "responsive": { "type": "object" }
+          },
+          "required": ["templateId", "regions", "demoPath"]
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/$defs/v0_1_0" },
+        {
+          "properties": {
+            "kind": { "const": "layoutProtocol" },
+            "mappings": { "type": "array" },
+            "alignment": { "type": "object" }
+          },
+          "required": ["mappings"]
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/$defs/v0_1_0" },
+        {
+          "properties": {
+            "kind": { "const": "slotRegistry" },
+            "slots": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^slot\\.[-a-zA-Z0-9]+\\.[-a-zA-Z0-9]+$" },
+                  "figmaNodeHint": { "type": "string" },
+                  "defaultElements": { "type": "array" },
+                  "forbidden": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            }
+          },
+          "required": ["slots"]
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/$defs/v0_1_0" },
+        {
+          "properties": {
+            "kind": { "const": "responsive" },
+            "breakpoints": { "type": "array" },
+            "gridColumns": { "type": "integer", "enum": [12, 24] }
+          },
+          "anyOf": [
+            { "required": ["breakpoints"] },
+            { "required": ["gridColumns"] }
+          ]
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/$defs/v0_1_0" },
+        {
+          "properties": {
+            "kind": { "const": "tokenMap" },
+            "numericToToken": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["token"],
+                "properties": {
+                  "role": { "type": "string" },
+                  "valuePx": { "type": "number" },
+                  "token": { "type": "string" },
+                  "derivation": { "type": "string" },
+                  "note": { "type": "string" }
+                }
+              }
+            }
+          },
+          "required": ["numericToToken"]
+        }
+      ]
+    }
+  ]
+}

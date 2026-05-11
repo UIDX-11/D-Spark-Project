@@ -73,37 +73,43 @@ Molecular
 
 ## Variants
 
-| **Kind** | **Range** | **Time** | **When to use** |
-| --- | --- | --- | --- |
-| `date` | no | no | standard date selection |
-| `datetime` | no | yes | date + time, single value |
-| `date-range` | yes | no | start–end date |
-| `datetime-range` | yes | yes | start–end with time |
-| `week` | optional | no | week-based reporting |
-| `month` | optional | no | month-level selection |
-| `year` | optional | no | year-level selection |
-| `quarter` | optional | no | quarter selection |
+
+| **Kind**         | **Range** | **Time** | **When to use**           |
+| ---------------- | --------- | -------- | ------------------------- |
+| `date`           | no        | no       | standard date selection   |
+| `datetime`       | no        | yes      | date + time, single value |
+| `date-range`     | yes       | no       | start–end date            |
+| `datetime-range` | yes       | yes      | start–end with time       |
+| `week`           | optional  | no       | week-based reporting      |
+| `month`          | optional  | no       | month-level selection     |
+| `year`           | optional  | no       | year-level selection      |
+| `quarter`        | optional  | no       | quarter selection         |
+
 
 ## States
 
 ### Trigger (input-like) — states
 
-| **State** | **Background** | **Border** | **Text** | **Icon** | **Ring** |
-| --- | --- | --- | --- | --- | --- |
-| Default | `var(--component-datepicker-trigger-bg-default)` | `var(--component-datepicker-trigger-border-default)` | `var(--component-datepicker-trigger-text-default)` | `var(--component-datepicker-trigger-icon-default)` | none |
-| Focus | `var(--component-datepicker-trigger-bg-focus)` | `var(--component-datepicker-trigger-border-focus)` | `var(--component-datepicker-trigger-text-focus)` | `var(--component-datepicker-trigger-icon-default)` | `var(--component-datepicker-trigger-ring-focus)` |
-| Error | `var(--component-datepicker-trigger-bg-error)` | `var(--component-datepicker-trigger-border-error)` | `var(--component-datepicker-trigger-text-default)` | `var(--component-datepicker-trigger-icon-default)` | `var(--component-datepicker-trigger-ring-error)` |
-| Disabled | `var(--component-datepicker-trigger-bg-disabled)` | `var(--component-datepicker-trigger-border-disabled)` | `var(--component-datepicker-trigger-text-disabled)` | `var(--component-datepicker-trigger-icon-disabled)` | none |
+
+| **State** | **Background**                                    | **Border**                                            | **Text**                                            | **Icon**                                            | **Ring**                                         |
+| --------- | ------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------ |
+| Default   | `var(--component-datepicker-trigger-bg-default)`  | `var(--component-datepicker-trigger-border-default)`  | `var(--component-datepicker-trigger-text-default)`  | `var(--component-datepicker-trigger-icon-default)`  | none                                             |
+| Focus     | `var(--component-datepicker-trigger-bg-focus)`    | `var(--component-datepicker-trigger-border-focus)`    | `var(--component-datepicker-trigger-text-focus)`    | `var(--component-datepicker-trigger-icon-default)`  | `var(--component-datepicker-trigger-ring-focus)` |
+| Error     | `var(--component-datepicker-trigger-bg-error)`    | `var(--component-datepicker-trigger-border-error)`    | `var(--component-datepicker-trigger-text-default)`  | `var(--component-datepicker-trigger-icon-default)`  | `var(--component-datepicker-trigger-ring-error)` |
+| Disabled  | `var(--component-datepicker-trigger-bg-disabled)` | `var(--component-datepicker-trigger-border-disabled)` | `var(--component-datepicker-trigger-text-disabled)` | `var(--component-datepicker-trigger-icon-disabled)` | none                                             |
+
 
 ### Day cell — states (required)
 
-| **State** | **Background** | **Text** | **Notes** |
-| --- | --- | --- | --- |
-| Default | `var(--component-datepicker-day-bg-default)` | `var(--component-datepicker-day-text-default)` | normal day |
-| Hover | `var(--component-datepicker-day-bg-hover)` | `var(--component-datepicker-day-text-default)` | hover highlight |
-| Selected | `var(--component-datepicker-day-bg-selected)` | `var(--component-datepicker-day-text-selected)` | single selection |
-| In range | `var(--component-datepicker-day-bg-in-range)` | `var(--component-datepicker-day-text-default)` | between start/end |
-| Disabled | `var(--component-datepicker-day-bg-default)` | `var(--component-datepicker-day-text-disabled)` | disabled date |
+
+| **State** | **Background**                                | **Text**                                        | **Notes**         |
+| --------- | --------------------------------------------- | ----------------------------------------------- | ----------------- |
+| Default   | `var(--component-datepicker-day-bg-default)`  | `var(--component-datepicker-day-text-default)`  | normal day        |
+| Hover     | `var(--component-datepicker-day-bg-hover)`    | `var(--component-datepicker-day-text-default)`  | hover highlight   |
+| Selected  | `var(--component-datepicker-day-bg-selected)` | `var(--component-datepicker-day-text-selected)` | single selection  |
+| In range  | `var(--component-datepicker-day-bg-in-range)` | `var(--component-datepicker-day-text-default)`  | between start/end |
+| Disabled  | `var(--component-datepicker-day-bg-default)`  | `var(--component-datepicker-day-text-disabled)` | disabled date     |
+
 
 ## Executable interaction rules
 
@@ -155,31 +161,42 @@ Molecular
 
 ## Component token bindings (required)
 
-| **Token path** | **CSS var** |
-| --- | --- |
-| `tokens.datepicker.trigger.bgDefault` | `--component-datepicker-trigger-bg-default` |
-| `tokens.datepicker.trigger.bgFocus` | `--component-datepicker-trigger-bg-focus` |
-| `tokens.datepicker.trigger.bgError` | `--component-datepicker-trigger-bg-error` |
-| `tokens.datepicker.trigger.bgDisabled` | `--component-datepicker-trigger-bg-disabled` |
-| `tokens.datepicker.trigger.borderDefault` | `--component-datepicker-trigger-border-default` |
-| `tokens.datepicker.trigger.borderFocus` | `--component-datepicker-trigger-border-focus` |
-| `tokens.datepicker.trigger.borderError` | `--component-datepicker-trigger-border-error` |
+
+| **Token path**                             | **CSS var**                                      |
+| ------------------------------------------ | ------------------------------------------------ |
+| `tokens.datepicker.trigger.bgDefault`      | `--component-datepicker-trigger-bg-default`      |
+| `tokens.datepicker.trigger.bgFocus`        | `--component-datepicker-trigger-bg-focus`        |
+| `tokens.datepicker.trigger.bgError`        | `--component-datepicker-trigger-bg-error`        |
+| `tokens.datepicker.trigger.bgDisabled`     | `--component-datepicker-trigger-bg-disabled`     |
+| `tokens.datepicker.trigger.borderDefault`  | `--component-datepicker-trigger-border-default`  |
+| `tokens.datepicker.trigger.borderFocus`    | `--component-datepicker-trigger-border-focus`    |
+| `tokens.datepicker.trigger.borderError`    | `--component-datepicker-trigger-border-error`    |
 | `tokens.datepicker.trigger.borderDisabled` | `--component-datepicker-trigger-border-disabled` |
-| `tokens.datepicker.trigger.textDefault` | `--component-datepicker-trigger-text-default` |
-| `tokens.datepicker.trigger.textFocus` | `--component-datepicker-trigger-text-focus` |
-| `tokens.datepicker.trigger.textDisabled` | `--component-datepicker-trigger-text-disabled` |
-| `tokens.datepicker.trigger.iconDefault` | `--component-datepicker-trigger-icon-default` |
-| `tokens.datepicker.trigger.iconDisabled` | `--component-datepicker-trigger-icon-disabled` |
-| `tokens.datepicker.trigger.ringFocus` | `--component-datepicker-trigger-ring-focus` |
-| `tokens.datepicker.trigger.ringError` | `--component-datepicker-trigger-ring-error` |
-| `tokens.datepicker.panel.bg` | `--component-datepicker-panel-bg` |
-| `tokens.datepicker.panel.border` | `--component-datepicker-panel-border` |
-| `tokens.datepicker.panel.radius` | `--component-datepicker-panel-radius` |
-| `tokens.datepicker.panel.shadow` | `--component-datepicker-panel-shadow` |
-| `tokens.datepicker.day.bgDefault` | `--component-datepicker-day-bg-default` |
-| `tokens.datepicker.day.bgHover` | `--component-datepicker-day-bg-hover` |
-| `tokens.datepicker.day.bgSelected` | `--component-datepicker-day-bg-selected` |
-| `tokens.datepicker.day.bgInRange` | `--component-datepicker-day-bg-in-range` |
-| `tokens.datepicker.day.textDefault` | `--component-datepicker-day-text-default` |
-| `tokens.datepicker.day.textSelected` | `--component-datepicker-day-text-selected` |
-| `tokens.datepicker.day.textDisabled` | `--component-datepicker-day-text-disabled` |
+| `tokens.datepicker.trigger.textDefault`    | `--component-datepicker-trigger-text-default`    |
+| `tokens.datepicker.trigger.textFocus`      | `--component-datepicker-trigger-text-focus`      |
+| `tokens.datepicker.trigger.textDisabled`   | `--component-datepicker-trigger-text-disabled`   |
+| `tokens.datepicker.trigger.iconDefault`    | `--component-datepicker-trigger-icon-default`    |
+| `tokens.datepicker.trigger.iconDisabled`   | `--component-datepicker-trigger-icon-disabled`   |
+| `tokens.datepicker.trigger.ringFocus`      | `--component-datepicker-trigger-ring-focus`      |
+| `tokens.datepicker.trigger.ringError`      | `--component-datepicker-trigger-ring-error`      |
+| `tokens.datepicker.panel.bg`               | `--component-datepicker-panel-bg`                |
+| `tokens.datepicker.panel.border`           | `--component-datepicker-panel-border`            |
+| `tokens.datepicker.panel.radius`           | `--component-datepicker-panel-radius`            |
+| `tokens.datepicker.panel.shadow`           | `--component-datepicker-panel-shadow`            |
+| `tokens.datepicker.day.bgDefault`          | `--component-datepicker-day-bg-default`          |
+| `tokens.datepicker.day.bgHover`            | `--component-datepicker-day-bg-hover`            |
+| `tokens.datepicker.day.bgSelected`         | `--component-datepicker-day-bg-selected`         |
+| `tokens.datepicker.day.bgInRange`          | `--component-datepicker-day-bg-in-range`         |
+| `tokens.datepicker.day.textDefault`        | `--component-datepicker-day-text-default`        |
+| `tokens.datepicker.day.textSelected`       | `--component-datepicker-day-text-selected`       |
+| `tokens.datepicker.day.textDisabled`       | `--component-datepicker-day-text-disabled`       |
+
+## Do
+
+- 遵循本文 **Best practices** / **Variants** 与 Figma、token 表；governed HTML 使用 `tokens.css` 变量（`--semantic-*` / `--component-*`），避免裸 px/hex。
+- 落实 **Accessibility essentials**（键盘、可见焦点、可访问名称）。
+
+## Don't
+
+- 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+

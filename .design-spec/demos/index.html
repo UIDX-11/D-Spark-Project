@@ -91,6 +91,50 @@
           <div class="muted" style="margin-top:6px;">Live token studio per component · <code>../tokens/dist/tokens.css</code> · behavior source <code>Arco Vue</code></div>
         </div>
       </div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-b">
+          <h2 style="margin:0 0 10px 0; font-size:16px; line-height:1.3;">B 线 · 页面对稿模版（MD → HTML · 1:1）</h2>
+          <p class="muted" style="margin:0 0 10px 0; font-size:12px; line-height:1.5;">
+            整页组合（仪表盘 / 列表 / 表单）仅使用 <code>tokens.css</code> 变量，用于对照 Figma 整屏与多组件间距；
+            单组件细部仍以 <code>components/*.html</code> 为准。参考：
+            <a href="https://arco.design/pro" rel="noreferrer noopener" target="_blank">Arco Pro</a>、
+            <a href="https://tdesign.tencent.com/starter/vue/dashboard/base" rel="noreferrer noopener" target="_blank">TDesign Starter</a>。
+          </p>
+          <ul style="margin:0; padding-left: 18px;">
+            
+          <li style="margin:6px 0;"><a href="pages/dashboard.html"><strong>仪表盘</strong> 页模版</a>
+            <span class="muted">（对稿 Arco Pro / TDesign 式信息架构 · 1:1）</span></li>
+          <li style="margin:6px 0;"><a href="pages/archive/dashboard-tdesign-starter-base.html"><strong>TDesign Starter 仪表盘</strong> 静态对稿</a>
+            <span class="muted">（token + ECharts CDN · 与线上 base 同构四段）</span></li>
+          <li style="margin:6px 0;"><a href="pages/list.html"><strong>列表页</strong> 模版</a>
+            <span class="muted">（筛选条 + 数据表 + 分页）</span></li>
+          <li style="margin:6px 0;"><a href="pages/form.html"><strong>表单页</strong> 模版</a>
+            <span class="muted">（面包屑 + 两列表单 + 操作区）</span></li>
+          <li style="margin:6px 0; margin-top:10px; list-style:none;"><span class="muted" style="font-size:11px;">以下为按组件 slug 聚合的索引（非整页模版）：</span></li>
+          <li style="margin:6px 0;"><a href="gallery-b1-forms-inputs.html"><strong>B1</strong> · 表单与输入</a>
+            <span class="muted">（按钮、输入、选择、开关、上传、日期时间等）</span></li>
+          <li style="margin:6px 0;"><a href="gallery-b2-feedback-data.html"><strong>B2</strong> · 反馈与数据展示</a>
+            <span class="muted">（提示、对话框、进度、徽标、表格、列表等）</span></li>
+          <li style="margin:6px 0;"><a href="gallery-b3-navigation-structure.html"><strong>B3</strong> · 导航与结构</a>
+            <span class="muted">（面包屑、菜单、标签页、分页、布局、树等）</span></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-b">
+          <h2 style="margin:0 0 10px 0; font-size:16px; line-height:1.3;">C 线 · Vue 3 真页面（Starter 级 IA）</h2>
+          <p class="muted" style="margin:0 0 10px 0; font-size:12px; line-height:1.5;">
+            仓库内 <code>apps/dspark-vue-admin</code>：Arco Design Vue + 设计 token，侧栏菜单与路由覆盖仪表盘 / 列表变体（含<strong>树状筛选</strong>）/
+            表单变体（含<strong>分步表单</strong>）/ 详情 / 结果 / 登录等。信息架构见
+            <a href="../docs/pages/information-architecture.md">docs/pages/information-architecture.md</a>。
+          </p>
+          <pre style="margin:0;">cd apps/dspark-vue-admin
+npm install
+npm run dev
+# 默认 http://127.0.0.1:5174</pre>
+        </div>
+      </div>
       <div class="card">
         <div class="card-b">
           <ul style="margin:0; padding-left: 18px;">

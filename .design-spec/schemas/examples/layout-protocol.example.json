@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "0.1.0",
+  "kind": "layoutProtocol",
+  "title": "Figma Auto Layout → Web (Flex) 默认映射",
+  "mappings": [
+    {
+      "figma": "Direction: Horizontal",
+      "web": "flex-direction: row"
+    },
+    {
+      "figma": "Direction: Vertical",
+      "web": "flex-direction: column"
+    },
+    {
+      "figma": "Hug contents (primary axis width/height)",
+      "web": "width/height: fit-content; or inline-flex with flex: 0 0 auto for icon-only rows"
+    },
+    {
+      "figma": "Fill container (horizontal)",
+      "web": "flex: 1 1 0; min-width: 0 (tables / overflow)"
+    },
+    {
+      "figma": "Fill container (vertical)",
+      "web": "flex: 1 1 auto; overflow: auto on scroll region"
+    },
+    {
+      "figma": "Fixed size",
+      "web": "flex: 0 0 <basis> with tokenized basis"
+    },
+    {
+      "figma": "Gap",
+      "web": "gap: var(--semantic-layout-button-group-gap) or core-space-derived token"
+    },
+    {
+      "figma": "Padding",
+      "web": "padding from spacing tokens; see foundations/间距.md"
+    }
+  ],
+  "alignment": {
+    "primaryStart": "justify-content: flex-start",
+    "primaryCenter": "justify-content: center",
+    "primaryEnd": "justify-content: flex-end",
+    "primarySpaceBetween": "justify-content: space-between",
+    "crossStart": "align-items: flex-start",
+    "crossCenter": "align-items: center",
+    "crossEnd": "align-items: flex-end",
+    "crossStretch": "align-items: stretch"
+  }
+}

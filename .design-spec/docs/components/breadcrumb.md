@@ -168,4 +168,12 @@ Live 侧栏 **Depth** / **Separator** 与 **Figma / token** 对应如下（当�
 | `tokens.breadcrumb.layout.lineHeight` | `--component-breadcrumb-layout-line-height` |
 | `tokens.breadcrumb.linkFocusRing`     | `--component-breadcrumb-link-focus-ring`    |
 
+## Do
+
+- 遵循本文 **Best practices** / **Variants** 与 Figma、token 表；governed HTML 使用 `tokens.css` 变量（`--semantic-*` / `--component-*`），避免裸 px/hex。
+- 落实 **Accessibility essentials**（键盘、可见焦点、可访问名称）。
+
+## Don't
+
+- 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
 

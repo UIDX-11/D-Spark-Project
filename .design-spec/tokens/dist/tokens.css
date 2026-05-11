@@ -70,6 +70,12 @@
   --semantic-font-size-lg: 16;
   --semantic-font-size-md: 14;
   --semantic-font-size-sm: 12;
+  --semantic-icon-size-2xl: 48;
+  --semantic-icon-size-lg: 20;
+  --semantic-icon-size-md: 16;
+  --semantic-icon-size-sm: 14;
+  --semantic-icon-size-xl: 24;
+  --semantic-icon-size-xs: 12;
   --semantic-layout-button-group-gap: 12;
   --semantic-radius-md: 6;
   --semantic-radius-sm: 4;

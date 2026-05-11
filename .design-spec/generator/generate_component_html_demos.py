@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import html
+import importlib.util
 import json
 import re
 from dataclasses import dataclass
@@ -1999,12 +2000,57 @@ def _index_body(components: list[ComponentSpec], tokens_href: str, behavior_sour
         f' <span class="muted">(<code>{html.escape(c.slug)}</code>)</span></li>'
         for c in components
     )
+    b_line_links = """
+          <li style="margin:6px 0;"><a href="pages/dashboard.html"><strong>仪表盘</strong> 页模版</a>
+            <span class="muted">（对稿 Arco Pro / TDesign 式信息架构 · 1:1）</span></li>
+          <li style="margin:6px 0;"><a href="pages/archive/dashboard-tdesign-starter-base.html"><strong>TDesign Starter 仪表盘</strong> 静态对稿</a>
+            <span class="muted">（token + ECharts CDN · 与线上 base 同构四段）</span></li>
+          <li style="margin:6px 0;"><a href="pages/list.html"><strong>列表页</strong> 模版</a>
+            <span class="muted">（筛选条 + 数据表 + 分页）</span></li>
+          <li style="margin:6px 0;"><a href="pages/form.html"><strong>表单页</strong> 模版</a>
+            <span class="muted">（面包屑 + 两列表单 + 操作区）</span></li>
+          <li style="margin:6px 0; margin-top:10px; list-style:none;"><span class="muted" style="font-size:11px;">以下为按组件 slug 聚合的索引（非整页模版）：</span></li>
+          <li style="margin:6px 0;"><a href="gallery-b1-forms-inputs.html"><strong>B1</strong> · 表单与输入</a>
+            <span class="muted">（按钮、输入、选择、开关、上传、日期时间等）</span></li>
+          <li style="margin:6px 0;"><a href="gallery-b2-feedback-data.html"><strong>B2</strong> · 反馈与数据展示</a>
+            <span class="muted">（提示、对话框、进度、徽标、表格、列表等）</span></li>
+          <li style="margin:6px 0;"><a href="gallery-b3-navigation-structure.html"><strong>B3</strong> · 导航与结构</a>
+            <span class="muted">（面包屑、菜单、标签页、分页、布局、树等）</span></li>
+"""
     return f"""
     <div class="wrap">
       <div class="top">
         <div>
           <h1 style="margin:0; font-size:20px; line-height:1.2;">Component demos</h1>
           <div class="muted" style="margin-top:6px;">Live token studio per component · <code>{html.escape(tokens_href)}</code> · behavior source <code>{html.escape(behavior_source)}</code></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-b">
+          <h2 style="margin:0 0 10px 0; font-size:16px; line-height:1.3;">B 线 · 页面对稿模版（MD → HTML · 1:1）</h2>
+          <p class="muted" style="margin:0 0 10px 0; font-size:12px; line-height:1.5;">
+            整页组合（仪表盘 / 列表 / 表单）仅使用 <code>tokens.css</code> 变量，用于对照 Figma 整屏与多组件间距；
+            单组件细部仍以 <code>components/*.html</code> 为准。参考：
+            <a href="https://arco.design/pro" rel="noreferrer noopener" target="_blank">Arco Pro</a>、
+            <a href="https://tdesign.tencent.com/starter/vue/dashboard/base" rel="noreferrer noopener" target="_blank">TDesign Starter</a>。
+          </p>
+          <ul style="margin:0; padding-left: 18px;">
+            {b_line_links}
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-b">
+          <h2 style="margin:0 0 10px 0; font-size:16px; line-height:1.3;">C 线 · Vue 3 真页面（Starter 级 IA）</h2>
+          <p class="muted" style="margin:0 0 10px 0; font-size:12px; line-height:1.5;">
+            仓库内 <code>apps/dspark-vue-admin</code>：Arco Design Vue + 设计 token，侧栏菜单与路由覆盖仪表盘 / 列表变体（含<strong>树状筛选</strong>）/
+            表单变体（含<strong>分步表单</strong>）/ 详情 / 结果 / 登录等。信息架构见
+            <a href="../docs/pages/information-architecture.md">docs/pages/information-architecture.md</a>。
+          </p>
+          <pre style="margin:0;">cd apps/dspark-vue-admin
+npm install
+npm run dev
+# 默认 http://127.0.0.1:5174</pre>
         </div>
       </div>
       <div class="card">
@@ -2016,6 +2062,170 @@ def _index_body(components: list[ComponentSpec], tokens_href: str, behavior_sour
       </div>
     </div>
     """
+
+
+# B-line gallery: partition all component slugs into three pages (every slug appears exactly once).
+_B_LINE_GALLERIES: tuple[tuple[str, str, str, tuple[str, ...]], ...] = (
+    (
+        "gallery-b1-forms-inputs.html",
+        "B1 · 表单与输入（MD → HTML 聚合）",
+        "覆盖按钮、文本与数字输入、选择类、开关滑块、表单、上传与日期时间等；逐项打开 demo 对照对应 .md。",
+        (
+            "button",
+            "input",
+            "input-number",
+            "input-ip",
+            "input-range",
+            "input-adornment",
+            "select",
+            "cascader",
+            "checkbox",
+            "radio",
+            "switch",
+            "slider",
+            "form",
+            "upload",
+            "pincode",
+            "datepicker",
+            "timepicker",
+        ),
+    ),
+    (
+        "gallery-b2-feedback-data.html",
+        "B2 · 反馈与数据展示（MD → HTML 聚合）",
+        "覆盖全局/行内反馈、对话框、进度、徽标标签、步骤、卡片、列表与表格等。",
+        (
+            "alert",
+            "message",
+            "notification",
+            "modal",
+            "progress",
+            "badge",
+            "tag",
+            "data-display-number",
+            "steps",
+            "card",
+            "list",
+            "table",
+        ),
+    ),
+    (
+        "gallery-b3-navigation-structure.html",
+        "B3 · 导航与结构（MD → HTML 聚合）",
+        "覆盖面包屑、下拉、菜单、标签页、分页、间距布局、页头、树与树选择等。",
+        (
+            "breadcrumb",
+            "dropdown",
+            "menu",
+            "tabs",
+            "pagination",
+            "layout",
+            "space",
+            "pageheader",
+            "tree",
+            "treeselect",
+        ),
+    ),
+)
+
+
+def _spec_by_slug(components: list[ComponentSpec]) -> dict[str, ComponentSpec]:
+    return {c.slug: c for c in components}
+
+
+def _validate_b_line_coverage(components: list[ComponentSpec]) -> None:
+    all_slugs = {c.slug for c in components}
+    grouped: set[str] = set()
+    for _fn, _title, _desc, slugs in _B_LINE_GALLERIES:
+        for s in slugs:
+            if s in grouped:
+                raise ValueError(f"B-line gallery duplicate slug: {s}")
+            grouped.add(s)
+    missing = all_slugs - grouped
+    extra = grouped - all_slugs
+    if missing or extra:
+        raise ValueError(f"B-line gallery slug mismatch: missing={sorted(missing)} extra={sorted(extra)}")
+
+
+def _gallery_page_body(
+    *,
+    page_title: str,
+    page_description: str,
+    slugs: tuple[str, ...],
+    spec_by_slug: dict[str, ComponentSpec],
+    index_href: str,
+) -> str:
+    rows: list[str] = []
+    for slug in slugs:
+        spec = spec_by_slug[slug]
+        title = html.escape(spec.title)
+        slug_esc = html.escape(slug)
+        rows.append(
+            f'<tr><td style="padding:8px 10px; border-bottom:1px solid var(--semantic-border-subtle,#e8e8e8);">'
+            f'<a href="components/{slug_esc}.html">{title}</a></td>'
+            f'<td style="padding:8px 10px; border-bottom:1px solid var(--semantic-border-subtle,#e8e8e8);">'
+            f'<code>{slug_esc}</code></td>'
+            f'<td style="padding:8px 10px; border-bottom:1px solid var(--semantic-border-subtle,#e8e8e8);">'
+            f'<a href="../docs/components/{slug_esc}.md">docs/components/{slug_esc}.md</a></td></tr>'
+        )
+    table = "\n".join(rows)
+    return f"""
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1 style="margin:0; font-size:20px; line-height:1.2;">{html.escape(page_title)}</h1>
+          <div class="muted" style="margin-top:6px;">{html.escape(page_description)}</div>
+        </div>
+        <div class="pill">
+          <span class="swatch"></span>
+          <a href="{html.escape(index_href)}">Back to index</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-b">
+          <p class="muted" style="margin:0 0 12px 0; font-size:12px; line-height:1.5;">
+            验收步骤：在仓库根目录执行 <code>python3 .design-spec/generator/generate_component_html_demos.py</code> 后，
+            逐行打开 <strong>Component demo</strong> 链接，对照 <strong>Spec (.md)</strong> 中的 Figma / Arco API / token 表。
+          </p>
+          <div style="overflow:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+              <thead>
+                <tr>
+                  <th style="text-align:left; padding:8px 10px; border-bottom:2px solid var(--semantic-border-subtle,#e8e8e8);">Component demo</th>
+                  <th style="text-align:left; padding:8px 10px; border-bottom:2px solid var(--semantic-border-subtle,#e8e8e8);">Slug</th>
+                  <th style="text-align:left; padding:8px 10px; border-bottom:2px solid var(--semantic-border-subtle,#e8e8e8);">Spec (.md)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {table}
+              </tbody>
+            </table>
+          </div>
+          <p class="muted" style="margin:12px 0 0 0; font-size:12px;">本页共 <strong>{len(slugs)}</strong> 个组件。</p>
+        </div>
+      </div>
+    </div>
+    """
+
+
+def _write_b_line_gallery_pages(
+    *,
+    out_dir: Path,
+    components: list[ComponentSpec],
+    tokens_href: str,
+) -> None:
+    _validate_b_line_coverage(components)
+    spec_by_slug = _spec_by_slug(components)
+    for filename, title, description, slugs in _B_LINE_GALLERIES:
+        body = _gallery_page_body(
+            page_title=title,
+            page_description=description,
+            slugs=slugs,
+            spec_by_slug=spec_by_slug,
+            index_href="index.html",
+        )
+        page = _html_page(title=title, body=body, tokens_href=tokens_href)
+        (out_dir / filename).write_text(page, encoding="utf-8")
 
 
 def _component_preview_block(slug: str) -> str:
@@ -2486,6 +2696,17 @@ def _component_preview_block(slug: str) -> str:
     """
 
 
+def _write_page_level_templates(repo_root: Path, behavior_source: str) -> None:
+    """Dashboard / list / form HTML under .design-spec/demos/pages/ (see page_templates.py)."""
+    pt_path = Path(__file__).resolve().parent / "page_templates.py"
+    spec = importlib.util.spec_from_file_location("_dspark_page_templates", pt_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Cannot load page templates module: {pt_path}")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.write_page_templates(repo_root=repo_root, behavior_source=behavior_source)
+
+
 def main() -> int:
     repo_root = Path(__file__).resolve().parents[2]  # .design-spec/generator/ -> repo root
     components_dir = repo_root / ".design-spec" / "docs" / "components"
@@ -2530,8 +2751,23 @@ def main() -> int:
     )
     (out_dir / "index.html").write_text(index_html, encoding="utf-8")
 
+    _write_b_line_gallery_pages(
+        out_dir=out_dir,
+        components=components,
+        tokens_href=tokens_href_index,
+    )
+
+    _write_page_level_templates(repo_root, behavior_source)
+
     print(f"Wrote {len(components)} component demos to {out_components_dir}")
     print(f"Wrote index: {out_dir / 'index.html'}")
+    print(
+        "Wrote B-line galleries: "
+        + ", ".join(fn for fn, _t, _d, _s in _B_LINE_GALLERIES)
+    )
+    print(
+        "Wrote B-line page templates: pages/dashboard.html, pages/list.html, pages/form.html, pages/archive/dashboard-tdesign-starter-base.html"
+    )
     return 0
 
 
