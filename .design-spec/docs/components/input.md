@@ -11,9 +11,9 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=117269-199903)
 - Arco Design Web React（API / 行为真源）: https://arco.design/react/components/input
 - Arco 源码（React）: [`arco-design/components/Input`](https://github.com/arco-design/arco-design/tree/main/components/Input)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Input** 画板，将本行替换为带 `node-id=` 的深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma
@@ -38,7 +38,7 @@ Molecular
 
 ## 推断（Figma 未单独画出的状态）
 
-- **键盘焦点**：使用 **`:focus-visible`** 展示 **`--component-input-ring-focus`**，避免鼠标点击出现双环。
+- **键盘焦点**：使用 **`:focus-visible`** 展示 **`--component-input-ring-focus`**（与 **`--component-input-border-focus`** 同色）+ **`--component-input-ring-focus-width`（1px）** 的 **outline**，避免鼠标点击出现双环。
 - **矩阵 Active / Focus 行**：静态 **`mat-inp-*`** 类，与 Arco 态色一致，便于并排对比。
 
 ## Best practices
@@ -125,13 +125,14 @@ From the provided nodes, Input includes:
 | **Name**   | **State**            | **Background**   | **Font**          | **Border**        | **Ring** | **When to use**            |
 | 默认         | Default              | `var(--component-input-bg-default)` | `var(--component-input-text-default)` | `var(--component-input-border-default)` | none | Resting state |
 | 悬停         | Hover                | `var(--component-input-bg-hover)` | `var(--component-input-text-default)` | `var(--component-input-border-hover)` | none | Pointer hover on web |
-| 聚焦 / 激活输入框 | Focus                | `var(--component-input-bg-focus)` | `var(--component-input-text-focus)` | `var(--component-input-border-focus)` | `var(--component-input-ring-focus)` | Active text entry |
+| 聚焦 / 激活输入框 | Focus                | `var(--component-input-bg-focus)` | `var(--component-input-text-focus)` | `var(--component-input-border-focus)` | `var(--component-input-ring-focus)`（与 Border 同色，均解析为 `text.primary` / `#222222`） | Active text entry |
 | 输入中        | Typing               | `var(--component-input-bg-typing)` | `var(--component-input-text-focus)` | `var(--component-input-border-focus)` | none | During input |
 | 输入完成       | Completed            | `var(--component-input-bg-completed)` | `var(--component-input-text-focus)` | `var(--component-input-border-default)` | none | Value confirmed/valid |
 | 报错 / 输入报错  | Error                | `var(--component-input-bg-error)` | `var(--component-input-text-focus)` | `var(--component-input-border-error)` | `var(--component-input-ring-error)` | Validation failed |
 | 禁用         | Disabled             | `var(--component-input-bg-disabled)` | `var(--component-input-text-disabled)` | `var(--component-input-border-disabled)` | none | Not editable |
 | 禁用-输入完成    | Disabled (segmented) | `var(--component-input-bg-disabled)` | `var(--component-input-text-disabled)` | `var(--component-input-border-disabled)` | none | IP input disabled variants |
 
+> **Focus 外圈线（键盘 `:focus-visible`）**：使用 **outline**，线宽 **`1px`**（`--component-input-ring-focus-width` → `tokens.input.ringFocusWidth`）；颜色 **`--component-input-ring-focus`**，与上表 **Border** 列 `var(--component-input-border-focus)` **同色**（token 源均为 `{text.primary}`）。组件 **Border** 仍为 **1px** `solid`。此前文档未单独写外圈线宽；实现上若外圈大于 1px 视为与 spec 不一致，应以本段为准。
 
 ## Layout patterns
 
@@ -195,6 +196,7 @@ From the provided nodes, Input includes:
 | `--component-input-border-error` | `tokens.input.borderError` |
 | `--component-input-border-disabled` | `tokens.input.borderDisabled` |
 | `--component-input-ring-focus` | `tokens.input.ringFocus` |
+| `--component-input-ring-focus-width` | `tokens.input.ringFocusWidth` |
 | `--component-input-ring-error` | `tokens.input.ringError` |
 
 ## Accessibility essentials
@@ -217,4 +219,47 @@ From the provided nodes, Input includes:
 ## Don't
 
 - 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+
+## Spec block (atomic)
+
+```json
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "input",
+  "figma": {
+    "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+    "primaryNodeId": "117269:199903"
+  },
+  "variantAxes": {
+    "size": ["s", "l", "xl"],
+    "state": ["default", "hover", "focus", "typing", "completed", "error", "disabled"]
+  },
+  "bindings": [
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/默认", "cssVar": "--component-input-bg-default" },
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/悬停", "cssVar": "--component-input-bg-hover" },
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/禁用", "cssVar": "--component-input-bg-disabled" },
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/报错", "cssVar": "--component-input-bg-error" },
+    { "figmaPath": "边框 Border/组件绑定/表单 Form/激活", "cssVar": "--component-input-border-focus" },
+    { "figmaPath": "边框 Border/组件绑定/表单 Form/报错", "cssVar": "--component-input-border-error" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/强调 primary", "cssVar": "--component-input-text-value" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/辅助 Territory", "cssVar": "--component-input-text-default" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/禁用 disabled", "cssVar": "--component-input-text-disabled" }
+  ],
+  "metrics": [
+    { "role": "height-s", "valuePx": 28, "cssVar": "--component-input-layout-s-height" },
+    { "role": "height-l", "valuePx": 32, "cssVar": "--component-input-layout-l-height" },
+    { "role": "height-xl", "valuePx": 36, "cssVar": "--component-input-layout-xl-height" },
+    { "role": "padding-x-s", "valuePx": 8, "cssVar": "--component-input-layout-s-padding-x" },
+    { "role": "padding-x-l", "valuePx": 12, "cssVar": "--component-input-layout-l-padding-x" },
+    { "role": "radius-s", "valuePx": 4, "cssVar": "--component-input-layout-s-radius" },
+    { "role": "radius-l", "valuePx": 6, "cssVar": "--component-input-layout-l-radius" },
+    { "role": "radius-xl", "valuePx": 8, "cssVar": "--component-input-layout-xl-radius" },
+    { "role": "ring-focus-width", "valuePx": 1, "cssVar": "--component-input-ring-focus-width" }
+  ],
+  "i18nDefaults": {
+    "placeholder": "Please enter"
+  }
+}
+```
 

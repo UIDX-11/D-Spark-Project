@@ -429,7 +429,8 @@
   --component-input-layout-xl-radius: 8;
   --component-input-max-width: 320;
   --component-input-ring-error: #F14846;
-  --component-input-ring-focus: #6985BF;
+  --component-input-ring-focus: #222222;
+  --component-input-ring-focus-width: 1px;
   --component-input-text-default: #999999;
   --component-input-text-disabled: #CCCCCC;
   --component-input-text-focus: #999999;

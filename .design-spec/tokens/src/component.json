@@ -166,7 +166,8 @@
       "borderError": "{status.danger}",
       "borderDisabled": "{bg.formDisabled}",
 
-      "ringFocus": "{focus.ring}",
+      "ringFocus": "{text.primary}",
+      "ringFocusWidth": "1px",
       "ringError": "{status.danger}"
     },
     "checkbox": {
