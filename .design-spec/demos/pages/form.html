@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>表单页模版 — D.Spark Page Template</title>
+    <link rel="stylesheet" href="../../tokens/dist/tokens.css" />
+    <style>
+      :root { color-scheme: light; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: var(--semantic-bg-page, #f7f7f7);
+        color: var(--semantic-text-primary, #222);
+      }
+      a { color: var(--semantic-text-link, #506daf); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      /**
+ * Page-level templates for design → code 1:1 review (B-line).
+ * Layout + chrome only: spacing, colors, radii from design tokens (no raw hex in rules).
+ * Reference UX patterns: Arco Pro, TDesign Starter (not runtime copies of those libs).
+ */
+
+.pt-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pt-app {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+}
+
+.pt-side {
+  width: calc(var(--component-menu-container-w-expanded) * 1px);
+  flex: 0 0 calc(var(--component-menu-container-w-expanded) * 1px);
+  align-self: stretch;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--component-menu-container-bg, #fff);
+  border-right: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--component-menu-item-px) * 1px);
+  gap: calc(var(--component-menu-item-gap) * 1px);
+}
+
+.pt-side-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-menu-item-gap) * 1px);
+  padding: calc(var(--component-menu-item-px) * 1px) 0;
+  min-height: calc(var(--component-menu-item-h-1) * 1px);
+}
+
+.pt-brand {
+  flex: 1;
+  min-width: 0;
+  font-size: calc(var(--semantic-font-size-md) * 1px);
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-brand-abbr {
+  display: none;
+  width: 100%;
+  text-align: center;
+  font-size: calc(var(--semantic-font-size-md) * 1px);
+  line-height: calc(var(--component-menu-item-h-1) * 1px);
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-brand-txt {
+  display: block;
+}
+
+.pt-side-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--component-menu-item-h-1) * 1px);
+  height: calc(var(--component-menu-item-h-1) * 1px);
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  border-radius: calc(var(--semantic-radius-sm) * 1px);
+  background: var(--semantic-bg-surface, #fff);
+  color: var(--component-menu-icon, #666);
+  cursor: pointer;
+}
+
+.pt-side-toggle:hover {
+  background: var(--component-menu-item-bg-hover, #f7f7f7);
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-side-toggle:focus-visible {
+  outline: 2px solid var(--semantic-focus-ring, #6985bf);
+  outline-offset: 2px;
+}
+
+.pt-side-toggle-ic {
+  display: block;
+  line-height: 0;
+}
+
+.pt-app.pt-side-collapsed .pt-side-toggle-ic--expand {
+  display: block;
+}
+
+.pt-app.pt-side-collapsed .pt-side-toggle-ic--collapse {
+  display: none;
+}
+
+.pt-app:not(.pt-side-collapsed) .pt-side-toggle-ic--expand {
+  display: none;
+}
+
+.pt-app:not(.pt-side-collapsed) .pt-side-toggle-ic--collapse {
+  display: block;
+}
+
+.pt-nav {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+}
+
+.pt-nav-item {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--component-menu-item-gap) * 1px);
+  min-height: calc(var(--component-menu-item-h-1) * 1px);
+  padding: 0 calc(var(--component-menu-item-px) * 1px);
+  border-radius: calc(var(--semantic-radius-sm) * 1px);
+  font-size: calc(var(--semantic-font-size-md) * 1px);
+  line-height: 20px;
+  color: var(--component-menu-item-text, #666);
+  background: var(--component-menu-item-bg-default, #fff);
+  text-decoration: none;
+}
+
+.pt-nav-item:hover {
+  text-decoration: none;
+}
+
+a.pt-nav-item:hover {
+  background: var(--component-menu-item-bg-hover, #f7f7f7);
+  color: var(--component-menu-item-text-hover, #222);
+}
+
+a.pt-nav-item.pt-nav--active {
+  background: var(--component-menu-item-bg-selected, #f2f3f5);
+  color: var(--component-menu-item-text-selected, #222);
+  font-weight: 600;
+}
+
+.pt-nav-svg {
+  flex-shrink: 0;
+  width: calc(var(--semantic-icon-size-md) * 1px);
+  height: calc(var(--semantic-icon-size-md) * 1px);
+  color: var(--component-menu-icon, #666);
+}
+
+a.pt-nav-item.pt-nav--active .pt-nav-svg {
+  color: var(--component-menu-icon, #666);
+}
+
+a.pt-nav-item:hover .pt-nav-svg {
+  color: var(--component-menu-icon, #666);
+}
+
+.pt-nav-lbl {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 961px) {
+  .pt-side {
+    transition: width 0.2s ease, flex-basis 0.2s ease, padding 0.2s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pt-side {
+      transition: none;
+    }
+  }
+
+  .pt-app.pt-side-collapsed .pt-side {
+    width: calc(var(--component-menu-container-w-collapsed) * 1px);
+    flex: 0 0 calc(var(--component-menu-container-w-collapsed) * 1px);
+    padding: calc(var(--component-menu-item-px) * 1px) calc(var(--semantic-layout-button-group-gap) * 1px);
+    align-items: center;
+  }
+
+  .pt-app.pt-side-collapsed .pt-side-head {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+    width: 100%;
+  }
+
+  .pt-app.pt-side-collapsed .pt-brand {
+    flex: none;
+    width: 100%;
+  }
+
+  .pt-app.pt-side-collapsed .pt-brand-txt {
+    display: none;
+  }
+
+  .pt-app.pt-side-collapsed .pt-brand-abbr {
+    display: block;
+  }
+
+  .pt-app.pt-side-collapsed .pt-side-toggle {
+    width: 100%;
+  }
+
+  .pt-app.pt-side-collapsed .pt-nav-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .pt-app.pt-side-collapsed .pt-nav-lbl {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .pt-app.pt-side-collapsed .pt-nav-item {
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+  }
+
+  .pt-app.pt-side-collapsed .pt-nav-group {
+    width: 100%;
+    align-items: center;
+  }
+
+  .pt-app.pt-side-collapsed .pt-nav {
+    width: 100%;
+    align-items: stretch;
+  }
+}
+
+.pt-nav-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-menu-item-gap) * 1px);
+}
+
+.pt-nav-title {
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--semantic-text-secondary, #666);
+  padding: calc(var(--component-menu-item-px) * 1px) calc(var(--component-menu-item-px) * 1px) 0
+    calc(var(--component-menu-item-px) * 1px);
+}
+
+.pt-nav-item.pt-nav-item--ghost {
+  color: var(--semantic-text-placeholder, #999);
+  cursor: default;
+  pointer-events: none;
+  background: var(--component-menu-item-bg-default, #fff);
+}
+
+.pt-nav-item.pt-nav-item--ghost .pt-nav-svg {
+  color: var(--component-menu-icon-disabled, #ccc);
+}
+
+.pt-card.pt-card--active {
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring, #6985bf);
+}
+
+.pt-row-selected td {
+  background: var(--component-table-row-bg-selected, #fafafa) !important;
+}
+
+.pt-hidden {
+  display: none !important;
+}
+
+.pt-toast-host {
+  position: fixed;
+  top: calc(var(--component-card-layout-padding-md) * 1px);
+  right: calc(var(--component-card-layout-padding-md) * 1px);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--component-message-gap) * 1px);
+  max-width: min(360px, 100vw - 32px);
+  pointer-events: none;
+}
+
+.pt-toast {
+  pointer-events: none;
+  padding: calc(var(--component-message-py) * 1px) calc(var(--component-message-px) * 1px);
+  border-radius: calc(var(--component-message-radius) * 1px);
+  font-size: calc(var(--component-message-font-size) * 1px);
+  line-height: calc(var(--component-message-line-height) * 1px);
+  color: var(--component-message-text, #222);
+  box-shadow: var(--component-card-panel-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pt-toast--out {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.pt-toast--info {
+  background: var(--component-message-tone-info-bg, #ecf2fc);
+}
+
+.pt-toast--success {
+  background: var(--component-message-tone-success-bg, #e6f7ef);
+}
+
+.pt-toast--error {
+  background: var(--component-message-tone-error-bg, #feeded);
+}
+
+.pt-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--semantic-bg-page, #f7f7f7);
+}
+
+.pt-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--component-form-col-gap) * 1px);
+  min-height: calc(var(--component-table-header-h-default) * 1px);
+  padding: 0 calc(var(--component-card-layout-padding-md) * 1px);
+  background: var(--semantic-bg-surface, #fff);
+  border-bottom: 1px solid var(--semantic-border-subtle, #e8e8e8);
+}
+
+.pt-header h1 {
+  margin: 0;
+  font-size: calc(var(--semantic-font-size-lg) * 1px);
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: calc(var(--component-card-layout-padding-md) * 1px);
+}
+
+.pt-banner {
+  margin-bottom: calc(var(--component-card-layout-demo-row-gap) * 1px);
+  padding: calc(var(--component-card-layout-padding-md) * 1px);
+  background: var(--semantic-bg-status-info, #ecf2fc);
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  border-radius: calc(var(--component-card-panel-radius) * 1px);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  line-height: 18px;
+  color: var(--semantic-text-secondary, #666);
+}
+
+.pt-banner strong {
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: calc(var(--component-card-layout-demo-row-gap) * 1px);
+}
+
+.pt-span-3 {
+  grid-column: span 3;
+}
+.pt-span-4 {
+  grid-column: span 4;
+}
+.pt-span-6 {
+  grid-column: span 6;
+}
+.pt-span-8 {
+  grid-column: span 8;
+}
+.pt-span-12 {
+  grid-column: span 12;
+}
+
+@media (max-width: 960px) {
+  .pt-span-3,
+  .pt-span-4,
+  .pt-span-6,
+  .pt-span-8 {
+    grid-column: span 12;
+  }
+  .pt-app {
+    flex-direction: column;
+  }
+  .pt-side {
+    width: 100%;
+    flex: 0 0 auto;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  }
+}
+
+.pt-card {
+  background: var(--component-card-panel-bg, #fff);
+  border: calc(var(--component-card-panel-border-width) * 1px) solid var(--component-card-panel-border, #e8e8e8);
+  border-radius: calc(var(--component-card-panel-radius) * 1px);
+  box-shadow: var(--component-card-panel-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
+  padding: calc(var(--component-card-layout-padding-md) * 1px);
+}
+
+.pt-card h2 {
+  margin: 0 0 calc(var(--component-card-layout-title-body-gap) * 1px) 0;
+  font-size: calc(var(--component-card-title-font-size) * 1px);
+  line-height: calc(var(--component-card-title-line-height) * 1px);
+  font-weight: var(--component-card-title-font-weight);
+  color: var(--component-card-title-text, #222);
+}
+
+.pt-card p.pt-muted {
+  margin: 0;
+  font-size: calc(var(--component-card-body-font-size) * 1px);
+  line-height: calc(var(--component-card-body-line-height) * 1px);
+  color: var(--component-card-body-text, #666);
+}
+
+.pt-kpi-val {
+  margin-top: calc(var(--component-card-layout-section-gap) * 1px);
+  font-size: calc(var(--semantic-font-size-lg) * 1px);
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+  margin-bottom: calc(var(--component-card-layout-demo-row-gap) * 1px);
+}
+
+.pt-input {
+  box-sizing: border-box;
+  height: calc(var(--component-input-layout-l-height) * 1px);
+  padding: 0 calc(var(--component-input-layout-l-padding-x) * 1px);
+  border-radius: calc(var(--component-input-layout-l-radius) * 1px);
+  border: 1px solid var(--component-input-border-default, #e8e8e8);
+  background: var(--component-input-bg-default, #f7f7f7);
+  color: var(--component-input-text-value, #222);
+  font-size: calc(var(--component-input-layout-l-font-size) * 1px);
+  line-height: calc(var(--component-input-layout-l-line-height) * 1px);
+  min-width: 140px;
+}
+
+.pt-input::placeholder {
+  color: var(--component-input-text-default, #999);
+}
+
+.pt-btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--component-button-layout-live-height-md) * 1px);
+  padding: 0 calc(var(--component-button-layout-live-padding-xmedium) * 1px);
+  border-radius: calc(var(--semantic-radius-md) * 1px);
+  font-size: calc(var(--component-button-layout-live-font-size-md) * 1px);
+  line-height: calc(var(--component-button-layout-live-line-md) * 1px);
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.pt-btn:active {
+  filter: brightness(0.96);
+}
+
+.pt-btn--primary {
+  background: var(--semantic-action-primary-bg, #222);
+  color: var(--semantic-action-primary-text, #fff);
+}
+
+.pt-btn--secondary {
+  background: var(--component-button-neutral-bg-default, #fff);
+  color: var(--component-button-neutral-text-default, #222);
+  border-color: var(--component-button-neutral-border-default, #ccc);
+}
+
+.pt-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--component-table-bg, #fff);
+  border: 1px solid var(--component-table-border, #e8e8e8);
+  border-radius: calc(var(--semantic-radius-md) * 1px);
+  overflow: hidden;
+}
+
+.pt-table th,
+.pt-table td {
+  padding: calc(var(--component-table-cell-py-default) * 1px) calc(var(--component-table-cell-px) * 1px);
+  font-size: calc(var(--component-table-typography-cell-font-size) * 1px);
+  line-height: 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--component-table-border, #e8e8e8);
+}
+
+.pt-table th {
+  background: var(--component-table-header-bg, #fafafa);
+  color: var(--component-table-header-text, #222);
+  font-weight: 600;
+  font-size: calc(var(--component-table-typography-header-font-size) * 1px);
+  min-height: calc(var(--component-table-header-h-default) * 1px);
+}
+
+.pt-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pt-table tbody tr:hover td {
+  background: var(--component-table-row-bg-hover, #fafafa);
+}
+
+.pt-muted {
+  color: var(--component-table-row-text-muted, #666);
+}
+
+.pt-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: calc(var(--component-pagination-gap) * 1px);
+  margin-top: calc(var(--component-card-layout-demo-row-gap) * 1px);
+}
+
+.pt-page-btn {
+  min-width: calc(var(--component-pagination-item-size-md) * 1px);
+  height: calc(var(--component-pagination-item-size-md) * 1px);
+  border-radius: calc(var(--component-pagination-item-radius-md) * 1px);
+  border: none;
+  background: var(--component-pagination-item-bg-default, transparent);
+  color: var(--component-pagination-item-text, #666);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  cursor: pointer;
+}
+
+.pt-page-btn:hover {
+  background: var(--component-pagination-item-bg-hover, #f7f7f7);
+}
+
+.pt-page-btn--current {
+  background: var(--component-pagination-item-bg-current, #f7f7f7);
+  color: var(--component-pagination-item-text-current, #222);
+  font-weight: 600;
+}
+
+.pt-chart {
+  min-height: 200px;
+  background: var(--semantic-bg-form-default, #f7f7f7);
+  border: 1px dashed var(--semantic-border-default, #ccc);
+  border-radius: calc(var(--semantic-radius-md) * 1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--semantic-text-secondary, #666);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+}
+
+.pt-form {
+  max-width: 880px;
+}
+
+.pt-form-row {
+  display: grid;
+  grid-template-columns: calc(var(--component-form-label-w) * 1px) 1fr;
+  gap: calc(var(--component-form-label-gap) * 1px) calc(var(--component-form-col-gap) * 1px);
+  align-items: start;
+  margin-bottom: calc(var(--component-form-row-gap) * 1px);
+}
+
+.pt-form-label {
+  padding-top: calc(var(--component-input-layout-l-padding-y) * 1px);
+  font-size: calc(var(--semantic-font-size-md) * 1px);
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--component-form-label-text, #222);
+}
+
+.pt-form-label .req {
+  color: var(--component-form-required-mark, #f14846);
+  margin-left: calc(var(--semantic-layout-button-group-gap) * 1px / 4);
+}
+
+.pt-help {
+  margin-top: calc(var(--component-card-layout-section-gap) * 1px);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  line-height: 18px;
+  color: var(--component-form-help-text, #666);
+}
+
+.pt-form-err {
+  color: var(--component-form-error-text, #f14846);
+}
+
+.pt-actions {
+  display: flex;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+  margin-top: calc(var(--component-form-row-gap) * 1px);
+}
+
+.pt-bc {
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  line-height: 18px;
+  color: var(--semantic-text-secondary, #666);
+  margin-bottom: calc(var(--component-card-layout-demo-row-gap) * 1px);
+}
+
+.pt-bc span {
+  color: var(--semantic-text-muted, #ccc);
+  margin: 0 6px;
+}
+
+/* --- TDesign Starter dashboard/base static parity (B-line) --- */
+.pt-starter-dashboard {
+  position: relative;
+  --pt-starter-gap: calc(var(--component-card-layout-demo-row-gap) * 1px);
+}
+
+.pt-starter-back-top {
+  position: fixed;
+  z-index: 100;
+  right: calc(var(--component-card-layout-padding-md) * 1px);
+  bottom: calc(var(--component-card-layout-padding-md) * 1px + 48px);
+  width: calc(var(--component-button-layout-live-height-md) * 1px);
+  height: calc(var(--component-button-layout-live-height-md) * 1px);
+  border-radius: calc(var(--semantic-radius-md) * 1px);
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  background: var(--semantic-bg-surface, #fff);
+  color: var(--semantic-text-primary, #222);
+  box-shadow: var(--component-card-panel-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--semantic-font-size-md) * 1px);
+}
+
+.pt-starter-back-top:hover {
+  background: var(--semantic-bg-form-default, #f7f7f7);
+}
+
+.pt-starter-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pt-starter-gap);
+}
+
+.pt-starter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pt-starter-gap);
+  margin: 0;
+}
+
+.pt-starter-row--tight .pt-card {
+  padding: calc(var(--semantic-layout-button-group-gap) * 1px);
+}
+
+.pt-starter-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--pt-starter-gap);
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .pt-starter-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .pt-starter-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pt-starter-kpi-card.pt-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 168px;
+  box-sizing: border-box;
+}
+
+.pt-starter-kpi-card--primary {
+  background: var(--semantic-action-primary-bg, #222);
+  border-color: var(--semantic-action-primary-bg, #222);
+  color: var(--semantic-action-primary-text, #fff);
+}
+
+.pt-starter-kpi-card--primary .pt-starter-kpi-title {
+  color: var(--semantic-action-primary-text, #fff);
+}
+
+.pt-starter-kpi-card--primary .pt-starter-kpi-num {
+  color: var(--semantic-action-primary-text, #fff);
+}
+
+.pt-starter-kpi-card--primary .pt-starter-divider {
+  border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+.pt-starter-kpi-title {
+  margin: 0 0 calc(var(--component-card-layout-title-body-gap) * 1px) 0;
+  font-size: calc(var(--semantic-font-size-md) * 1px);
+  font-weight: 500;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-starter-kpi-num {
+  font-size: calc(var(--semantic-font-size-lg) * 1px);
+  line-height: 44px;
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-starter-kpi-left {
+  position: absolute;
+  top: 0;
+  right: calc(var(--component-card-layout-padding-md) * 1px);
+}
+
+.pt-starter-kpi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-top: -24px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--semantic-action-primary-bg, #222) 12%, transparent);
+  color: var(--semantic-action-primary-bg, #222);
+}
+
+.pt-starter-kpi-card--primary .pt-starter-kpi-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--semantic-action-primary-text, #fff);
+}
+
+.pt-starter-mini-chart {
+  min-width: 40px;
+  min-height: 40px;
+}
+
+#moneyContainer.pt-starter-mini-chart {
+  width: 120px;
+  height: 66px;
+}
+
+#refundContainer.pt-starter-mini-chart {
+  width: 120px;
+  height: 42px;
+}
+
+.pt-starter-kpi-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: calc(var(--semantic-layout-button-group-gap) * 1px);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  line-height: 22px;
+  color: var(--semantic-text-secondary, #666);
+}
+
+.pt-starter-kpi-foot-meta {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px / 2);
+}
+
+.pt-starter-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  font-weight: 500;
+}
+
+.pt-starter-trend--up {
+  color: var(--semantic-status-success-fg, #09aa5c);
+}
+
+.pt-starter-trend--down {
+  color: var(--semantic-status-error-fg, #f14846);
+}
+
+.pt-starter-kpi-card--primary .pt-starter-trend--up,
+.pt-starter-kpi-card--primary .pt-starter-trend--down {
+  color: var(--semantic-action-primary-text, #fff);
+  opacity: 0.9;
+}
+
+.pt-starter-chev {
+  cursor: default;
+  color: var(--semantic-text-placeholder, #999);
+}
+
+.pt-starter-kpi-card--primary .pt-starter-chev {
+  color: var(--semantic-action-primary-text, #fff);
+  opacity: 0.8;
+}
+
+.pt-starter-mid-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--pt-starter-gap);
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .pt-starter-mid-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pt-starter-card-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px / 2);
+  margin-bottom: calc(var(--component-card-layout-padding-md) * 1px);
+}
+
+.pt-starter-card-title-lg {
+  margin: 0;
+  font-size: calc(var(--semantic-font-size-lg) * 1px);
+  line-height: 28px;
+  font-weight: 500;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-starter-card-sub {
+  font-size: calc(var(--semantic-font-size-md) * 1px);
+  color: var(--semantic-text-secondary, #666);
+}
+
+.pt-starter-card-extra {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--semantic-layout-button-group-gap) * 1px);
+}
+
+.pt-starter-chart-tall {
+  width: 100%;
+  height: 326px;
+}
+
+.pt-starter-chart-stoke {
+  width: 100%;
+  height: 351px;
+}
+
+.pt-starter-rank-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--pt-starter-gap);
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .pt-starter-rank-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pt-starter-rank-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--pt-starter-gap);
+  margin-bottom: calc(var(--component-card-layout-padding-md) * 1px);
+}
+
+.pt-starter-rank-head h2 {
+  margin: 0;
+  font-size: calc(var(--semantic-font-size-lg) * 1px);
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.pt-starter-seg {
+  display: inline-flex;
+  border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  border-radius: calc(var(--semantic-radius-sm) * 1px);
+  overflow: hidden;
+  background: var(--semantic-bg-surface, #fff);
+}
+
+.pt-starter-seg label {
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  position: relative;
+}
+
+.pt-starter-seg input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.pt-starter-seg span {
+  display: inline-block;
+  padding: calc(var(--semantic-layout-button-group-gap) * 1px / 2) calc(var(--component-card-layout-padding-md) * 1px);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  line-height: 20px;
+  color: var(--semantic-text-secondary, #666);
+  border-right: 1px solid var(--semantic-border-subtle, #e8e8e8);
+}
+
+.pt-starter-seg label:last-child span {
+  border-right: none;
+}
+
+.pt-starter-seg label:has(input:checked) span {
+  background: var(--semantic-bg-form-default, #f7f7f7);
+  color: var(--semantic-text-primary, #222);
+  font-weight: 500;
+}
+
+.pt-starter-rank-cell {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--core-color-neutral-0, #fff);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  background: var(--semantic-text-placeholder, #999);
+}
+
+.pt-starter-rank-cell--top {
+  background: var(--semantic-action-primary-bg, #222);
+}
+
+.pt-starter-out-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  gap: 0;
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .pt-starter-out-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pt-starter-out-left {
+  border-right: 1px solid var(--semantic-border-subtle, #e8e8e8);
+}
+
+@media (max-width: 960px) {
+  .pt-starter-out-left {
+    border-right: none;
+    border-bottom: 1px solid var(--semantic-border-subtle, #e8e8e8);
+  }
+}
+
+.pt-starter-out-right .pt-card {
+  height: 100%;
+}
+
+.pt-starter-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--pt-starter-gap);
+}
+
+.pt-starter-metric-grid .pt-card {
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .pt-starter-metric-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pt-starter-metric-card .pt-starter-metric-val {
+  font-size: calc(var(--semantic-font-size-lg) * 1px);
+  line-height: 44px;
+  font-weight: 600;
+  color: var(--semantic-text-primary, #222);
+}
+
+.pt-starter-metric-label {
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  margin-bottom: 4px;
+}
+
+.pt-starter-metric-nest .pt-starter-card-extra {
+  justify-content: flex-end;
+  margin-bottom: calc(var(--semantic-layout-button-group-gap) * 1px);
+}
+
+.pt-starter-out-left .pt-starter-card-extra {
+  margin-left: auto;
+}
+
+.pt-starter-metric-card .pt-starter-metric-foot {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: calc(var(--semantic-layout-button-group-gap) * 1px);
+  font-size: calc(var(--semantic-font-size-sm) * 1px);
+  color: var(--semantic-text-secondary, #666);
+}
+
+.pt-starter-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: var(--semantic-text-link, #506daf);
+  text-decoration: none;
+}
+
+.pt-starter-link:hover {
+  text-decoration: underline;
+}
+
+.pt-starter-divider {
+  margin: calc(var(--semantic-layout-button-group-gap) * 1px) 0;
+  border: none;
+  border-top: 1px solid var(--semantic-border-subtle, #e8e8e8);
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="pt-shell">
+  <div class="pt-app">
+  <aside id="ptSideNav" class="pt-side" aria-label="应用侧栏">
+      <div class="pt-side-head">
+      <div class="pt-brand">
+      <span class="pt-brand-abbr" aria-hidden="true">D</span>
+      <span class="pt-brand-txt">D.Spark</span>
+    </div>
+      <button type="button" class="pt-side-toggle" data-pt-side-toggle aria-expanded="true" aria-controls="ptSideNav" aria-label="收起侧栏" title="收起侧栏">
+      <svg class="pt-side-toggle-ic pt-side-toggle-ic--collapse" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="pt-side-toggle-ic pt-side-toggle-ic--expand" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    </div>
+      <div class="pt-nav-group" role="group" aria-label="工作台">
+        <div class="pt-nav-title">工作台</div>
+        <nav class="pt-nav" aria-label="页级模版">
+          <a class="pt-nav-item" href="dashboard.html" aria-label="仪表盘"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 2h5v5H2V2zm7 0h5v5H9V2zM2 9h5v5H2V9zm7 0h5v5H9V9z" stroke="currentColor" stroke-width="1.2"/></svg><span class="pt-nav-lbl">仪表盘</span></a>
+          <a class="pt-nav-item" href="archive/dashboard-tdesign-starter-base.html" aria-label="TDesign 仪表盘对稿"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 12V8M8 12V4M13 12V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="pt-nav-lbl">TDesign 仪表盘对稿</span></a>
+          <a class="pt-nav-item" href="list.html" aria-label="数据列表"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 4h9M5 8h9M5 12h9M2 4h.01M2 8h.01M2 12h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="pt-nav-lbl">数据列表</span></a>
+          <a class="pt-nav-item pt-nav--active" href="form.html" aria-label="表单页"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="pt-nav-lbl">表单页</span></a>
+        </nav>
+      </div>
+      <div class="pt-nav-group" role="group" aria-label="分析（占位）">
+        <div class="pt-nav-title">分析</div>
+        <nav class="pt-nav" aria-label="分析占位">
+          <span class="pt-nav-item pt-nav-item--ghost pt-nav--muted" role="presentation"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 13V5M8 13V8M13 13V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="pt-nav-lbl">报表中心</span></span>
+          <span class="pt-nav-item pt-nav-item--ghost pt-nav--muted" role="presentation"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.5 3h11a1 1 0 011 1v6a1 1 0 01-1 1H8.5l-1 2h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pt-nav-lbl">实时监控</span></span>
+        </nav>
+      </div>
+      <div class="pt-nav-group" role="group" aria-label="单组件 demo">
+        <div class="pt-nav-title">组件 Demo</div>
+        <nav class="pt-nav" aria-label="组件链接">
+          <a class="pt-nav-item" href="../components/menu.html" aria-label="Menu"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 4h10M3 8h10M3 12h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="pt-nav-lbl">Menu</span></a>
+          <a class="pt-nav-item" href="../components/table.html" aria-label="Table"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 3h12v10H2V3zm0 3.5h12M6 3v10" stroke="currentColor" stroke-width="1.2"/></svg><span class="pt-nav-lbl">Table</span></a>
+          <a class="pt-nav-item" href="../components/button.html" aria-label="Button"><svg class="pt-nav-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg><span class="pt-nav-lbl">Button</span></a>
+        </nav>
+      </div>
+    </aside>
+  <div class="pt-main">
+    <header class="pt-header" role="banner">
+      <h1>表单页</h1>
+      <div class="pt-toolbar" style="margin:0;">
+        <input class="pt-input" type="search" placeholder="搜索…" aria-label="全局搜索" style="min-width:200px;" />
+        <button type="button" class="pt-btn pt-btn--secondary" data-pt-notify aria-label="通知">通知</button>
+        <button type="button" class="pt-btn pt-btn--primary" data-pt-primary aria-label="主操作">主操作</button>
+      </div>
+    </header>
+    <main class="pt-body" role="main">
+      <div class="pt-banner" data-pt-template="form">
+      <strong>页面对稿模版 · 表单页</strong>
+      （B 线：整页组合 token，用于对照 Figma 与 <code>docs/components/*.md</code> 做 1:1 还原验收；行为真源 <code>Arco Design Web React</code>。）
+      页面级信息架构可参考
+      <a href="https://arco.design/pro" rel="noreferrer noopener" target="_blank">Arco Pro</a>、
+      <a href="https://tdesign.tencent.com/starter/vue/dashboard/base" rel="noreferrer noopener" target="_blank">TDesign Starter</a>
+      （非运行时拷贝）。
+      · <a href="../index.html">返回 Demo 索引</a>
+      · <a href="../components/button.html">示例：单组件 Button demo</a>
+    </div>
+      <div class="pt-bc" aria-label="面包屑">首页<span>/</span>设置<span>/</span>基础信息</div>
+      <section class="pt-card pt-form" aria-labelledby="form-title">
+        <h2 id="form-title">基础信息</h2>
+        <p class="pt-muted" style="margin:0 0 calc(var(--component-form-row-gap)*1px) 0;">两列表单行：对齐 Form / Input token；保存会做必填校验；通知/主操作在顶栏可点。</p>
+        <div class="pt-form-row">
+          <div class="pt-form-label">名称<span class="req" aria-hidden="true">*</span></div>
+          <div>
+            <input class="pt-input" id="ptFormName" type="text" style="width:100%; max-width:calc(var(--component-input-max-width)*1px);" placeholder="请输入名称" aria-required="true" aria-label="名称" />
+            <p class="pt-help">辅助说明文案，对应 form.helpText token。</p>
+          </div>
+        </div>
+        <div class="pt-form-row">
+          <div class="pt-form-label">描述</div>
+          <div>
+            <input class="pt-input" id="ptFormDesc" type="text" style="width:100%; max-width:calc(var(--component-input-max-width)*1px);" placeholder="可选" aria-label="描述" />
+          </div>
+        </div>
+        <div class="pt-form-row">
+          <div class="pt-form-label">类型<span class="req" aria-hidden="true">*</span></div>
+          <div>
+            <select class="pt-input" style="width:100%; max-width:280px;" aria-label="类型" aria-required="true">
+              <option>类型 A</option>
+              <option>类型 B</option>
+            </select>
+          </div>
+        </div>
+        <div class="pt-form-row">
+          <div class="pt-form-label"></div>
+          <div>
+            <p id="ptFormErrLine" class="pt-help pt-hidden pt-form-err" role="alert">请填写名称。</p>
+            <p class="pt-help">校验错误使用 form.errorText token（保存时空名称会显示上一行）。</p>
+          </div>
+        </div>
+        <div class="pt-actions">
+          <button type="button" class="pt-btn pt-btn--primary" data-pt-save>保存</button>
+          <button type="button" class="pt-btn pt-btn--secondary" data-pt-cancel>取消</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  </div>
+</div>
+    <div id="ptToastHost" class="pt-toast-host" aria-live="polite" aria-atomic="true"></div>
+    <script src="page_templates.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+---
+description: >-
+  D-Spark React 原型演示默认规则。当用户提示词出现“高级前端研发专家”“构建原型演示”
+  “原型 demo”“prototype”等语义，或描述基于本仓库构建 React 页面/模块原型时，必须加载本规则。
+  内置 React + Arco 技术栈前提，硬约束禁止使用原生 <button>/<input>/<select> 等交互标签，
+  统一路由到 docs/components.md 与 .design-spec/docs/design.md。
+alwaysApply: false
+---
+
+# D-Spark · React 原型演示默认规则（prototype mode）
+
+> 触发场景：用户提示词含 **“高级前端研发专家”** / **“构建原型演示”** / **“原型 demo”** /
+> **“prototype”** 等语义，或要求在本仓库内组合现有组件搭建 React 页面 / 模块原型。
+> 命中即按本规则执行；业务提示词只需描述**页面/模块内容**，无需重复粘贴下面的栈与铁律。
+
+## 1. 默认技术栈（已内置，业务提示词无需再写）
+
+- 框架：**React**。
+- 组件库：**[@arco-design/web-react](https://github.com/arco-design/arco-design)**
+  （安装：`npm i @arco-design/web-react`）。
+- 仓库内统一封装出口：[`src/components/ui/index.ts`](../../src/components/ui/index.ts)
+  —— 业务页面只引用这里导出的组件，**不绕过封装自造同款控件**。
+- Token / 视觉真源：[`.design-spec/tokens/dist/tokens.css`](../../.design-spec/tokens/dist/tokens.css)
+  + [`.design-spec/docs/design.md`](../../.design-spec/docs/design.md)。
+
+> 因此当用户提示词写明“高级前端研发专家 + 构建原型演示”一类语义时，**不必再在 prompt
+> 里重复 React/Arco/npm/github 链接**；本规则即默认前提。
+
+## 2. 硬约束（铁律，违反即视为缺陷）
+
+1. **禁止**直接使用原生 `<button>` / `<input>` / `<select>` / `<textarea>` /
+   `<form>` / `<dialog>` 等 HTML 交互标签来承担产品交互。需要交互能力时，**必须**改用
+   [`src/components/ui`](../../src/components/ui/index.ts) 中的封装组件
+   （`Button` / `Input` / `Select` / `Checkbox` / `Radio` / `Switch` /
+   `Form` + `FormField` + `FormItem` + `FormMessage` / `Modal` / `Drawer` …）。
+2. 所有可用组件的**参数、变体、状态、token 绑定**真源为：
+   [`.design-spec/docs/components/*.md`](../../.design-spec/docs/components/)。
+   人读契约见 [`docs/components.md`](../../docs/components.md)（变体命名、Form/Input/Button
+   用法、页面/模式组装入口）。**只组合，不重复造**：组件内部的 hover / 展开 / 选中
+   / 校验等交互已由底层封装处理，不要在原型层重写 CSS 或交互脚本去覆盖。
+3. **样式必须使用 token**（`--semantic-*` / `--component-*` / `--ds-*`）。
+   禁止为对齐 Figma 在原型代码里写裸 `hex` / 任意 `px` 替代 token；具体读
+   [`.design-spec/docs/design.md`](../../.design-spec/docs/design.md) §TL;DR
+   与 [`.design-spec/docs/ALIGNMENT_GOVERNANCE.md`](../../.design-spec/docs/ALIGNMENT_GOVERNANCE.md)。
+4. **变体命名**遵循 `type/kind/shape/size/state`
+   （见 [`docs/components.md`](../../docs/components.md) §2）。
+5. **表单**：用 `Form` + `FormField` + `FormItem` + `FormMessage`，标签常驻、占位符不可
+   替代标签、提交时展示可操作错误文案；主按钮唯一，`type="submit"` + `form` 绑定表单 `id`。
+6. **页面 / 多组件组合**先看模式与页面规范，不要直接在业务页面手堆 ad-hoc 布局：
+   - 页面规范：[`.design-spec/docs/pages/`](../../.design-spec/docs/pages/)
+   - 模式规范：[`.design-spec/docs/pages/patterns/`](../../.design-spec/docs/pages/patterns/)
+   - 布局模板：[`.design-spec/docs/layouts/README.md`](../../.design-spec/docs/layouts/README.md)
+
+## 3. 执行流程（每次原型任务）
+
+1. 读 [`docs/components.md`](../../docs/components.md) §3–§5，确认可用组件、变体命名与页面/模式入口。
+2. 读 [`.design-spec/docs/design.md`](../../.design-spec/docs/design.md) §Read order，
+   按真源顺序加载 token / Figma 映射 / 组件 spec。
+3. 选用 [`src/components/ui`](../../src/components/ui/index.ts) 导出的组件组合页面，
+   只传 props，**不**编写自定义交互覆盖底层封装。
+4. 自检：
+   - 页面里没有任何原生交互标签直出。
+   - 颜色 / 间距 / 圆角 / 字号 / 阴影只来自 token。
+   - 表单符合 Form/FormItem/FormMessage 用法。
+   - 主按钮唯一且绑定提交动作。
+
+## 4. 业务提示词应该长什么样（建议范式）
+
+启用本规则后，**新的对话只描述页面意图，不要再粘贴技术栈说明**。推荐骨架：
+
+```text
+{页面/模块目标，例如：登录页 / 设备列表 / 巡检详情 …}
+
+模块结构：
+- 区域 A：…
+- 区域 B：…
+
+关键数据字段：…
+
+验收点：
+- 交互：…
+- 视觉：遵循 design.md，使用 token
+- 表单：遵循 Form + FormItem + FormMessage
+```
+
+> 触发短语示例（任选其一即可激活本规则）：
+> “你是一个高级前端研发专家，构建原型演示，登录页……”、
+> “按 D-Spark 原型规范，给我做一个设备详情页……”。

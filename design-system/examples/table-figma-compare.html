@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D-Spark Table (Figma compare)</title>
+    <link rel="stylesheet" href="../../.design-spec/tokens/dist/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+        background: var(--semantic-bg-page);
+        color: var(--semantic-text-primary);
+      }
+
+      .page {
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .card {
+        background: var(--semantic-bg-surface);
+        border: 1px solid var(--component-table-border);
+        border-radius: calc(var(--core-radius-md) * 1px);
+        overflow: hidden;
+      }
+
+      .head {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--component-table-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .title {
+        font-weight: 600;
+        font-size: calc(var(--core-font-size-md) * 1px);
+      }
+
+      .badge {
+        font-size: calc(var(--core-font-size-sm) * 1px);
+        color: var(--semantic-text-secondary);
+        background: var(--semantic-bg-page);
+        border: 1px solid var(--semantic-border-subtle);
+        border-radius: 999px;
+        padding: 4px 8px;
+        white-space: nowrap;
+      }
+
+      .table-wrap {
+        position: relative;
+        overflow: auto;
+        background: var(--component-table-bg);
+      }
+
+      /* ---- Table base (tokens-only) ---- */
+      table.ds-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 980px; /* force horizontal scroll to demo pinned boundary */
+      }
+
+      table.ds-table[data-density="compact"] {
+        --ds-row-h: var(--component-table-row-h-compact);
+        --ds-header-h: var(--component-table-header-h-compact);
+        --ds-cell-py: var(--component-table-cell-py-compact);
+      }
+      table.ds-table[data-density="default"] {
+        --ds-row-h: var(--component-table-row-h-default);
+        --ds-header-h: var(--component-table-header-h-default);
+        --ds-cell-py: var(--component-table-cell-py-default);
+      }
+      table.ds-table[data-density="comfortable"] {
+        --ds-row-h: var(--component-table-row-h-comfortable);
+        --ds-header-h: var(--component-table-header-h-comfortable);
+        --ds-cell-py: var(--component-table-cell-py-comfortable);
+      }
+
+      table.ds-table thead th {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        height: calc(var(--ds-header-h) * 1px);
+        background: var(--component-table-header-bg);
+        color: var(--component-table-header-text);
+        text-align: left;
+        font-weight: 600;
+        font-size: calc(var(--component-table-typography-header-font-size) * 1px);
+        padding: calc(var(--ds-cell-py) * 1px) calc(var(--component-table-cell-px) * 1px);
+        border-bottom: 1px solid var(--component-table-border);
+        white-space: nowrap;
+      }
+
+      table.ds-table tbody td {
+        height: calc(var(--ds-row-h) * 1px);
+        padding: calc(var(--ds-cell-py) * 1px) calc(var(--component-table-cell-px) * 1px);
+        border-bottom: 1px solid var(--component-table-border);
+        color: var(--component-table-row-text);
+        font-size: calc(var(--component-table-typography-cell-font-size) * 1px);
+        background: var(--component-table-row-bg-default);
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+
+      table.ds-table tbody tr:hover td {
+        background: var(--component-table-row-bg-hover);
+      }
+
+      table.ds-table tbody tr[data-selected="true"] td {
+        background: var(--component-table-row-bg-selected);
+      }
+
+      .muted {
+        color: var(--component-table-row-text-muted);
+      }
+
+      /* Figma: No/序号 column can be 12px */
+      td.no-col {
+        font-size: calc(var(--component-table-typography-no-font-size) * 1px);
+      }
+
+      /* pinned */
+      .pinned-left,
+      .pinned-right {
+        position: sticky;
+        z-index: 4;
+        background: inherit;
+      }
+      .pinned-left {
+        left: 0;
+      }
+      .pinned-right {
+        right: 0;
+      }
+
+      .divider-right {
+        border-right: 1px solid var(--component-table-pinned-divider);
+      }
+      .divider-left {
+        border-left: 1px solid var(--component-table-pinned-divider);
+      }
+      .shadow-left {
+        box-shadow: var(--component-table-pinned-shadow-tier1);
+      }
+      .shadow-right {
+        box-shadow: var(--component-table-pinned-shadow-right);
+      }
+
+      /* row-focus demo */
+      table.ds-table tbody tr {
+        outline: none;
+      }
+      table.ds-table tbody tr:focus-visible td {
+        outline: calc(var(--component-table-focus-cell-outline-w) * 1px) solid var(--component-table-focus-row-ring);
+        outline-offset: calc(var(--component-table-focus-cell-outline-w) * -1px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="card">
+        <div class="head">
+          <div class="title">Table / compact (36)</div>
+          <div class="badge">对照 Figma: 小（36px）</div>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Table compact">
+          <table class="ds-table" data-density="compact" aria-label="Compact table">
+            <thead>
+              <tr>
+                <th class="pinned-left divider-right shadow-left" style="width: 56px"><span class="muted">#</span></th>
+                <th style="min-width: 220px">Title1</th>
+                <th style="min-width: 160px">Title2</th>
+                <th style="min-width: 160px">Title3</th>
+                <th class="pinned-right divider-left shadow-right" style="width: 72px; text-align: center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr tabindex="0" data-selected="true">
+                <td class="pinned-left divider-right shadow-left no-col">1</td>
+                <td>Design</td>
+                <td>Design</td>
+                <td class="muted">Link</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center">✎</td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left no-col">2</td>
+                <td>Design</td>
+                <td>Design</td>
+                <td class="muted">Link</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center">✎</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="head">
+          <div class="title">Table / default (44)</div>
+          <div class="badge">对照 Figma: 中（44）</div>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Table default">
+          <table class="ds-table" data-density="default" aria-label="Default table">
+            <thead>
+              <tr>
+                <th class="pinned-left divider-right shadow-left" style="width: 56px"><span class="muted">#</span></th>
+                <th style="min-width: 220px">Title</th>
+                <th style="min-width: 160px">Type</th>
+                <th style="min-width: 160px">Owner</th>
+                <th class="pinned-right divider-left shadow-right" style="width: 72px; text-align: center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left no-col">1</td>
+                <td>Design</td>
+                <td>Design</td>
+                <td class="muted">D.Spark</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center">✎</td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left no-col">2</td>
+                <td>Design</td>
+                <td>Design</td>
+                <td class="muted">D.Spark</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center">✎</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="head">
+          <div class="title">Table / comfortable (52)</div>
+          <div class="badge">对照 Figma: 大（52）</div>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Table comfortable">
+          <table class="ds-table" data-density="comfortable" aria-label="Comfortable table">
+            <thead>
+              <tr>
+                <th class="pinned-left divider-right shadow-left" style="width: 56px"><span class="muted">#</span></th>
+                <th style="min-width: 220px">Title</th>
+                <th style="min-width: 160px">Type</th>
+                <th style="min-width: 160px">Owner</th>
+                <th class="pinned-right divider-left shadow-right" style="width: 72px; text-align: center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left no-col">1</td>
+                <td>Design</td>
+                <td>Design</td>
+                <td class="muted">D.Spark</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center">✎</td>
+              </tr>
+              <tr tabindex="0">
+                <td class="pinned-left divider-right shadow-left no-col">2</td>
+                <td>Design</td>
+                <td>Design</td>
+                <td class="muted">D.Spark</td>
+                <td class="pinned-right divider-left shadow-right" style="text-align: center">✎</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

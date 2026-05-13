@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Component previews — D.Spark Design System Demo</title>
+<!-- Figma-export icons (icons.manifest.json) -->
+    <template id="ds-icon-money-circle"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2" />
+  <circle cx="24" cy="24" r="6" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-user-circle"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2" />
+  <circle cx="24" cy="20" r="6" fill="currentColor" />
+  <path d="M12 38c2.4-5.4 6.6-8 12-8s9.6 2.6 12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+</svg></template>
+    <template id="ds-icon-cart"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M6 8h6l3 4m0 0 4 16h20l4-12H15Zm0 0 1 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="20" cy="38" r="3" fill="currentColor" />
+  <circle cx="36" cy="38" r="3" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-ticket"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 16a2 2 0 0 1 2-2h28a2 2 0 0 1 2 2v6a4 4 0 0 0 0 8v6a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-6a4 4 0 0 0 0-8v-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+  <path d="M28 16v4M28 26v4M28 34v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+</svg></template>
+    <template id="ds-icon-shield-check"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M24 6 8 12v12c0 9 6.8 14.6 16 18 9.2-3.4 16-9 16-18V12L24 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+  <path d="m16 24 6 6 12-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-trend-up"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 34 22 20l8 8 12-14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M30 14h12v12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-trend-down"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 14 22 28l8-8 12 14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M30 34h12V22" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-trend-flat"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 24h28" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+  <path d="m30 16 10 8-10 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-chart-line"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 8v32h32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="m14 32 8-10 6 6 12-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-chart-pie"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M24 6v18l16 8A18 18 0 1 1 24 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+  <path d="M28 6a14 14 0 0 1 14 14H28V6Z" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-chart-bar"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 8v32h32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="14" y="24" width="6" height="12" fill="currentColor" />
+  <rect x="24" y="16" width="6" height="20" fill="currentColor" />
+  <rect x="34" y="20" width="6" height="16" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-medal"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="m14 6 6 14M34 6l-6 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+  <circle cx="24" cy="30" r="12" stroke="currentColor" stroke-width="2" fill="none" />
+  <circle cx="24" cy="30" r="6" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-table-rows"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <rect x="6" y="10" width="36" height="28" rx="2" stroke="currentColor" stroke-width="2" />
+  <path d="M6 20h36M6 30h36M18 10v28" stroke="currentColor" stroke-width="2" />
+</svg></template>
+    <meta name="ds:page" content="component-previews" />
+    <link rel="stylesheet" href="../tokens/dist/tokens.css" />
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: var(--semantic-bg-page, #f7f7f7);
+        color: var(--semantic-text-primary, #222);
+      }
+      a {
+        color: var(--semantic-text-link, #506daf);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .card {
+        background: var(--semantic-bg-surface, #fff);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 12px;
+        box-shadow: 0px 1px 2px rgba(0,0,0,0.06);
+      }
+      .card-h {
+        padding: 16px 16px 0 16px;
+      }
+      .card-b {
+        padding: 16px;
+      }
+      .muted {
+        color: var(--semantic-text-secondary, #666);
+        font-size: 12px;
+      }
+      pre {
+        margin: 0;
+        padding: 12px;
+        overflow: auto;
+        background: var(--semantic-bg-page, #f7f7f7);
+        border-radius: 10px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: var(--semantic-bg-surface, #fff);
+      }
+      .swatch {
+        width: 14px;
+        height: 14px;
+        border-radius: 4px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-text-primary, #222);
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <style>
+      .prv-wrap {
+        max-width: 1280px;
+        margin: 24px auto 96px auto;
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .prv-top {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .prv-top h1 {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        color: var(--semantic-text-primary, #222);
+      }
+      .prv-top .prv-sub {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--semantic-text-secondary, #666);
+        line-height: 1.45;
+        max-width: 720px;
+      }
+      .prv-top .prv-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-bg-surface, #fff);
+        border-radius: 999px;
+        padding: 6px 12px;
+      }
+      .prv-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        margin: 0 -16px;
+        background: var(--semantic-bg-page, #f7f7f7);
+        border-bottom: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        flex-wrap: wrap;
+      }
+      .prv-toolbar .prv-filter {
+        flex: 1 1 220px;
+        min-height: 36px;
+        border-radius: 8px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-bg-surface, #fff);
+        color: var(--semantic-text-primary, #222);
+        padding: 0 12px;
+        font-size: 14px;
+      }
+      .prv-toolbar .prv-filter:focus-visible {
+        outline: 2px solid var(--semantic-text-link, #506daf);
+        outline-offset: 1px;
+      }
+      .prv-toolbar .prv-count {
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+      }
+      .prv-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 8px;
+        padding: 12px 14px;
+        background: var(--semantic-bg-surface, #fff);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 12px;
+      }
+      .prv-nav-chip {
+        display: inline-flex;
+        align-items: baseline;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-bg-surface, #fff);
+        color: var(--semantic-text-primary, #222);
+        font-size: 12px;
+        line-height: 1.4;
+        text-decoration: none;
+      }
+      .prv-nav-chip:hover {
+        background: var(--semantic-bg-page, #f7f7f7);
+        text-decoration: none;
+      }
+      .prv-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+        background: var(--semantic-bg-surface, #fff);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 16px;
+        scroll-margin-top: 80px;
+      }
+      .prv-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--semantic-text-secondary, #666);
+      }
+      .prv-eyebrow-num {
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: var(--semantic-bg-page, #f7f7f7);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+      }
+      .prv-section-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .prv-section-title {
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: var(--semantic-text-primary, #222);
+      }
+      .prv-section-sub {
+        margin: 4px 0 0 0;
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+      }
+      .prv-section-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .prv-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        font-size: 12px;
+        line-height: 1.4;
+        border-radius: 999px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-text-primary, #222);
+        color: var(--semantic-bg-surface, #fff);
+        text-decoration: none;
+      }
+      .prv-btn:hover {
+        text-decoration: none;
+        opacity: 0.92;
+      }
+      .prv-btn--ghost {
+        background: var(--semantic-bg-surface, #fff);
+        color: var(--semantic-text-primary, #222);
+      }
+      .prv-frame-wrap {
+        position: relative;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--semantic-bg-page, #f7f7f7);
+      }
+      .prv-frame {
+        display: block;
+        width: 100%;
+        height: 880px;
+        border: 0;
+        background: var(--semantic-bg-page, #f7f7f7);
+      }
+      .prv-footer-note {
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+        text-align: center;
+        margin-top: 8px;
+      }
+      .prv-section[hidden] { display: none; }
+      @media (max-width: 720px) {
+        .prv-frame { height: 720px; }
+        .prv-top h1 { font-size: 22px; }
+      }
+    </style>
+    <div class="prv-wrap" id="top">
+      <header class="prv-top">
+        <div>
+          <h1>Component previews</h1>
+          <p class="prv-sub">
+            全量组件的状态 / 变体 / token 变量在此聚合预览。每张卡片嵌入
+            <code>components/&lt;slug&gt;.html</code>（Live + Status matrix + Rendered preview + Token snapshot）。
+            真源约束见 <a href="../docs/design.md">docs/design.md</a>，tokens 仅取自
+            <code>../tokens/dist/tokens.css</code>。
+          </p>
+        </div>
+        <div class="prv-pill">
+          <span>39 components</span>
+          <span aria-hidden="true">·</span>
+          <span>behavior · <code>Arco Design Web React</code></span>
+          <span aria-hidden="true">·</span>
+          <a href="index.html">Back to index</a>
+        </div>
+      </header>
+      <div class="prv-toolbar" role="region" aria-label="Preview toolbar">
+        <input id="prvFilter" class="prv-filter" type="search" placeholder="Filter by component name or slug…" autocomplete="off" aria-label="Filter components" />
+        <span class="prv-count" id="prvCount">39 / 39</span>
+        <a class="prv-btn prv-btn--ghost" href="#top" aria-label="Back to top">Top</a>
+      </div>
+      <nav class="prv-nav" aria-label="Quick component anchors">
+      <a class="prv-nav-chip" href="#prv-alert" data-prv-filter="alert alert"><span>Alert</span><span class="muted" style="margin-left:6px;"><code>alert</code></span></a>
+      <a class="prv-nav-chip" href="#prv-badge" data-prv-filter="badge badge"><span>Badge</span><span class="muted" style="margin-left:6px;"><code>badge</code></span></a>
+      <a class="prv-nav-chip" href="#prv-breadcrumb" data-prv-filter="breadcrumb breadcrumb"><span>Breadcrumb</span><span class="muted" style="margin-left:6px;"><code>breadcrumb</code></span></a>
+      <a class="prv-nav-chip" href="#prv-button" data-prv-filter="button button"><span>Button</span><span class="muted" style="margin-left:6px;"><code>button</code></span></a>
+      <a class="prv-nav-chip" href="#prv-card" data-prv-filter="card card"><span>Card</span><span class="muted" style="margin-left:6px;"><code>card</code></span></a>
+      <a class="prv-nav-chip" href="#prv-cascader" data-prv-filter="cascader cascader"><span>Cascader</span><span class="muted" style="margin-left:6px;"><code>cascader</code></span></a>
+      <a class="prv-nav-chip" href="#prv-checkbox" data-prv-filter="checkbox checkbox"><span>Checkbox</span><span class="muted" style="margin-left:6px;"><code>checkbox</code></span></a>
+      <a class="prv-nav-chip" href="#prv-data-display-number" data-prv-filter="data-display-number data display (number)"><span>Data Display (Number)</span><span class="muted" style="margin-left:6px;"><code>data-display-number</code></span></a>
+      <a class="prv-nav-chip" href="#prv-datepicker" data-prv-filter="datepicker datepicker"><span>DatePicker</span><span class="muted" style="margin-left:6px;"><code>datepicker</code></span></a>
+      <a class="prv-nav-chip" href="#prv-dropdown" data-prv-filter="dropdown dropdown"><span>Dropdown</span><span class="muted" style="margin-left:6px;"><code>dropdown</code></span></a>
+      <a class="prv-nav-chip" href="#prv-form" data-prv-filter="form form"><span>Form</span><span class="muted" style="margin-left:6px;"><code>form</code></span></a>
+      <a class="prv-nav-chip" href="#prv-input" data-prv-filter="input input"><span>Input</span><span class="muted" style="margin-left:6px;"><code>input</code></span></a>
+      <a class="prv-nav-chip" href="#prv-input-adornment" data-prv-filter="input-adornment input-adornment"><span>Input-Adornment</span><span class="muted" style="margin-left:6px;"><code>input-adornment</code></span></a>
+      <a class="prv-nav-chip" href="#prv-input-ip" data-prv-filter="input-ip input-ip"><span>Input-IP</span><span class="muted" style="margin-left:6px;"><code>input-ip</code></span></a>
+      <a class="prv-nav-chip" href="#prv-input-number" data-prv-filter="input-number inputnumber"><span>InputNumber</span><span class="muted" style="margin-left:6px;"><code>input-number</code></span></a>
+      <a class="prv-nav-chip" href="#prv-input-range" data-prv-filter="input-range input-range"><span>Input-Range</span><span class="muted" style="margin-left:6px;"><code>input-range</code></span></a>
+      <a class="prv-nav-chip" href="#prv-layout" data-prv-filter="layout layout"><span>Layout</span><span class="muted" style="margin-left:6px;"><code>layout</code></span></a>
+      <a class="prv-nav-chip" href="#prv-list" data-prv-filter="list list"><span>List</span><span class="muted" style="margin-left:6px;"><code>list</code></span></a>
+      <a class="prv-nav-chip" href="#prv-menu" data-prv-filter="menu menu"><span>Menu</span><span class="muted" style="margin-left:6px;"><code>menu</code></span></a>
+      <a class="prv-nav-chip" href="#prv-message" data-prv-filter="message message"><span>Message</span><span class="muted" style="margin-left:6px;"><code>message</code></span></a>
+      <a class="prv-nav-chip" href="#prv-modal" data-prv-filter="modal modal"><span>Modal</span><span class="muted" style="margin-left:6px;"><code>modal</code></span></a>
+      <a class="prv-nav-chip" href="#prv-notification" data-prv-filter="notification notification"><span>Notification</span><span class="muted" style="margin-left:6px;"><code>notification</code></span></a>
+      <a class="prv-nav-chip" href="#prv-pageheader" data-prv-filter="pageheader pageheader"><span>PageHeader</span><span class="muted" style="margin-left:6px;"><code>pageheader</code></span></a>
+      <a class="prv-nav-chip" href="#prv-pagination" data-prv-filter="pagination pagination"><span>Pagination</span><span class="muted" style="margin-left:6px;"><code>pagination</code></span></a>
+      <a class="prv-nav-chip" href="#prv-pincode" data-prv-filter="pincode pincode"><span>PinCode</span><span class="muted" style="margin-left:6px;"><code>pincode</code></span></a>
+      <a class="prv-nav-chip" href="#prv-progress" data-prv-filter="progress progress"><span>Progress</span><span class="muted" style="margin-left:6px;"><code>progress</code></span></a>
+      <a class="prv-nav-chip" href="#prv-radio" data-prv-filter="radio radio"><span>Radio</span><span class="muted" style="margin-left:6px;"><code>radio</code></span></a>
+      <a class="prv-nav-chip" href="#prv-select" data-prv-filter="select select"><span>Select</span><span class="muted" style="margin-left:6px;"><code>select</code></span></a>
+      <a class="prv-nav-chip" href="#prv-slider" data-prv-filter="slider slider"><span>Slider</span><span class="muted" style="margin-left:6px;"><code>slider</code></span></a>
+      <a class="prv-nav-chip" href="#prv-space" data-prv-filter="space space"><span>Space</span><span class="muted" style="margin-left:6px;"><code>space</code></span></a>
+      <a class="prv-nav-chip" href="#prv-steps" data-prv-filter="steps steps"><span>Steps</span><span class="muted" style="margin-left:6px;"><code>steps</code></span></a>
+      <a class="prv-nav-chip" href="#prv-switch" data-prv-filter="switch switch"><span>Switch</span><span class="muted" style="margin-left:6px;"><code>switch</code></span></a>
+      <a class="prv-nav-chip" href="#prv-table" data-prv-filter="table table"><span>Table</span><span class="muted" style="margin-left:6px;"><code>table</code></span></a>
+      <a class="prv-nav-chip" href="#prv-tabs" data-prv-filter="tabs tabs"><span>Tabs</span><span class="muted" style="margin-left:6px;"><code>tabs</code></span></a>
+      <a class="prv-nav-chip" href="#prv-tag" data-prv-filter="tag tag"><span>Tag</span><span class="muted" style="margin-left:6px;"><code>tag</code></span></a>
+      <a class="prv-nav-chip" href="#prv-timepicker" data-prv-filter="timepicker timepicker"><span>TimePicker</span><span class="muted" style="margin-left:6px;"><code>timepicker</code></span></a>
+      <a class="prv-nav-chip" href="#prv-tree" data-prv-filter="tree tree"><span>Tree</span><span class="muted" style="margin-left:6px;"><code>tree</code></span></a>
+      <a class="prv-nav-chip" href="#prv-treeselect" data-prv-filter="treeselect treeselect"><span>TreeSelect</span><span class="muted" style="margin-left:6px;"><code>treeselect</code></span></a>
+      <a class="prv-nav-chip" href="#prv-upload" data-prv-filter="upload upload"><span>Upload</span><span class="muted" style="margin-left:6px;"><code>upload</code></span></a>
+      </nav>
+
+      <section class="prv-section" id="prv-alert" data-prv-filter="alert alert">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">01</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Alert</h2>
+            <p class="prv-section-sub">Slug <code>alert</code> · tokens <code>--component-alert-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/alert.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/alert.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/alert.html" loading="lazy"
+                  title="Alert preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-badge" data-prv-filter="badge badge">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">02</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Badge</h2>
+            <p class="prv-section-sub">Slug <code>badge</code> · tokens <code>--component-badge-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/badge.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/badge.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/badge.html" loading="lazy"
+                  title="Badge preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-breadcrumb" data-prv-filter="breadcrumb breadcrumb">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">03</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Breadcrumb</h2>
+            <p class="prv-section-sub">Slug <code>breadcrumb</code> · tokens <code>--component-breadcrumb-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/breadcrumb.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/breadcrumb.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/breadcrumb.html" loading="lazy"
+                  title="Breadcrumb preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-button" data-prv-filter="button button">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">04</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Button</h2>
+            <p class="prv-section-sub">Slug <code>button</code> · tokens <code>--component-button-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/button.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/button.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/button.html" loading="lazy"
+                  title="Button preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-card" data-prv-filter="card card">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">05</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Card</h2>
+            <p class="prv-section-sub">Slug <code>card</code> · tokens <code>--component-card-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/card.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/card.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/card.html" loading="lazy"
+                  title="Card preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-cascader" data-prv-filter="cascader cascader">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">06</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Cascader</h2>
+            <p class="prv-section-sub">Slug <code>cascader</code> · tokens <code>--component-cascader-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/cascader.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/cascader.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/cascader.html" loading="lazy"
+                  title="Cascader preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-checkbox" data-prv-filter="checkbox checkbox">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">07</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Checkbox</h2>
+            <p class="prv-section-sub">Slug <code>checkbox</code> · tokens <code>--component-checkbox-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/checkbox.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/checkbox.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/checkbox.html" loading="lazy"
+                  title="Checkbox preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-data-display-number" data-prv-filter="data-display-number data display (number)">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">08</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Data Display (Number)</h2>
+            <p class="prv-section-sub">Slug <code>data-display-number</code> · tokens <code>--component-data-display-number-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/data-display-number.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/data-display-number.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/data-display-number.html" loading="lazy"
+                  title="Data Display (Number) preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-datepicker" data-prv-filter="datepicker datepicker">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">09</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">DatePicker</h2>
+            <p class="prv-section-sub">Slug <code>datepicker</code> · tokens <code>--component-datepicker-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/datepicker.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/datepicker.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/datepicker.html" loading="lazy"
+                  title="DatePicker preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-dropdown" data-prv-filter="dropdown dropdown">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">10</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Dropdown</h2>
+            <p class="prv-section-sub">Slug <code>dropdown</code> · tokens <code>--component-dropdown-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/dropdown.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/dropdown.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/dropdown.html" loading="lazy"
+                  title="Dropdown preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-form" data-prv-filter="form form">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">11</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Form</h2>
+            <p class="prv-section-sub">Slug <code>form</code> · tokens <code>--component-form-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/form.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/form.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/form.html" loading="lazy"
+                  title="Form preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-input" data-prv-filter="input input">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">12</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Input</h2>
+            <p class="prv-section-sub">Slug <code>input</code> · tokens <code>--component-input-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/input.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/input.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/input.html" loading="lazy"
+                  title="Input preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-input-adornment" data-prv-filter="input-adornment input-adornment">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">13</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Input-Adornment</h2>
+            <p class="prv-section-sub">Slug <code>input-adornment</code> · tokens <code>--component-input-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/input-adornment.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/input-adornment.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/input-adornment.html" loading="lazy"
+                  title="Input-Adornment preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-input-ip" data-prv-filter="input-ip input-ip">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">14</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Input-IP</h2>
+            <p class="prv-section-sub">Slug <code>input-ip</code> · tokens <code>--component-input-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/input-ip.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/input-ip.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/input-ip.html" loading="lazy"
+                  title="Input-IP preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-input-number" data-prv-filter="input-number inputnumber">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">15</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">InputNumber</h2>
+            <p class="prv-section-sub">Slug <code>input-number</code> · tokens <code>--component-input-number-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/input-number.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/input-number.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/input-number.html" loading="lazy"
+                  title="InputNumber preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-input-range" data-prv-filter="input-range input-range">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">16</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Input-Range</h2>
+            <p class="prv-section-sub">Slug <code>input-range</code> · tokens <code>--component-input-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/input-range.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/input-range.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/input-range.html" loading="lazy"
+                  title="Input-Range preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-layout" data-prv-filter="layout layout">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">17</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Layout</h2>
+            <p class="prv-section-sub">Slug <code>layout</code> · tokens <code>--component-layout-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/layout.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/layout.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/layout.html" loading="lazy"
+                  title="Layout preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-list" data-prv-filter="list list">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">18</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">List</h2>
+            <p class="prv-section-sub">Slug <code>list</code> · tokens <code>--component-list-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/list.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/list.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/list.html" loading="lazy"
+                  title="List preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-menu" data-prv-filter="menu menu">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">19</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Menu</h2>
+            <p class="prv-section-sub">Slug <code>menu</code> · tokens <code>--component-menu-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/menu.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/menu.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/menu.html" loading="lazy"
+                  title="Menu preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-message" data-prv-filter="message message">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">20</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Message</h2>
+            <p class="prv-section-sub">Slug <code>message</code> · tokens <code>--component-message-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/message.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/message.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/message.html" loading="lazy"
+                  title="Message preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-modal" data-prv-filter="modal modal">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">21</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Modal</h2>
+            <p class="prv-section-sub">Slug <code>modal</code> · tokens <code>--component-modal-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/modal.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/modal.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/modal.html" loading="lazy"
+                  title="Modal preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-notification" data-prv-filter="notification notification">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">22</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Notification</h2>
+            <p class="prv-section-sub">Slug <code>notification</code> · tokens <code>--component-notification-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/notification.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/notification.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/notification.html" loading="lazy"
+                  title="Notification preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-pageheader" data-prv-filter="pageheader pageheader">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">23</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">PageHeader</h2>
+            <p class="prv-section-sub">Slug <code>pageheader</code> · tokens <code>--component-page-header-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/pageheader.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/pageheader.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/pageheader.html" loading="lazy"
+                  title="PageHeader preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-pagination" data-prv-filter="pagination pagination">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">24</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Pagination</h2>
+            <p class="prv-section-sub">Slug <code>pagination</code> · tokens <code>--component-pagination-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/pagination.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/pagination.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/pagination.html" loading="lazy"
+                  title="Pagination preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-pincode" data-prv-filter="pincode pincode">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">25</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">PinCode</h2>
+            <p class="prv-section-sub">Slug <code>pincode</code> · tokens <code>--component-pin-code-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/pincode.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/pincode.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/pincode.html" loading="lazy"
+                  title="PinCode preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-progress" data-prv-filter="progress progress">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">26</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Progress</h2>
+            <p class="prv-section-sub">Slug <code>progress</code> · tokens <code>--component-progress-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/progress.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/progress.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/progress.html" loading="lazy"
+                  title="Progress preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-radio" data-prv-filter="radio radio">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">27</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Radio</h2>
+            <p class="prv-section-sub">Slug <code>radio</code> · tokens <code>--component-radio-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/radio.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/radio.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/radio.html" loading="lazy"
+                  title="Radio preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-select" data-prv-filter="select select">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">28</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Select</h2>
+            <p class="prv-section-sub">Slug <code>select</code> · tokens <code>--component-select-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/select.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/select.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/select.html" loading="lazy"
+                  title="Select preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-slider" data-prv-filter="slider slider">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">29</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Slider</h2>
+            <p class="prv-section-sub">Slug <code>slider</code> · tokens <code>--component-slider-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/slider.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/slider.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/slider.html" loading="lazy"
+                  title="Slider preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-space" data-prv-filter="space space">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">30</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Space</h2>
+            <p class="prv-section-sub">Slug <code>space</code> · tokens <code>--component-space-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/space.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/space.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/space.html" loading="lazy"
+                  title="Space preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-steps" data-prv-filter="steps steps">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">31</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Steps</h2>
+            <p class="prv-section-sub">Slug <code>steps</code> · tokens <code>--component-steps-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/steps.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/steps.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/steps.html" loading="lazy"
+                  title="Steps preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-switch" data-prv-filter="switch switch">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">32</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Switch</h2>
+            <p class="prv-section-sub">Slug <code>switch</code> · tokens <code>--component-switch-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/switch.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/switch.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/switch.html" loading="lazy"
+                  title="Switch preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-table" data-prv-filter="table table">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">33</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Table</h2>
+            <p class="prv-section-sub">Slug <code>table</code> · tokens <code>--component-table-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/table.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/table.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/table.html" loading="lazy"
+                  title="Table preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-tabs" data-prv-filter="tabs tabs">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">34</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Tabs</h2>
+            <p class="prv-section-sub">Slug <code>tabs</code> · tokens <code>--component-tabs-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/tabs.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/tabs.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/tabs.html" loading="lazy"
+                  title="Tabs preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-tag" data-prv-filter="tag tag">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">35</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Tag</h2>
+            <p class="prv-section-sub">Slug <code>tag</code> · tokens <code>--component-tag-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/tag.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/tag.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/tag.html" loading="lazy"
+                  title="Tag preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-timepicker" data-prv-filter="timepicker timepicker">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">36</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">TimePicker</h2>
+            <p class="prv-section-sub">Slug <code>timepicker</code> · tokens <code>--component-timepicker-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/timepicker.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/timepicker.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/timepicker.html" loading="lazy"
+                  title="TimePicker preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-tree" data-prv-filter="tree tree">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">37</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Tree</h2>
+            <p class="prv-section-sub">Slug <code>tree</code> · tokens <code>--component-tree-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/tree.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/tree.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/tree.html" loading="lazy"
+                  title="Tree preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-treeselect" data-prv-filter="treeselect treeselect">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">38</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">TreeSelect</h2>
+            <p class="prv-section-sub">Slug <code>treeselect</code> · tokens <code>--component-tree-select-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/treeselect.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/treeselect.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/treeselect.html" loading="lazy"
+                  title="TreeSelect preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <section class="prv-section" id="prv-upload" data-prv-filter="upload upload">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">39</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">Upload</h2>
+            <p class="prv-section-sub">Slug <code>upload</code> · tokens <code>--component-upload-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="components/upload.html" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="../docs/components/upload.md" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="components/upload.html" loading="lazy"
+                  title="Upload preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+
+      <p class="prv-footer-note">
+        Generated by <code>.design-spec/generator/generate_component_html_demos.py</code> · do not hand-edit.
+      </p>
+    </div>
+    <script>
+      (function () {
+        var input = document.getElementById("prvFilter");
+        var countEl = document.getElementById("prvCount");
+        if (!input) return;
+        var sections = Array.prototype.slice.call(document.querySelectorAll(".prv-section[data-prv-filter]"));
+        var chips = Array.prototype.slice.call(document.querySelectorAll(".prv-nav-chip[data-prv-filter]"));
+        var total = sections.length;
+        function apply() {
+          var q = (input.value || "").trim().toLowerCase();
+          var shown = 0;
+          sections.forEach(function (el) {
+            var hit = !q || el.getAttribute("data-prv-filter").indexOf(q) >= 0;
+            if (hit) { el.removeAttribute("hidden"); shown += 1; } else { el.setAttribute("hidden", ""); }
+          });
+          chips.forEach(function (el) {
+            var hit = !q || el.getAttribute("data-prv-filter").indexOf(q) >= 0;
+            el.style.display = hit ? "" : "none";
+          });
+          if (countEl) countEl.textContent = shown + " / " + total;
+        }
+        input.addEventListener("input", apply);
+      })();
+    </script>
+    
+  </body>
+</html>

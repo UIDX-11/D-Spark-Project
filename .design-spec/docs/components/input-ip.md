@@ -1,0 +1,89 @@
+# Component: Input-IP
+
+## Level
+
+Molecular
+
+## Aliases
+
+- IPv4 input
+- segmented IP field
+- IP 输入框
+
+## References
+
+- Arco Design Web React：IPv4 常以 **多个 Input** 或业务组件组合实现，无独立 `InputIP` 根导出；行为对齐 **[Input](https://arco.design/react/components/input)** 与表单校验模式。
+- Arco 源码（React）: [`arco-design/components/Input`](https://github.com/arco-design/arco-design/tree/main/components/Input)
+- 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
+
+## Figma
+
+[D.S-Web-Com · input IP（288620:2128）](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=288620-2128)
+
+## Best practices
+
+- **Use for**: **IPv4** addresses only; for hostnames or IPv6 use a plain **Input** with appropriate validation.
+- **Composition**: four octet fields separated by literal `**.`** (decorative separators, not editable); one outer chrome (`ds-input-ip`) aligned to **Input** tokens (`--component-input-`*).
+- **Errors (Figma)**: when one octet is invalid, show the **red border only on that segment** — not on the whole row. Optional error text below the control.
+- **Keyboard**: `←` / `→` between octets; auto-advance after three digits where helpful; **Backspace** on an empty octet moves focus to the previous field.
+- **Accessibility**: label the whole control (e.g. “IP address”); each octet has `aria-label` (“First octet” … “Fourth octet”); link `aria-describedby` to helper/error when present.
+
+## Anatomy
+
+```
+┌─────────────────────────────────────────────┐
+│  [octet]  .  [octet]  .  [octet]  .  [octet]  │
+└─────────────────────────────────────────────┘
+  Error message (optional)
+```
+
+
+| Part                      | Description                                                                                                                                                                                                                                                                            |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Outer (`ds-input-ip`)     | Rounded container; `data-size`, optional `data-disabled`; hover/focus-within uses Input border tokens.                                                                                                                                                                                 |
+| Octet (`ds-input-ip-seg`) | `maxlength="3"`, numeric entry; **row `padding: 0`** so the active border meets the shell inner edge. **Corners when active (Figma pixel):** octet 1 — **TL/BL** = `var(--ds-ip-r)`; octets 2–3 — **0**; octet 4 — **TR/BR** = `var(--ds-ip-r)` (same token as shell `border-radius`). |
+| Dot (`ds-input-ip-dot`)   | Literal `.`; `aria-hidden="true"`. 行容器 **Grid** + `**align-items: stretch`**：分隔列拉满行高，列内 `**place-items: center**`；相对数字输入作 **光学居中** 使用 `**transform: translateY(-4px)`**（累计上移）。                                                                                                         |
+
+
+## Sizes
+
+Align with **Input** studio sizes: `mini` / `small` / `medium` / `large` (Figma references **M·32** and **L·36** as primary densities).
+
+## Interactive demo
+
+静态 / 交互页面路径：`**.design-spec/demos/components/input-ip.html`**（不是 `input.html`）。  
+与 `studio_runtime.css` / `studio_runtime.js` 同步：在仓库根目录执行：
+
+`python3 .design-spec/generator/generate_component_html_demos.py`
+
+`[input-ip.html](../../demos/components/input-ip.html)`
+
+## Layout patterns
+
+- **Forms**: full-width or fixed max-width; IP row sits in the same vertical rhythm as single **Input** fields.
+- **Filters**: only when the product truly filters by IPv4; otherwise use plain **Input** with validation.
+
+## Anti-patterns
+
+- Using this control for **hostnames** or **IPv6** (use a single text field with appropriate validation).
+- Highlighting the **entire** row red for a single-octet error (Figma: only the bad segment is red).
+
+## Accessibility essentials
+
+- **Group label**: the outer control has one visible or `aria-label` name (e.g. “IP address”).
+- **Octets**: each segment has a distinct `aria-label` (“First octet” … “Fourth octet”); link helper/error text with `aria-describedby` when present.
+- **Keyboard**: document Tab order between segments; `Backspace` on empty moves focus per product rules.
+
+## Relationship to Input
+
+Documented separately from the multi-variant `[input.html](../../demos/components/input.html)` page; shares the same component token prefix `**input**` in generated token snapshots.
+
+## Do
+
+- 遵循本文 **Best practices** / **Variants** 与 Figma、token 表；governed HTML 使用 `tokens.css` 变量（`--semantic-*` / `--component-*`），避免裸 px/hex。
+- 落实 **Accessibility essentials**（键盘、可见焦点、可访问名称）。
+
+## Don't
+
+- 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+

@@ -1,0 +1,106 @@
+{
+  "version": "0.1.0",
+  "libraryName": "D.Spark Web · Icon set",
+  "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+  "iconsRootNodeId": "276593:77",
+  "export": {
+    "format": "svg",
+    "designGridPx": 48,
+    "displayTokenVar": "--semantic-icon-size-md",
+    "displayPx": 16,
+    "note": "从 Figma 48×48 画板导出 SVG；HTML 侧用 semantic icon size token 控制展示尺寸。"
+  },
+  "items": [
+    {
+      "id": "money-circle",
+      "label": "Money circle（示例槽位）",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/money-circle.svg",
+      "note": "设计导出后替换 figmaNodeId 与文件名；可复制本对象追加真实条目。"
+    },
+    {
+      "id": "user-circle",
+      "label": "User circle",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/user-circle.svg",
+      "note": "用户/账号场景。"
+    },
+    {
+      "id": "cart",
+      "label": "Cart",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/cart.svg",
+      "note": "订单/购物车。"
+    },
+    {
+      "id": "ticket",
+      "label": "Ticket",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/ticket.svg",
+      "note": "工单/票务。"
+    },
+    {
+      "id": "shield-check",
+      "label": "Shield check",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/shield-check.svg",
+      "note": "SLA/安全/保障。"
+    },
+    {
+      "id": "trend-up",
+      "label": "Trend up",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/trend-up.svg",
+      "note": "上升趋势。"
+    },
+    {
+      "id": "trend-down",
+      "label": "Trend down",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/trend-down.svg",
+      "note": "下降趋势。"
+    },
+    {
+      "id": "trend-flat",
+      "label": "Trend flat",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/trend-flat.svg",
+      "note": "持平趋势。"
+    },
+    {
+      "id": "chart-line",
+      "label": "Chart line",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/chart-line.svg",
+      "note": "折线图区域标识。"
+    },
+    {
+      "id": "chart-pie",
+      "label": "Chart pie",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/chart-pie.svg",
+      "note": "环形/饼图区域标识。"
+    },
+    {
+      "id": "chart-bar",
+      "label": "Chart bar",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/chart-bar.svg",
+      "note": "柱状图区域标识。"
+    },
+    {
+      "id": "medal",
+      "label": "Medal",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/medal.svg",
+      "note": "排名/奖牌。"
+    },
+    {
+      "id": "table-rows",
+      "label": "Table rows",
+      "figmaNodeId": "TBD",
+      "relativePath": "out/table-rows.svg",
+      "note": "明细表格区域标识。"
+    }
+  ]
+}

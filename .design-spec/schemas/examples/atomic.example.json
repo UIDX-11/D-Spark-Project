@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "example",
+  "bindings": [
+    { "figmaPath": "trigger.border", "cssVar": "--component-example-trigger-border-default" }
+  ],
+  "metrics": []
+}
