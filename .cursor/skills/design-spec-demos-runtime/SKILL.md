@@ -14,7 +14,7 @@ disable-model-invocation: false
 
 - **运行时**：`.design-spec/generator/studio_runtime.css`、`.design-spec/generator/studio_runtime.js`
 - **生成脚本**：`.design-spec/generator/generate_component_html_demos.py`
-- **输出**：`.design-spec/demos/components/*.html`、`.design-spec/demos/index.html`、`.design-spec/demos/gallery-*.html`（组件索引聚合）、`.design-spec/demos/pages/*.html`（**页面对稿模版**：通用仪表盘 / 列表 / 表单）与 **`demos/pages/archive/dashboard-tdesign-starter-base.html`**（TDesign Starter 仪表盘静态对稿，非 canonical）
+- **输出**：`.design-spec/demos/components/*.html`、`.design-spec/demos/index.html`、`.design-spec/demos/pages/*.html`（**页面对稿模版**：通用仪表盘 / 列表 / 表单）与 **`demos/pages/archive/dashboard-tdesign-starter-base.html`**（TDesign Starter 仪表盘静态对稿，非 canonical）。Path B 单组件验收以 **`components/<slug>.html`** 为准；**不再维护** 历史上的 `gallery-b{1,2,3}-*.html` 聚合索引页。
 - **C 线 · Vue 真页面**：`apps/dspark-vue-admin`（Starter 级路由与侧栏；IA 文档 `.design-spec/docs/pages/information-architecture.md`）；索引页含启动说明
 - **页模版样式**：`.design-spec/generator/page_templates.css`；逻辑与脚本：`.design-spec/generator/page_templates.py`、`.design-spec/generator/page_templates.js`（`demos/pages/page_templates.js`）；**TDesign 静态仪表盘**另含 `generator/dashboard-starter.js`（输出 `demos/pages/dashboard-starter.js`）+ **ECharts CDN**（见生成 HTML）
 

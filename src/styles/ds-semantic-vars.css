@@ -1,0 +1,14 @@
+/**
+ * Playground 使用的 Figma / DS 长名变量 — 映射到 theme.css 中的基础 token，
+ * 与 Dashboard / Table 中 className 引用保持一致。
+ */
+:root {
+  --文字&图标-text&icon/无组件绑定/强调-primary: var(--foreground);
+  --文字&图标-text&icon/无组件绑定/辅助-territory: var(--muted-foreground);
+  --文字&图标-text&icon/无组件绑定/次要-secondary: var(--sidebar-foreground);
+  --边框-border/无组件绑定/描边_常规: var(--border);
+  --填充-fill/无组件绑定/卡片背景_100-card-background: var(--card);
+  --主色-primary/global-light/50-22: var(--accent);
+  --图标色-icon/纯白-white: var(--primary-foreground);
+  --中性色-neutral/global-light/30-f7: var(--muted);
+}

@@ -12,6 +12,7 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=284471-9574)
 - Arco Design Web React（API / 行为真源）: [TimePicker](https://arco.design/react/components/time-picker)
 - Arco 源码（React）: [`arco-design/components/TimePicker`](https://github.com/arco-design/arco-design/tree/main/components/TimePicker)
 - Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 TimePicker 画板并补充 `node-id=` 深链接。

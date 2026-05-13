@@ -1,5 +1,8 @@
 # PRD：Figma 1:1 对齐能力（设计规范 × 代码 × 证据链）
 
+> **L2 — 实现目标与验收 / 不是组件规范真源。**  
+> 本 PRD 定义 Figma ↔ 代码对齐的能力建设目标与验收标准；组件参数、token 数值以 `.design-spec/` 真源为准。
+
 | 属性 | 内容 |
 |------|------|
 | 文档状态 | Draft → Review → Approved |
@@ -7,6 +10,7 @@
 | 协作讨论稿（非视觉验收真源） | `VqEug9MsAHfG1lpRNP5FKy`（仅 Playground / 讨论，见 [PATH-A-WORKFLOW.md](./PATH-A-WORKFLOW.md)） |
 | 治理约束 | [.design-spec/docs/ALIGNMENT_GOVERNANCE.md](../../.design-spec/docs/ALIGNMENT_GOVERNANCE.md) |
 | 机器可读真源表 | [.design-spec/config/figma_truth_table.json](../../.design-spec/config/figma_truth_table.json) |
+| 偏差修复执行顺序（工程门禁） | [.design-spec/docs/reports/DEVIATION_REMEDIATION_WORKFLOW.md](../../.design-spec/docs/reports/DEVIATION_REMEDIATION_WORKFLOW.md) |
 
 本文档将「Figma 1:1 偏差根因与项目能力建设计划」改写为 **可签字 PRD**：明确需求、目标、**验收标准**与**如何验证**。原 Cursor plan 文件不作为工程真源；以本 PRD 与仓库内链接文件为准。
 

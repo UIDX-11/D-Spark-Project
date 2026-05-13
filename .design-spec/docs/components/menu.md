@@ -12,13 +12,11 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118262-164627)
 - Arco Design Web React（API / 行为真源）· Menu: [https://arco.design/react/components/menu](https://arco.design/react/components/menu)
 - Arco Design Web React · Layout（侧栏常见 **`Layout.Sider`** + **`collapsed`** / **`onCollapse`** 组合）: [https://arco.design/react/components/layout](https://arco.design/react/components/layout)
 - Arco 源码（React）: [`arco-design/components/Menu`](https://github.com/arco-design/arco-design/tree/main/components/Menu)
-- Figma（Light，视觉真源）深链：
-  - 一级竖向菜单项矩阵 **`vertical-menu-item/1st-level`**: [node 118145:152369](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118145-152369)
-  - 多列 Mega（二级 + 菜单组列）: [node 118125:152281](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118125-152281)
-  - 弹出子菜单项矩阵 **`pop-menu-item/1st-level`**: [node 118262:158322](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118262-158322)
+- 变体画板（竖向项矩阵 / Mega / 弹出子菜单等）：请在官方库内自 **canonical** 节点导航；若需纳入三边对账，将对应 `node-id` **追加** 至 `figma_truth_table.json` 后再写入本段深链（避免与真源表不一致）。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## B 线页模版（`page_templates`）与单组件 Menu demo 的边界

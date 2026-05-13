@@ -1,5 +1,9 @@
 # 设计规范对齐审计报告（滚动更新）
 
+> **Layer / 层级**: **L2 — 证据链摘要**。  
+> 本文档是 **滚动执行摘要**；具体数值与表格请回查机器报告（[`MD_HTML_Figma_TRIAD.md`](../../.design-spec/docs/reports/MD_HTML_Figma_TRIAD.md)、[`CLOSE_MD_GAPS.md`](../../.design-spec/docs/reports/CLOSE_MD_GAPS.md)、[`COMPONENTS_MD_AUDIT.md`](../../.design-spec/docs/reports/COMPONENTS_MD_AUDIT.md)）。**不要** 在此粘贴大段机器表，避免与生成报告漂移。  
+> 治理与文档分层：[`.design-spec/docs/reports/DESIGN_MD_GOVERNANCE_AUDIT.md`](../../.design-spec/docs/reports/DESIGN_MD_GOVERNANCE_AUDIT.md)。
+
 ## 1. 摘要
 
 | 项 | 状态 | 说明 |
@@ -21,6 +25,8 @@
 **下一迭代优先级**：① 回填 References 与 canonical node-id；② 为 `select` / `table` 等补 Figma 行；③ 收紧 `studio_runtime.css` 字面量（见 `studio_runtime_literal_audit.py`，可选 `--fail-if-px-over` 门禁）。
 
 ## 3. 样式 / 交互 / 命名差异与方案
+
+**Path B 静态 HTML vs `demos-react`（Arco npm）**：视觉以 Figma + token 为主在 HTML 验收；**交互与与官网 1:1 的状态机**以 **`demos-react` + Arco 文档** 为主验收面。HTML 的 `#liveRoot` 仅保证 MD 声明子集（见 [HTML_VS_DEMOS_REACT.md](../../.design-spec/docs/reports/HTML_VS_DEMOS_REACT.md)）。对稿矩阵中 **Arco 矩阵** 列与 slug 机器排序见 [MATRIX.md](./MATRIX.md)、[FIGMA_SLUG_PRIORITY.md](../../.design-spec/docs/reports/FIGMA_SLUG_PRIORITY.md)。**执行顺序与命令**见 [DEVIATION_REMEDIATION_WORKFLOW.md](../../.design-spec/docs/reports/DEVIATION_REMEDIATION_WORKFLOW.md)（含 `sync_md_canonical_figma.py`、生成器与 `triad_reconcile.py`）。
 
 （按 PR 或按组件追加小节。）
 

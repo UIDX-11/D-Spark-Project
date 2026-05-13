@@ -1,5 +1,9 @@
 # React → Vue 适配与 P5–P7 里程碑（概要）
 
+> **Layer / 层级**: **L3 — 迁移 / 里程碑**。  
+> 本文档是 **里程碑计划**，不是规范真源。规范主线（`design.md`、组件 MD、token、Figma inventory）必须先收敛，再启动 P5–P7。  
+> 治理与边界声明见 [`../../.design-spec/docs/reports/DESIGN_MD_GOVERNANCE_AUDIT.md`](../../.design-spec/docs/reports/DESIGN_MD_GOVERNANCE_AUDIT.md)。
+
 ## 依赖
 
 - **Token 单一出口**：见 [`.design-spec/docs/TOKEN_PIPELINE_STRATEGY.md`](../../.design-spec/docs/TOKEN_PIPELINE_STRATEGY.md)；未完成前 Vue 侧易与 HTML demos 漂移。  

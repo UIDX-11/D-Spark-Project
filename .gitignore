@@ -6,6 +6,14 @@ test-results/
 node_modules/
 **/node_modules/
 apps/**/dist/
+/dist/
+/dist-playground/
+.vite/
+**/.vite/
+
+# Editor / handoff scratch (regenerable; do not commit)
+docs/figma-handoff/dashboard-fullpage.png
+docs/figma-handoff/*.png
 
 # OS
 .DS_Store

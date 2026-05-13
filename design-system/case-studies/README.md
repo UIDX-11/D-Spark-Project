@@ -1,5 +1,8 @@
 # Case studies (案例库)
 
+> **Layer / 层级**: **L3 — 设计系统门面占位**。  
+> 当前目录为 **placeholder**，尚未沉淀案例；不是规范真源，不要把这里的示例当作 `design.md` 主线参考。新案例落地后再从 [`../SKILL.md`](../SKILL.md) overlay 中升级。
+
 此目录用于存放“业务场景 → 推荐骨架 + 组件组合 + 注意事项”的案例。
 
 ## How to add a case

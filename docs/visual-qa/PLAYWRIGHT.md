@@ -1,5 +1,8 @@
 # Playwright 视觉与烟雾测试
 
+> **L2 — 实现侧验收命令清单 / 不是规范真源。**  
+> Playwright 配置真源在 [`.design-spec/e2e/`](../../.design-spec/e2e/)；本文件仅记录开发者最常用的命令与边界约束。
+
 ## design-spec（静态 HTML）
 
 配置与命令见 [`.design-spec/e2e/README.md`](../../.design-spec/e2e/README.md)。

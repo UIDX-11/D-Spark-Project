@@ -100,6 +100,8 @@ export default function ComponentStateMatrix({ slug }: { slug: string }) {
           <Alert type="success" content="Success" />
           <Alert type="warning" content="Warning" />
           <Alert type="info" content="Info" />
+          <Alert type="error" closable content="Error closable" />
+          <Alert type="info" title="Title" content="With title" closable />
         </Space>
       );
     case "badge":
@@ -122,14 +124,26 @@ export default function ComponentStateMatrix({ slug }: { slug: string }) {
       );
     case "button":
       return (
-        <Space wrap size={8}>
-          <Button type="primary">primary</Button>
-          <Button type="secondary">secondary</Button>
-          <Button type="outline">outline</Button>
-          <Button disabled>disabled</Button>
-          <Button type="primary" loading>
-            loading
-          </Button>
+        <Space direction="vertical" size={10} style={{ width: "100%" }}>
+          <Space wrap size={8}>
+            <Button type="primary">primary</Button>
+            <Button type="secondary">secondary</Button>
+            <Button type="outline">outline</Button>
+            <Button disabled>disabled</Button>
+            <Button type="primary" loading>
+              loading
+            </Button>
+          </Space>
+          <Space wrap size={8}>
+            <Button type="dashed">dashed</Button>
+            <Button type="text">text</Button>
+            <Button type="primary" status="danger">
+              danger
+            </Button>
+            <Button type="outline" status="warning">
+              warning
+            </Button>
+          </Space>
         </Space>
       );
     case "card":

@@ -13,6 +13,7 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=117747-171283)
 - Arco Design Web React（API / 行为真源）: [DatePicker](https://arco.design/react/components/date-picker)
 - Arco 源码（React）: [`arco-design/components/DatePicker`](https://github.com/arco-design/arco-design/tree/main/components/DatePicker)
 - Figma（Light，视觉真源）: 见本文 **「Figma 参考」** 各节点链接；文件总入口 [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026)。
@@ -199,4 +200,36 @@ Molecular
 ## Don't
 
 - 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+
+## Spec block (atomic)
+
+```json
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "datepicker",
+  "figma": {
+    "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+    "primaryNodeId": "117747:171283",
+    "additionalNodeIds": ["123612:128253"]
+  },
+  "variantAxes": {
+    "kind": ["date", "datetime", "date-range", "datetime-range", "week", "month", "year", "quarter"],
+    "state": ["default", "focus", "error", "disabled"]
+  },
+  "bindings": [
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/默认", "cssVar": "--component-datepicker-trigger-bg-default" },
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/禁用", "cssVar": "--component-datepicker-trigger-bg-disabled" },
+    { "figmaPath": "边框 Border/组件绑定/表单 Form/激活", "cssVar": "--component-datepicker-trigger-border-focus" },
+    { "figmaPath": "边框 Border/组件绑定/表单 Form/报错", "cssVar": "--component-datepicker-trigger-border-error" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/辅助 Territory", "cssVar": "--component-datepicker-trigger-text-default" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/次要 secondary", "cssVar": "--component-datepicker-trigger-icon-default" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/禁用 disabled", "cssVar": "--component-datepicker-trigger-text-disabled" },
+    { "figmaPath": "填充 Fill/无组件绑定/卡片背景_100 card-100", "cssVar": "--component-datepicker-panel-bg" }
+  ],
+  "metrics": [
+    { "role": "panel-radius", "valuePx": 4, "cssVar": "--component-datepicker-panel-radius" }
+  ]
+}
+```
 

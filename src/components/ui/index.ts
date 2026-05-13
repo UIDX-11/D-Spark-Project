@@ -22,6 +22,13 @@ export { default as Badge } from './Badge';
 export { default as Table } from './Table';
 export { default as Tag } from './Tag';
 export { default as Empty } from './Empty';
+export { default as Statistic } from './Statistic';
+export { default as Progress } from './Progress';
+export { default as List, ListItem } from './List';
+export { default as Icon } from './Icon';
+
+// Charts
+export { LineChart, PieChart, BarChart } from './Chart';
 
 // Feedback
 export { default as Alert } from './Alert';
@@ -52,7 +59,7 @@ export type { TabsProps, TabItem } from './Tabs/types';
 export type { AvatarProps } from './Avatar/types';
 export type { BadgeProps } from './Badge/types';
 export type { TableProps, TableColumn, TableRowSelection } from './Table/types';
-export type { TagProps } from './Tag/types';
+export type { TagProps, TagTheme, TagSize } from './Tag/types';
 export type { EmptyProps } from './Empty/types';
 export type { AlertProps } from './Alert/types';
 export type { LoadingProps } from './Loading/types';
@@ -61,3 +68,19 @@ export type { TooltipProps } from './Tooltip/types';
 export type { ModalProps } from './Modal/types';
 export type { DrawerProps, DrawerPlacement } from './Drawer/types';
 export type { FormProps, FormFieldProps, FormItemProps, FormMessageProps } from './Form/types';
+export type {
+  StatisticProps,
+  StatisticTrend,
+  StatisticTrendDirection,
+} from './Statistic/types';
+export type { ProgressProps, ProgressTheme, ProgressSize } from './Progress/types';
+export type { ListProps, ListItemProps } from './List/types';
+export type { IconProps, IconName, IconSize } from './Icon/types';
+export type {
+  LineChartProps,
+  PieChartProps,
+  BarChartProps,
+  ChartCommonProps,
+  ChartSeries,
+  PieDatum,
+} from './Chart/types';

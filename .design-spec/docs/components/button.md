@@ -12,9 +12,9 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=10657-99018)
 - Arco Design Web React（API / 行为真源）: [https://arco.design/react/components/button](https://arco.design/react/components/button)
 - Arco 源码（React）: [`arco-design/components/Button`](https://github.com/arco-design/arco-design/tree/main/components/Button)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Button** 画板，将本行替换为带 `node-id=` 的深链接。
 
 ## Figma
 
@@ -26,8 +26,8 @@ Molecular
 
 | Arco `prop`                     | 取值 / 默认                                                                 | 设计稿 / demo 说明                                                                                                                   |
 | ------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                          | `primary` | `secondary` | `dashed` | `outline` | `text`（默认 `secondary`） | demo 侧栏 **Variant** 映射：`primary`→Primary，`neutral`→Secondary 面、`ghost`→Outline、`danger`→警示；`dashed` / `text` 待与 Figma 对齐后补充矩阵行。 |
-| `status`                        | `normal` | `warning` | `success` | `danger`                             | 当前 token 集以 **normal** 为主；`warning/success` 待 Figma 与 token 扩展。                                                                 |
+| `type`                          | `primary` | `secondary` | `dashed` | `outline` | `text`（默认 `secondary`） | demo 侧栏 **Variant** 映射：`primary`→Primary，`neutral`→Secondary 面、`ghost`→Outline、`danger`→警示；`dashed` / `text` 在 **demos-react** [`ComponentStateMatrix`](../../demos-react/src/ComponentStateMatrix.tsx) 第二行展示，静态矩阵待 Figma 对齐后补充。 |
+| `status`                        | `normal` | `warning` | `success` | `danger`                             | 当前 token 集以 **normal** 为主；**demos-react** 矩阵含 `status="danger"` / `warning` 与 `outline` 组合示例；静态 HTML 矩阵仍以 Variant 轴为主。                                                                 |
 | `size`                          | `mini` | `small` | `medium` | `large`（默认 `medium`）                      | Live **Size**：`sm`→small、`md`→medium、`lg`→large（与 Figma XL/L/M 命名对照见 Sizes）。                                                    |
 | `long`                          | `boolean`                                                               | 未在静态矩阵展示；需时由 token 控制宽度。                                                                                                        |
 | `loading` / `loadingFixedWidth` | `boolean`                                                               | **推断**：与 Arco 一致——`loading` 时首子节点为图标区（见 DOM）；`loadingFixedWidth` 保持宽度；demo 后续可加重开关。                                             |
@@ -244,4 +244,45 @@ Button groups are used when multiple actions are presented together (toolbars, f
 ## Don't
 
 - 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+
+## Spec block (atomic)
+
+```json
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "button",
+  "figma": {
+    "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+    "primaryNodeId": "10657:99018",
+    "additionalNodeIds": ["277087:36652"]
+  },
+  "variantAxes": {
+    "style": ["primary", "secondary", "tertiary", "outline", "link", "danger"],
+    "size": ["sm", "md", "lg"],
+    "state": ["default", "hover", "active", "disabled", "loading", "focus"]
+  },
+  "bindings": [
+    { "figmaPath": "填充 Fill/组件绑定/按钮 Button/主按钮 primary/默认 default", "cssVar": "--component-button-primary-bg-default" },
+    { "figmaPath": "填充 Fill/组件绑定/按钮 Button/主按钮 primary/悬停 hover", "cssVar": "--component-button-primary-bg-hover" },
+    { "figmaPath": "填充 Fill/组件绑定/按钮 Button/主按钮 primary/激活 active", "cssVar": "--component-button-primary-bg-active" },
+    { "figmaPath": "填充 Fill/组件绑定/按钮 Button/主按钮 primary/禁用 disabled", "cssVar": "--component-button-primary-bg-disabled" },
+    { "figmaPath": "文字&图标 Text&Icon/组件绑定 bound/按钮 button/默认按钮 Default/主按钮-默认default", "cssVar": "--component-button-primary-text-default" },
+    { "figmaPath": "文字&图标 Text&Icon/组件绑定 bound/按钮 button/默认按钮 Default/主按钮-禁用 disabled", "cssVar": "--component-button-primary-text-disabled" },
+    { "figmaPath": "填充 Fill/组件绑定/按钮 Button/次按钮 secondary/悬停 hover", "cssVar": "--component-button-neutral-bg-hover" },
+    { "figmaPath": "填充 Fill/组件绑定/按钮 Button/次按钮 secondary/激活 activate", "cssVar": "--component-button-neutral-bg-active" },
+    { "figmaPath": "边框 Border/组件绑定/按钮 Button/次按钮 secondary/默认 default", "cssVar": "--component-button-neutral-border-default" },
+    { "figmaPath": "填充 Fill/组件绑定/按钮 Button/危险_主按钮 danger-primary/默认", "cssVar": "--component-button-danger-bg-default" }
+  ],
+  "metrics": [
+    { "role": "height-sm", "valuePx": 32, "cssVar": "--component-button-layout-live-height-sm" },
+    { "role": "height-md", "valuePx": 40, "cssVar": "--component-button-layout-live-height-md" },
+    { "role": "height-lg", "valuePx": 56, "cssVar": "--component-button-layout-live-height-lg" },
+    { "role": "padding-x-sm", "valuePx": 12, "cssVar": "--component-button-layout-live-padding-xsmall" },
+    { "role": "padding-x-md", "valuePx": 16, "cssVar": "--component-button-layout-live-padding-xmedium" },
+    { "role": "padding-x-lg", "valuePx": 20, "cssVar": "--component-button-layout-live-padding-xlarge" },
+    { "role": "radius-md", "valuePx": 6, "cssVar": "--component-button-primary-radius" }
+  ]
+}
+```
 

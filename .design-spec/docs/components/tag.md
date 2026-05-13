@@ -12,9 +12,9 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=275126-37182)
 - Arco Design Web React（API / 行为真源）: https://arco.design/react/components/tag
 - Arco 源码（React）: [`arco-design/components/Tag`](https://github.com/arco-design/arco-design/tree/main/components/Tag)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Tag** 画板，将本行替换为带 `node-id=` 的深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma

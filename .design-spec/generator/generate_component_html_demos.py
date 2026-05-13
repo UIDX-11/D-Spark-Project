@@ -2043,6 +2043,314 @@ def _component_demo_body(
     """
     )
 
+def _preview_body(components: list[ComponentSpec], tokens_href: str, behavior_source: str) -> str:
+    """
+    Aggregated preview page: every component embedded as an iframe over
+    `components/<slug>.html` for full-state/full-variant browsing.
+
+    Visual rhythm follows the `getdesign.md` preview reference (scannable
+    section flow + light card density) but stays inside D-Spark tokens —
+    no new brand palette is introduced.
+    """
+    quick_nav_items = "\n".join(
+        f'      <a class="prv-nav-chip" href="#prv-{html.escape(c.slug)}" data-prv-filter="{html.escape((c.slug + " " + c.title).lower())}">'
+        f'<span>{html.escape(c.title)}</span>'
+        f'<span class="muted" style="margin-left:6px;"><code>{html.escape(c.slug)}</code></span>'
+        f'</a>'
+        for c in components
+    )
+
+    section_items: list[str] = []
+    for c in components:
+        slug = html.escape(c.slug)
+        title = html.escape(c.title)
+        token_prefix = html.escape(c.token_prefix)
+        md_rel = html.escape(f"../docs/components/{c.source_path.name}")
+        demo_rel = f"components/{slug}.html"
+        section_items.append(
+            f"""
+      <section class="prv-section" id="prv-{slug}" data-prv-filter="{html.escape((c.slug + " " + c.title).lower())}">
+        <div class="prv-eyebrow">
+          <span class="prv-eyebrow-num">{len(section_items) + 1:02d}</span>
+          <span class="prv-eyebrow-text">Component preview</span>
+        </div>
+        <div class="prv-section-head">
+          <div class="prv-section-titles">
+            <h2 class="prv-section-title">{title}</h2>
+            <p class="prv-section-sub">Slug <code>{slug}</code> · tokens <code>--component-{token_prefix}-*</code></p>
+          </div>
+          <div class="prv-section-actions">
+            <a class="prv-btn" href="{demo_rel}" target="_blank" rel="noreferrer noopener">Open standalone ↗</a>
+            <a class="prv-btn prv-btn--ghost" href="{md_rel}" target="_blank" rel="noreferrer noopener">Spec</a>
+            <a class="prv-btn prv-btn--ghost" href="#top">Top</a>
+          </div>
+        </div>
+        <div class="prv-frame-wrap">
+          <iframe class="prv-frame" src="{demo_rel}" loading="lazy"
+                  title="{title} preview"
+                  referrerpolicy="no-referrer"></iframe>
+        </div>
+      </section>
+"""
+        )
+
+    sections_html = "".join(section_items)
+    total = len(components)
+
+    return f"""
+    <style>
+      .prv-wrap {{
+        max-width: 1280px;
+        margin: 24px auto 96px auto;
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }}
+      .prv-top {{
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }}
+      .prv-top h1 {{
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        color: var(--semantic-text-primary, #222);
+      }}
+      .prv-top .prv-sub {{
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--semantic-text-secondary, #666);
+        line-height: 1.45;
+        max-width: 720px;
+      }}
+      .prv-top .prv-pill {{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-bg-surface, #fff);
+        border-radius: 999px;
+        padding: 6px 12px;
+      }}
+      .prv-toolbar {{
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        margin: 0 -16px;
+        background: var(--semantic-bg-page, #f7f7f7);
+        border-bottom: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        flex-wrap: wrap;
+      }}
+      .prv-toolbar .prv-filter {{
+        flex: 1 1 220px;
+        min-height: 36px;
+        border-radius: 8px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-bg-surface, #fff);
+        color: var(--semantic-text-primary, #222);
+        padding: 0 12px;
+        font-size: 14px;
+      }}
+      .prv-toolbar .prv-filter:focus-visible {{
+        outline: 2px solid var(--semantic-text-link, #506daf);
+        outline-offset: 1px;
+      }}
+      .prv-toolbar .prv-count {{
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+      }}
+      .prv-nav {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 8px;
+        padding: 12px 14px;
+        background: var(--semantic-bg-surface, #fff);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 12px;
+      }}
+      .prv-nav-chip {{
+        display: inline-flex;
+        align-items: baseline;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-bg-surface, #fff);
+        color: var(--semantic-text-primary, #222);
+        font-size: 12px;
+        line-height: 1.4;
+        text-decoration: none;
+      }}
+      .prv-nav-chip:hover {{
+        background: var(--semantic-bg-page, #f7f7f7);
+        text-decoration: none;
+      }}
+      .prv-section {{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+        background: var(--semantic-bg-surface, #fff);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 16px;
+        scroll-margin-top: 80px;
+      }}
+      .prv-eyebrow {{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--semantic-text-secondary, #666);
+      }}
+      .prv-eyebrow-num {{
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: var(--semantic-bg-page, #f7f7f7);
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+      }}
+      .prv-section-head {{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }}
+      .prv-section-title {{
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: var(--semantic-text-primary, #222);
+      }}
+      .prv-section-sub {{
+        margin: 4px 0 0 0;
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+      }}
+      .prv-section-actions {{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }}
+      .prv-btn {{
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        font-size: 12px;
+        line-height: 1.4;
+        border-radius: 999px;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        background: var(--semantic-text-primary, #222);
+        color: var(--semantic-bg-surface, #fff);
+        text-decoration: none;
+      }}
+      .prv-btn:hover {{
+        text-decoration: none;
+        opacity: 0.92;
+      }}
+      .prv-btn--ghost {{
+        background: var(--semantic-bg-surface, #fff);
+        color: var(--semantic-text-primary, #222);
+      }}
+      .prv-frame-wrap {{
+        position: relative;
+        border: 1px solid var(--semantic-border-subtle, #e8e8e8);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--semantic-bg-page, #f7f7f7);
+      }}
+      .prv-frame {{
+        display: block;
+        width: 100%;
+        height: 880px;
+        border: 0;
+        background: var(--semantic-bg-page, #f7f7f7);
+      }}
+      .prv-footer-note {{
+        font-size: 12px;
+        color: var(--semantic-text-secondary, #666);
+        text-align: center;
+        margin-top: 8px;
+      }}
+      .prv-section[hidden] {{ display: none; }}
+      @media (max-width: 720px) {{
+        .prv-frame {{ height: 720px; }}
+        .prv-top h1 {{ font-size: 22px; }}
+      }}
+    </style>
+    <div class="prv-wrap" id="top">
+      <header class="prv-top">
+        <div>
+          <h1>Component previews</h1>
+          <p class="prv-sub">
+            全量组件的状态 / 变体 / token 变量在此聚合预览。每张卡片嵌入
+            <code>components/&lt;slug&gt;.html</code>（Live + Status matrix + Rendered preview + Token snapshot）。
+            真源约束见 <a href="../docs/design.md">docs/design.md</a>，tokens 仅取自
+            <code>{html.escape(tokens_href)}</code>。
+          </p>
+        </div>
+        <div class="prv-pill">
+          <span>{total} components</span>
+          <span aria-hidden="true">·</span>
+          <span>behavior · <code>{html.escape(behavior_source)}</code></span>
+          <span aria-hidden="true">·</span>
+          <a href="index.html">Back to index</a>
+        </div>
+      </header>
+      <div class="prv-toolbar" role="region" aria-label="Preview toolbar">
+        <input id="prvFilter" class="prv-filter" type="search" placeholder="Filter by component name or slug…" autocomplete="off" aria-label="Filter components" />
+        <span class="prv-count" id="prvCount">{total} / {total}</span>
+        <a class="prv-btn prv-btn--ghost" href="#top" aria-label="Back to top">Top</a>
+      </div>
+      <nav class="prv-nav" aria-label="Quick component anchors">
+{quick_nav_items}
+      </nav>
+{sections_html}
+      <p class="prv-footer-note">
+        Generated by <code>.design-spec/generator/generate_component_html_demos.py</code> · do not hand-edit.
+      </p>
+    </div>
+    <script>
+      (function () {{
+        var input = document.getElementById("prvFilter");
+        var countEl = document.getElementById("prvCount");
+        if (!input) return;
+        var sections = Array.prototype.slice.call(document.querySelectorAll(".prv-section[data-prv-filter]"));
+        var chips = Array.prototype.slice.call(document.querySelectorAll(".prv-nav-chip[data-prv-filter]"));
+        var total = sections.length;
+        function apply() {{
+          var q = (input.value || "").trim().toLowerCase();
+          var shown = 0;
+          sections.forEach(function (el) {{
+            var hit = !q || el.getAttribute("data-prv-filter").indexOf(q) >= 0;
+            if (hit) {{ el.removeAttribute("hidden"); shown += 1; }} else {{ el.setAttribute("hidden", ""); }}
+          }});
+          chips.forEach(function (el) {{
+            var hit = !q || el.getAttribute("data-prv-filter").indexOf(q) >= 0;
+            el.style.display = hit ? "" : "none";
+          }});
+          if (countEl) countEl.textContent = shown + " / " + total;
+        }}
+        input.addEventListener("input", apply);
+      }})();
+    </script>
+    """
+
+
 def _index_body(components: list[ComponentSpec], tokens_href: str, behavior_source: str) -> str:
     items = "\n".join(
         f'<li style="margin:6px 0;"><a href="components/{html.escape(c.slug)}.html">{html.escape(c.title)}</a>'
@@ -2058,13 +2366,6 @@ def _index_body(components: list[ComponentSpec], tokens_href: str, behavior_sour
             <span class="muted">（筛选条 + 数据表 + 分页）</span></li>
           <li style="margin:6px 0;"><a href="pages/form.html"><strong>表单页</strong> 模版</a>
             <span class="muted">（面包屑 + 两列表单 + 操作区）</span></li>
-          <li style="margin:6px 0; margin-top:10px; list-style:none;"><span class="muted" style="font-size:11px;">以下为按组件 slug 聚合的索引（非整页模版）：</span></li>
-          <li style="margin:6px 0;"><a href="gallery-b1-forms-inputs.html"><strong>B1</strong> · 表单与输入</a>
-            <span class="muted">（按钮、输入、选择、开关、上传、日期时间等）</span></li>
-          <li style="margin:6px 0;"><a href="gallery-b2-feedback-data.html"><strong>B2</strong> · 反馈与数据展示</a>
-            <span class="muted">（提示、对话框、进度、徽标、表格、列表等）</span></li>
-          <li style="margin:6px 0;"><a href="gallery-b3-navigation-structure.html"><strong>B3</strong> · 导航与结构</a>
-            <span class="muted">（面包屑、菜单、标签页、分页、布局、树等）</span></li>
 """
     return f"""
     <div class="wrap">
@@ -2072,6 +2373,16 @@ def _index_body(components: list[ComponentSpec], tokens_href: str, behavior_sour
         <div>
           <h1 style="margin:0; font-size:20px; line-height:1.2;">Component demos</h1>
           <div class="muted" style="margin-top:6px;">Live token studio per component · <code>{html.escape(tokens_href)}</code> · behavior source <code>{html.escape(behavior_source)}</code></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-b">
+          <h2 style="margin:0 0 10px 0; font-size:16px; line-height:1.3;">A 线 · 全量预览（aggregated preview）</h2>
+          <p class="muted" style="margin:0 0 10px 0; font-size:12px; line-height:1.5;">
+            <a href="preview.html"><strong>preview.html</strong></a> 用 iframe 聚合
+            <code>components/&lt;slug&gt;.html</code>，一页直观看完所有组件的 Live / Status matrix /
+            Rendered preview / Token snapshot；顶栏支持按名称或 slug 即时过滤。
+          </p>
         </div>
       </div>
       <div class="card" style="margin-bottom:16px;">
@@ -2111,176 +2422,6 @@ npm run dev
       </div>
     </div>
     """
-
-
-# B-line gallery: partition all component slugs into three pages (every slug appears exactly once).
-_B_LINE_GALLERIES: tuple[tuple[str, str, str, tuple[str, ...]], ...] = (
-    (
-        "gallery-b1-forms-inputs.html",
-        "B1 · 表单与输入（MD → HTML 聚合）",
-        "覆盖按钮、文本与数字输入、选择类、开关滑块、表单、上传与日期时间等；逐项打开 demo 对照对应 .md。",
-        (
-            "button",
-            "input",
-            "input-number",
-            "input-ip",
-            "input-range",
-            "input-adornment",
-            "select",
-            "cascader",
-            "checkbox",
-            "radio",
-            "switch",
-            "slider",
-            "form",
-            "upload",
-            "pincode",
-            "datepicker",
-            "timepicker",
-        ),
-    ),
-    (
-        "gallery-b2-feedback-data.html",
-        "B2 · 反馈与数据展示（MD → HTML 聚合）",
-        "覆盖全局/行内反馈、对话框、进度、徽标标签、步骤、卡片、列表与表格等。",
-        (
-            "alert",
-            "message",
-            "notification",
-            "modal",
-            "progress",
-            "badge",
-            "tag",
-            "data-display-number",
-            "steps",
-            "card",
-            "list",
-            "table",
-        ),
-    ),
-    (
-        "gallery-b3-navigation-structure.html",
-        "B3 · 导航与结构（MD → HTML 聚合）",
-        "覆盖面包屑、下拉、菜单、标签页、分页、间距布局、页头、树与树选择等。",
-        (
-            "breadcrumb",
-            "dropdown",
-            "menu",
-            "tabs",
-            "pagination",
-            "layout",
-            "space",
-            "pageheader",
-            "tree",
-            "treeselect",
-        ),
-    ),
-)
-
-
-def _spec_by_slug(components: list[ComponentSpec]) -> dict[str, ComponentSpec]:
-    return {c.slug: c for c in components}
-
-
-def _validate_b_line_coverage(components: list[ComponentSpec]) -> None:
-    all_slugs = {c.slug for c in components}
-    grouped: set[str] = set()
-    for _fn, _title, _desc, slugs in _B_LINE_GALLERIES:
-        for s in slugs:
-            if s in grouped:
-                raise ValueError(f"B-line gallery duplicate slug: {s}")
-            grouped.add(s)
-    missing = all_slugs - grouped
-    extra = grouped - all_slugs
-    if missing or extra:
-        raise ValueError(f"B-line gallery slug mismatch: missing={sorted(missing)} extra={sorted(extra)}")
-
-
-def _gallery_page_body(
-    *,
-    page_title: str,
-    page_description: str,
-    slugs: tuple[str, ...],
-    spec_by_slug: dict[str, ComponentSpec],
-    index_href: str,
-) -> str:
-    rows: list[str] = []
-    for slug in slugs:
-        spec = spec_by_slug[slug]
-        title = html.escape(spec.title)
-        slug_esc = html.escape(slug)
-        rows.append(
-            f'<tr><td style="padding:8px 10px; border-bottom:1px solid var(--semantic-border-subtle,#e8e8e8);">'
-            f'<a href="components/{slug_esc}.html">{title}</a></td>'
-            f'<td style="padding:8px 10px; border-bottom:1px solid var(--semantic-border-subtle,#e8e8e8);">'
-            f'<code>{slug_esc}</code></td>'
-            f'<td style="padding:8px 10px; border-bottom:1px solid var(--semantic-border-subtle,#e8e8e8);">'
-            f'<a href="../docs/components/{slug_esc}.md">docs/components/{slug_esc}.md</a></td></tr>'
-        )
-    table = "\n".join(rows)
-    return f"""
-    <div class="wrap">
-      <div class="top">
-        <div>
-          <h1 style="margin:0; font-size:20px; line-height:1.2;">{html.escape(page_title)}</h1>
-          <div class="muted" style="margin-top:6px;">{html.escape(page_description)}</div>
-        </div>
-        <div class="pill">
-          <span class="swatch"></span>
-          <a href="{html.escape(index_href)}">Back to index</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-b">
-          <p class="muted" style="margin:0 0 12px 0; font-size:12px; line-height:1.5;">
-            验收步骤：在仓库根目录执行 <code>python3 .design-spec/generator/generate_component_html_demos.py</code> 后，
-            逐行打开 <strong>Component demo</strong> 链接，对照 <strong>Spec (.md)</strong> 中的 Figma / Arco API / token 表。
-          </p>
-          <div style="overflow:auto;">
-            <table style="width:100%; border-collapse:collapse; font-size:13px;">
-              <thead>
-                <tr>
-                  <th style="text-align:left; padding:8px 10px; border-bottom:2px solid var(--semantic-border-subtle,#e8e8e8);">Component demo</th>
-                  <th style="text-align:left; padding:8px 10px; border-bottom:2px solid var(--semantic-border-subtle,#e8e8e8);">Slug</th>
-                  <th style="text-align:left; padding:8px 10px; border-bottom:2px solid var(--semantic-border-subtle,#e8e8e8);">Spec (.md)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {table}
-              </tbody>
-            </table>
-          </div>
-          <p class="muted" style="margin:12px 0 0 0; font-size:12px;">本页共 <strong>{len(slugs)}</strong> 个组件。</p>
-        </div>
-      </div>
-    </div>
-    """
-
-
-def _write_b_line_gallery_pages(
-    *,
-    out_dir: Path,
-    components: list[ComponentSpec],
-    tokens_href: str,
-    icons_head: str,
-) -> None:
-    _validate_b_line_coverage(components)
-    spec_by_slug = _spec_by_slug(components)
-    for filename, title, description, slugs in _B_LINE_GALLERIES:
-        body = _gallery_page_body(
-            page_title=title,
-            page_description=description,
-            slugs=slugs,
-            spec_by_slug=spec_by_slug,
-            index_href="index.html",
-        )
-        page = _html_page(
-            title=title,
-            body=body,
-            tokens_href=tokens_href,
-            head_extra=icons_head,
-        )
-        (out_dir / filename).write_text(page, encoding="utf-8")
 
 
 def _component_preview_block(slug: str) -> str:
@@ -2814,21 +2955,20 @@ def main() -> int:
     )
     (out_dir / "index.html").write_text(index_html, encoding="utf-8")
 
-    _write_b_line_gallery_pages(
-        out_dir=out_dir,
-        components=components,
+    # Write aggregated preview (iframes over per-component pages)
+    preview_html_text = _html_page(
+        title="Component previews",
+        body=_preview_body(components, tokens_href=tokens_href_index, behavior_source=behavior_source),
         tokens_href=tokens_href_index,
-        icons_head=icons_head,
+        head_extra=icons_head + '    <meta name="ds:page" content="component-previews" />\n',
     )
+    (out_dir / "preview.html").write_text(preview_html_text, encoding="utf-8")
 
     _write_page_level_templates(repo_root, behavior_source)
 
     print(f"Wrote {len(components)} component demos to {out_components_dir}")
     print(f"Wrote index: {out_dir / 'index.html'}")
-    print(
-        "Wrote B-line galleries: "
-        + ", ".join(fn for fn, _t, _d, _s in _B_LINE_GALLERIES)
-    )
+    print(f"Wrote preview: {out_dir / 'preview.html'}")
     print(
         "Wrote B-line page templates: pages/dashboard.html, pages/list.html, pages/form.html, pages/archive/dashboard-tdesign-starter-base.html"
     )

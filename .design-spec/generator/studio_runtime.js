@@ -4029,7 +4029,7 @@
       var closeHtml = opts.closable
         ? '<div class="ds-alert-close-btn' +
           (opts.customClose ? " is-slot" : "") +
-          '" tabindex="-1" role="button" aria-label="Close">' +
+          '" tabindex="0" role="button" aria-label="Close">' +
           (opts.customClose ? "Close" : "×") +
           "</div>"
         : "";
@@ -4072,11 +4072,23 @@
         // Arco: normal type does not show icon by default.
       }
       liveRoot.innerHTML = renderAlert(opts);
-      var closeBtn = liveRoot.querySelector(".ds-alert-close-btn");
-      if (closeBtn) {
-        closeBtn.addEventListener("click", function (ev) {
-          var host = ev.currentTarget.closest(".ds-alert");
-          if (host) host.remove();
+      function bindAlertCloseButtons(scope) {
+        if (!scope) return;
+        scope.querySelectorAll(".ds-alert-close-btn").forEach(function (closeBtn) {
+          function dismiss() {
+            var host = closeBtn.closest(".ds-alert");
+            if (host) host.remove();
+          }
+          closeBtn.addEventListener("click", function (ev) {
+            ev.preventDefault();
+            dismiss();
+          });
+          closeBtn.addEventListener("keydown", function (ev) {
+            if (ev.key === "Enter" || ev.key === " ") {
+              ev.preventDefault();
+              dismiss();
+            }
+          });
         });
       }
       matrixShell(L5, function (_l, i) {
@@ -4094,6 +4106,8 @@
           center: !!v.center,
         });
       });
+      bindAlertCloseButtons(liveRoot);
+      bindAlertCloseButtons(matrixRoot);
     };
 
     pgVariant.disabled = false;

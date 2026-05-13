@@ -14,7 +14,6 @@ Molecular
 
 - Arco Design Web React（API / 行为真源）: [https://arco.design/react/components/input](https://arco.design/react/components/input)（`addBefore` / `addAfter` 等）
 - Arco 源码（React）: [`arco-design/components/Input`](https://github.com/arco-design/arco-design/tree/main/components/Input)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Input** 与前后缀组合，将本行替换为带 `node-id=` 的深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma

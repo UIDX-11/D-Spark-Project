@@ -1,7 +1,391 @@
-# Figma Variables → D-Spark tokens bridge (placeholder)
-version: "0.0.0"
-mappings: []
-# Example entry (not authoritative):
-#   - figmaVariable: "Color/Primary/Default"
-#     tokenCss: "--semantic-action-primary-bg"
-#     notes: "Light mode only"
+# Figma Variables → D-Spark CSS tokens bridge
+#
+# Authoritative mapping from Figma library variable paths in the
+# "D.S. Web Com — Light V2 2026" file (fileKey: KJfy0GFDs8kLsXTzhTxAjd) to
+# semantic-layer CSS variables produced by .design-spec/tokens/dist/tokens.css.
+#
+# Rules:
+# - Bridge entries map Figma variables to **semantic** CSS variables, not to
+#   raw core hex/px. Consumers (AI tools, generators, demos) should always
+#   consume `--semantic-*` or `--component-*` vars from `tokens/dist/tokens.css`.
+# - When Figma exposes both a "组件绑定 bound" and "无组件绑定 unbound" alias
+#   that resolve to the same hex/px, bridge them to the same semantic var.
+# - When a Figma variable has no semantic equivalent yet, leave `tokenCss: null`
+#   and add an entry under `gaps:` so it is tracked.
+# - The Figma variable name is the **path string** returned by the Figma MCP
+#   `get_variable_defs` tool (mixed bilingual labels are intentional).
+# - `notes` may mention which pilot components use the variable so reviewers
+#   can spot scope.
+
+version: "0.1.0"
+schemaVersion: "0.1.0"
+kind: "tokenMap"
+
+figmaFile:
+  fileKey: "KJfy0GFDs8kLsXTzhTxAjd"
+  name: "D.S. Web Com — Light V2 2026"
+  mode: "Light"
+  capturedAt: "2026-05-12"
+
+mappings:
+  # === Text & Icon: unbound semantic palette ===
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/强调 primary"
+    figmaValue: "#222222"
+    tokenCss: "--semantic-text-primary"
+    coreHex: "#222222"
+    notes: "Used in: button, input, select, table, modal, datepicker — body and emphasized text"
+
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/次要 secondary"
+    figmaValue: "#666666"
+    tokenCss: "--semantic-text-secondary"
+    coreHex: "#666666"
+    notes: "Secondary text, helper copy"
+
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/辅助 Territory"
+    figmaValue: "#999999"
+    tokenCss: "--semantic-text-placeholder"
+    coreHex: "#999999"
+    notes: "Placeholder text, low-emphasis labels"
+
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/禁用 disabled"
+    figmaValue: "#cccccc"
+    tokenCss: "--semantic-text-muted"
+    coreHex: "#CCCCCC"
+    notes: "Disabled text/icon"
+
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/始终白 Always white"
+    figmaValue: "#ffffff"
+    tokenCss: "--semantic-text-inverse"
+    coreHex: "#FFFFFF"
+    notes: "Inverse text on dark/primary surfaces"
+
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/危险&报错&必填 error-default"
+    figmaValue: "#f14846"
+    tokenCss: "--semantic-status-danger"
+    coreHex: "#F14846"
+    notes: "Required-field marker, error text/icon"
+
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/信息&提示&接入 Info"
+    figmaValue: "#3f78e4"
+    tokenCss: "--semantic-status-info"
+    coreHex: "#3F78E4"
+    notes: "Info status text/icon"
+
+  - figmaVariable: "文字&图标 Text&Icon/无组件绑定 unbound/成功 Success"
+    figmaValue: "#09aa5c"
+    tokenCss: "--semantic-status-success"
+    coreHex: "#09AA5C"
+    notes: "Success status text/icon"
+
+  # === Fill: form palette (input / select / datepicker / timepicker triggers) ===
+  - figmaVariable: "填充 Fill/组件绑定/表单 Form/默认"
+    figmaValue: "#f7f7f7"
+    tokenCss: "--semantic-bg-form-default"
+    coreHex: "#F7F7F7"
+    notes: "Default input/select/datepicker background"
+
+  - figmaVariable: "填充 Fill/组件绑定/表单 Form/悬停"
+    figmaValue: "#e8e8e8"
+    tokenCss: "--semantic-bg-form-hover"
+    coreHex: "#E8E8E8"
+    notes: "Hover background on form controls"
+
+  - figmaVariable: "填充 Fill/组件绑定/表单 Form/禁用"
+    figmaValue: "#fafafa"
+    tokenCss: "--semantic-bg-form-disabled"
+    coreHex: "#FAFAFA"
+    notes: "Disabled background"
+
+  - figmaVariable: "填充 Fill/组件绑定/表单 Form/报错"
+    figmaValue: "#f7f7f7"
+    tokenCss: "--semantic-bg-form-default"
+    coreHex: "#F7F7F7"
+    notes: "Error state shares default fill; border carries the error signal"
+
+  # === Border: form focus & error ===
+  - figmaVariable: "边框 Border/组件绑定/表单 Form/激活"
+    figmaValue: "#222222"
+    tokenCss: "--semantic-text-primary"
+    coreHex: "#222222"
+    notes: "Active/focus border on form controls (matches primary text)"
+
+  - figmaVariable: "边框 Border/组件绑定/表单 Form/报错"
+    figmaValue: "#f14846"
+    tokenCss: "--semantic-status-danger"
+    coreHex: "#F14846"
+    notes: "Error border"
+
+  # === Background surfaces ===
+  - figmaVariable: "填充 Fill/无组件绑定/页面背景_100  page-100"
+    figmaValue: "#ffffff"
+    tokenCss: "--semantic-bg-surface"
+    coreHex: "#FFFFFF"
+    notes: "Page-level background (light mode)"
+
+  - figmaVariable: "填充 Fill/无组件绑定/卡片背景_100 card-100"
+    figmaValue: "#ffffff"
+    tokenCss: "--semantic-bg-card"
+    coreHex: "#FFFFFF"
+    notes: "Card surface; aliases page background in light mode"
+
+  - figmaVariable: "背景色 Background Color/color-bg-2一级容器背景 #FFFFFF"
+    figmaValue: "#FFFFFF"
+    tokenCss: "--semantic-bg-surface"
+    coreHex: "#FFFFFF"
+    notes: "Container background (table surface)"
+
+  - figmaVariable: "主题色 Primary Color/primary-1浅色 #FFFFFF"
+    figmaValue: "#FFFFFF"
+    tokenCss: "--semantic-bg-surface"
+    coreHex: "#FFFFFF"
+    notes: "Primary-on-light surface alias"
+
+  # === Button: primary palette ===
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/主按钮 primary/默认 default"
+    figmaValue: "#222222"
+    tokenCss: "--semantic-action-primary-bg"
+    coreHex: "#222222"
+    notes: "Button primary background"
+
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/主按钮 primary/悬停 hover"
+    figmaValue: "#4e4e4e"
+    tokenCss: "--semantic-action-primary-bg-hover"
+    coreHex: "#4E4E4E"
+    notes: "Button primary hover"
+
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/主按钮 primary/激活 active"
+    figmaValue: "#1b1b1b"
+    tokenCss: "--semantic-action-primary-bg-active"
+    coreHex: "#1B1B1B"
+    notes: "Button primary active/pressed"
+
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/主按钮 primary/禁用 disabled"
+    figmaValue: "#a7a7a7"
+    tokenCss: "--semantic-action-primary-bg-disabled"
+    coreHex: "#A7A7A7"
+    notes: "Button primary disabled"
+
+  - figmaVariable: "文字&图标 Text&Icon/组件绑定 bound/按钮 button/默认按钮 Default/主按钮-默认default"
+    figmaValue: "#ffffff"
+    tokenCss: "--component-button-primary-text-default"
+    coreHex: "#FFFFFF"
+    notes: "Button primary label color"
+
+  - figmaVariable: "文字&图标 Text&Icon/组件绑定 bound/按钮 button/默认按钮 Default/主按钮-禁用 disabled"
+    figmaValue: "#cccccc"
+    tokenCss: "--component-button-primary-text-disabled"
+    coreHex: "#CCCCCC"
+    notes: "Button primary label disabled"
+
+  # === Button: neutral (secondary/tertiary) ===
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/次按钮 secondary/悬停 hover"
+    figmaValue: "#e6e6e6"
+    tokenCss: "--component-button-neutral-bg-hover"
+    coreHex: "#E6E6E6"
+    notes: "Neutral button hover background"
+
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/次按钮 secondary/激活 activate"
+    figmaValue: "#cccccc"
+    tokenCss: "--component-button-neutral-bg-active"
+    coreHex: "#CCCCCC"
+    notes: "Neutral button active background"
+
+  - figmaVariable: "边框 Border/组件绑定/按钮 Button/次按钮 secondary/默认 default"
+    figmaValue: "#999999"
+    tokenCss: "--component-button-neutral-border-default"
+    coreHex: "#999999"
+    notes: "Neutral border default"
+
+  - figmaVariable: "边框 Border/组件绑定/按钮 Button/次按钮 secondary/禁用 disabled"
+    figmaValue: "#e7e7e7"
+    tokenCss: "--component-button-neutral-border-disabled"
+    coreHex: "#E7E7E7"
+    notes: "Neutral border disabled"
+
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/面性按钮 tertiary/默认 default"
+    figmaValue: "#f7f7f7"
+    tokenCss: "--semantic-bg-form-default"
+    coreHex: "#F7F7F7"
+    notes: "Filled (tertiary) button default background — same swatch as form default"
+
+  # === Button: outline / dashed ===
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/虚框按钮 dashed/默认 default"
+    figmaValue: "#f7f7f7"
+    tokenCss: "--semantic-bg-form-default"
+    coreHex: "#F7F7F7"
+    notes: "Dashed button fill default"
+
+  - figmaVariable: "边框 Border/组件绑定/按钮 Button/虚框按钮 dashed/常规 default"
+    figmaValue: "#999999"
+    tokenCss: "--semantic-border-strong"
+    coreHex: "#999999"
+    notes: "Dashed button border default"
+
+  # === Button: danger palette ===
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/危险_主按钮 danger-primary/默认"
+    figmaValue: "#f14846"
+    tokenCss: "--semantic-status-danger"
+    coreHex: "#F14846"
+    notes: "Danger primary button background"
+
+  - figmaVariable: "填充 Fill/组件绑定/按钮 Button/危险_面性按钮 Facial/默认"
+    figmaValue: "#feedec"
+    tokenCss: "--semantic-bg-status-danger"
+    coreHex: "#FEEDEC"
+    notes: "Danger soft/facial background"
+
+  - figmaVariable: "边框 Border/组件绑定/按钮 Button/危险_次按钮 secondary/默认"
+    figmaValue: "#f46d6b"
+    tokenCss: null
+    coreHex: "#F46D6B"
+    notes: "Danger secondary border — promote to semantic if reused beyond button"
+
+  - figmaVariable: "危险色Danger/Global light/30"
+    figmaValue: "#f8a3a2"
+    tokenCss: null
+    coreHex: "#F8A3A2"
+    notes: "Danger soft scale 30 — currently only used as danger.disabled text/border in button"
+
+  # === Table surfaces ===
+  - figmaVariable: "填充 Fill/组件绑定/表格 Table/表头背景"
+    figmaValue: "#fafafa"
+    tokenCss: "--semantic-bg-table-header"
+    coreHex: "#FAFAFA"
+    notes: "Table header background"
+
+  - figmaVariable: "填充 Fill/组件绑定/表格 Table/默认背景"
+    figmaValue: "#ffffff"
+    tokenCss: "--semantic-bg-surface"
+    coreHex: "#FFFFFF"
+    notes: "Table body background"
+
+  - figmaVariable: "边框 Border/无组件绑定/描边_常规 divider-100"
+    figmaValue: "#e8e8e8"
+    tokenCss: "--semantic-border-subtle"
+    coreHex: "#E8E8E8"
+    notes: "Divider / subtle border"
+
+  - figmaVariable: "文字&图标 Text&Icon/组件绑定 bound/链接 link/默认_200"
+    figmaValue: "#222222"
+    tokenCss: "--semantic-text-primary"
+    coreHex: "#222222"
+    notes: "Table cell link variant (overridden per component)"
+
+  # === Status palette (modal & global) ===
+  - figmaVariable: "告警色 Warning Color/warning-6标签#FFAD14"
+    figmaValue: "#FFAD14"
+    tokenCss: "--semantic-status-warning"
+    coreHex: "#FFAD14"
+    notes: "Warning status"
+
+  - figmaVariable: "错误 Danger color/Danger-6 常规#F14846"
+    figmaValue: "#F14846"
+    tokenCss: "--semantic-status-danger"
+    coreHex: "#F14846"
+    notes: "Danger status (duplicate alias)"
+
+  - figmaVariable: "接入中&提示Commissioning&Prompt/Global light/50"
+    figmaValue: "#3f78e4"
+    tokenCss: "--semantic-status-info"
+    coreHex: "#3F78E4"
+    notes: "Info / processing status"
+
+  # === Neutral primitives (Light mode) — these map directly to core, only
+  #     useful for verifying that a Figma alias resolves to the expected hex. ===
+  - figmaVariable: "中性色 Neutral/Global light/130 22"
+    figmaValue: "#222222"
+    tokenCss: "--core-color-neutral-170"
+    coreHex: "#222222"
+    notes: "Core neutral — consumers should still use --semantic-text-primary"
+
+  - figmaVariable: "中性色 Neutral/Global light/190 E8"
+    figmaValue: "#e8e8e8"
+    tokenCss: "--core-color-neutral-70"
+    coreHex: "#E8E8E8"
+    notes: "Core neutral hover swatch — consumers should still use --semantic-bg-form-hover"
+
+  - figmaVariable: "中性色 Neutral/Global light/70 FF"
+    figmaValue: "#ffffff"
+    tokenCss: "--core-color-neutral-0"
+    coreHex: "#FFFFFF"
+    notes: "Pure white core swatch"
+
+  - figmaVariable: "主色 Primary/Global light/50"
+    figmaValue: "#222222"
+    tokenCss: "--semantic-action-primary-bg"
+    coreHex: "#222222"
+    notes: "Primary action color (in light mode equals primary text)"
+
+  # === Numeric primitives (size / spacing baked into Figma frames) ===
+  - figmaVariable: "4"
+    figmaValue: "4"
+    tokenCss: "--semantic-space-xs"
+    coreHex: null
+    notes: "Repeating 4-px gap/padding literal from Figma frames"
+
+  - figmaVariable: "6"
+    figmaValue: "6"
+    tokenCss: null
+    coreHex: null
+    notes: "6-px literal — no semantic alias yet; treat as component-specific"
+
+  - figmaVariable: "8"
+    figmaValue: "8"
+    tokenCss: "--semantic-space-sm"
+    coreHex: null
+    notes: "8-px gap/padding"
+
+  - figmaVariable: "36px"
+    figmaValue: "8"
+    tokenCss: "--core-size-control-lg"
+    coreHex: null
+    notes: "36-px control height (e.g. button medium / input large)"
+
+  # === Typography composites ===
+  - figmaVariable: "12/EN-Medium"
+    figmaValue: "Font(family: Montserrat, size: 12, weight: 500, lineHeight: 16)"
+    tokenCss: "--semantic-font-size-sm"
+    notes: "Helper / caption typography (CSS line-height handled per-component)"
+
+  - figmaVariable: "14/EN-Medium"
+    figmaValue: "Font(family: Montserrat, size: 14, weight: 500, lineHeight: 20)"
+    tokenCss: "--semantic-font-size-md"
+    notes: "Body / control label typography"
+
+  - figmaVariable: "14/EN-Semibold"
+    figmaValue: "Font(family: Montserrat, size: 14, weight: 600, lineHeight: 20)"
+    tokenCss: "--semantic-font-size-md"
+    notes: "Emphasised body / button label typography"
+
+  - figmaVariable: "16/EN-Semibold"
+    figmaValue: "Font(family: Montserrat, size: 16, weight: 600, lineHeight: 22)"
+    tokenCss: "--semantic-font-size-lg"
+    notes: "Modal title / page title typography"
+
+# Variables observed in Figma but without a current semantic anchor — tracked
+# so the designer / token owner can decide whether to promote them.
+gaps:
+  - figmaVariable: "边框 Border/组件绑定/按钮 Button/危险_次按钮 secondary/默认"
+    figmaValue: "#f46d6b"
+    suggestedToken: "--semantic-status-danger-soft-border"
+    notes: "Danger secondary border swatch shared between button states; promote to semantic if reused elsewhere"
+
+  - figmaVariable: "危险色Danger/Global light/30"
+    figmaValue: "#f8a3a2"
+    suggestedToken: "--semantic-status-danger-soft"
+    notes: "Danger disabled/soft tone — currently only used in button.danger.disabled chains"
+
+  - figmaVariable: "请输入"
+    figmaValue: "Please enter"
+    suggestedToken: null
+    notes: "Placeholder string copy — belongs in i18n, not tokens"
+
+  - figmaVariable: "请选择"
+    figmaValue: "Please select"
+    suggestedToken: null
+    notes: "Placeholder string copy — belongs in i18n, not tokens"
+
+  - figmaVariable: "watermark/日期-日月年"
+    figmaValue: "16/Nov/2025"
+    suggestedToken: null
+    notes: "Sample data baked into Figma frame; do not bridge"

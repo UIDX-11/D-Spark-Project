@@ -32,7 +32,7 @@
 
 .studio {
   display: grid;
-  gap: 16px;
+  gap: calc(var(--core-space-4) * 1px);
   align-items: start;
 }
 
@@ -45,7 +45,7 @@
 .studio-main {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: calc(var(--core-space-4) * 1px);
 }
 
 .studio-aside {
@@ -5436,6 +5436,11 @@
   cursor: pointer;
   overflow: hidden;
   flex-shrink: 0;
+}
+
+.ds-alert-close-btn:focus-visible {
+  outline: 2px solid var(--color-primary-6);
+  outline-offset: 2px;
 }
 
 /* close-element 槽位：任意节点，不强制 16×16 图标格 */

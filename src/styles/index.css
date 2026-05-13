@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+@import './theme.css';
+@import './ds-semantic-vars.css';
+/* design.md: runtime colors must resolve from tokens/dist (component + semantic). */
+@import '../../.design-spec/tokens/dist/tokens.css';

@@ -12,9 +12,9 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node 116529-135291](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116529-135291) · [Dropdown panel 278324-4612](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=278324-4612)
 - Arco Design Web React（API / 行为真源）: [https://arco.design/react/components/select](https://arco.design/react/components/select)
 - Arco 源码（React）: [`arco-design/components/Select`](https://github.com/arco-design/arco-design/tree/main/components/Select)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Select** 画板，将本行替换为带 `node-id=` 的深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma
@@ -280,4 +280,47 @@ Molecular
 ## Don't
 
 - 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+
+## Spec block (atomic)
+
+```json
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "select",
+  "figma": {
+    "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+    "primaryNodeId": "116529:135291",
+    "additionalNodeIds": ["278324:4612"]
+  },
+  "variantAxes": {
+    "size": ["sm", "md", "lg", "xl"],
+    "state": ["default", "hover", "focus", "disabled", "error"],
+    "kind": ["single", "multiple"]
+  },
+  "bindings": [
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/默认", "cssVar": "--component-select-trigger-bg-default" },
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/悬停", "cssVar": "--component-select-trigger-bg-hover" },
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/禁用", "cssVar": "--component-select-trigger-bg-disabled" },
+    { "figmaPath": "边框 Border/组件绑定/表单 Form/激活", "cssVar": "--component-select-trigger-border-focus" },
+    { "figmaPath": "边框 Border/组件绑定/表单 Form/报错", "cssVar": "--component-select-trigger-border-error" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/辅助 Territory", "cssVar": "--component-select-trigger-text-default" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/禁用 disabled", "cssVar": "--component-select-trigger-text-disabled" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/次要 secondary", "cssVar": "--component-select-item-text" },
+    { "figmaPath": "填充 Fill/无组件绑定/卡片背景_100 card-100", "cssVar": "--component-select-dropdown-bg" }
+  ],
+  "metrics": [
+    { "role": "trigger-height-sm", "valuePx": 24, "cssVar": "--component-select-layout-sm-trigger-height" },
+    { "role": "trigger-height-md", "valuePx": 28, "cssVar": "--component-select-layout-md-trigger-height" },
+    { "role": "trigger-height-lg", "valuePx": 32, "cssVar": "--component-select-layout-lg-trigger-height" },
+    { "role": "trigger-height-xl", "valuePx": 36, "cssVar": "--component-select-layout-xl-trigger-height" },
+    { "role": "trigger-padding-x-lg", "valuePx": 12, "cssVar": "--component-select-layout-lg-trigger-padding-x" },
+    { "role": "dropdown-offset-y", "valuePx": 4, "cssVar": "--component-select-dropdown-offset-y" },
+    { "role": "dropdown-radius-md", "valuePx": 6, "cssVar": "--component-select-dropdown-radius" }
+  ],
+  "i18nDefaults": {
+    "placeholder": "Please select"
+  }
+}
+```
 

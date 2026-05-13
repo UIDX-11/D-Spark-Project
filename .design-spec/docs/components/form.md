@@ -13,7 +13,7 @@ Molecular
 
 - Arco Design Web React（API / 行为真源）: [Form](https://arco.design/react/components/form)
 - Arco 源码（React）: [`arco-design/components/Form`](https://github.com/arco-design/arco-design/tree/main/components/Form)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 Form 相关画板并补充 `node-id=` 深链接。
+- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — Form 画板 canonical node-id **pending** (`.design-spec/docs/COMPONENT_FIGMA_INVENTORY.md → Pending entries`)。在此之前用 `input.md` / `select.md` 等表单原子组件的 Figma node 作为视觉参照。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Best practices
@@ -159,4 +159,38 @@ Label (fixed width)  [ Control ]  Helper/Error
 ## Don't
 
 - 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+
+## Spec block (atomic)
+
+```json
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "form",
+  "figma": {
+    "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+    "primaryNodeId": null,
+    "pendingReason": "Canonical Form Figma node pending designer assignment — see .design-spec/docs/COMPONENT_FIGMA_INVENTORY.md → Pending entries"
+  },
+  "variantAxes": {
+    "layout": ["1col", "2col", "inline"],
+    "labelPosition": ["top", "left"],
+    "validation": ["required", "optional", "error"]
+  },
+  "bindings": [
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/强调 primary", "cssVar": "--component-form-label-text" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/禁用 disabled", "cssVar": "--component-form-label-text-disabled" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/危险&报错&必填 error-default", "cssVar": "--component-form-required-mark" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/次要 secondary", "cssVar": "--component-form-help-text" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/危险&报错&必填 error-default", "cssVar": "--component-form-error-text" }
+  ],
+  "metrics": [
+    { "role": "row-gap", "valuePx": 20, "cssVar": "--component-form-row-gap" },
+    { "role": "col-gap", "valuePx": 16, "cssVar": "--component-form-col-gap" },
+    { "role": "label-gap", "valuePx": 8, "cssVar": "--component-form-label-gap" },
+    { "role": "label-width", "valuePx": 120, "cssVar": "--component-form-label-w" }
+  ],
+  "composedOf": ["input", "select", "checkbox", "radio", "datepicker", "switch", "button"]
+}
+```
 

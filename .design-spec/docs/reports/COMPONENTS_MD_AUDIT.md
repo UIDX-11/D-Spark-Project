@@ -1,4 +1,7 @@
-# Components MD 审计（机器生成）
+# Components MD 审计（机器生成 / 快照）
+
+> **Layer / 层级**: **L4 — 生成快照**。脚本：`python3 .design-spec/scripts/components_md_audit.py`。  
+> 治理：[`DESIGN_MD_GOVERNANCE_AUDIT.md`](DESIGN_MD_GOVERNANCE_AUDIT.md)。
 
 检查项：`# Component:` 标题、## Level、## References、Figma `KJfy0GFDs8kLsXTzhTxAjd` 或 figma 链接、异常短文。
 

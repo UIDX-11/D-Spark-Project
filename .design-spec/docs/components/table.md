@@ -13,7 +13,7 @@ Molecular
 
 - Arco Design Web React（API / 行为真源）: [Table](https://arco.design/react/components/table)
 - Arco 源码（React）: [`arco-design/components/Table`](https://github.com/arco-design/arco-design/tree/main/components/Table)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 Table 画板并补充 `node-id=` 深链接。
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node 116997-186851](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=116997-186851)
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Best practices
@@ -353,4 +353,37 @@ Table container
 ## Don't
 
 - 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+
+## Spec block (atomic)
+
+```json
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "table",
+  "figma": {
+    "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+    "primaryNodeId": "116997:186851"
+  },
+  "variantAxes": {
+    "density": ["compact", "default", "comfortable"],
+    "feature": ["plain", "sortable", "filterable", "selectable", "treeView", "expandable", "pinned"]
+  },
+  "bindings": [
+    { "figmaPath": "填充 Fill/组件绑定/表格 Table/默认背景", "cssVar": "--component-table-bg" },
+    { "figmaPath": "填充 Fill/组件绑定/表格 Table/表头背景", "cssVar": "--component-table-header-bg" },
+    { "figmaPath": "边框 Border/无组件绑定/描边_常规 divider-100", "cssVar": "--component-table-border" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/强调 primary", "cssVar": "--component-table-header-text" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/次要 secondary", "cssVar": "--component-table-row-text-muted" },
+    { "figmaPath": "填充 Fill/组件绑定/表单 Form/悬停", "cssVar": "--component-table-row-bg-hover" }
+  ],
+  "metrics": [
+    { "role": "header-h-default", "valuePx": 44, "cssVar": "--component-table-header-h-default" },
+    { "role": "row-h-default", "valuePx": 44, "cssVar": "--component-table-row-h-default" },
+    { "role": "cell-px", "valuePx": 16, "cssVar": "--component-table-cell-px" },
+    { "role": "cell-py-default", "valuePx": 12, "cssVar": "--component-table-cell-py-default" },
+    { "role": "tree-indent", "valuePx": 16, "cssVar": "--component-table-tree-indent" }
+  ]
+}
+```
 

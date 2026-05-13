@@ -40,7 +40,7 @@
 | 组件行为 | 轻量 `page_templates.js`；TDesign 仪表盘另见 `dashboard-starter.js` + ECharts CDN | Arco 真组件 |
 | IA 覆盖 | 通用仪表盘 / 列表 / 表单；另 **`demos/pages/archive/dashboard-tdesign-starter-base.html`** 对齐 [TDesign Starter 仪表盘 base](https://tdesign.tencent.com/starter/vue/dashboard/base) 四段结构 | **上表全量** |
 
-页级对稿说明见 [dashboard-tdesign-starter-base.md](./dashboard-tdesign-starter-base.md)。
+页级对稿说明见 [_archive/pages/dashboard-tdesign-starter-base.md](../_archive/pages/dashboard-tdesign-starter-base.md)（**B 线参考，已归档**；canonical 仍为 [`page-dashboard.md`](page-dashboard.md)）。
 
 ## 维护约定
 

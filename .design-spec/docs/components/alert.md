@@ -42,7 +42,9 @@ Molecular
 
 Arco Design Web React `Alert` 结构要点：根 `**div[role="alert"]`** → 可选图标区 → `**div` body**（可选 title + content）→ 可选 action 外包层 → 可选关闭区（**非**原生 `<button>` 时为 `div` + `role="button"`）。
 
-本仓库 Live / 矩阵类名前缀为 `**ds-alert`**，子节点顺序与 Arco 一致；关闭节点为 `**div.ds-alert-close-btn`**，`tabindex="-1"`，`aria-label="Close"`。
+本仓库 Live / 矩阵类名前缀为 `**ds-alert`**，子节点顺序与 Arco 一致；关闭节点为 `**div.ds-alert-close-btn**`，`role="button"`，`aria-label="Close"`。
+
+**与 Arco 差异（Path B HTML）**：Arco 源码中默认可关闭关闭区常为 `tabindex="-1"`（不在顺序 Tab 内）。静态 demo 为便于 **键盘验收**，关闭区使用 `tabindex="0"`，并响应 **Enter / Space** 与点击；样式含 `:focus-visible` 焦点环（见 `studio_runtime.css`）。
 
 ## Best practices
 
@@ -83,7 +85,7 @@ Arco Design Web React `Alert` 结构要点：根 `**div[role="alert"]`** → 可
 ## Accessibility essentials
 
 - **Role**: Arco Design Web React 源码根节点为 `**role="alert"`**（所有 `type` 一致）。若产品需区分 polite / assertive，可在封装层按类型覆盖为 `status` 等（非 Arco 默认）。
-- **Close**: 与 Arco 一致为 `**div.ds-alert-close-btn`**，`tabindex="-1"`，`role="button"`，`aria-label="Close"`（非原生 `<button>`）。
+- **Close**: 与 Arco 一致为 `**div.ds-alert-close-btn**`，`role="button"`，`aria-label="Close"`（非原生 `<button>`）。Arco 默认常为非顺序聚焦（`tabindex="-1"`）；Path B HTML 使用 `tabindex="0"` + Enter/Space，见 **Arco DOM** 小节「与 Arco 差异」。
 - **Focus**: do not steal focus on render; if triggered by a user action, optionally move focus to the alert region (product-dependent).
 
 ## Variant naming (type/kind/shape/size/state)

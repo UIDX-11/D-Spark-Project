@@ -74,4 +74,10 @@ Button → Tag → Checkbox → … → Form / Table 等复杂件（详见 `docs
 
 ## 6. 修订
 
-变更本规范请走单独 PR，并在 `index.md` 中保持「必读文件」链接最新。
+变更本规范请走单独 PR，并同步维护以下入口的「必读文件」链接：
+
+- [`.design-spec/index.md`](../index.md)（仓库级入口）
+- [`.design-spec/docs/design.md`](design.md)（AI 入口；只调整规则 / 读序时改）
+- [`.design-spec/docs/REQUIREMENTS_AND_PLAN.md`](REQUIREMENTS_AND_PLAN.md) §1 / §2（路线变更先改这里）
+
+治理审计与隔离记录见 [`reports/DESIGN_MD_GOVERNANCE_AUDIT.md`](reports/DESIGN_MD_GOVERNANCE_AUDIT.md)。

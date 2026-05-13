@@ -36,4 +36,5 @@ npm run test:update
 ## 约束
 
 - Demo 使用 `file://` 打开本地 HTML；不启动 HTTP 服务。
+- **烟雾**不再覆盖已删除的 `demos/gallery-b*.html`；Path B 以 `demos/components/*.html` 与 `demos/pages/*.html` 为准（见 `tests/smoke.spec.ts`）。
 - 若本机字体与 CI 不一致导致 diff，请在 **同一 Docker / CI 镜像** 上生成基线，或后续改为 `npx playwright install-deps` + 锁定字体栈（治理文档后续迭代）。

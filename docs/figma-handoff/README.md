@@ -1,5 +1,10 @@
 # Figma 手递 — 方案 B（MCP 推送）/ 方案 C（截图）
 
+> **Layer / 层级**: **L3 — 操作 / 手递**。  
+> 本文档不是 `Figma 规范 → design.md` 视觉验收真源；只是把本地 localhost 截图 / 网页 推到 **讨论稿** 的临时手递流程。  
+> Path A 视觉对稿真源仍是 **官方库 `KJfy0GFDs8kLsXTzhTxAjd`**（详见 [`../visual-qa/PATH-A-WORKFLOW.md`](../visual-qa/PATH-A-WORKFLOW.md) 与 [`../../.design-spec/docs/reports/DESIGN_MD_GOVERNANCE_AUDIT.md`](../../.design-spec/docs/reports/DESIGN_MD_GOVERNANCE_AUDIT.md)）。  
+> **不要** 把 `dashboard-fullpage.png`（按需由 `capture-dashboard.sh` 重生成，**已从仓库隔离**，进入 `.gitignore`）与讨论稿 `VqEug9MsAHfG1lpRNP5FKy` 当作组件 / 页面规范的真源；它们仅供讨论。
+
 在 **Figma 里看到 Dashboard** 的两种做法：**方案 B** 用 Cursor 的 Figma MCP 把网页抓进文件；**方案 C** 用本地 PNG 拖入画布。
 
 ---
@@ -61,7 +66,7 @@ chmod +x docs/figma-handoff/capture-dashboard.sh
 
 输出文件：`docs/figma-handoff/dashboard-fullpage.png`
 
-**注意**：脚本只检查 `DASHBOARD_URL` 能否访问；页面内容取决于你本地跑的是 **当前源码的 dev** 还是 **旧产物目录**（例如仅用 `serve dist-playground` 时，截图可能是历史 Playground，而不是最新的 `src/pages/Dashboard`）。要以源码为准时，请用完整 Vite 工程 `pnpm dev` / `npm run dev` 后再执行脚本。
+**注意**：脚本只检查 `DASHBOARD_URL` 能否访问；页面内容取决于你本地跑的是 **当前源码的 dev** 还是已构建的 **`dist/` 静态预览**（截图可能是构建快照，而非最新 `src/pages/Dashboard`）。要以源码为准时，请用 `npm run dev` 跑起来再执行本脚本。`dist/` 与历史 `dist-playground/` 已被 `.gitignore`，每次构建后会重新生成。
 
 若端口或地址不同：
 

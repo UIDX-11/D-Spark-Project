@@ -1,8 +1,9 @@
 # Web UI 组件 ↔ Figma 真源索引
 
-面向 `@UIDX-11/dspark-web-ui`（[`src/components/ui/index.ts`](../../src/components/ui/index.ts)）与 Figma 库 **D.S-Web-Com_Light_V2_2026**，`fileKey` = **`KJfy0GFDs8kLsXTzhTxAjd`**（官方视觉真源）。
+> **L2 — 实现侧人读镜像 / 不是规范真源。** 本表面向 `@UIDX-11/dspark-web-ui`（[`src/components/ui/index.ts`](../../src/components/ui/index.ts)）的实现对账。
+> Component ↔ Figma 节点的 **唯一真源** 是 [`.design-spec/config/figma_truth_table.json`](../../.design-spec/config/figma_truth_table.json)（机器 SoT）与 [`.design-spec/docs/COMPONENT_FIGMA_INVENTORY.md`](../../.design-spec/docs/COMPONENT_FIGMA_INVENTORY.md)（canonical 人读 SoT）。本表仅取每行 `figma_urls[0]` 作为「Primary Figma」展示，**禁止**作为冲突时的裁决依据。
 
-**Canonical 多节点列表**：见 [`.design-spec/config/figma_truth_table.json`](../../.design-spec/config/figma_truth_table.json)（机器可读）。本表「Primary Figma」取每行 `figma_urls[0]`。
+`fileKey` = **`KJfy0GFDs8kLsXTzhTxAjd`**（官方视觉真源 · D.S-Web-Com_Light_V2_2026）。
 
 | 导出组件 / API | design-spec 文档 | Primary Figma（canonical） |
 |----------------|------------------|----------------------------|

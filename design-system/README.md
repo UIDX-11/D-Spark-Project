@@ -1,16 +1,20 @@
 # Design System (Human-visible entry)
 
+> **L3 — Façade only.** 本目录是 GitHub 上的人读门面，**不是规范真源**。规范一律落在 [`.design-spec/`](../.design-spec/)；本仓库分层与 reverse routing 见 [`docs/DOCUMENTATION_MAP.md`](../docs/DOCUMENTATION_MAP.md) 与本轮治理报告 [`DESIGN_MD_GOVERNANCE_AUDIT.md`](../.design-spec/docs/reports/DESIGN_MD_GOVERNANCE_AUDIT.md)。
+
 This folder is the **human-visible entrypoint** on GitHub.
 
 ## Where the source of truth lives
 
 All authoritative, AI-retrievable specifications live in:
 
-- `.design-spec/` (hidden folder)
+- [`.design-spec/`](../.design-spec/) (hidden folder)
   - `manifest.json` — machine entrypoint
   - `docs/` — references (components, layouts, a11y, i18n…)
   - `tokens/src/` — token source of truth (primitive → semantic → component)
   - `tokens/dist/tokens.css` — generated CSS variables (for web consumption)
+
+> **Do NOT** add component specs, page specs, or token tables in this folder. If you need to copy a value here for readability, link back to `.design-spec/` instead.
 
 ## Quick links
 

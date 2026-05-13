@@ -12,9 +12,9 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=119237-106936)
 - Arco Design Web React（API / 行为真源）: [https://arco.design/react/components/modal](https://arco.design/react/components/modal)
 - Arco 源码（React）: [`arco-design/components/Modal`](https://github.com/arco-design/arco-design/tree/main/components/Modal)
-- Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 请在文件中定位 **Modal** 画板，将本行替换为带 `node-id=` 的深链接。
 - 治理规范: `.design-spec/docs/ALIGNMENT_GOVERNANCE.md`
 
 ## Figma
@@ -201,4 +201,45 @@ Overlay mask
 ## Don't
 
 - 违反 **Anti-patterns** 与本组件规格中的异常条款；在 design-spec demo 中对布局/色使用内联 `style=…px/#…`（见 `scan_token_violations`）。
+
+## Spec block (atomic)
+
+```json
+{
+  "schemaVersion": "0.1.0",
+  "kind": "atomic",
+  "componentSlug": "modal",
+  "figma": {
+    "fileKey": "KJfy0GFDs8kLsXTzhTxAjd",
+    "primaryNodeId": "119237:106936",
+    "additionalNodeIds": ["284016:9485", "284016:9652"]
+  },
+  "variantAxes": {
+    "intent": ["default", "warning", "danger", "info", "success"],
+    "size": ["regular", "withTip"],
+    "footer": ["default", "none", "custom"]
+  },
+  "bindings": [
+    { "figmaPath": "填充 Fill/无组件绑定/卡片背景_100 card-100", "cssVar": "--component-modal-panel-bg" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/强调 primary", "cssVar": "--component-modal-title-text" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/次要 secondary", "cssVar": "--component-modal-body-text" },
+    { "figmaPath": "文字&图标 Text&Icon/无组件绑定 unbound/辅助 Territory", "cssVar": "--component-modal-close-icon" },
+    { "figmaPath": "告警色 Warning Color/warning-6标签#FFAD14", "cssVar": "--semantic-status-warning" },
+    { "figmaPath": "错误 Danger color/Danger-6 常规#F14846", "cssVar": "--semantic-status-danger" }
+  ],
+  "metrics": [
+    { "role": "panel-radius", "valuePx": 16, "cssVar": "--component-modal-panel-radius" },
+    { "role": "panel-padding", "valuePx": 24, "cssVar": "--component-modal-p" },
+    { "role": "panel-width", "valuePx": 440, "cssVar": "--component-modal-w" },
+    { "role": "panel-width-with-tip", "valuePx": 464, "cssVar": "--component-modal-w-with-tip" },
+    { "role": "title-font-size", "valuePx": 16, "cssVar": "--component-modal-title-text" },
+    { "role": "title-line-height", "valuePx": 22, "cssVar": null, "note": "Title line-height: 16/EN-Semibold" }
+  ],
+  "mask": {
+    "value": "rgba(0,0,0,0.4)",
+    "cssVar": "--component-modal-mask",
+    "semantic": "--semantic-opacity-mask"
+  }
+}
+```
 

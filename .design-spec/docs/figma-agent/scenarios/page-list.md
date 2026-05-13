@@ -1,7 +1,7 @@
 # Scenario / 场景：List page（列表页 / CRUD）
 
 > **Maps to layout spec**: `.design-spec/docs/layouts/page-list.md`  
-> **Prerequisite**: Table, Input, Button, Pagination (when available) exist in `docs/figma-agent/components/` after Sequence A.
+> **Prerequisite**: Table, Input, Button, Pagination (when available) exist in [`../components/`](../components/) after Sequence A.
 
 ---
 

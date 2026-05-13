@@ -49,7 +49,7 @@ Commits actions (submit, save, cancel, next step). Maintain clear hierarchy—ty
 
 ## 4. Token mapping / Token 映射（Figma Variables ↔ semantic / component）
 
-**Rule**: Left column = **Figma variable path/name** (fill after Inspect). Right column = repo role (`semantic.*` JSON path under `.design-spec/tokens/src/semantic.json` or `component.*` under `component.json`). See `docs/ALIGNMENT_GOVERNANCE.md` §2.
+**Rule**: Left column = **Figma variable path/name** (fill after Inspect). Right column = repo role (`semantic.*` JSON path under `.design-spec/tokens/src/semantic.json` or `component.*` under `component.json`). See [`../../ALIGNMENT_GOVERNANCE.md`](../../ALIGNMENT_GOVERNANCE.md) §2.
 
 | Figma variable *(audit)* | Repo role | CSS reference *(generated)* |
 |---------------------------|-----------|-------------------------------|

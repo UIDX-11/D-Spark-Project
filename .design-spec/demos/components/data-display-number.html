@@ -5,9 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Data Display (Number) — D.Spark Design System Demo</title>
 <!-- Figma-export icons (icons.manifest.json) -->
-    <template id="ds-icon-example-money-circle"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+    <template id="ds-icon-money-circle"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
   <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2" />
   <circle cx="24" cy="24" r="6" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-user-circle"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2" />
+  <circle cx="24" cy="20" r="6" fill="currentColor" />
+  <path d="M12 38c2.4-5.4 6.6-8 12-8s9.6 2.6 12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+</svg></template>
+    <template id="ds-icon-cart"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M6 8h6l3 4m0 0 4 16h20l4-12H15Zm0 0 1 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="20" cy="38" r="3" fill="currentColor" />
+  <circle cx="36" cy="38" r="3" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-ticket"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 16a2 2 0 0 1 2-2h28a2 2 0 0 1 2 2v6a4 4 0 0 0 0 8v6a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-6a4 4 0 0 0 0-8v-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+  <path d="M28 16v4M28 26v4M28 34v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+</svg></template>
+    <template id="ds-icon-shield-check"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M24 6 8 12v12c0 9 6.8 14.6 16 18 9.2-3.4 16-9 16-18V12L24 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+  <path d="m16 24 6 6 12-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-trend-up"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 34 22 20l8 8 12-14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M30 14h12v12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-trend-down"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 14 22 28l8-8 12 14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M30 34h12V22" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-trend-flat"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 24h28" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+  <path d="m30 16 10 8-10 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-chart-line"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 8v32h32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="m14 32 8-10 6 6 12-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg></template>
+    <template id="ds-icon-chart-pie"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M24 6v18l16 8A18 18 0 1 1 24 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+  <path d="M28 6a14 14 0 0 1 14 14H28V6Z" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-chart-bar"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="M8 8v32h32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="14" y="24" width="6" height="12" fill="currentColor" />
+  <rect x="24" y="16" width="6" height="20" fill="currentColor" />
+  <rect x="34" y="20" width="6" height="16" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-medal"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <path d="m14 6 6 14M34 6l-6 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+  <circle cx="24" cy="30" r="12" stroke="currentColor" stroke-width="2" fill="none" />
+  <circle cx="24" cy="30" r="6" fill="currentColor" />
+</svg></template>
+    <template id="ds-icon-table-rows"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <rect x="6" y="10" width="36" height="28" rx="2" stroke="currentColor" stroke-width="2" />
+  <path d="M6 20h36M6 30h36M18 10v28" stroke="currentColor" stroke-width="2" />
 </svg></template>
     <meta name="ds:component-slug" content="data-display-number" />
     <meta name="ds:source-md" content="../../docs/components/data-display-number.md" />
@@ -139,7 +192,7 @@
 
 .studio {
   display: grid;
-  gap: 16px;
+  gap: calc(var(--core-space-4) * 1px);
   align-items: start;
 }
 
@@ -152,7 +205,7 @@
 .studio-main {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: calc(var(--core-space-4) * 1px);
 }
 
 .studio-aside {
@@ -5545,6 +5598,11 @@
   flex-shrink: 0;
 }
 
+.ds-alert-close-btn:focus-visible {
+  outline: 2px solid var(--color-primary-6);
+  outline-offset: 2px;
+}
+
 /* close-element 槽位：任意节点，不强制 16×16 图标格 */
 .ds-alert-close-btn.is-slot {
   width: auto;
@@ -9913,7 +9971,7 @@
       var closeHtml = opts.closable
         ? '<div class="ds-alert-close-btn' +
           (opts.customClose ? " is-slot" : "") +
-          '" tabindex="-1" role="button" aria-label="Close">' +
+          '" tabindex="0" role="button" aria-label="Close">' +
           (opts.customClose ? "Close" : "×") +
           "</div>"
         : "";
@@ -9956,11 +10014,23 @@
         // Arco: normal type does not show icon by default.
       }
       liveRoot.innerHTML = renderAlert(opts);
-      var closeBtn = liveRoot.querySelector(".ds-alert-close-btn");
-      if (closeBtn) {
-        closeBtn.addEventListener("click", function (ev) {
-          var host = ev.currentTarget.closest(".ds-alert");
-          if (host) host.remove();
+      function bindAlertCloseButtons(scope) {
+        if (!scope) return;
+        scope.querySelectorAll(".ds-alert-close-btn").forEach(function (closeBtn) {
+          function dismiss() {
+            var host = closeBtn.closest(".ds-alert");
+            if (host) host.remove();
+          }
+          closeBtn.addEventListener("click", function (ev) {
+            ev.preventDefault();
+            dismiss();
+          });
+          closeBtn.addEventListener("keydown", function (ev) {
+            if (ev.key === "Enter" || ev.key === " ") {
+              ev.preventDefault();
+              dismiss();
+            }
+          });
         });
       }
       matrixShell(L5, function (_l, i) {
@@ -9978,6 +10048,8 @@
           center: !!v.center,
         });
       });
+      bindAlertCloseButtons(liveRoot);
+      bindAlertCloseButtons(matrixRoot);
     };
 
     pgVariant.disabled = false;

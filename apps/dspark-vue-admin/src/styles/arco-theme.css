@@ -1,0 +1,15 @@
+/* Bridge D.Spark semantic tokens into shell chrome; Arco components keep their own theme. */
+body {
+  background: var(--semantic-bg-page, #f7f7f7);
+  color: var(--semantic-text-primary, #222);
+}
+
+.ds-admin-sider {
+  border-right: 1px solid var(--semantic-border-subtle, #e8e8e8);
+}
+
+.ds-admin-content {
+  min-height: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}

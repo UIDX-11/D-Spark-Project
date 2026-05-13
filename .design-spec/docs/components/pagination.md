@@ -11,6 +11,7 @@ Molecular
 
 ## References
 
+- Figma（Light，真源表 canonical / `figma_truth_table.json`）: [Primary node](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026?node-id=118845-144970)
 - Arco Design Web React（API / 行为真源）: [Pagination](https://arco.design/react/components/pagination)
 - Arco 源码（React）: [`arco-design/components/Pagination`](https://github.com/arco-design/arco-design/tree/main/components/Pagination)
 - Figma（Light，视觉真源）: [D.S. Web Com — Light](https://www.figma.com/design/KJfy0GFDs8kLsXTzhTxAjd/D.S-Web-Com_Light_V2_2026) — 定位 Pagination 画板并补充 `node-id=` 深链接。
